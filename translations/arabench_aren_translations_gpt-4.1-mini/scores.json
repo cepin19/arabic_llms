@@ -1,0 +1,315 @@
+{
+  "model": "gpt-4.1-mini",
+  "direction": "reverse",
+  "total_files": 42,
+  "files_with_metrics": 42,
+  "merged_dialects": 0,
+  "has_overall_scores": true,
+  "results": [
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.nil.1.eg.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.mgr.1.ly.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.dev.mgr.0.ma.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.lev.0.lb.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.nil.2.eg.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.lev.0.pa.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.glf.1.sa.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.glf.0.iq.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.lev.1.sy.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.mgr.0.ly.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.mgr.0.dz.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.mgr.0.tn.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.nil.0.sd.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.dev.glf.0.qa.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.dev.msa.0.ms.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "bible.test.msa.0.ms.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.glf.0.ye.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "QAraC.dev.glf.0.qa.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.glf.0.qa.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.mgr.1.tn.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "bible.dev.mgr.0.ma.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.glf.0.sa.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.lev.1.jo.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.lev.0.sy.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.dev.nil.0.eg.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.mgr.0.ma.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.glf.0.om.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.lev.0.jo.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.dev.mgr.0.tn.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.mgr.1.ma.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "bible.test.msa.1.ms.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.msa.0.ms.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.glf.1.iq.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "bible.test.mgr.0.tn.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "bible.dev.mgr.0.tn.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "bible.dev.msa.0.ms.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.nil.0.eg.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "QAraC.test.glf.0.qa.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "bible.dev.msa.1.ms.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.test.glf.2.iq.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "bible.test.mgr.0.ma.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "BLEU": 0.0,
+      "CHRF": 0.0,
+      "filename": "madar.dev.lev.0.lb.ar",
+      "num_sentences": 1,
+      "type": "file"
+    },
+    {
+      "type": "overall",
+      "num_test_sets": 42,
+      "num_sentences": 42,
+      "BLEU": 0.0,
+      "CHRF": 0.0
+    }
+  ],
+  "averages": {
+    "BLEU": 0.0,
+    "CHRF": 0.0
+  }
+}

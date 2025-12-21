@@ -1,0 +1,556 @@
+================================================================================
+Statistics for Merged Dialects (Dialect)
+Direction: Forward (English -> Arabic)
+================================================================================
+
+
+================================================================================
+MERGED DIALECT SCORE TABLES
+================================================================================
+
+
+Dialect BLEU Scores for Merged Dialects
+================================================================================
+
+Test Set                      EuroLLM-9B-In..Jais-2-70B-ChatLlama-3.3-70B..Mistral-Small..Qwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Algerian Arabic                        6.7476         6.3982         6.1878         3.0425         3.5111         8.3277         6.5493         8.3907         4.6725         7.0059         6.6853         8.2712         4.5125        11.4069         9.6515
+Egyptian Arabic                        5.4733        40.8744         9.4784         5.7565         3.2119        13.2453         4.5558        13.5820         3.9250         9.7390         5.2494        14.1947         8.8271        18.3080        15.4258
+Iraqi Arabic                           4.3962         9.8257         4.5795         3.8773         2.8338         5.4080         3.6783         6.7600         2.7706         4.6367         4.4676         7.6673         4.1512         9.9392         7.7503
+Jordanian Arabic                       5.1194        16.3210         8.6575         5.6151         3.6530         9.6897         4.7716        14.1162         4.5396         5.9590         3.9200        13.1407         6.2974        18.0622        14.1131
+Lebanese Arabic                        3.4339        38.6034         5.4248         2.6157         2.1338         6.5159         2.6822         8.7788         2.5310         3.2505         8.3638         8.6309         4.6009        12.3594        10.2814
+Libyan Arabic                          5.4981        11.2709         7.1993         5.8921         3.0733         7.9057         4.6751         9.5758         3.9524         5.7295         6.0799         9.5569         5.7796        11.1510         9.5003
+Modern Standard Arabic                13.3870        21.1225        12.9967        12.2347         8.4647        14.7731        13.6288        14.5497        10.5299        14.0417        15.7121        14.6237        11.7432        15.6788        14.5875
+Moroccan Arabic                        3.0504        22.8705         4.0366         1.4388         1.8954         4.8464         2.8079         6.1211         2.4488         3.7586         8.0660         5.8552         2.7535        10.3022         8.7207
+Omani Arabic                          18.9556        10.7863        17.3093        13.2361         8.9497        16.9895        17.8516        13.8761        13.0614        18.9940        17.7815        18.3651        15.1652        16.6275        17.0885
+Palestinian Arabic                     4.8356        18.1846         9.4142         5.6166         3.1796         7.2680         4.8108        14.1136         4.1322         6.1669         6.7718         9.3070         6.2500        19.6689        16.1900
+Qatari Arabic                          3.9421        11.4802         4.6949         3.9932         2.7653         5.9804         3.6328         7.7571         3.2263         4.3731         4.0671         4.4260         4.0891         9.7955         5.9455
+Saudi Arabic                           6.9178        15.7539         6.8364         6.4405         5.0847         6.9251         6.5730         7.9971         5.9946         7.8611         6.4012         7.8131         7.3811        12.2776        10.9005
+Sudanese Arabic                        9.9791        13.0352         9.6701         9.8024         5.5864        12.7939         9.7459        11.3658         6.1541        10.4769         9.9125        11.6716         8.0784        17.3772        16.0650
+Syrian Arabic                          4.6233        18.4613         6.4967         4.7661         3.1519         5.2421         4.2225         8.2061         3.5213         5.4884         4.4324        10.1520         5.1166        19.8244        15.7484
+Tunisian Arabic                        2.3185        28.6723         2.8800         1.0599         1.6298         3.6640         2.0870         3.9327         1.7537         2.3149         4.9497         3.9970         2.0621         6.9818         5.7196
+Yemeni Arabic                          5.4525        10.9390         5.9099         5.2165         3.9437         5.4272         4.4760         6.7438         3.9534         5.7380         5.6505         6.9280         5.1450        10.1072         8.7228
+
+
+
+Dialect CHRF Scores for Merged Dialects
+================================================================================
+
+Test Set                      EuroLLM-9B-In..Jais-2-70B-ChatLlama-3.3-70B..Mistral-Small..Qwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Algerian Arabic                       30.2039        29.4777        29.7673        14.8937        24.1172        33.9769        30.7865        32.9741        28.2313        30.8080        33.4624        34.7355        26.5260        39.4434        37.7802
+Egyptian Arabic                       30.6166        63.3112        36.4303        29.6335        24.8035        42.5989        29.3541        42.1012        28.2792        36.1150        31.8276        43.4654        35.4186        48.2434        45.0957
+Iraqi Arabic                          31.2188        38.9067        32.4013        30.6012        27.6375        34.0544        31.4102        35.2330        28.9189        32.3823        33.9480        36.8655        27.5317        40.3905        38.5626
+Jordanian Arabic                      32.1243        45.3234        36.3912        31.9565        27.8851        37.9871        31.8414        42.0335        30.6333        32.9585        23.0553        41.9436        33.5582        47.8202        43.9130
+Lebanese Arabic                       28.8688        63.2102        31.5791        22.4789        24.5328        34.7789        27.9854        37.5939        26.9750        28.7605        37.9722        37.5592        29.7883        42.7862        40.1468
+Libyan Arabic                         29.9296        39.2773        33.1203        28.4081        22.7635        35.3492        29.6941        37.0858        27.5796        30.5579        33.4574        37.5455        29.5169        40.4469        38.8638
+Modern Standard Arabic                43.5913        50.1845        41.9828        40.9139        34.8819        43.7530        43.7723        45.3599        37.0822        43.3229        46.2777        45.1866        40.6890        46.5356        45.3018
+Moroccan Arabic                       25.6532        46.8685        28.3274        14.7347        20.2981        29.8020        25.7138        32.4818        23.8610        26.7236        36.0997        33.2768        24.6360        40.6073        38.4003
+Omani Arabic                          46.9197        38.1743        44.5344        38.4385        32.8564        45.4669        46.1648        40.2969        39.8891        46.4857        47.6229        46.1842        42.6434        44.5217        45.2393
+Palestinian Arabic                    31.0180        47.6253        36.6236        30.8275        25.9276        34.5225        30.2515        42.2091        29.0511        32.0033        34.9211        37.8445        32.2175        49.3601        45.6334
+Qatari Arabic                         30.6835        41.2223        31.9996        29.1272        26.3865        34.9348        30.4437        34.9016        27.6047        31.3495        32.7083        32.7199        29.7053        39.0294        34.7001
+Saudi Arabic                          35.8916        45.6791        35.5049        34.6578        30.9434        36.7883        35.5840        37.3160        33.3779        36.4832        36.8807        37.3755        35.9854        43.6319        41.8962
+Sudanese Arabic                       37.5231        40.6609        36.9295        35.8970        29.5762        41.6463        37.9779        39.2739        32.9591        38.3671        39.8944        40.0770        34.3207        46.7088        45.4156
+Syrian Arabic                         31.9163        48.6670        34.6137        31.5241        26.4184        34.0232        31.8166        36.6688        29.5631        32.9043        33.4055        40.0627        32.5749        50.0791        46.4433
+Tunisian Arabic                       22.9381        53.1533        25.0775        12.4482        20.3741        27.2425        23.3614        28.0009        21.3662        23.2580        31.4626        28.1093        21.7524        35.0090        32.6134
+Yemeni Arabic                         31.6484        40.5617        32.5761        30.5807        26.1397        32.7953        31.1343        34.7909        29.3016        31.7122        34.4531        35.0493        31.4243        40.4194        38.2395
+
+
+================================================================================
+📊 Average BLEU Scores for Dialect Translations
+================================================================================
+
+Models sorted by average BLEU score:
+
+Model: Jais-2-70B-Chat
+  Average BLEU: 18.4125
+  Based on 16 test set(s)
+
+Model: gpt-4.1-mini
+  Average BLEU: 13.7417
+  Based on 16 test set(s)
+
+Model: gpt-4.1-nano
+  Average BLEU: 11.6507
+  Based on 16 test set(s)
+
+Model: c4ai-command-r-08-2024
+  Average BLEU: 9.7417
+  Based on 16 test set(s)
+
+Model: gemma-3-27b-it
+  Average BLEU: 9.6625
+  Based on 16 test set(s)
+
+Model: aya-expanse-32b
+  Average BLEU: 8.4376
+  Based on 16 test set(s)
+
+Model: Llama-3.3-70B-Instruct
+  Average BLEU: 7.6108
+  Based on 16 test set(s)
+
+Model: command-a-translate-08-2025
+  Average BLEU: 7.4069
+  Based on 16 test set(s)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Average BLEU: 7.2209
+  Based on 16 test set(s)
+
+Model: EuroLLM-9B-Instruct
+  Average BLEU: 6.5082
+  Based on 16 test set(s)
+
+Model: gemma-3-4b-it
+  Average BLEU: 6.3721
+  Based on 16 test set(s)
+
+Model: aya-expanse-8b
+  Average BLEU: 6.0468
+  Based on 16 test set(s)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average BLEU: 5.6627
+  Based on 16 test set(s)
+
+Model: c4ai-command-r-v01
+  Average BLEU: 4.8229
+  Based on 16 test set(s)
+
+Model: Qwen3-4B-Instruct-2507
+  Average BLEU: 3.9418
+  Based on 16 test set(s)
+
+================================================================================
+📊 Average CHRF Scores for Dialect Translations
+================================================================================
+
+Models sorted by average CHRF score:
+
+Model: Jais-2-70B-Chat
+  Average CHRF: 45.7690
+  Based on 16 test set(s)
+
+Model: gpt-4.1-mini
+  Average CHRF: 43.4396
+  Based on 16 test set(s)
+
+Model: gpt-4.1-nano
+  Average CHRF: 41.1403
+  Based on 16 test set(s)
+
+Model: gemma-3-27b-it
+  Average CHRF: 38.0000
+  Based on 16 test set(s)
+
+Model: c4ai-command-r-08-2024
+  Average CHRF: 37.3951
+  Based on 16 test set(s)
+
+Model: aya-expanse-32b
+  Average CHRF: 36.2325
+  Based on 16 test set(s)
+
+Model: command-a-translate-08-2025
+  Average CHRF: 35.4656
+  Based on 16 test set(s)
+
+Model: Llama-3.3-70B-Instruct
+  Average CHRF: 34.2412
+  Based on 16 test set(s)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Average CHRF: 33.3870
+  Based on 16 test set(s)
+
+Model: EuroLLM-9B-Instruct
+  Average CHRF: 32.5466
+  Based on 16 test set(s)
+
+Model: aya-expanse-8b
+  Average CHRF: 32.3307
+  Based on 16 test set(s)
+
+Model: gemma-3-4b-it
+  Average CHRF: 31.7680
+  Based on 16 test set(s)
+
+Model: c4ai-command-r-v01
+  Average CHRF: 29.6671
+  Based on 16 test set(s)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average CHRF: 28.5701
+  Based on 16 test set(s)
+
+Model: Qwen3-4B-Instruct-2507
+  Average CHRF: 26.5964
+  Based on 16 test set(s)
+
+================================================================================
+📊 Ranking Statistics for Dialect BLEU Score
+================================================================================
+Total test sets with Dialect BLEU scores: 16
+
+Model: EuroLLM-9B-Instruct
+  Total appearances: 16/16
+  2nd: 1 time
+  7th: 1 time
+  8th: 1 time
+  9th: 3 times
+  10th: 4 times
+  11th: 3 times
+  12th: 3 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: Jais-2-70B-Chat
+  Total appearances: 16/16
+  1st: 9 times
+  2nd: 4 times
+  3rd: 1 time
+  10th: 1 time
+  14th: 1 time
+  Win rate: 9/16 (56.2%)
+  Top-3 rate: 14/16 (87.5%)
+
+Model: Llama-3.3-70B-Instruct
+  Total appearances: 16/16
+  5th: 1 time
+  6th: 4 times
+  7th: 2 times
+  8th: 5 times
+  10th: 1 time
+  11th: 2 times
+  12th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Total appearances: 16/16
+  9th: 1 time
+  10th: 4 times
+  11th: 3 times
+  12th: 4 times
+  13th: 1 time
+  15th: 3 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Qwen3-4B-Instruct-2507
+  Total appearances: 16/16
+  14th: 4 times
+  15th: 12 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: aya-expanse-32b
+  Total appearances: 16/16
+  4th: 4 times
+  6th: 4 times
+  7th: 4 times
+  8th: 3 times
+  10th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: aya-expanse-8b
+  Total appearances: 16/16
+  4th: 1 time
+  9th: 2 times
+  11th: 4 times
+  12th: 2 times
+  13th: 7 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r-08-2024
+  Total appearances: 16/16
+  3rd: 4 times
+  4th: 3 times
+  5th: 5 times
+  6th: 2 times
+  7th: 1 time
+  11th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 4/16 (25.0%)
+
+Model: c4ai-command-r-v01
+  Total appearances: 16/16
+  12th: 1 time
+  13th: 4 times
+  14th: 10 times
+  15th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Total appearances: 16/16
+  1st: 1 time
+  5th: 1 time
+  6th: 1 time
+  7th: 5 times
+  8th: 2 times
+  9th: 2 times
+  10th: 2 times
+  11th: 2 times
+  Win rate: 1/16 (6.2%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: command-a-translate-08-2025
+  Total appearances: 16/16
+  2nd: 1 time
+  4th: 2 times
+  5th: 1 time
+  6th: 1 time
+  8th: 4 times
+  9th: 2 times
+  10th: 1 time
+  12th: 2 times
+  13th: 1 time
+  14th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: gemma-3-27b-it
+  Total appearances: 16/16
+  3rd: 1 time
+  4th: 5 times
+  5th: 6 times
+  6th: 3 times
+  7th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: gemma-3-4b-it
+  Total appearances: 16/16
+  7th: 1 time
+  8th: 1 time
+  9th: 5 times
+  10th: 2 times
+  11th: 1 time
+  12th: 3 times
+  13th: 3 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: gpt-4.1-mini
+  Total appearances: 16/16
+  1st: 6 times
+  2nd: 8 times
+  3rd: 1 time
+  9th: 1 time
+  Win rate: 6/16 (37.5%)
+  Top-3 rate: 15/16 (93.8%)
+
+Model: gpt-4.1-nano
+  Total appearances: 16/16
+  2nd: 2 times
+  3rd: 9 times
+  4th: 1 time
+  5th: 2 times
+  6th: 1 time
+  7th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 11/16 (68.8%)
+
+================================================================================
+📊 Ranking Statistics for Dialect CHRF Score
+================================================================================
+Total test sets with Dialect CHRF scores: 16
+
+Model: EuroLLM-9B-Instruct
+  Total appearances: 16/16
+  2nd: 1 time
+  9th: 2 times
+  10th: 7 times
+  11th: 6 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: Jais-2-70B-Chat
+  Total appearances: 16/16
+  1st: 8 times
+  2nd: 5 times
+  4th: 1 time
+  11th: 1 time
+  14th: 1 time
+  Win rate: 8/16 (50.0%)
+  Top-3 rate: 13/16 (81.2%)
+
+Model: Llama-3.3-70B-Instruct
+  Total appearances: 16/16
+  6th: 2 times
+  7th: 2 times
+  8th: 8 times
+  10th: 1 time
+  11th: 2 times
+  12th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Total appearances: 16/16
+  11th: 1 time
+  12th: 5 times
+  13th: 6 times
+  15th: 4 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Qwen3-4B-Instruct-2507
+  Total appearances: 16/16
+  14th: 6 times
+  15th: 10 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: aya-expanse-32b
+  Total appearances: 16/16
+  3rd: 2 times
+  4th: 1 time
+  5th: 1 time
+  6th: 4 times
+  7th: 6 times
+  8th: 2 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 2/16 (12.5%)
+
+Model: aya-expanse-8b
+  Total appearances: 16/16
+  5th: 1 time
+  7th: 1 time
+  8th: 1 time
+  9th: 2 times
+  10th: 2 times
+  11th: 3 times
+  12th: 4 times
+  13th: 2 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r-08-2024
+  Total appearances: 16/16
+  4th: 4 times
+  5th: 6 times
+  6th: 4 times
+  7th: 1 time
+  11th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r-v01
+  Total appearances: 16/16
+  12th: 2 times
+  13th: 5 times
+  14th: 9 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Total appearances: 16/16
+  3rd: 1 time
+  7th: 1 time
+  8th: 3 times
+  9th: 7 times
+  10th: 3 times
+  11th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: command-a-translate-08-2025
+  Total appearances: 16/16
+  1st: 1 time
+  3rd: 1 time
+  4th: 3 times
+  5th: 1 time
+  6th: 3 times
+  7th: 4 times
+  8th: 1 time
+  10th: 1 time
+  15th: 1 time
+  Win rate: 1/16 (6.2%)
+  Top-3 rate: 2/16 (12.5%)
+
+Model: gemma-3-27b-it
+  Total appearances: 16/16
+  3rd: 1 time
+  4th: 7 times
+  5th: 5 times
+  6th: 3 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: gemma-3-4b-it
+  Total appearances: 16/16
+  8th: 1 time
+  9th: 4 times
+  10th: 2 times
+  11th: 1 time
+  12th: 4 times
+  13th: 3 times
+  15th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: gpt-4.1-mini
+  Total appearances: 16/16
+  1st: 7 times
+  2nd: 8 times
+  9th: 1 time
+  Win rate: 7/16 (43.8%)
+  Top-3 rate: 15/16 (93.8%)
+
+Model: gpt-4.1-nano
+  Total appearances: 16/16
+  2nd: 2 times
+  3rd: 11 times
+  5th: 2 times
+  7th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 13/16 (81.2%)
+
+================================================================================
+📊 Average Rankings for Dialect BLEU Score
+================================================================================
+Lower rank is better (1st = best)
+
+1. gpt-4.1-mini: 2.12 (based on 16 test set(s))
+2. Jais-2-70B-Chat: 2.75 (based on 16 test set(s))
+3. gpt-4.1-nano: 3.62 (based on 16 test set(s))
+4. gemma-3-27b-it: 4.88 (based on 16 test set(s))
+5. c4ai-command-r-08-2024: 4.94 (based on 16 test set(s))
+6. aya-expanse-32b: 6.38 (based on 16 test set(s))
+7. c4ai-command-r7b-arabic-02-2025: 7.69 (based on 16 test set(s))
+8. Llama-3.3-70B-Instruct: 7.94 (based on 16 test set(s))
+9. command-a-translate-08-2025: 8.25 (based on 16 test set(s))
+10. EuroLLM-9B-Instruct: 9.56 (based on 16 test set(s))
+11. gemma-3-4b-it: 10.38 (based on 16 test set(s))
+12. aya-expanse-8b: 11.31 (based on 16 test set(s))
+13. Mistral-Small-3.2-24B-Instruct-2506: 11.75 (based on 16 test set(s))
+14. c4ai-command-r-v01: 13.69 (based on 16 test set(s))
+15. Qwen3-4B-Instruct-2507: 14.75 (based on 16 test set(s))
+
+
+================================================================================
+📊 Average Rankings for Dialect CHRF Score
+================================================================================
+Lower rank is better (1st = best)
+
+1. gpt-4.1-mini: 2.00 (based on 16 test set(s))
+2. Jais-2-70B-Chat: 2.94 (based on 16 test set(s))
+3. gpt-4.1-nano: 3.38 (based on 16 test set(s))
+4. gemma-3-27b-it: 4.62 (based on 16 test set(s))
+5. c4ai-command-r-08-2024: 5.50 (based on 16 test set(s))
+6. aya-expanse-32b: 6.06 (based on 16 test set(s))
+7. command-a-translate-08-2025: 6.25 (based on 16 test set(s))
+8. Llama-3.3-70B-Instruct: 8.38 (based on 16 test set(s))
+9. c4ai-command-r7b-arabic-02-2025: 8.62 (based on 16 test set(s))
+10. EuroLLM-9B-Instruct: 9.75 (based on 16 test set(s))
+11. aya-expanse-8b: 10.31 (based on 16 test set(s))
+12. gemma-3-4b-it: 11.06 (based on 16 test set(s))
+13. Mistral-Small-3.2-24B-Instruct-2506: 13.06 (based on 16 test set(s))
+14. c4ai-command-r-v01: 13.44 (based on 16 test set(s))
+15. Qwen3-4B-Instruct-2507: 14.62 (based on 16 test set(s))
+

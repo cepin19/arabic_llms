@@ -1,0 +1,195 @@
+================================================================================
+AraBench Evaluation Results (Arabic -> English)
+================================================================================
+
+Model: gpt-4.1-mini
+Direction: Arabic -> English
+Total files processed: 42
+Files with metrics: 42
+
+Average Scores (per-file averages):
+--------------------------------------------------------------------------------
+  BLEU: 0.0000
+  CHRF: 0.0000
+
+================================================================================
+Overall Scores (all test sets concatenated):
+================================================================================
+Total test sets: 42
+Total sentences: 42
+
+  BLEU: 0.0000
+  CHRF: 0.0000
+
+================================================================================
+Per-file Results:
+================================================================================
+
+File: madar.test.nil.1.eg.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.mgr.1.ly.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.dev.mgr.0.ma.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.lev.0.lb.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.nil.2.eg.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.lev.0.pa.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.1.sa.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.0.iq.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.lev.1.sy.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.mgr.0.ly.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.mgr.0.dz.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.mgr.0.tn.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.nil.0.sd.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.dev.glf.0.qa.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.dev.msa.0.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.test.msa.0.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.0.ye.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: QAraC.dev.glf.0.qa.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.0.qa.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.mgr.1.tn.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.dev.mgr.0.ma.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.0.sa.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.lev.1.jo.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.lev.0.sy.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.dev.nil.0.eg.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.mgr.0.ma.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.0.om.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.lev.0.jo.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.dev.mgr.0.tn.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.mgr.1.ma.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.test.msa.1.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.msa.0.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.1.iq.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.test.mgr.0.tn.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.dev.mgr.0.tn.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.dev.msa.0.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.nil.0.eg.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: QAraC.test.glf.0.qa.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.dev.msa.1.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.2.iq.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.test.mgr.0.ma.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.dev.lev.0.lb.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+

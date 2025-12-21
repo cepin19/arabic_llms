@@ -1,0 +1,195 @@
+================================================================================
+AraBench Evaluation Results (Arabic -> English)
+================================================================================
+
+Model: inceptionai/Jais-2-8B-Chat
+Direction: Arabic -> English
+Total files processed: 42
+Files with metrics: 42
+
+Average Scores (per-file averages):
+--------------------------------------------------------------------------------
+  BLEU: 34.4425
+  CHRF: 55.8113
+
+================================================================================
+Overall Scores (all test sets concatenated):
+================================================================================
+Total test sets: 42
+Total sentences: 130226
+
+  BLEU: 35.2600
+  CHRF: 56.9238
+
+================================================================================
+Per-file Results:
+================================================================================
+
+File: madar.test.nil.1.eg.ar
+Sentences: 2000
+  BLEU: 47.8568, CHRF: 66.9897
+
+File: madar.test.mgr.1.ly.ar
+Sentences: 2000
+  BLEU: 40.6531, CHRF: 61.0575
+
+File: madar.dev.mgr.0.ma.ar
+Sentences: 5500
+  BLEU: 36.8669, CHRF: 56.9875
+
+File: madar.test.lev.0.lb.ar
+Sentences: 6500
+  BLEU: 41.2439, CHRF: 60.8122
+
+File: madar.test.nil.2.eg.ar
+Sentences: 2000
+  BLEU: 38.9340, CHRF: 60.3827
+
+File: madar.test.lev.0.pa.ar
+Sentences: 2000
+  BLEU: 42.0576, CHRF: 60.8967
+
+File: madar.test.glf.1.sa.ar
+Sentences: 2000
+  BLEU: 36.4530, CHRF: 56.3433
+
+File: madar.test.glf.0.iq.ar
+Sentences: 2000
+  BLEU: 37.1833, CHRF: 57.9450
+
+File: madar.test.lev.1.sy.ar
+Sentences: 2000
+  BLEU: 40.4678, CHRF: 60.4910
+
+File: madar.test.mgr.0.ly.ar
+Sentences: 2000
+  BLEU: 34.4183, CHRF: 56.0502
+
+File: madar.test.mgr.0.dz.ar
+Sentences: 2000
+  BLEU: 29.3242, CHRF: 51.8764
+
+File: madar.test.mgr.0.tn.ar
+Sentences: 6500
+  BLEU: 30.6994, CHRF: 51.6071
+
+File: madar.test.nil.0.sd.ar
+Sentences: 2000
+  BLEU: 46.0923, CHRF: 64.9513
+
+File: madar.dev.glf.0.qa.ar
+Sentences: 5500
+  BLEU: 43.4336, CHRF: 61.0975
+
+File: madar.dev.msa.0.ms.ar
+Sentences: 5500
+  BLEU: 52.0252, CHRF: 71.0520
+
+File: bible.test.msa.0.ms.ar
+Sentences: 600
+  BLEU: 18.4751, CHRF: 43.5415
+
+File: madar.test.glf.0.ye.ar
+Sentences: 2000
+  BLEU: 38.4102, CHRF: 59.2519
+
+File: QAraC.dev.glf.0.qa.ar
+Sentences: 6713
+  BLEU: 13.7165, CHRF: 44.2130
+
+File: madar.test.glf.0.qa.ar
+Sentences: 6500
+  BLEU: 42.2470, CHRF: 60.3613
+
+File: madar.test.mgr.1.tn.ar
+Sentences: 2000
+  BLEU: 23.0140, CHRF: 44.1932
+
+File: bible.dev.mgr.0.ma.ar
+Sentences: 600
+  BLEU: 13.5539, CHRF: 39.3626
+
+File: madar.test.glf.0.sa.ar
+Sentences: 2000
+  BLEU: 46.6602, CHRF: 64.7639
+
+File: madar.test.lev.1.jo.ar
+Sentences: 2000
+  BLEU: 41.7014, CHRF: 61.6389
+
+File: madar.test.lev.0.sy.ar
+Sentences: 2000
+  BLEU: 41.5054, CHRF: 60.7593
+
+File: madar.dev.nil.0.eg.ar
+Sentences: 5500
+  BLEU: 44.0329, CHRF: 64.2268
+
+File: madar.test.mgr.0.ma.ar
+Sentences: 6500
+  BLEU: 41.8444, CHRF: 61.7381
+
+File: madar.test.glf.0.om.ar
+Sentences: 2000
+  BLEU: 45.1751, CHRF: 63.9208
+
+File: madar.test.lev.0.jo.ar
+Sentences: 2000
+  BLEU: 40.7230, CHRF: 61.6971
+
+File: madar.dev.mgr.0.tn.ar
+Sentences: 5500
+  BLEU: 33.8476, CHRF: 54.3944
+
+File: madar.test.mgr.1.ma.ar
+Sentences: 2000
+  BLEU: 41.8591, CHRF: 63.3356
+
+File: bible.test.msa.1.ms.ar
+Sentences: 600
+  BLEU: 15.9732, CHRF: 39.8417
+
+File: madar.test.msa.0.ms.ar
+Sentences: 6500
+  BLEU: 47.4813, CHRF: 67.3456
+
+File: madar.test.glf.1.iq.ar
+Sentences: 2000
+  BLEU: 38.4709, CHRF: 58.1850
+
+File: bible.test.mgr.0.tn.ar
+Sentences: 600
+  BLEU: 12.8072, CHRF: 37.9405
+
+File: bible.dev.mgr.0.tn.ar
+Sentences: 600
+  BLEU: 13.0707, CHRF: 37.8873
+
+File: bible.dev.msa.0.ms.ar
+Sentences: 600
+  BLEU: 18.8351, CHRF: 43.9174
+
+File: madar.test.nil.0.eg.ar
+Sentences: 6500
+  BLEU: 46.1487, CHRF: 64.8097
+
+File: QAraC.test.glf.0.qa.ar
+Sentences: 6713
+  BLEU: 13.8368, CHRF: 44.6021
+
+File: bible.dev.msa.1.ms.ar
+Sentences: 600
+  BLEU: 16.7838, CHRF: 39.8756
+
+File: madar.test.glf.2.iq.ar
+Sentences: 2000
+  BLEU: 35.7914, CHRF: 57.2040
+
+File: bible.test.mgr.0.ma.ar
+Sentences: 600
+  BLEU: 13.7869, CHRF: 39.6346
+
+File: madar.dev.lev.0.lb.ar
+Sentences: 5500
+  BLEU: 49.1241, CHRF: 66.8929
+

@@ -1,0 +1,195 @@
+================================================================================
+AraBench Evaluation Results (Arabic -> English)
+================================================================================
+
+Model: google/gemma-3-27b-it
+Direction: Arabic -> English
+Total files processed: 42
+Files with metrics: 42
+
+Average Scores (per-file averages):
+--------------------------------------------------------------------------------
+  BLEU: 2.4534
+  CHRF: 0.3241
+
+================================================================================
+Overall Scores (all test sets concatenated):
+================================================================================
+Total test sets: 42
+Total sentences: 42
+
+  BLEU: 0.1932
+  CHRF: 0.3755
+
+================================================================================
+Per-file Results:
+================================================================================
+
+File: madar.test.nil.1.eg.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3577
+
+File: madar.test.mgr.1.ly.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3516
+
+File: madar.dev.mgr.0.ma.ar
+Sentences: 1
+  BLEU: 1.9756, CHRF: 0.6158
+
+File: madar.test.lev.0.lb.ar
+Sentences: 1
+  BLEU: 4.1673, CHRF: 0.4845
+
+File: madar.test.nil.2.eg.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3639
+
+File: madar.test.lev.0.pa.ar
+Sentences: 1
+  BLEU: 3.2150, CHRF: 0.3608
+
+File: madar.test.glf.1.sa.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3516
+
+File: madar.test.glf.0.iq.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3472
+
+File: madar.test.lev.1.sy.ar
+Sentences: 1
+  BLEU: 3.2150, CHRF: 0.3671
+
+File: madar.test.mgr.0.ly.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3577
+
+File: madar.test.mgr.0.dz.ar
+Sentences: 1
+  BLEU: 3.4162, CHRF: 0.3516
+
+File: madar.test.mgr.0.tn.ar
+Sentences: 1
+  BLEU: 4.1673, CHRF: 0.4817
+
+File: madar.test.nil.0.sd.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3608
+
+File: madar.dev.glf.0.qa.ar
+Sentences: 1
+  BLEU: 1.6045, CHRF: 0.4329
+
+File: madar.dev.msa.0.ms.ar
+Sentences: 1
+  BLEU: 1.9624, CHRF: 0.6313
+
+File: bible.test.msa.0.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.0.ye.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3487
+
+File: QAraC.dev.glf.0.qa.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.0.qa.ar
+Sentences: 1
+  BLEU: 4.1673, CHRF: 0.4817
+
+File: madar.test.mgr.1.tn.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3516
+
+File: bible.dev.mgr.0.ma.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.0.sa.ar
+Sentences: 1
+  BLEU: 3.2150, CHRF: 0.3623
+
+File: madar.test.lev.1.jo.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3592
+
+File: madar.test.lev.0.sy.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3561
+
+File: madar.dev.nil.0.eg.ar
+Sentences: 1
+  BLEU: 1.8339, CHRF: 0.6427
+
+File: madar.test.mgr.0.ma.ar
+Sentences: 1
+  BLEU: 4.2782, CHRF: 0.4735
+
+File: madar.test.glf.0.om.ar
+Sentences: 1
+  BLEU: 3.4162, CHRF: 0.3472
+
+File: madar.test.lev.0.jo.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3516
+
+File: madar.dev.mgr.0.tn.ar
+Sentences: 1
+  BLEU: 1.7757, CHRF: 0.6494
+
+File: madar.test.mgr.1.ma.ar
+Sentences: 1
+  BLEU: 3.4162, CHRF: 0.3487
+
+File: bible.test.msa.1.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.msa.0.ms.ar
+Sentences: 1
+  BLEU: 4.2782, CHRF: 0.4762
+
+File: madar.test.glf.1.iq.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3561
+
+File: bible.test.mgr.0.tn.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.dev.mgr.0.tn.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.dev.msa.0.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.nil.0.eg.ar
+Sentences: 1
+  BLEU: 4.1673, CHRF: 0.4817
+
+File: QAraC.test.glf.0.qa.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: bible.dev.msa.1.ms.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.test.glf.2.iq.ar
+Sentences: 1
+  BLEU: 3.3495, CHRF: 0.3546
+
+File: bible.test.mgr.0.ma.ar
+Sentences: 1
+  BLEU: 0.0000, CHRF: 0.0000
+
+File: madar.dev.lev.0.lb.ar
+Sentences: 1
+  BLEU: 1.8800, CHRF: 0.6527
+

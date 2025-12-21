@@ -1,0 +1,139 @@
+================================================================================
+General Arabic vs Dialect Differences
+Direction: Forward (English -> Arabic)
+================================================================================
+
+
+================================================================================
+📊 Average Difference: General Arabic - Dialect (BLEU Score)
+================================================================================
+Positive values mean general Arabic scores are higher.
+Negative values mean dialect scores are higher.
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average difference: -0.0455 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.0455 points higher on average
+Model: aya-expanse-8b
+  Average difference: -0.0582 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.0582 points higher on average
+Model: Qwen3-4B-Instruct-2507
+  Average difference: -0.0800 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.0800 points higher on average
+Model: c4ai-command-r-v01
+  Average difference: -0.0990 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.0990 points higher on average
+Model: EuroLLM-9B-Instruct
+  Average difference: -0.3898 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.3898 points higher on average
+Model: c4ai-command-r7b-arabic-02-2025
+  Average difference: -0.8621 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.8621 points higher on average
+Model: gemma-3-4b-it
+  Average difference: -1.0930 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 1.0930 points higher on average
+Model: Llama-3.3-70B-Instruct
+  Average difference: -1.4905 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 1.4905 points higher on average
+Model: command-a-translate-08-2025
+  Average difference: -1.6579 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 1.6579 points higher on average
+Model: aya-expanse-32b
+  Average difference: -2.1412 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 2.1412 points higher on average
+Model: gemma-3-27b-it
+  Average difference: -3.1130 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 3.1130 points higher on average
+Model: c4ai-command-r-08-2024
+  Average difference: -3.3467 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 3.3467 points higher on average
+Model: gpt-4.1-nano
+  Average difference: -4.6010 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 4.6010 points higher on average
+Model: gpt-4.1-mini
+  Average difference: -6.2750 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 6.2750 points higher on average
+Model: Jais-2-70B-Chat
+  Average difference: -11.3837 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 11.3837 points higher on average
+
+================================================================================
+📊 Average Difference: General Arabic - Dialect (CHRF Score)
+================================================================================
+Positive values mean general Arabic scores are higher.
+Negative values mean dialect scores are higher.
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average difference: +2.9607 (CHRF points)
+  Based on 42 test set(s)
+  → General Arabic scores are 2.9607 points higher on average
+Model: Qwen3-4B-Instruct-2507
+  Average difference: +0.8212 (CHRF points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.8212 points higher on average
+Model: c4ai-command-r-v01
+  Average difference: +0.0509 (CHRF points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0509 points higher on average
+Model: EuroLLM-9B-Instruct
+  Average difference: -0.0000 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.0000 points higher on average
+Model: aya-expanse-8b
+  Average difference: -0.1518 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.1518 points higher on average
+Model: gemma-3-4b-it
+  Average difference: -0.7816 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.7816 points higher on average
+Model: c4ai-command-r7b-arabic-02-2025
+  Average difference: -0.8517 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.8517 points higher on average
+Model: Llama-3.3-70B-Instruct
+  Average difference: -2.1734 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 2.1734 points higher on average
+Model: command-a-translate-08-2025
+  Average difference: -2.9649 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 2.9649 points higher on average
+Model: aya-expanse-32b
+  Average difference: -3.3146 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 3.3146 points higher on average
+Model: c4ai-command-r-08-2024
+  Average difference: -4.5806 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 4.5806 points higher on average
+Model: gemma-3-27b-it
+  Average difference: -5.0232 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 5.0232 points higher on average
+Model: gpt-4.1-nano
+  Average difference: -7.5370 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 7.5370 points higher on average
+Model: gpt-4.1-mini
+  Average difference: -9.2257 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 9.2257 points higher on average
+Model: Jais-2-70B-Chat
+  Average difference: -11.9780 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 11.9780 points higher on average
