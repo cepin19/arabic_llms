@@ -1,0 +1,289 @@
+================================================================================
+General Arabic vs Dialect Differences
+Direction: Forward (English -> Arabic)
+================================================================================
+
+
+================================================================================
+📊 Average Difference: General Arabic - Dialect (BLEU Score)
+================================================================================
+Positive values mean general Arabic scores are higher.
+Negative values mean dialect scores are higher.
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average difference: +0.2816 (BLEU points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.2816 points higher on average
+Model: Qwen3-4B-Instruct-2507
+  Average difference: +0.1593 (BLEU points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.1593 points higher on average
+Model: EuroLLM-9B-Instruct
+  Average difference: -0.0065 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.0065 points higher on average
+Model: aya-expanse-8b
+  Average difference: -0.0592 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.0592 points higher on average
+Model: c4ai-command-r-v01
+  Average difference: -0.1097 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.1097 points higher on average
+Model: c4ai-command-r7b-arabic-02-2025
+  Average difference: -0.8431 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.8431 points higher on average
+Model: gemma-3-4b-it
+  Average difference: -0.9860 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.9860 points higher on average
+Model: Llama-3.3-70B-Instruct
+  Average difference: -1.4666 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 1.4666 points higher on average
+Model: command-a-translate-08-2025
+  Average difference: -1.5858 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 1.5858 points higher on average
+Model: aya-expanse-32b
+  Average difference: -2.0854 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 2.0854 points higher on average
+Model: gpt-4.1-nano
+  Average difference: -2.5745 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 2.5745 points higher on average
+Model: gemma-3-27b-it
+  Average difference: -3.0770 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 3.0770 points higher on average
+Model: c4ai-command-r-08-2024
+  Average difference: -3.2970 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 3.2970 points higher on average
+Model: Jais-2-8B-Chat
+  Average difference: -3.7867 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 3.7867 points higher on average
+Model: gpt-4.1-mini
+  Average difference: -4.7217 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 4.7217 points higher on average
+Model: Jais-2-70B-Chat
+  Average difference: -11.1788 (BLEU points)
+  Based on 42 test set(s)
+  → Dialect scores are 11.1788 points higher on average
+
+================================================================================
+📊 Average Difference: General Arabic - Dialect (CHRF Score)
+================================================================================
+Positive values mean general Arabic scores are higher.
+Negative values mean dialect scores are higher.
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average difference: +3.5938 (CHRF points)
+  Based on 42 test set(s)
+  → General Arabic scores are 3.5938 points higher on average
+Model: Qwen3-4B-Instruct-2507
+  Average difference: +1.1831 (CHRF points)
+  Based on 42 test set(s)
+  → General Arabic scores are 1.1831 points higher on average
+Model: EuroLLM-9B-Instruct
+  Average difference: +0.5059 (CHRF points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.5059 points higher on average
+Model: c4ai-command-r-v01
+  Average difference: +0.0226 (CHRF points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0226 points higher on average
+Model: gemma-3-4b-it
+  Average difference: -0.0978 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.0978 points higher on average
+Model: aya-expanse-8b
+  Average difference: -0.1516 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.1516 points higher on average
+Model: c4ai-command-r7b-arabic-02-2025
+  Average difference: -0.7750 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 0.7750 points higher on average
+Model: Llama-3.3-70B-Instruct
+  Average difference: -2.1451 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 2.1451 points higher on average
+Model: command-a-translate-08-2025
+  Average difference: -2.9108 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 2.9108 points higher on average
+Model: aya-expanse-32b
+  Average difference: -3.2817 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 3.2817 points higher on average
+Model: Jais-2-8B-Chat
+  Average difference: -3.9443 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 3.9443 points higher on average
+Model: c4ai-command-r-08-2024
+  Average difference: -4.4711 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 4.4711 points higher on average
+Model: gpt-4.1-nano
+  Average difference: -4.5564 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 4.5564 points higher on average
+Model: gemma-3-27b-it
+  Average difference: -4.9912 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 4.9912 points higher on average
+Model: gpt-4.1-mini
+  Average difference: -6.3330 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 6.3330 points higher on average
+Model: Jais-2-70B-Chat
+  Average difference: -11.8133 (CHRF points)
+  Based on 42 test set(s)
+  → Dialect scores are 11.8133 points higher on average
+
+================================================================================
+📊 Average Difference: General Arabic - Dialect (COMET_Unbabel_XCOMET-XL Score)
+================================================================================
+Positive values mean general Arabic scores are higher.
+Negative values mean dialect scores are higher.
+
+Model: Jais-2-8B-Chat
+  Average difference: +0.1249 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.1249 points higher on average
+Model: Jais-2-70B-Chat
+  Average difference: +0.0947 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0947 points higher on average
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average difference: +0.0898 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0898 points higher on average
+Model: gemma-3-4b-it
+  Average difference: +0.0806 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0806 points higher on average
+Model: c4ai-command-r-08-2024
+  Average difference: +0.0698 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0698 points higher on average
+Model: Llama-3.3-70B-Instruct
+  Average difference: +0.0621 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0621 points higher on average
+Model: gemma-3-27b-it
+  Average difference: +0.0618 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0618 points higher on average
+Model: gpt-4.1-mini
+  Average difference: +0.0592 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0592 points higher on average
+Model: gpt-4.1-nano
+  Average difference: +0.0487 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0487 points higher on average
+Model: Qwen3-4B-Instruct-2507
+  Average difference: +0.0450 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0450 points higher on average
+Model: command-a-translate-08-2025
+  Average difference: +0.0299 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0299 points higher on average
+Model: aya-expanse-32b
+  Average difference: +0.0276 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0276 points higher on average
+Model: EuroLLM-9B-Instruct
+  Average difference: +0.0226 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0226 points higher on average
+Model: c4ai-command-r7b-arabic-02-2025
+  Average difference: +0.0179 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0179 points higher on average
+Model: c4ai-command-r-v01
+  Average difference: +0.0084 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0084 points higher on average
+Model: aya-expanse-8b
+  Average difference: +0.0031 (COMET_Unbabel_XCOMET-XL points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0031 points higher on average
+
+================================================================================
+📊 Average Difference: General Arabic - Dialect (COMET_Unbabel_XCOMET-XL_ref-less Score)
+================================================================================
+Positive values mean general Arabic scores are higher.
+Negative values mean dialect scores are higher.
+
+Model: Jais-2-8B-Chat
+  Average difference: +0.1861 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.1861 points higher on average
+Model: Jais-2-70B-Chat
+  Average difference: +0.1726 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.1726 points higher on average
+Model: gpt-4.1-mini
+  Average difference: +0.1148 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.1148 points higher on average
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average difference: +0.1123 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.1123 points higher on average
+Model: c4ai-command-r-08-2024
+  Average difference: +0.1115 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.1115 points higher on average
+Model: gemma-3-27b-it
+  Average difference: +0.0996 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0996 points higher on average
+Model: gemma-3-4b-it
+  Average difference: +0.0976 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0976 points higher on average
+Model: gpt-4.1-nano
+  Average difference: +0.0954 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0954 points higher on average
+Model: Llama-3.3-70B-Instruct
+  Average difference: +0.0885 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0885 points higher on average
+Model: command-a-translate-08-2025
+  Average difference: +0.0557 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0557 points higher on average
+Model: Qwen3-4B-Instruct-2507
+  Average difference: +0.0517 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0517 points higher on average
+Model: aya-expanse-32b
+  Average difference: +0.0482 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0482 points higher on average
+Model: EuroLLM-9B-Instruct
+  Average difference: +0.0271 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0271 points higher on average
+Model: c4ai-command-r7b-arabic-02-2025
+  Average difference: +0.0256 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0256 points higher on average
+Model: c4ai-command-r-v01
+  Average difference: +0.0097 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0097 points higher on average
+Model: aya-expanse-8b
+  Average difference: +0.0035 (COMET_Unbabel_XCOMET-XL_ref-less points)
+  Based on 42 test set(s)
+  → General Arabic scores are 0.0035 points higher on average

@@ -14,7 +14,9 @@
       "dialect_code": "iq",
       "dialect_name": "Iraqi Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9755150619000197,
+      "COMET_Unbabel_XCOMET-XL": 0.9743835962563753
     },
     {
       "roundtrip": {
@@ -25,7 +27,9 @@
       "dialect_code": "qa",
       "dialect_name": "Qatari Arabic",
       "num_sentences": 6713,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9539679070196865,
+      "COMET_Unbabel_XCOMET-XL": 0.9510800110304674
     },
     {
       "roundtrip": {
@@ -36,7 +40,9 @@
       "dialect_code": "tn",
       "dialect_name": "Tunisian Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9668684077113867,
+      "COMET_Unbabel_XCOMET-XL": 0.9654295816719533
     },
     {
       "roundtrip": {
@@ -47,7 +53,9 @@
       "dialect_code": "ma",
       "dialect_name": "Moroccan Arabic",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9139611623932918,
+      "COMET_Unbabel_XCOMET-XL": 0.910756317426761
     },
     {
       "roundtrip": {
@@ -58,7 +66,9 @@
       "dialect_code": "om",
       "dialect_name": "Omani Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.979311170771718,
+      "COMET_Unbabel_XCOMET-XL": 0.9777192825675011
     },
     {
       "roundtrip": {
@@ -69,7 +79,9 @@
       "dialect_code": "qa",
       "dialect_name": "Qatari Arabic",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9765987739210779,
+      "COMET_Unbabel_XCOMET-XL": 0.9754587079367855
     },
     {
       "roundtrip": {
@@ -80,7 +92,9 @@
       "dialect_code": "ms",
       "dialect_name": "Modern Standard Arabic",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9846372079903429,
+      "COMET_Unbabel_XCOMET-XL": 0.9831186162775213
     },
     {
       "roundtrip": {
@@ -91,7 +105,9 @@
       "dialect_code": "ms",
       "dialect_name": "Modern Standard Arabic",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9550501174728075,
+      "COMET_Unbabel_XCOMET-XL": 0.9517509509126345
     },
     {
       "roundtrip": {
@@ -102,7 +118,9 @@
       "dialect_code": "dz",
       "dialect_name": "Algerian Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9679620182961226,
+      "COMET_Unbabel_XCOMET-XL": 0.9670838923752307
     },
     {
       "roundtrip": {
@@ -113,7 +131,9 @@
       "dialect_code": "eg",
       "dialect_name": "Egyptian Arabic",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9758295979635282,
+      "COMET_Unbabel_XCOMET-XL": 0.9748544633930379
     },
     {
       "roundtrip": {
@@ -124,7 +144,9 @@
       "dialect_code": "ye",
       "dialect_name": "Yemeni Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9795161266028881,
+      "COMET_Unbabel_XCOMET-XL": 0.9782549096047878
     },
     {
       "roundtrip": {
@@ -135,7 +157,9 @@
       "dialect_code": "tn",
       "dialect_name": "Tunisian Arabic",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9663568374135277,
+      "COMET_Unbabel_XCOMET-XL": 0.9650112748904661
     },
     {
       "roundtrip": {
@@ -146,7 +170,9 @@
       "dialect_code": "tn",
       "dialect_name": "Tunisian Arabic",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9668542790963099,
+      "COMET_Unbabel_XCOMET-XL": 0.9653537958539449
     },
     {
       "roundtrip": {
@@ -157,7 +183,9 @@
       "dialect_code": "sa",
       "dialect_name": "Saudi Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9815225586891174,
+      "COMET_Unbabel_XCOMET-XL": 0.980158160507679
     },
     {
       "roundtrip": {
@@ -168,7 +196,9 @@
       "dialect_code": "sy",
       "dialect_name": "Syrian Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9787938327640295,
+      "COMET_Unbabel_XCOMET-XL": 0.9773554973602295
     },
     {
       "roundtrip": {
@@ -179,7 +209,9 @@
       "dialect_code": "tn",
       "dialect_name": "Tunisian Arabic",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9292995832363764,
+      "COMET_Unbabel_XCOMET-XL": 0.9261221632858118
     },
     {
       "roundtrip": {
@@ -190,7 +222,9 @@
       "dialect_code": "eg",
       "dialect_name": "Egyptian Arabic",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9770154189742528,
+      "COMET_Unbabel_XCOMET-XL": 0.9756366561880478
     },
     {
       "roundtrip": {
@@ -201,7 +235,9 @@
       "dialect_code": "qa",
       "dialect_name": "Qatari Arabic",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9766780365384542,
+      "COMET_Unbabel_XCOMET-XL": 0.9752794645978854
     },
     {
       "roundtrip": {
@@ -212,7 +248,9 @@
       "dialect_code": "ly",
       "dialect_name": "Libyan Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9755201670974493,
+      "COMET_Unbabel_XCOMET-XL": 0.9738719808757306
     },
     {
       "roundtrip": {
@@ -223,7 +261,9 @@
       "dialect_code": "lb",
       "dialect_name": "Lebanese Arabic",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9777760389493062,
+      "COMET_Unbabel_XCOMET-XL": 0.9762950045833221
     },
     {
       "roundtrip": {
@@ -234,7 +274,9 @@
       "dialect_code": "lb",
       "dialect_name": "Lebanese Arabic",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9680729656219482,
+      "COMET_Unbabel_XCOMET-XL": 0.9691426134976474
     },
     {
       "roundtrip": {
@@ -245,7 +287,9 @@
       "dialect_code": "ma",
       "dialect_name": "Moroccan Arabic",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9687950139397925,
+      "COMET_Unbabel_XCOMET-XL": 0.9678072941492905
     },
     {
       "roundtrip": {
@@ -256,7 +300,9 @@
       "dialect_code": "qa",
       "dialect_name": "Qatari Arabic",
       "num_sentences": 6713,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9541316810319982,
+      "COMET_Unbabel_XCOMET-XL": 0.9507704973797959
     },
     {
       "roundtrip": {
@@ -267,7 +313,9 @@
       "dialect_code": "sy",
       "dialect_name": "Syrian Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9791788184046746,
+      "COMET_Unbabel_XCOMET-XL": 0.9776770459711551
     },
     {
       "roundtrip": {
@@ -278,7 +326,9 @@
       "dialect_code": "jo",
       "dialect_name": "Jordanian Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9795750980079174,
+      "COMET_Unbabel_XCOMET-XL": 0.9782010064423085
     },
     {
       "roundtrip": {
@@ -289,7 +339,9 @@
       "dialect_code": "ms",
       "dialect_name": "Modern Standard Arabic",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9845745279788971,
+      "COMET_Unbabel_XCOMET-XL": 0.9831428178548813
     },
     {
       "roundtrip": {
@@ -300,7 +352,9 @@
       "dialect_code": "sd",
       "dialect_name": "Sudanese Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.978861569494009,
+      "COMET_Unbabel_XCOMET-XL": 0.9774183112978935
     },
     {
       "roundtrip": {
@@ -311,7 +365,9 @@
       "dialect_code": "ly",
       "dialect_name": "Libyan Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9758831394016743,
+      "COMET_Unbabel_XCOMET-XL": 0.9742662655413151
     },
     {
       "roundtrip": {
@@ -322,7 +378,9 @@
       "dialect_code": "ma",
       "dialect_name": "Moroccan Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9678210005909205,
+      "COMET_Unbabel_XCOMET-XL": 0.9666469722688198
     },
     {
       "roundtrip": {
@@ -333,7 +391,9 @@
       "dialect_code": "ms",
       "dialect_name": "Modern Standard Arabic",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9571642912427585,
+      "COMET_Unbabel_XCOMET-XL": 0.9541364555557569
     },
     {
       "roundtrip": {
@@ -344,7 +404,9 @@
       "dialect_code": "iq",
       "dialect_name": "Iraqi Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9753207299560308,
+      "COMET_Unbabel_XCOMET-XL": 0.9739560862630605
     },
     {
       "roundtrip": {
@@ -355,7 +417,9 @@
       "dialect_code": "ms",
       "dialect_name": "Modern Standard Arabic",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9571291414896647,
+      "COMET_Unbabel_XCOMET-XL": 0.9539116182923317
     },
     {
       "roundtrip": {
@@ -366,7 +430,9 @@
       "dialect_code": "eg",
       "dialect_name": "Egyptian Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.977371145427227,
+      "COMET_Unbabel_XCOMET-XL": 0.9761262610852718
     },
     {
       "roundtrip": {
@@ -377,7 +443,9 @@
       "dialect_code": "tn",
       "dialect_name": "Tunisian Arabic",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8955832534780105,
+      "COMET_Unbabel_XCOMET-XL": 0.8970837158461412
     },
     {
       "roundtrip": {
@@ -388,7 +456,9 @@
       "dialect_code": "ms",
       "dialect_name": "Modern Standard Arabic",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9570653029282887,
+      "COMET_Unbabel_XCOMET-XL": 0.9536279052495956
     },
     {
       "roundtrip": {
@@ -399,7 +469,9 @@
       "dialect_code": "ma",
       "dialect_name": "Moroccan Arabic",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9693702178047253,
+      "COMET_Unbabel_XCOMET-XL": 0.9681060472772671
     },
     {
       "roundtrip": {
@@ -410,7 +482,9 @@
       "dialect_code": "sa",
       "dialect_name": "Saudi Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9812950123846531,
+      "COMET_Unbabel_XCOMET-XL": 0.9797798450887203
     },
     {
       "roundtrip": {
@@ -421,7 +495,9 @@
       "dialect_code": "ma",
       "dialect_name": "Moroccan Arabic",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9174774537483851,
+      "COMET_Unbabel_XCOMET-XL": 0.9140453222890695
     },
     {
       "roundtrip": {
@@ -432,7 +508,9 @@
       "dialect_code": "pa",
       "dialect_name": "Palestinian Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9796140969246626,
+      "COMET_Unbabel_XCOMET-XL": 0.9780525320470334
     },
     {
       "roundtrip": {
@@ -443,7 +521,9 @@
       "dialect_code": "iq",
       "dialect_name": "Iraqi Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.975955846697092,
+      "COMET_Unbabel_XCOMET-XL": 0.9744789307564496
     },
     {
       "roundtrip": {
@@ -454,7 +534,9 @@
       "dialect_code": "jo",
       "dialect_name": "Jordanian Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9796682766973972,
+      "COMET_Unbabel_XCOMET-XL": 0.9784048990905285
     },
     {
       "roundtrip": {
@@ -465,11 +547,15 @@
       "dialect_code": "eg",
       "dialect_name": "Egyptian Arabic",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9769038462489843,
+      "COMET_Unbabel_XCOMET-XL": 0.9756219355762005
     }
   ],
   "averages": {
     "BLEU": 47.0936,
-    "CHRF": 65.2233
+    "CHRF": 65.2233,
+    "COMET_Unbabel_XCOMET-XL_ref-less": 0.967,
+    "COMET_Unbabel_XCOMET-XL": 0.9654
   }
 }

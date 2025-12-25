@@ -9,11 +9,15 @@
     {
       "arabic_general": {
         "BLEU": 2.7197,
-        "CHRF": 29.9225
+        "CHRF": 29.9225,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9348506858199834,
+        "COMET_Unbabel_XCOMET-XL": 0.8873088715970516
       },
       "dialect": {
         "BLEU": 3.4288,
-        "CHRF": 24.4016
+        "CHRF": 24.4016,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7625513385273516,
+        "COMET_Unbabel_XCOMET-XL": 0.728091595955193
       },
       "filename": "madar.test.glf.1.iq.en",
       "dialect_code": "iq",
@@ -24,11 +28,15 @@
     {
       "arabic_general": {
         "BLEU": 1.8338,
-        "CHRF": 27.6184
+        "CHRF": 27.6184,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9086273406419565,
+        "COMET_Unbabel_XCOMET-XL": 0.8065533499011034
       },
       "dialect": {
         "BLEU": 1.8963,
-        "CHRF": 26.9786
+        "CHRF": 26.9786,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8254273527628012,
+        "COMET_Unbabel_XCOMET-XL": 0.7437927789828531
       },
       "filename": "QAraC.test.glf.0.qa.en",
       "dialect_code": "qa",
@@ -39,11 +47,15 @@
     {
       "arabic_general": {
         "BLEU": 1.4865,
-        "CHRF": 21.6255
+        "CHRF": 21.6255,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9346200192570686,
+        "COMET_Unbabel_XCOMET-XL": 0.7876138507798314
       },
       "dialect": {
         "BLEU": 1.609,
-        "CHRF": 20.5985
+        "CHRF": 20.5985,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7556965003609657,
+        "COMET_Unbabel_XCOMET-XL": 0.642546195410192
       },
       "filename": "madar.test.mgr.1.tn.en",
       "dialect_code": "tn",
@@ -54,11 +66,15 @@
     {
       "arabic_general": {
         "BLEU": 0.5939,
-        "CHRF": 20.8969
+        "CHRF": 20.8969,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7881744835029045,
+        "COMET_Unbabel_XCOMET-XL": 0.5004166562482715
       },
       "dialect": {
         "BLEU": 0.7839,
-        "CHRF": 20.1873
+        "CHRF": 20.1873,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7072655965511998,
+        "COMET_Unbabel_XCOMET-XL": 0.451845742687583
       },
       "filename": "bible.dev.mgr.0.ma.en",
       "dialect_code": "ma",
@@ -69,11 +85,15 @@
     {
       "arabic_general": {
         "BLEU": 15.0956,
-        "CHRF": 44.1002
+        "CHRF": 44.1002,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9343599206060171,
+        "COMET_Unbabel_XCOMET-XL": 0.9114615512415767
       },
       "dialect": {
         "BLEU": 14.8705,
-        "CHRF": 42.2284
+        "CHRF": 42.2284,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9149000882357359,
+        "COMET_Unbabel_XCOMET-XL": 0.893812122143805
       },
       "filename": "madar.test.glf.0.om.en",
       "dialect_code": "om",
@@ -84,11 +104,15 @@
     {
       "arabic_general": {
         "BLEU": 4.1327,
-        "CHRF": 31.3986
+        "CHRF": 31.3986,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9360856362581254,
+        "COMET_Unbabel_XCOMET-XL": 0.8990144517177885
       },
       "dialect": {
         "BLEU": 6.1584,
-        "CHRF": 32.2303
+        "CHRF": 32.2303,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8235153073363684,
+        "COMET_Unbabel_XCOMET-XL": 0.7969215312898159
       },
       "filename": "madar.dev.glf.0.qa.en",
       "dialect_code": "qa",
@@ -99,11 +123,15 @@
     {
       "arabic_general": {
         "BLEU": 16.3788,
-        "CHRF": 47.9339
+        "CHRF": 47.9339,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9360427345958623,
+        "COMET_Unbabel_XCOMET-XL": 0.9258056411634792
       },
       "dialect": {
         "BLEU": 15.7108,
-        "CHRF": 47.0498
+        "CHRF": 47.0498,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9340901613343846,
+        "COMET_Unbabel_XCOMET-XL": 0.9216603216854009
       },
       "filename": "madar.dev.msa.0.ms.en",
       "dialect_code": "ms",
@@ -114,11 +142,15 @@
     {
       "arabic_general": {
         "BLEU": 1.2009,
-        "CHRF": 25.6149
+        "CHRF": 25.6149,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7709299600248536,
+        "COMET_Unbabel_XCOMET-XL": 0.6654189916203419
       },
       "dialect": {
         "BLEU": 0.9871,
-        "CHRF": 25.2908
+        "CHRF": 25.2908,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7557977770765623,
+        "COMET_Unbabel_XCOMET-XL": 0.6572368433016041
       },
       "filename": "bible.test.msa.1.ms.en",
       "dialect_code": "ms",
@@ -129,11 +161,15 @@
     {
       "arabic_general": {
         "BLEU": 5.0784,
-        "CHRF": 28.9124
+        "CHRF": 28.9124,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9347359018921853,
+        "COMET_Unbabel_XCOMET-XL": 0.8573779153302312
       },
       "dialect": {
         "BLEU": 3.9203,
-        "CHRF": 24.0757
+        "CHRF": 24.0757,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7463139606453478,
+        "COMET_Unbabel_XCOMET-XL": 0.6835873981448821
       },
       "filename": "madar.test.mgr.0.dz.en",
       "dialect_code": "dz",
@@ -144,11 +180,15 @@
     {
       "arabic_general": {
         "BLEU": 3.7452,
-        "CHRF": 27.887
+        "CHRF": 27.887,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9358114580999721,
+        "COMET_Unbabel_XCOMET-XL": 0.8826295030205087
       },
       "dialect": {
         "BLEU": 6.5311,
-        "CHRF": 33.2139
+        "CHRF": 33.2139,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8342108944857662,
+        "COMET_Unbabel_XCOMET-XL": 0.8002444405766542
       },
       "filename": "madar.dev.nil.0.eg.en",
       "dialect_code": "eg",
@@ -159,11 +199,15 @@
     {
       "arabic_general": {
         "BLEU": 3.9777,
-        "CHRF": 30.0537
+        "CHRF": 30.0537,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9342381378263235,
+        "COMET_Unbabel_XCOMET-XL": 0.8957493664771319
       },
       "dialect": {
         "BLEU": 5.145,
-        "CHRF": 31.3101
+        "CHRF": 31.3101,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8837415023297072,
+        "COMET_Unbabel_XCOMET-XL": 0.8505704945996404
       },
       "filename": "madar.test.glf.0.ye.en",
       "dialect_code": "ye",
@@ -174,11 +218,15 @@
     {
       "arabic_general": {
         "BLEU": 2.2337,
-        "CHRF": 23.1086
+        "CHRF": 23.1086,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9357700275223364,
+        "COMET_Unbabel_XCOMET-XL": 0.7982922272397713
       },
       "dialect": {
         "BLEU": 2.2,
-        "CHRF": 20.9989
+        "CHRF": 20.9989,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7625419465479526,
+        "COMET_Unbabel_XCOMET-XL": 0.651992743588984
       },
       "filename": "madar.dev.mgr.0.tn.en",
       "dialect_code": "tn",
@@ -189,11 +237,15 @@
     {
       "arabic_general": {
         "BLEU": 1.826,
-        "CHRF": 22.1227
+        "CHRF": 22.1227,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9359144469499588,
+        "COMET_Unbabel_XCOMET-XL": 0.784251814219814
       },
       "dialect": {
         "BLEU": 2.1355,
-        "CHRF": 19.8251
+        "CHRF": 19.8251,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7629705930442477,
+        "COMET_Unbabel_XCOMET-XL": 0.646415017482753
       },
       "filename": "madar.test.mgr.0.tn.en",
       "dialect_code": "tn",
@@ -204,11 +256,15 @@
     {
       "arabic_general": {
         "BLEU": 7.1806,
-        "CHRF": 37.5973
+        "CHRF": 37.5973,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.934140084400773,
+        "COMET_Unbabel_XCOMET-XL": 0.9244360431432724
       },
       "dialect": {
         "BLEU": 9.3025,
-        "CHRF": 39.0858
+        "CHRF": 39.0858,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9090966627150774,
+        "COMET_Unbabel_XCOMET-XL": 0.9009357335567474
       },
       "filename": "madar.test.glf.0.sa.en",
       "dialect_code": "sa",
@@ -219,11 +275,15 @@
     {
       "arabic_general": {
         "BLEU": 3.2166,
-        "CHRF": 29.7574
+        "CHRF": 29.7574,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9339681969285011,
+        "COMET_Unbabel_XCOMET-XL": 0.8864468438476324
       },
       "dialect": {
         "BLEU": 4.7389,
-        "CHRF": 31.9048
+        "CHRF": 31.9048,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8706069034710526,
+        "COMET_Unbabel_XCOMET-XL": 0.8335491961464286
       },
       "filename": "madar.test.lev.1.sy.en",
       "dialect_code": "sy",
@@ -234,11 +294,15 @@
     {
       "arabic_general": {
         "BLEU": 0.8193,
-        "CHRF": 21.282
+        "CHRF": 21.282,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7694925300280253,
+        "COMET_Unbabel_XCOMET-XL": 0.5261825668315093
       },
       "dialect": {
         "BLEU": 0.8093,
-        "CHRF": 19.4504
+        "CHRF": 19.4504,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.5996817714472612,
+        "COMET_Unbabel_XCOMET-XL": 0.41850553584595523
       },
       "filename": "bible.test.mgr.0.tn.en",
       "dialect_code": "tn",
@@ -249,11 +313,15 @@
     {
       "arabic_general": {
         "BLEU": 3.9628,
-        "CHRF": 28.4302
+        "CHRF": 28.4302,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9360968795006092,
+        "COMET_Unbabel_XCOMET-XL": 0.8911036562915319
       },
       "dialect": {
         "BLEU": 8.8262,
-        "CHRF": 35.5119
+        "CHRF": 35.5119,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8325182991283587,
+        "COMET_Unbabel_XCOMET-XL": 0.8090381715452442
       },
       "filename": "madar.test.nil.0.eg.en",
       "dialect_code": "eg",
@@ -264,11 +332,15 @@
     {
       "arabic_general": {
         "BLEU": 4.1597,
-        "CHRF": 30.8662
+        "CHRF": 30.8662,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9359776647870357,
+        "COMET_Unbabel_XCOMET-XL": 0.9001656554295466
       },
       "dialect": {
         "BLEU": 6.4161,
-        "CHRF": 32.0228
+        "CHRF": 32.0228,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8226477290598245,
+        "COMET_Unbabel_XCOMET-XL": 0.7976843526861989
       },
       "filename": "madar.test.glf.0.qa.en",
       "dialect_code": "qa",
@@ -279,11 +351,15 @@
     {
       "arabic_general": {
         "BLEU": 3.0487,
-        "CHRF": 26.7096
+        "CHRF": 26.7096,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9342897702157498,
+        "COMET_Unbabel_XCOMET-XL": 0.8683979927524924
       },
       "dialect": {
         "BLEU": 3.9553,
-        "CHRF": 26.7414
+        "CHRF": 26.7414,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7813857291042805,
+        "COMET_Unbabel_XCOMET-XL": 0.7345214411057532
       },
       "filename": "madar.test.mgr.0.ly.en",
       "dialect_code": "ly",
@@ -294,11 +370,15 @@
     {
       "arabic_general": {
         "BLEU": 1.9995,
-        "CHRF": 26.0344
+        "CHRF": 26.0344,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9360534086044018,
+        "COMET_Unbabel_XCOMET-XL": 0.854226111075626
       },
       "dialect": {
         "BLEU": 3.7923,
-        "CHRF": 28.2014
+        "CHRF": 28.2014,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8092781778442172,
+        "COMET_Unbabel_XCOMET-XL": 0.7518758373197455
       },
       "filename": "madar.test.lev.0.lb.en",
       "dialect_code": "lb",
@@ -309,11 +389,15 @@
     {
       "arabic_general": {
         "BLEU": 2.2149,
-        "CHRF": 27.7167
+        "CHRF": 27.7167,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.935619721962647,
+        "COMET_Unbabel_XCOMET-XL": 0.8604852923141284
       },
       "dialect": {
         "BLEU": 4.5884,
-        "CHRF": 29.7307
+        "CHRF": 29.7307,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8090248803391376,
+        "COMET_Unbabel_XCOMET-XL": 0.7552185483209112
       },
       "filename": "madar.dev.lev.0.lb.en",
       "dialect_code": "lb",
@@ -324,11 +408,15 @@
     {
       "arabic_general": {
         "BLEU": 1.9247,
-        "CHRF": 22.5471
+        "CHRF": 22.5471,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.935714651748538,
+        "COMET_Unbabel_XCOMET-XL": 0.7751928060169925
       },
       "dialect": {
         "BLEU": 2.4177,
-        "CHRF": 22.0765
+        "CHRF": 22.0765,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7968109869035808,
+        "COMET_Unbabel_XCOMET-XL": 0.671348696558313
       },
       "filename": "madar.dev.mgr.0.ma.en",
       "dialect_code": "ma",
@@ -339,11 +427,15 @@
     {
       "arabic_general": {
         "BLEU": 1.7562,
-        "CHRF": 27.1862
+        "CHRF": 27.1862,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9075525628693338,
+        "COMET_Unbabel_XCOMET-XL": 0.8060251362072397
       },
       "dialect": {
         "BLEU": 1.6298,
-        "CHRF": 26.3595
+        "CHRF": 26.3595,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8199487016699308,
+        "COMET_Unbabel_XCOMET-XL": 0.7419420255878884
       },
       "filename": "QAraC.dev.glf.0.qa.en",
       "dialect_code": "qa",
@@ -354,11 +446,15 @@
     {
       "arabic_general": {
         "BLEU": 3.2106,
-        "CHRF": 30.4362
+        "CHRF": 30.4362,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.934042391717434,
+        "COMET_Unbabel_XCOMET-XL": 0.8917540356740356
       },
       "dialect": {
         "BLEU": 4.9564,
-        "CHRF": 32.5776
+        "CHRF": 32.5776,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8706034508049488,
+        "COMET_Unbabel_XCOMET-XL": 0.8376386620476842
       },
       "filename": "madar.test.lev.0.sy.en",
       "dialect_code": "sy",
@@ -369,11 +465,15 @@
     {
       "arabic_general": {
         "BLEU": 3.8737,
-        "CHRF": 29.8873
+        "CHRF": 29.8873,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.934812091678381,
+        "COMET_Unbabel_XCOMET-XL": 0.9004925204440951
       },
       "dialect": {
         "BLEU": 7.1256,
-        "CHRF": 33.8197
+        "CHRF": 33.8197,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8779923330247402,
+        "COMET_Unbabel_XCOMET-XL": 0.8526809328198433
       },
       "filename": "madar.test.lev.0.jo.en",
       "dialect_code": "jo",
@@ -384,11 +484,15 @@
     {
       "arabic_general": {
         "BLEU": 15.7988,
-        "CHRF": 46.6238
+        "CHRF": 46.6238,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.93580163867657,
+        "COMET_Unbabel_XCOMET-XL": 0.924163210607492
       },
       "dialect": {
         "BLEU": 15.2732,
-        "CHRF": 46.1168
+        "CHRF": 46.1168,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9329755810883182,
+        "COMET_Unbabel_XCOMET-XL": 0.9206244132169165
       },
       "filename": "madar.test.msa.0.ms.en",
       "dialect_code": "ms",
@@ -399,11 +503,15 @@
     {
       "arabic_general": {
         "BLEU": 7.6476,
-        "CHRF": 35.0884
+        "CHRF": 35.0884,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9338499248325824,
+        "COMET_Unbabel_XCOMET-XL": 0.8989889110773802
       },
       "dialect": {
         "BLEU": 7.7754,
-        "CHRF": 33.9854
+        "CHRF": 33.9854,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8334229766177014,
+        "COMET_Unbabel_XCOMET-XL": 0.8067847729511559
       },
       "filename": "madar.test.nil.0.sd.en",
       "dialect_code": "sd",
@@ -414,11 +522,15 @@
     {
       "arabic_general": {
         "BLEU": 4.3818,
-        "CHRF": 29.8554
+        "CHRF": 29.8554,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9339295986443757,
+        "COMET_Unbabel_XCOMET-XL": 0.8819667902998626
       },
       "dialect": {
         "BLEU": 6.2532,
-        "CHRF": 29.3877
+        "CHRF": 29.3877,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7801402268335224,
+        "COMET_Unbabel_XCOMET-XL": 0.7453389103177469
       },
       "filename": "madar.test.mgr.1.ly.en",
       "dialect_code": "ly",
@@ -429,11 +541,15 @@
     {
       "arabic_general": {
         "BLEU": 5.3863,
-        "CHRF": 31.8033
+        "CHRF": 31.8033,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9337392405271531,
+        "COMET_Unbabel_XCOMET-XL": 0.8518100416362285
       },
       "dialect": {
         "BLEU": 4.9892,
-        "CHRF": 28.8209
+        "CHRF": 28.8209,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7873598020635545,
+        "COMET_Unbabel_XCOMET-XL": 0.7239435781165957
       },
       "filename": "madar.test.mgr.1.ma.en",
       "dialect_code": "ma",
@@ -444,11 +560,15 @@
     {
       "arabic_general": {
         "BLEU": 1.6686,
-        "CHRF": 26.2392
+        "CHRF": 26.2392,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.785688512387375,
+        "COMET_Unbabel_XCOMET-XL": 0.687352664830784
       },
       "dialect": {
         "BLEU": 1.7601,
-        "CHRF": 26.1274
+        "CHRF": 26.1274,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7765015436460575,
+        "COMET_Unbabel_XCOMET-XL": 0.6742319231651103
       },
       "filename": "bible.dev.msa.1.ms.en",
       "dialect_code": "ms",
@@ -459,11 +579,15 @@
     {
       "arabic_general": {
         "BLEU": 3.7833,
-        "CHRF": 31.0012
+        "CHRF": 31.0012,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9342354866862297,
+        "COMET_Unbabel_XCOMET-XL": 0.8880402752384543
       },
       "dialect": {
         "BLEU": 4.6436,
-        "CHRF": 24.8323
+        "CHRF": 24.8323,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7615711593739688,
+        "COMET_Unbabel_XCOMET-XL": 0.7264149178043008
       },
       "filename": "madar.test.glf.0.iq.en",
       "dialect_code": "iq",
@@ -474,11 +598,15 @@
     {
       "arabic_general": {
         "BLEU": 4.2117,
-        "CHRF": 31.2808
+        "CHRF": 31.2808,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7714045975853999,
+        "COMET_Unbabel_XCOMET-XL": 0.6959870373085141
       },
       "dialect": {
         "BLEU": 3.815,
-        "CHRF": 30.62
+        "CHRF": 30.62,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7582565780356526,
+        "COMET_Unbabel_XCOMET-XL": 0.6867564194649458
       },
       "filename": "bible.test.msa.0.ms.en",
       "dialect_code": "ms",
@@ -489,11 +617,15 @@
     {
       "arabic_general": {
         "BLEU": 3.0563,
-        "CHRF": 26.3722
+        "CHRF": 26.3722,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9340638932287693,
+        "COMET_Unbabel_XCOMET-XL": 0.8826516181752085
       },
       "dialect": {
         "BLEU": 7.1963,
-        "CHRF": 33.5906
+        "CHRF": 33.5906,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8287094073642511,
+        "COMET_Unbabel_XCOMET-XL": 0.8019668836984783
       },
       "filename": "madar.test.nil.2.eg.en",
       "dialect_code": "eg",
@@ -504,11 +636,15 @@
     {
       "arabic_general": {
         "BLEU": 0.8728,
-        "CHRF": 22.5106
+        "CHRF": 22.5106,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.786582685187459,
+        "COMET_Unbabel_XCOMET-XL": 0.5502527650197347
       },
       "dialect": {
         "BLEU": 0.9189,
-        "CHRF": 21.0841
+        "CHRF": 21.0841,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.6283959576611717,
+        "COMET_Unbabel_XCOMET-XL": 0.44476982885350785
       },
       "filename": "bible.dev.mgr.0.tn.en",
       "dialect_code": "tn",
@@ -519,11 +655,15 @@
     {
       "arabic_general": {
         "BLEU": 5.1943,
-        "CHRF": 32.645
+        "CHRF": 32.645,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7857042751833796,
+        "COMET_Unbabel_XCOMET-XL": 0.7153537148609758
       },
       "dialect": {
         "BLEU": 4.8787,
-        "CHRF": 31.7849
+        "CHRF": 31.7849,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7740316256135702,
+        "COMET_Unbabel_XCOMET-XL": 0.696816686168313
       },
       "filename": "bible.dev.msa.0.ms.en",
       "dialect_code": "ms",
@@ -534,11 +674,15 @@
     {
       "arabic_general": {
         "BLEU": 2.5959,
-        "CHRF": 26.3522
+        "CHRF": 26.3522,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9361395586110078,
+        "COMET_Unbabel_XCOMET-XL": 0.822767059595539
       },
       "dialect": {
         "BLEU": 3.1389,
-        "CHRF": 25.5022
+        "CHRF": 25.5022,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7921057180032993,
+        "COMET_Unbabel_XCOMET-XL": 0.7034057430791167
       },
       "filename": "madar.test.mgr.0.ma.en",
       "dialect_code": "ma",
@@ -549,11 +693,15 @@
     {
       "arabic_general": {
         "BLEU": 3.7702,
-        "CHRF": 30.2885
+        "CHRF": 30.2885,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9346970810741186,
+        "COMET_Unbabel_XCOMET-XL": 0.8989029024243355
       },
       "dialect": {
         "BLEU": 5.3828,
-        "CHRF": 32.7949
+        "CHRF": 32.7949,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9083489374369382,
+        "COMET_Unbabel_XCOMET-XL": 0.876855440147221
       },
       "filename": "madar.test.glf.1.sa.en",
       "dialect_code": "sa",
@@ -564,11 +712,15 @@
     {
       "arabic_general": {
         "BLEU": 0.2589,
-        "CHRF": 20.0665
+        "CHRF": 20.0665,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.771694911159575,
+        "COMET_Unbabel_XCOMET-XL": 0.4768925176685055
       },
       "dialect": {
         "BLEU": 0.4194,
-        "CHRF": 19.6141
+        "CHRF": 19.6141,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.6688798507396132,
+        "COMET_Unbabel_XCOMET-XL": 0.41755000930900377
       },
       "filename": "bible.test.mgr.0.ma.en",
       "dialect_code": "ma",
@@ -579,11 +731,15 @@
     {
       "arabic_general": {
         "BLEU": 3.5924,
-        "CHRF": 29.346
+        "CHRF": 29.346,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9336130187511444,
+        "COMET_Unbabel_XCOMET-XL": 0.8940696927607059
       },
       "dialect": {
         "BLEU": 5.9834,
-        "CHRF": 31.7246
+        "CHRF": 31.7246,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8985355242267251,
+        "COMET_Unbabel_XCOMET-XL": 0.8664200563058257
       },
       "filename": "madar.test.lev.0.pa.en",
       "dialect_code": "pa",
@@ -594,11 +750,15 @@
     {
       "arabic_general": {
         "BLEU": 2.4372,
-        "CHRF": 28.7043
+        "CHRF": 28.7043,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9341553066819906,
+        "COMET_Unbabel_XCOMET-XL": 0.8782944048121571
       },
       "dialect": {
         "BLEU": 3.1006,
-        "CHRF": 22.404
+        "CHRF": 22.404,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7634581532664597,
+        "COMET_Unbabel_XCOMET-XL": 0.7169079237012193
       },
       "filename": "madar.test.glf.2.iq.en",
       "dialect_code": "iq",
@@ -609,11 +769,15 @@
     {
       "arabic_general": {
         "BLEU": 3.659,
-        "CHRF": 30.5723
+        "CHRF": 30.5723,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.93473553404212,
+        "COMET_Unbabel_XCOMET-XL": 0.8961761392503976
       },
       "dialect": {
         "BLEU": 5.4567,
-        "CHRF": 33.1547
+        "CHRF": 33.1547,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8764690453484655,
+        "COMET_Unbabel_XCOMET-XL": 0.8484616189561784
       },
       "filename": "madar.test.lev.1.jo.en",
       "dialect_code": "jo",
@@ -624,11 +788,15 @@
     {
       "arabic_general": {
         "BLEU": 3.6248,
-        "CHRF": 28.4325
+        "CHRF": 28.4325,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9341890288740397,
+        "COMET_Unbabel_XCOMET-XL": 0.8980255720689893
       },
       "dialect": {
         "BLEU": 6.1033,
-        "CHRF": 33.521
+        "CHRF": 33.521,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8270278364170809,
+        "COMET_Unbabel_XCOMET-XL": 0.8139895861260593
       },
       "filename": "madar.test.nil.1.eg.en",
       "dialect_code": "eg",
@@ -649,11 +817,15 @@
       "num_sentences": 6000,
       "arabic_general": {
         "BLEU": 3.0149,
-        "CHRF": 29.8655
+        "CHRF": 29.8655,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9344,
+        "COMET_Unbabel_XCOMET-XL": 0.8845
       },
       "dialect": {
         "BLEU": 3.7736,
-        "CHRF": 23.8705
+        "CHRF": 23.8705,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7625,
+        "COMET_Unbabel_XCOMET-XL": 0.7238
       }
     },
     {
@@ -670,11 +842,15 @@
       "num_sentences": 25426,
       "arabic_general": {
         "BLEU": 2.9289,
-        "CHRF": 29.0471
+        "CHRF": 29.0471,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9213,
+        "COMET_Unbabel_XCOMET-XL": 0.8503
       },
       "dialect": {
         "BLEU": 3.9163,
-        "CHRF": 29.0788
+        "CHRF": 29.0788,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8229,
+        "COMET_Unbabel_XCOMET-XL": 0.7686
       }
     },
     {
@@ -692,11 +868,15 @@
       "num_sentences": 15200,
       "arabic_general": {
         "BLEU": 1.7383,
-        "CHRF": 22.3175
+        "CHRF": 22.3175,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9232,
+        "COMET_Unbabel_XCOMET-XL": 0.7704
       },
       "dialect": {
         "BLEU": 1.8485,
-        "CHRF": 20.3541
+        "CHRF": 20.3541,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7501,
+        "COMET_Unbabel_XCOMET-XL": 0.631
       }
     },
     {
@@ -714,11 +894,15 @@
       "num_sentences": 15200,
       "arabic_general": {
         "BLEU": 2.3432,
-        "CHRF": 24.6482
+        "CHRF": 24.6482,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9233,
+        "COMET_Unbabel_XCOMET-XL": 0.783
       },
       "dialect": {
         "BLEU": 2.6131,
-        "CHRF": 23.7074
+        "CHRF": 23.7074,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.785,
+        "COMET_Unbabel_XCOMET-XL": 0.6733
       }
     },
     {
@@ -732,11 +916,15 @@
       "num_sentences": 2000,
       "arabic_general": {
         "BLEU": 15.0956,
-        "CHRF": 44.1002
+        "CHRF": 44.1002,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9344,
+        "COMET_Unbabel_XCOMET-XL": 0.9115
       },
       "dialect": {
         "BLEU": 14.8705,
-        "CHRF": 42.2284
+        "CHRF": 42.2284,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9149,
+        "COMET_Unbabel_XCOMET-XL": 0.8938
       }
     },
     {
@@ -755,11 +943,15 @@
       "num_sentences": 14400,
       "arabic_general": {
         "BLEU": 12.1823,
-        "CHRF": 41.2924
+        "CHRF": 41.2924,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9097,
+        "COMET_Unbabel_XCOMET-XL": 0.8859
       },
       "dialect": {
         "BLEU": 11.7416,
-        "CHRF": 40.6632
+        "CHRF": 40.6632,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9056,
+        "COMET_Unbabel_XCOMET-XL": 0.8807
       }
     },
     {
@@ -773,11 +965,15 @@
       "num_sentences": 2000,
       "arabic_general": {
         "BLEU": 5.0784,
-        "CHRF": 28.9124
+        "CHRF": 28.9124,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9347,
+        "COMET_Unbabel_XCOMET-XL": 0.8574
       },
       "dialect": {
         "BLEU": 3.9203,
-        "CHRF": 24.0757
+        "CHRF": 24.0757,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7463,
+        "COMET_Unbabel_XCOMET-XL": 0.6836
       }
     },
     {
@@ -794,11 +990,15 @@
       "num_sentences": 16000,
       "arabic_general": {
         "BLEU": 3.7355,
-        "CHRF": 27.9786
+        "CHRF": 27.9786,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9355,
+        "COMET_Unbabel_XCOMET-XL": 0.888
       },
       "dialect": {
         "BLEU": 7.5434,
-        "CHRF": 34.2241
+        "CHRF": 34.2241,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8319,
+        "COMET_Unbabel_XCOMET-XL": 0.8058
       }
     },
     {
@@ -812,11 +1012,15 @@
       "num_sentences": 2000,
       "arabic_general": {
         "BLEU": 3.9777,
-        "CHRF": 30.0537
+        "CHRF": 30.0537,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9342,
+        "COMET_Unbabel_XCOMET-XL": 0.8957
       },
       "dialect": {
         "BLEU": 5.145,
-        "CHRF": 31.3101
+        "CHRF": 31.3101,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8837,
+        "COMET_Unbabel_XCOMET-XL": 0.8506
       }
     },
     {
@@ -831,11 +1035,15 @@
       "num_sentences": 4000,
       "arabic_general": {
         "BLEU": 5.5113,
-        "CHRF": 33.9936
+        "CHRF": 33.9936,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9344,
+        "COMET_Unbabel_XCOMET-XL": 0.9117
       },
       "dialect": {
         "BLEU": 7.3811,
-        "CHRF": 35.9854
+        "CHRF": 35.9854,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9087,
+        "COMET_Unbabel_XCOMET-XL": 0.8889
       }
     },
     {
@@ -850,11 +1058,15 @@
       "num_sentences": 4000,
       "arabic_general": {
         "BLEU": 3.2142,
-        "CHRF": 30.0988
+        "CHRF": 30.0988,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.934,
+        "COMET_Unbabel_XCOMET-XL": 0.8891
       },
       "dialect": {
         "BLEU": 4.8496,
-        "CHRF": 32.2442
+        "CHRF": 32.2442,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8706,
+        "COMET_Unbabel_XCOMET-XL": 0.8356
       }
     },
     {
@@ -869,11 +1081,15 @@
       "num_sentences": 4000,
       "arabic_general": {
         "BLEU": 3.7474,
-        "CHRF": 28.2722
+        "CHRF": 28.2722,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9341,
+        "COMET_Unbabel_XCOMET-XL": 0.8752
       },
       "dialect": {
         "BLEU": 5.1164,
-        "CHRF": 28.0513
+        "CHRF": 28.0513,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.7808,
+        "COMET_Unbabel_XCOMET-XL": 0.7399
       }
     },
     {
@@ -888,11 +1104,15 @@
       "num_sentences": 12000,
       "arabic_general": {
         "BLEU": 2.0971,
-        "CHRF": 26.8056
+        "CHRF": 26.8056,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9359,
+        "COMET_Unbabel_XCOMET-XL": 0.8571
       },
       "dialect": {
         "BLEU": 4.159,
-        "CHRF": 28.9067
+        "CHRF": 28.9067,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8092,
+        "COMET_Unbabel_XCOMET-XL": 0.7534
       }
     },
     {
@@ -907,11 +1127,15 @@
       "num_sentences": 4000,
       "arabic_general": {
         "BLEU": 3.7669,
-        "CHRF": 30.2203
+        "CHRF": 30.2203,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9348,
+        "COMET_Unbabel_XCOMET-XL": 0.8983
       },
       "dialect": {
         "BLEU": 6.2974,
-        "CHRF": 33.4959
+        "CHRF": 33.4959,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8772,
+        "COMET_Unbabel_XCOMET-XL": 0.8506
       }
     },
     {
@@ -925,11 +1149,15 @@
       "num_sentences": 2000,
       "arabic_general": {
         "BLEU": 7.6476,
-        "CHRF": 35.0884
+        "CHRF": 35.0884,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9338,
+        "COMET_Unbabel_XCOMET-XL": 0.899
       },
       "dialect": {
         "BLEU": 7.7754,
-        "CHRF": 33.9854
+        "CHRF": 33.9854,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8334,
+        "COMET_Unbabel_XCOMET-XL": 0.8068
       }
     },
     {
@@ -943,11 +1171,15 @@
       "num_sentences": 2000,
       "arabic_general": {
         "BLEU": 3.5924,
-        "CHRF": 29.346
+        "CHRF": 29.346,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.9336,
+        "COMET_Unbabel_XCOMET-XL": 0.8941
       },
       "dialect": {
         "BLEU": 5.9834,
-        "CHRF": 31.7246
+        "CHRF": 31.7246,
+        "COMET_Unbabel_XCOMET-XL_ref-less": 0.8985,
+        "COMET_Unbabel_XCOMET-XL": 0.8664
       }
     },
     {
@@ -967,11 +1199,15 @@
   "averages": {
     "arabic_general": {
       "BLEU": 4.0383,
-      "CHRF": 29.2102
+      "CHRF": 29.2102,
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9039,
+      "COMET_Unbabel_XCOMET-XL": 0.8197
     },
     "dialect": {
       "BLEU": 5.0244,
-      "CHRF": 29.308
+      "CHRF": 29.308,
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8063,
+      "COMET_Unbabel_XCOMET-XL": 0.7392
     }
   }
 }

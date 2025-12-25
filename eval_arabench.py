@@ -143,30 +143,30 @@ async def translate_arabench_file(
         print(f"⏭️  Step 1: Arabic (general) translation already exists, skipping...")
         print(f"   Output: {arabic_output}\n")
     else:
-        print(f"🔄 Step 1: Translating to Arabic (general)...")
-        print(f"   Input:  {input_file}")
-        print(f"   Output: {arabic_output}")
-        try:
-            await translate_file(client, model, input_file, arabic_output, "Arabic")
-            print(f"✅ Completed Arabic translation\n")
-        except Exception as e:
-            print(f"❌ Error translating to Arabic: {e}\n")
-            return None
+    print(f"🔄 Step 1: Translating to Arabic (general)...")
+    print(f"   Input:  {input_file}")
+    print(f"   Output: {arabic_output}")
+    try:
+        await translate_file(client, model, input_file, arabic_output, "Arabic")
+        print(f"✅ Completed Arabic translation\n")
+    except Exception as e:
+        print(f"❌ Error translating to Arabic: {e}\n")
+        return None
     
     # Step 2: Translate to specific dialect
     if dialect_output.exists():
         print(f"⏭️  Step 2: {dialect_name} translation already exists, skipping...")
         print(f"   Output: {dialect_output}\n")
     else:
-        print(f"🔄 Step 2: Translating to {dialect_name}...")
-        print(f"   Input:  {input_file}")
-        print(f"   Output: {dialect_output}")
-        try:
-            await translate_file(client, model, input_file, dialect_output, dialect_name)
-            print(f"✅ Completed {dialect_name} translation\n")
-        except Exception as e:
-            print(f"❌ Error translating to {dialect_name}: {e}\n")
-            return None
+    print(f"🔄 Step 2: Translating to {dialect_name}...")
+    print(f"   Input:  {input_file}")
+    print(f"   Output: {dialect_output}")
+    try:
+        await translate_file(client, model, input_file, dialect_output, dialect_name)
+        print(f"✅ Completed {dialect_name} translation\n")
+    except Exception as e:
+        print(f"❌ Error translating to {dialect_name}: {e}\n")
+        return None
     
     # Compute metrics if reference file exists
     metrics = {}
@@ -735,13 +735,13 @@ async def process_all_files(
         
         roundtrip_output_dir.mkdir(parents=True, exist_ok=True)
         
-        # Find all .en files (excluding .ids files)
-        en_files = [f for f in dataset_dir.glob("*.en") if not f.name.endswith(".ids")]
-        
-        if not en_files:
-            print(f"❌ No .en files found in {dataset_dir}")
-            return
-        
+    # Find all .en files (excluding .ids files)
+    en_files = [f for f in dataset_dir.glob("*.en") if not f.name.endswith(".ids")]
+    
+    if not en_files:
+        print(f"❌ No .en files found in {dataset_dir}")
+        return
+    
         total_files = len(en_files)
         print(f"📊 Found {total_files} English files for round-trip translation\n")
         print(f"   Forward output: {output_dir}")
@@ -756,7 +756,7 @@ async def process_all_files(
             if metrics:
                 metrics['type'] = 'file'
                 all_metrics.append(metrics)
-        
+    
         # No merged dialect scores for round-trip
         merged_dialect_results = []
         direction_str = 'roundtrip'
@@ -801,16 +801,16 @@ async def process_all_files(
         
         total_files = len(en_files)
         print(f"📊 Found {total_files} English files to translate (forward: English -> Arabic)\n")
-        
-        # Process files sequentially (to avoid overwhelming the API)
-        for i, en_file in enumerate(en_files, 1):
+    
+    # Process files sequentially (to avoid overwhelming the API)
+    for i, en_file in enumerate(en_files, 1):
             print(f"\n[{i}/{total_files}] Processing {en_file.name}...")
-            metrics = await translate_arabench_file(client, model, en_file, output_dir, dataset_dir, base_url)
-            if metrics:
+        metrics = await translate_arabench_file(client, model, en_file, output_dir, dataset_dir, base_url)
+        if metrics:
                 # Mark as individual file result
                 metrics['type'] = 'file'
-                all_metrics.append(metrics)
-        
+            all_metrics.append(metrics)
+    
         # Compute merged dialect scores (only for forward translation)
         merged_dialect_results = compute_merged_dialect_scores(all_metrics, dataset_dir, output_dir)
         direction_str = 'forward'
@@ -861,21 +861,21 @@ async def process_all_files(
             }
         else:
             # For forward translation, we have arabic_general and dialect
-            arabic_bleu_scores = [m['arabic_general']['BLEU'] for m in all_metrics if 'arabic_general' in m]
-            arabic_chrf_scores = [m['arabic_general']['CHRF'] for m in all_metrics if 'arabic_general' in m]
-            dialect_bleu_scores = [m['dialect']['BLEU'] for m in all_metrics if 'dialect' in m]
-            dialect_chrf_scores = [m['dialect']['CHRF'] for m in all_metrics if 'dialect' in m]
-            
-            scores_summary['averages'] = {
-                'arabic_general': {
-                    'BLEU': round(sum(arabic_bleu_scores) / len(arabic_bleu_scores), 4) if arabic_bleu_scores else 0,
-                    'CHRF': round(sum(arabic_chrf_scores) / len(arabic_chrf_scores), 4) if arabic_chrf_scores else 0,
-                },
-                'dialect': {
-                    'BLEU': round(sum(dialect_bleu_scores) / len(dialect_bleu_scores), 4) if dialect_bleu_scores else 0,
-                    'CHRF': round(sum(dialect_chrf_scores) / len(dialect_chrf_scores), 4) if dialect_chrf_scores else 0,
-                }
+        arabic_bleu_scores = [m['arabic_general']['BLEU'] for m in all_metrics if 'arabic_general' in m]
+        arabic_chrf_scores = [m['arabic_general']['CHRF'] for m in all_metrics if 'arabic_general' in m]
+        dialect_bleu_scores = [m['dialect']['BLEU'] for m in all_metrics if 'dialect' in m]
+        dialect_chrf_scores = [m['dialect']['CHRF'] for m in all_metrics if 'dialect' in m]
+        
+        scores_summary['averages'] = {
+            'arabic_general': {
+                'BLEU': round(sum(arabic_bleu_scores) / len(arabic_bleu_scores), 4) if arabic_bleu_scores else 0,
+                'CHRF': round(sum(arabic_chrf_scores) / len(arabic_chrf_scores), 4) if arabic_chrf_scores else 0,
+            },
+            'dialect': {
+                'BLEU': round(sum(dialect_bleu_scores) / len(dialect_bleu_scores), 4) if dialect_bleu_scores else 0,
+                'CHRF': round(sum(dialect_chrf_scores) / len(dialect_chrf_scores), 4) if dialect_chrf_scores else 0,
             }
+        }
     
     # Save JSON
     scores_file.write_text(json.dumps(scores_summary, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -904,12 +904,12 @@ async def process_all_files(
                 f.write(f"  BLEU: {scores_summary['averages']['BLEU']:.4f}\n")
                 f.write(f"  CHRF: {scores_summary['averages']['CHRF']:.4f}\n\n")
             else:
-                f.write(f"Arabic (general):\n")
-                f.write(f"  BLEU: {scores_summary['averages']['arabic_general']['BLEU']:.4f}\n")
-                f.write(f"  CHRF: {scores_summary['averages']['arabic_general']['CHRF']:.4f}\n\n")
-                f.write(f"Dialect-specific:\n")
-                f.write(f"  BLEU: {scores_summary['averages']['dialect']['BLEU']:.4f}\n")
-                f.write(f"  CHRF: {scores_summary['averages']['dialect']['CHRF']:.4f}\n\n")
+            f.write(f"Arabic (general):\n")
+            f.write(f"  BLEU: {scores_summary['averages']['arabic_general']['BLEU']:.4f}\n")
+            f.write(f"  CHRF: {scores_summary['averages']['arabic_general']['CHRF']:.4f}\n\n")
+            f.write(f"Dialect-specific:\n")
+            f.write(f"  BLEU: {scores_summary['averages']['dialect']['BLEU']:.4f}\n")
+            f.write(f"  CHRF: {scores_summary['averages']['dialect']['CHRF']:.4f}\n\n")
         
         # Write overall scores if available
         if overall_result:
@@ -939,16 +939,16 @@ async def process_all_files(
         for metrics in all_metrics:
             f.write(f"File: {metrics.get('filename', 'unknown')}\n")
             if not reverse:
-                f.write(f"Dialect: {metrics.get('dialect_name', 'unknown')} ({metrics.get('dialect_code', 'unknown')})\n")
+            f.write(f"Dialect: {metrics.get('dialect_name', 'unknown')} ({metrics.get('dialect_code', 'unknown')})\n")
             f.write(f"Sentences: {metrics.get('num_sentences', 0)}\n")
             if reverse:
                 if 'BLEU' in metrics:
                     f.write(f"  BLEU: {metrics['BLEU']:.4f}, CHRF: {metrics['CHRF']:.4f}\n")
             else:
-                if 'arabic_general' in metrics:
-                    f.write(f"  Arabic (general) - BLEU: {metrics['arabic_general']['BLEU']:.4f}, CHRF: {metrics['arabic_general']['CHRF']:.4f}\n")
-                if 'dialect' in metrics:
-                    f.write(f"  Dialect - BLEU: {metrics['dialect']['BLEU']:.4f}, CHRF: {metrics['dialect']['CHRF']:.4f}\n")
+            if 'arabic_general' in metrics:
+                f.write(f"  Arabic (general) - BLEU: {metrics['arabic_general']['BLEU']:.4f}, CHRF: {metrics['arabic_general']['CHRF']:.4f}\n")
+            if 'dialect' in metrics:
+                f.write(f"  Dialect - BLEU: {metrics['dialect']['BLEU']:.4f}, CHRF: {metrics['dialect']['CHRF']:.4f}\n")
             f.write("\n")
     
     print(f"\n{'='*80}")
@@ -961,8 +961,8 @@ async def process_all_files(
         if roundtrip or reverse:
             print(f"   BLEU: {scores_summary['averages']['BLEU']:.4f}, CHRF: {scores_summary['averages']['CHRF']:.4f}")
         else:
-            print(f"   Arabic (general) - BLEU: {scores_summary['averages']['arabic_general']['BLEU']:.4f}, CHRF: {scores_summary['averages']['arabic_general']['CHRF']:.4f}")
-            print(f"   Dialect-specific - BLEU: {scores_summary['averages']['dialect']['BLEU']:.4f}, CHRF: {scores_summary['averages']['dialect']['CHRF']:.4f}")
+        print(f"   Arabic (general) - BLEU: {scores_summary['averages']['arabic_general']['BLEU']:.4f}, CHRF: {scores_summary['averages']['arabic_general']['CHRF']:.4f}")
+        print(f"   Dialect-specific - BLEU: {scores_summary['averages']['dialect']['BLEU']:.4f}, CHRF: {scores_summary['averages']['dialect']['CHRF']:.4f}")
     if overall_result:
         print(f"\n📈 Overall Scores (all test sets concatenated):")
         print(f"   Total test sets: {overall_result.get('num_test_sets', 0)}")

@@ -11,294 +11,378 @@
       "CHRF": 71.9036,
       "filename": "madar.test.nil.1.eg.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9050838603079319,
+      "COMET_Unbabel_XCOMET-XL": 0.956275207772851
     },
     {
       "BLEU": 48.681,
       "CHRF": 66.8151,
       "filename": "madar.test.mgr.1.ly.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8752259875983,
+      "COMET_Unbabel_XCOMET-XL": 0.9296391539201141
     },
     {
       "BLEU": 46.2679,
       "CHRF": 63.9914,
       "filename": "madar.dev.mgr.0.ma.ar",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7443207751946016,
+      "COMET_Unbabel_XCOMET-XL": 0.891491398548538
     },
     {
       "BLEU": 50.0807,
       "CHRF": 67.5224,
       "filename": "madar.test.lev.0.lb.ar",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8374952346350139,
+      "COMET_Unbabel_XCOMET-XL": 0.9269523541652239
     },
     {
       "BLEU": 45.5044,
       "CHRF": 65.1729,
       "filename": "madar.test.nil.2.eg.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8897788644805551,
+      "COMET_Unbabel_XCOMET-XL": 0.9444047530442476
     },
     {
       "BLEU": 48.6768,
       "CHRF": 65.9457,
       "filename": "madar.test.lev.0.pa.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.896914252050221,
+      "COMET_Unbabel_XCOMET-XL": 0.9490986082702875
     },
     {
       "BLEU": 40.572,
       "CHRF": 61.1812,
       "filename": "madar.test.glf.1.sa.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9012770915031433,
+      "COMET_Unbabel_XCOMET-XL": 0.9379139887318015
     },
     {
       "BLEU": 45.3968,
       "CHRF": 64.1949,
       "filename": "madar.test.glf.0.iq.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.898396226875484,
+      "COMET_Unbabel_XCOMET-XL": 0.9401816644072533
     },
     {
       "BLEU": 49.3705,
       "CHRF": 66.4762,
       "filename": "madar.test.lev.1.sy.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8742412516847253,
+      "COMET_Unbabel_XCOMET-XL": 0.9377182772904634
     },
     {
       "BLEU": 42.0317,
       "CHRF": 61.9887,
       "filename": "madar.test.mgr.0.ly.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8552506293430925,
+      "COMET_Unbabel_XCOMET-XL": 0.9246296093538403
     },
     {
       "BLEU": 36.0989,
       "CHRF": 57.0004,
       "filename": "madar.test.mgr.0.dz.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8650539149269462,
+      "COMET_Unbabel_XCOMET-XL": 0.9191887096613646
     },
     {
       "BLEU": 37.7018,
       "CHRF": 57.305,
       "filename": "madar.test.mgr.0.tn.ar",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7811339476360725,
+      "COMET_Unbabel_XCOMET-XL": 0.8624588636403474
     },
     {
       "BLEU": 53.2985,
       "CHRF": 70.2322,
       "filename": "madar.test.nil.0.sd.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9056613090373575,
+      "COMET_Unbabel_XCOMET-XL": 0.9408362675309181
     },
     {
       "BLEU": 52.5544,
       "CHRF": 67.8292,
       "filename": "madar.dev.glf.0.qa.ar",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9058241873099045,
+      "COMET_Unbabel_XCOMET-XL": 0.9509333863068711
     },
     {
       "BLEU": 70.4205,
       "CHRF": 82.1608,
       "filename": "madar.dev.msa.0.ms.ar",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9524763190732761,
+      "COMET_Unbabel_XCOMET-XL": 0.9790899750400673
     },
     {
       "BLEU": 24.1872,
       "CHRF": 48.5903,
       "filename": "bible.test.msa.0.ms.ar",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8462135453149676,
+      "COMET_Unbabel_XCOMET-XL": 0.8397699754312634
     },
     {
       "BLEU": 46.496,
       "CHRF": 65.03,
       "filename": "madar.test.glf.0.ye.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8910430395845323,
+      "COMET_Unbabel_XCOMET-XL": 0.9314212680086493
     },
     {
       "BLEU": 14.3648,
       "CHRF": 46.929,
       "filename": "QAraC.dev.glf.0.qa.ar",
       "num_sentences": 6713,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7491358112797775,
+      "COMET_Unbabel_XCOMET-XL": 0.8083251687331392
     },
     {
       "BLEU": 50.584,
       "CHRF": 66.6217,
       "filename": "madar.test.glf.0.qa.ar",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9055519780218602,
+      "COMET_Unbabel_XCOMET-XL": 0.9515548474656847
     },
     {
       "BLEU": 28.0273,
       "CHRF": 49.0794,
       "filename": "madar.test.mgr.1.tn.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7912855761796236,
+      "COMET_Unbabel_XCOMET-XL": 0.8519534948840737
     },
     {
       "BLEU": 19.2511,
       "CHRF": 45.0945,
       "filename": "bible.dev.mgr.0.ma.ar",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.5545268477809926,
+      "COMET_Unbabel_XCOMET-XL": 0.701035117469728
     },
     {
       "BLEU": 54.3158,
       "CHRF": 69.7132,
       "filename": "madar.test.glf.0.sa.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9393861989751459,
+      "COMET_Unbabel_XCOMET-XL": 0.9677743043899536
     },
     {
       "BLEU": 49.5406,
       "CHRF": 66.886,
       "filename": "madar.test.lev.1.jo.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8927689800411462,
+      "COMET_Unbabel_XCOMET-XL": 0.9422040875405073
     },
     {
       "BLEU": 48.278,
       "CHRF": 65.934,
       "filename": "madar.test.lev.0.sy.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8902475528791547,
+      "COMET_Unbabel_XCOMET-XL": 0.9492456301003694
     },
     {
       "BLEU": 59.6153,
       "CHRF": 74.3837,
       "filename": "madar.dev.nil.0.eg.ar",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.884228585134853,
+      "COMET_Unbabel_XCOMET-XL": 0.9509690961106257
     },
     {
       "BLEU": 51.197,
       "CHRF": 68.0124,
       "filename": "madar.test.mgr.0.ma.ar",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7986173827579388,
+      "COMET_Unbabel_XCOMET-XL": 0.921198197915577
     },
     {
       "BLEU": 52.6171,
       "CHRF": 68.7878,
       "filename": "madar.test.glf.0.om.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9285617220774293,
+      "COMET_Unbabel_XCOMET-XL": 0.9540099138990045
     },
     {
       "BLEU": 47.2439,
       "CHRF": 66.363,
       "filename": "madar.test.lev.0.jo.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9115527370944619,
+      "COMET_Unbabel_XCOMET-XL": 0.9524119354635477
     },
     {
       "BLEU": 42.6754,
       "CHRF": 60.961,
       "filename": "madar.dev.mgr.0.tn.ar",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7964114467203617,
+      "COMET_Unbabel_XCOMET-XL": 0.8859291836836122
     },
     {
       "BLEU": 48.9882,
       "CHRF": 67.861,
       "filename": "madar.test.mgr.1.ma.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8274403430372477,
+      "COMET_Unbabel_XCOMET-XL": 0.9292882548645138
     },
     {
       "BLEU": 22.8386,
       "CHRF": 45.5205,
       "filename": "bible.test.msa.1.ms.ar",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7672794145780305,
+      "COMET_Unbabel_XCOMET-XL": 0.8026042948414882
     },
     {
       "BLEU": 62.8874,
       "CHRF": 76.8281,
       "filename": "madar.test.msa.0.ms.ar",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9504214102196006,
+      "COMET_Unbabel_XCOMET-XL": 0.9747830892755435
     },
     {
       "BLEU": 46.8682,
       "CHRF": 64.7041,
       "filename": "madar.test.glf.1.iq.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.895989845559001,
+      "COMET_Unbabel_XCOMET-XL": 0.9354047997221351
     },
     {
       "BLEU": 18.9143,
       "CHRF": 44.2574,
       "filename": "bible.test.mgr.0.tn.ar",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.5951628078520298,
+      "COMET_Unbabel_XCOMET-XL": 0.7023701805373033
     },
     {
       "BLEU": 16.5067,
       "CHRF": 42.6828,
       "filename": "bible.dev.mgr.0.tn.ar",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.6018326527035485,
+      "COMET_Unbabel_XCOMET-XL": 0.701826579181167
     },
     {
       "BLEU": 24.9432,
       "CHRF": 49.2207,
       "filename": "bible.dev.msa.0.ms.ar",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8595265849183004,
+      "COMET_Unbabel_XCOMET-XL": 0.8496207982550065
     },
     {
       "BLEU": 55.9792,
       "CHRF": 71.4379,
       "filename": "madar.test.nil.0.eg.ar",
       "num_sentences": 6500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.897205920279026,
+      "COMET_Unbabel_XCOMET-XL": 0.9539736038767375
     },
     {
       "BLEU": 15.4824,
       "CHRF": 47.8962,
       "filename": "QAraC.test.glf.0.qa.ar",
       "num_sentences": 6713,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7471180299964841,
+      "COMET_Unbabel_XCOMET-XL": 0.8044994113281199
     },
     {
       "BLEU": 24.4302,
       "CHRF": 46.6004,
       "filename": "bible.dev.msa.1.ms.ar",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7788475725303093,
+      "COMET_Unbabel_XCOMET-XL": 0.8107975006103516
     },
     {
       "BLEU": 43.5883,
       "CHRF": 63.7235,
       "filename": "madar.test.glf.2.iq.ar",
       "num_sentences": 2000,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8585831042081118,
+      "COMET_Unbabel_XCOMET-XL": 0.8993448704853654
     },
     {
       "BLEU": 20.4976,
       "CHRF": 45.5527,
       "filename": "bible.test.mgr.0.ma.ar",
       "num_sentences": 600,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.5486658413894474,
+      "COMET_Unbabel_XCOMET-XL": 0.710509488855799
     },
     {
       "BLEU": 62.1574,
       "CHRF": 75.5657,
       "filename": "madar.dev.lev.0.lb.ar",
       "num_sentences": 5500,
-      "type": "file"
+      "type": "file",
+      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8368931616724214,
+      "COMET_Unbabel_XCOMET-XL": 0.9306778672798114
     },
     {
       "type": "overall",
@@ -310,6 +394,8 @@
   ],
   "averages": {
     "BLEU": 42.2481,
-    "CHRF": 61.7609
+    "CHRF": 61.7609,
+    "COMET_Unbabel_XCOMET-XL_ref-less": 0.8341,
+    "COMET_Unbabel_XCOMET-XL": 0.8953
   }
 }

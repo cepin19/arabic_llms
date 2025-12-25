@@ -1,0 +1,128 @@
+{
+  "madar.test.nil.1.eg.ar|reverse": [
+    0.7818552255630493
+  ],
+  "madar.test.mgr.1.ly.ar|reverse": [
+    0.7449449300765991
+  ],
+  "madar.dev.mgr.0.ma.ar|reverse": [
+    0.5371866226196289
+  ],
+  "madar.test.lev.0.lb.ar|reverse": [
+    0.9314351081848145
+  ],
+  "madar.test.nil.2.eg.ar|reverse": [
+    0.7724074125289917
+  ],
+  "madar.test.lev.0.pa.ar|reverse": [
+    0.7335754632949829
+  ],
+  "madar.test.glf.1.sa.ar|reverse": [
+    0.8379733562469482
+  ],
+  "madar.test.glf.0.iq.ar|reverse": [
+    0.7919752597808838
+  ],
+  "madar.test.lev.1.sy.ar|reverse": [
+    0.8097162246704102
+  ],
+  "madar.test.mgr.0.ly.ar|reverse": [
+    0.6689885854721069
+  ],
+  "madar.test.mgr.0.dz.ar|reverse": [
+    0.7223644256591797
+  ],
+  "madar.test.mgr.0.tn.ar|reverse": [
+    0.9479553699493408
+  ],
+  "madar.test.nil.0.sd.ar|reverse": [
+    0.854597806930542
+  ],
+  "madar.dev.glf.0.qa.ar|reverse": [
+    0.7386358976364136
+  ],
+  "madar.dev.msa.0.ms.ar|reverse": [
+    0.6963487267494202
+  ],
+  "bible.test.msa.0.ms.ar|reverse": [
+    0.927833080291748
+  ],
+  "madar.test.glf.0.ye.ar|reverse": [
+    0.8528392314910889
+  ],
+  "QAraC.dev.glf.0.qa.ar|reverse": [
+    0.6849381327629089
+  ],
+  "madar.test.glf.0.qa.ar|reverse": [
+    0.9434670209884644
+  ],
+  "madar.test.mgr.1.tn.ar|reverse": [
+    0.7230198383331299
+  ],
+  "bible.dev.mgr.0.ma.ar|reverse": [
+    0.8363120555877686
+  ],
+  "madar.test.glf.0.sa.ar|reverse": [
+    0.8789758682250977
+  ],
+  "madar.test.lev.1.jo.ar|reverse": [
+    0.6638327836990356
+  ],
+  "madar.test.lev.0.sy.ar|reverse": [
+    0.7692776918411255
+  ],
+  "madar.dev.nil.0.eg.ar|reverse": [
+    0.6717813014984131
+  ],
+  "madar.test.mgr.0.ma.ar|reverse": [
+    0.9016531705856323
+  ],
+  "madar.test.glf.0.om.ar|reverse": [
+    0.8545998334884644
+  ],
+  "madar.test.lev.0.jo.ar|reverse": [
+    0.8169384002685547
+  ],
+  "madar.dev.mgr.0.tn.ar|reverse": [
+    0.4245449900627136
+  ],
+  "madar.test.mgr.1.ma.ar|reverse": [
+    0.7433760166168213
+  ],
+  "bible.test.msa.1.ms.ar|reverse": [
+    0.8987311124801636
+  ],
+  "madar.test.msa.0.ms.ar|reverse": [
+    0.9538923501968384
+  ],
+  "madar.test.glf.1.iq.ar|reverse": [
+    0.8122410774230957
+  ],
+  "bible.test.mgr.0.tn.ar|reverse": [
+    0.7382721900939941
+  ],
+  "bible.dev.mgr.0.tn.ar|reverse": [
+    0.8862175941467285
+  ],
+  "bible.dev.msa.0.ms.ar|reverse": [
+    0.9526581764221191
+  ],
+  "madar.test.nil.0.eg.ar|reverse": [
+    0.7293317317962646
+  ],
+  "QAraC.test.glf.0.qa.ar|reverse": [
+    0.8854632377624512
+  ],
+  "bible.dev.msa.1.ms.ar|reverse": [
+    0.9936974048614502
+  ],
+  "madar.test.glf.2.iq.ar|reverse": [
+    0.8027178049087524
+  ],
+  "bible.test.mgr.0.ma.ar|reverse": [
+    0.7447211742401123
+  ],
+  "madar.dev.lev.0.lb.ar|reverse": [
+    0.5433152914047241
+  ]
+}

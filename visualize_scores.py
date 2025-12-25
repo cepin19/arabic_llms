@@ -53,6 +53,140 @@ def extract_model_name(scores_data: Dict, scores_path: Path) -> str:
         return scores_path.parent.name
 
 
+def find_comet_keys(data_dict: Dict) -> List[str]:
+    """
+    Find all COMET-related keys in a dictionary.
+    Returns list of all keys that start with 'COMET_'.
+    """
+    comet_keys = []
+    for key in data_dict.keys():
+        if isinstance(key, str) and key.startswith('COMET_'):
+            comet_keys.append(key)
+    return sorted(comet_keys)
+
+
+def find_comet_score(model_scores: Dict, score_type: Optional[str] = None) -> Optional[float]:
+    """
+    Find a COMET score in model_scores, checking all COMET variants.
+    
+    Args:
+        model_scores: Dictionary containing scores for a model
+        score_type: Optional score type ('arabic_general' or 'dialect')
+    
+    Returns:
+        First COMET score found, or None if not found
+    """
+    if score_type:
+        # Check for score_type_COMET_* variants first
+        for key in sorted(model_scores.keys()):
+            if isinstance(key, str) and key.startswith(f'{score_type}_COMET_'):
+                return model_scores[key]
+        # Check for legacy score_type_COMET
+        if f'{score_type}_COMET' in model_scores:
+            return model_scores[f'{score_type}_COMET']
+    else:
+        # Check for COMET_* variants first
+        for key in sorted(model_scores.keys()):
+            if isinstance(key, str) and key.startswith('COMET_'):
+                return model_scores[key]
+        # Check for legacy 'COMET' key
+        if 'COMET' in model_scores:
+            return model_scores['COMET']
+        # Check in roundtrip if present
+        if 'roundtrip' in model_scores and isinstance(model_scores['roundtrip'], dict):
+            for key in sorted(model_scores['roundtrip'].keys()):
+                if isinstance(key, str) and key.startswith('COMET_'):
+                    return model_scores['roundtrip'][key]
+            if 'COMET' in model_scores['roundtrip']:
+                return model_scores['roundtrip']['COMET']
+    return None
+
+
+def find_all_comet_variants(test_sets: Dict, models: List[str], score_type: Optional[str] = None) -> List[str]:
+    """
+    Find all unique COMET variants present across all test sets and models.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        score_type: Optional score type ('arabic_general' or 'dialect')
+    
+    Returns:
+        List of unique COMET variant keys (e.g., ['COMET_wmt22-comet-da', 'COMET_wmt22-comet-da_ref-less'])
+    """
+    comet_variants = set()
+    
+    for test_set, model_scores in test_sets.items():
+        for model in models:
+            if model in model_scores:
+                if score_type:
+                    # Look for score_type_COMET_* keys
+                    for key in model_scores[model].keys():
+                        if isinstance(key, str) and key.startswith(f'{score_type}_COMET_'):
+                            # Extract the COMET variant part (remove score_type_ prefix)
+                            comet_variant = key[len(f'{score_type}_'):]
+                            comet_variants.add(comet_variant)
+                    # Also check for legacy
+                    if f'{score_type}_COMET' in model_scores[model]:
+                        comet_variants.add('COMET')
+                else:
+                    # Look for COMET_* keys directly
+                    for key in model_scores[model].keys():
+                        if isinstance(key, str) and key.startswith('COMET_'):
+                            comet_variants.add(key)
+                        elif key == 'COMET':
+                            comet_variants.add('COMET')
+                    # Check in roundtrip
+                    if 'roundtrip' in model_scores[model] and isinstance(model_scores[model]['roundtrip'], dict):
+                        for key in model_scores[model]['roundtrip'].keys():
+                            if isinstance(key, str) and key.startswith('COMET_'):
+                                comet_variants.add(key)
+                            elif key == 'COMET':
+                                comet_variants.add('COMET')
+    
+    return sorted(list(comet_variants))
+
+
+def get_comet_score_for_variant(model_scores: Dict, comet_variant: str, score_type: Optional[str] = None) -> Optional[float]:
+    """
+    Get the COMET score for a specific COMET variant.
+    
+    Args:
+        model_scores: Dictionary containing scores for a model
+        comet_variant: COMET variant key (e.g., 'COMET_wmt22-comet-da' or 'COMET')
+        score_type: Optional score type ('arabic_general' or 'dialect')
+    
+    Returns:
+        COMET score for the variant, or None if not found
+    """
+    if score_type:
+        key = f'{score_type}_{comet_variant}'
+        return model_scores.get(key)
+    else:
+        # Check direct key
+        if comet_variant in model_scores:
+            return model_scores[comet_variant]
+        # Check in roundtrip
+        if 'roundtrip' in model_scores and isinstance(model_scores['roundtrip'], dict):
+            return model_scores['roundtrip'].get(comet_variant)
+    return None
+
+
+def safe_comet_filename(comet_variant: str) -> str:
+    """
+    Convert a COMET variant key to a safe filename component.
+    
+    Args:
+        comet_variant: COMET variant key (e.g., 'COMET_wmt22-comet-da' or 'COMET_wmt22-comet-da_ref-less')
+    
+    Returns:
+        Safe filename string (e.g., 'COMET_wmt22-comet-da' or 'COMET_wmt22-comet-da_ref-less')
+    """
+    # Replace problematic characters
+    safe = comet_variant.replace('/', '_').replace('\\', '_').replace(':', '_')
+    return safe.lower()
+
+
 def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
     """
     Extract scores from scores.json data.
@@ -83,6 +217,12 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
                     overall_scores['arabic_general']['BLEU'] = result['arabic_general']['BLEU']
                 if 'CHRF' in result['arabic_general']:
                     overall_scores['arabic_general']['CHRF'] = result['arabic_general']['CHRF']
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['arabic_general']):
+                    overall_scores['arabic_general'][comet_key] = result['arabic_general'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['arabic_general']:
+                    overall_scores['arabic_general']['COMET'] = result['arabic_general']['COMET']
             
             if 'dialect' in result:
                 overall_scores['dialect'] = {}
@@ -90,11 +230,23 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
                     overall_scores['dialect']['BLEU'] = result['dialect']['BLEU']
                 if 'CHRF' in result['dialect']:
                     overall_scores['dialect']['CHRF'] = result['dialect']['CHRF']
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['dialect']):
+                    overall_scores['dialect'][comet_key] = result['dialect'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['dialect']:
+                    overall_scores['dialect']['COMET'] = result['dialect']['COMET']
             
-            # Reverse/Roundtrip: direct BLEU/CHRF
+            # Reverse/Roundtrip: direct BLEU/CHRF/COMET
             if 'BLEU' in result and 'CHRF' in result:
                 overall_scores['BLEU'] = result['BLEU']
                 overall_scores['CHRF'] = result['CHRF']
+            # Extract all COMET variants
+            for comet_key in find_comet_keys(result):
+                overall_scores[comet_key] = result[comet_key]
+            # Also check for legacy 'COMET' key
+            if 'COMET' in result:
+                overall_scores['COMET'] = result['COMET']
             
             # Roundtrip: has roundtrip scores
             if 'roundtrip' in result:
@@ -103,6 +255,12 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
                     overall_scores['roundtrip']['BLEU'] = result['roundtrip']['BLEU']
                 if 'CHRF' in result['roundtrip']:
                     overall_scores['roundtrip']['CHRF'] = result['roundtrip']['CHRF']
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['roundtrip']):
+                    overall_scores['roundtrip'][comet_key] = result['roundtrip'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['roundtrip']:
+                    overall_scores['roundtrip']['COMET'] = result['roundtrip']['COMET']
             
             # Store metadata
             if 'num_test_sets' in result:
@@ -120,12 +278,24 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
                     merged_scores[dialect_name]['arabic_general_BLEU'] = result['arabic_general']['BLEU']
                 if 'CHRF' in result['arabic_general']:
                     merged_scores[dialect_name]['arabic_general_CHRF'] = result['arabic_general']['CHRF']
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['arabic_general']):
+                    merged_scores[dialect_name][f'arabic_general_{comet_key}'] = result['arabic_general'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['arabic_general']:
+                    merged_scores[dialect_name]['arabic_general_COMET'] = result['arabic_general']['COMET']
             
             if 'dialect' in result:
                 if 'BLEU' in result['dialect']:
                     merged_scores[dialect_name]['dialect_BLEU'] = result['dialect']['BLEU']
                 if 'CHRF' in result['dialect']:
                     merged_scores[dialect_name]['dialect_CHRF'] = result['dialect']['CHRF']
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['dialect']):
+                    merged_scores[dialect_name][f'dialect_{comet_key}'] = result['dialect'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['dialect']:
+                    merged_scores[dialect_name]['dialect_COMET'] = result['dialect']['COMET']
             
             # Store metadata
             if 'dialect_code' in result:
@@ -148,17 +318,29 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
                     'BLEU': result['roundtrip']['BLEU'],
                     'CHRF': result['roundtrip']['CHRF']
                 }
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['roundtrip']):
+                    file_scores[test_set][comet_key] = result['roundtrip'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['roundtrip']:
+                    file_scores[test_set]['COMET'] = result['roundtrip']['COMET']
                 if 'dialect_code' in result:
                     file_scores[test_set]['dialect_code'] = result['dialect_code']
                 if 'dialect_name' in result:
                     file_scores[test_set]['dialect_name'] = result['dialect_name']
             
-            # Handle eval_arabench_reverse.py format (direct BLEU/CHRF)
+            # Handle eval_arabench_reverse.py format (direct BLEU/CHRF/COMET)
             elif 'BLEU' in result and 'CHRF' in result and 'arabic_general' not in result:
                 file_scores[test_set] = {
                     'BLEU': result['BLEU'],
                     'CHRF': result['CHRF']
                 }
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result):
+                    file_scores[test_set][comet_key] = result[comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result:
+                    file_scores[test_set]['COMET'] = result['COMET']
             
             # Handle eval_arabench.py format (arabic_general and dialect)
             elif 'arabic_general' in result:
@@ -167,12 +349,24 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
                     file_scores[test_set]['arabic_general_BLEU'] = result['arabic_general']['BLEU']
                 if 'CHRF' in result['arabic_general']:
                     file_scores[test_set]['arabic_general_CHRF'] = result['arabic_general']['CHRF']
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['arabic_general']):
+                    file_scores[test_set][f'arabic_general_{comet_key}'] = result['arabic_general'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['arabic_general']:
+                    file_scores[test_set]['arabic_general_COMET'] = result['arabic_general']['COMET']
                 
                 if 'dialect' in result:
                     if 'BLEU' in result['dialect']:
                         file_scores[test_set]['dialect_BLEU'] = result['dialect']['BLEU']
                     if 'CHRF' in result['dialect']:
                         file_scores[test_set]['dialect_CHRF'] = result['dialect']['CHRF']
+                    # Extract all COMET variants
+                    for comet_key in find_comet_keys(result['dialect']):
+                        file_scores[test_set][f'dialect_{comet_key}'] = result['dialect'][comet_key]
+                    # Also check for legacy 'COMET' key
+                    if 'COMET' in result['dialect']:
+                        file_scores[test_set]['dialect_COMET'] = result['dialect']['COMET']
                 
                 # Store metadata
                 if 'dialect_code' in result:
@@ -253,8 +447,19 @@ def collect_all_scores(scores_files: List[Path]) -> Tuple[Dict[str, Dict], List[
 
 
 def write_scores_table(test_sets: Dict, models: List[str], score_type: Optional[str], 
-                      metric: str, stats_file, title: str = ""):
-    """Write a table of scores to the stats file."""
+                      metric: str, stats_file, title: str = "", comet_variant: Optional[str] = None):
+    """
+    Write a table of scores to the stats file.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        score_type: Optional score type ('arabic_general' or 'dialect')
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        stats_file: File handle to write to
+        title: Optional title for the table
+        comet_variant: If metric is 'COMET', the specific COMET variant to use
+    """
     if title:
         stats_file.write(f"\n{title}\n")
         stats_file.write("=" * 80 + "\n\n")
@@ -295,13 +500,28 @@ def write_scores_table(test_sets: Dict, models: List[str], score_type: Optional[
         
         for model in models:
             if model in model_scores:
-                if score_type and key in model_scores[model]:
-                    score = model_scores[model][key]
-                    line += f"{score:>{model_width}.4f}"
+                if score_type:
+                    if metric == 'COMET':
+                        if comet_variant:
+                            score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                        else:
+                            score = find_comet_score(model_scores[model], score_type)
+                    else:
+                        score = model_scores[model].get(key) if key else None
+                    if score is not None:
+                        line += f"{score:>{model_width}.4f}"
+                    else:
+                        line += f"{'N/A':>{model_width}}"
                 elif not score_type:
                     # Try to find the metric in various formats
                     score = None
-                    if metric in model_scores[model]:
+                    if metric == 'COMET':
+                        if comet_variant:
+                            score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                        else:
+                            # For COMET, use the helper function to find any variant
+                            score = find_comet_score(model_scores[model])
+                    elif metric in model_scores[model]:
                         score = model_scores[model][metric]
                     elif f'arabic_general_{metric}' in model_scores[model]:
                         score = model_scores[model][f'arabic_general_{metric}']
@@ -323,8 +543,18 @@ def write_scores_table(test_sets: Dict, models: List[str], score_type: Optional[
 
 
 def create_bar_plot(test_set: str, model_scores: Dict[str, Dict[str, float]], 
-                    models: List[str], output_dir: Path, metric: str = 'BLEU'):
-    """Create a bar plot for a specific test set and metric."""
+                    models: List[str], output_dir: Path, metric: str = 'BLEU', comet_variant: Optional[str] = None):
+    """
+    Create a bar plot for a specific test set and metric.
+    
+    Args:
+        test_set: Name of the test set
+        model_scores: Dictionary mapping model -> scores dict
+        models: List of model names
+        output_dir: Output directory for plots
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        comet_variant: If metric is 'COMET', the specific COMET variant to plot (e.g., 'COMET_wmt22-comet-da')
+    """
     # Extract scores for this metric
     model_values = []
     model_labels = []
@@ -333,7 +563,14 @@ def create_bar_plot(test_set: str, model_scores: Dict[str, Dict[str, float]],
         if model in model_scores:
             # Try to find the metric in various formats
             score = None
-            if metric in model_scores[model]:
+            if metric == 'COMET':
+                if comet_variant:
+                    # Get specific COMET variant
+                    score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                else:
+                    # Fallback: find any COMET variant
+                    score = find_comet_score(model_scores[model])
+            elif metric in model_scores[model]:
                 score = model_scores[model][metric]
             elif f'arabic_general_{metric}' in model_scores[model]:
                 score = model_scores[model][f'arabic_general_{metric}']
@@ -345,7 +582,10 @@ def create_bar_plot(test_set: str, model_scores: Dict[str, Dict[str, float]],
                 model_labels.append(model)
     
     if not model_values:
-        print(f"⚠️  No {metric} scores found for test set: {test_set}")
+        if metric == 'COMET' and comet_variant:
+            print(f"⚠️  No {comet_variant} scores found for test set: {test_set}")
+        else:
+            print(f"⚠️  No {metric} scores found for test set: {test_set}")
         return
     
     # Create figure
@@ -356,9 +596,10 @@ def create_bar_plot(test_set: str, model_scores: Dict[str, Dict[str, float]],
                   color=plt.cm.viridis(np.linspace(0, 1, len(model_labels))))
     
     # Customize plot
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
     ax.set_xlabel('Model', fontsize=12, fontweight='bold')
-    ax.set_ylabel(f'{metric} Score', fontsize=12, fontweight='bold')
-    ax.set_title(f'{metric} Scores by Model\nTest Set: {test_set}', 
+    ax.set_ylabel(f'{metric_label} Score', fontsize=12, fontweight='bold')
+    ax.set_title(f'{metric_label} Scores by Model\nTest Set: {test_set}', 
                  fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(range(len(model_labels)))
     ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=10)
@@ -375,9 +616,13 @@ def create_bar_plot(test_set: str, model_scores: Dict[str, Dict[str, float]],
     # Adjust layout
     plt.tight_layout()
     
-    # Save figure
+    # Save figure with COMET variant in filename if applicable
     safe_test_set = test_set.replace('/', '_').replace('.', '_')
-    output_file = output_dir / f"{safe_test_set}_{metric.lower()}.png"
+    if metric == 'COMET' and comet_variant:
+        safe_comet = safe_comet_filename(comet_variant)
+        output_file = output_dir / f"{safe_test_set}_{safe_comet}.png"
+    else:
+        output_file = output_dir / f"{safe_test_set}_{metric.lower()}.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
     
@@ -479,8 +724,17 @@ def create_combined_plot(test_set: str, model_scores: Dict[str, Dict[str, float]
     print(f"✅ Saved: {output_file}")
 
 
-def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU'):
-    """Create a summary plot showing all test sets and models."""
+def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU', comet_variant: Optional[str] = None):
+    """
+    Create a summary plot showing all test sets and models.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        output_dir: Output directory for plots
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        comet_variant: If metric is 'COMET', the specific COMET variant to plot
+    """
     # Prepare data matrix
     test_set_names = sorted(test_sets.keys())
     data_matrix = []
@@ -490,7 +744,12 @@ def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, me
         for model in models:
             score = None
             if model in test_sets[test_set]:
-                if metric in test_sets[test_set][model]:
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(test_sets[test_set][model], comet_variant)
+                    else:
+                        score = find_comet_score(test_sets[test_set][model])
+                elif metric in test_sets[test_set][model]:
                     score = test_sets[test_set][model][metric]
                 elif f'arabic_general_{metric}' in test_sets[test_set][model]:
                     score = test_sets[test_set][model][f'arabic_general_{metric}']
@@ -500,7 +759,8 @@ def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, me
         data_matrix.append(row)
     
     if not data_matrix or all(all(np.isnan(x) for x in row) for row in data_matrix):
-        print(f"⚠️  No {metric} scores found for summary plot")
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+        print(f"⚠️  No {metric_label} scores found for summary plot")
         return
     
     # Create heatmap
@@ -523,26 +783,40 @@ def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, me
                              ha="center", va="center", color="black", fontsize=8)
     
     # Colorbar
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
     cbar = plt.colorbar(im, ax=ax)
-    cbar.set_label(f'{metric} Score', rotation=270, labelpad=20, fontsize=11)
+    cbar.set_label(f'{metric_label} Score', rotation=270, labelpad=20, fontsize=11)
     
-    ax.set_title(f'{metric} Scores: All Test Sets vs All Models', 
+    ax.set_title(f'{metric_label} Scores: All Test Sets vs All Models', 
                  fontsize=14, fontweight='bold', pad=20)
     ax.set_xlabel('Model', fontsize=12, fontweight='bold')
     ax.set_ylabel('Test Set', fontsize=12, fontweight='bold')
     
     plt.tight_layout()
     
-    # Save figure
-    output_file = output_dir / f"summary_{metric.lower()}_heatmap.png"
+    # Save figure with COMET variant in filename if applicable
+    if metric == 'COMET' and comet_variant:
+        safe_comet = safe_comet_filename(comet_variant)
+        output_file = output_dir / f"summary_{safe_comet}_heatmap.png"
+    else:
+        output_file = output_dir / f"summary_{metric.lower()}_heatmap.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
     
     print(f"✅ Saved: {output_file}")
 
 
-def create_average_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU'):
-    """Create a plot showing average scores across all test sets for each model."""
+def create_average_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU', comet_variant: Optional[str] = None):
+    """
+    Create a plot showing average scores across all test sets for each model.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        output_dir: Output directory for plots
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        comet_variant: If metric is 'COMET', the specific COMET variant to plot
+    """
     # Calculate averages for each model
     model_averages = {}
     
@@ -551,7 +825,12 @@ def create_average_plot(test_sets: Dict, models: List[str], output_dir: Path, me
         for test_set, model_scores in test_sets.items():
             if model in model_scores:
                 score = None
-                if metric in model_scores[model]:
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                    else:
+                        score = find_comet_score(model_scores[model])
+                elif metric in model_scores[model]:
                     score = model_scores[model][metric]
                 elif f'arabic_general_{metric}' in model_scores[model]:
                     score = model_scores[model][f'arabic_general_{metric}']
@@ -565,7 +844,8 @@ def create_average_plot(test_sets: Dict, models: List[str], output_dir: Path, me
             model_averages[model] = np.mean(scores)
     
     if not model_averages:
-        print(f"⚠️  No {metric} scores found for average plot")
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+        print(f"⚠️  No {metric_label} scores found for average plot")
         return
     
     # Sort models by average score (descending)
@@ -581,9 +861,10 @@ def create_average_plot(test_sets: Dict, models: List[str], output_dir: Path, me
                   color=plt.cm.viridis(np.linspace(0, 1, len(model_names))))
     
     # Customize plot
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
     ax.set_xlabel('Model', fontsize=12, fontweight='bold')
-    ax.set_ylabel(f'Average {metric} Score', fontsize=12, fontweight='bold')
-    ax.set_title(f'Average {metric} Score Across All Test Sets\n(Models sorted by performance)', 
+    ax.set_ylabel(f'Average {metric_label} Score', fontsize=12, fontweight='bold')
+    ax.set_title(f'Average {metric_label} Score Across All Test Sets\n(Models sorted by performance)', 
                  fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(range(len(model_names)))
     ax.set_xticklabels(model_names, rotation=45, ha='right', fontsize=10)
@@ -605,16 +886,29 @@ def create_average_plot(test_sets: Dict, models: List[str], output_dir: Path, me
     
     plt.tight_layout()
     
-    # Save figure
-    output_file = output_dir / f"average_{metric.lower()}_all_testsets.png"
+    # Save figure with COMET variant in filename if applicable
+    if metric == 'COMET' and comet_variant:
+        safe_comet = safe_comet_filename(comet_variant)
+        output_file = output_dir / f"average_{safe_comet}_all_testsets.png"
+    else:
+        output_file = output_dir / f"average_{metric.lower()}_all_testsets.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
     
     print(f"✅ Saved: {output_file}")
 
 
-def create_all_testsets_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU'):
-    """Create a grouped bar chart showing all test sets in a single plot."""
+def create_all_testsets_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU', comet_variant: Optional[str] = None):
+    """
+    Create a grouped bar chart showing all test sets in a single plot.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        output_dir: Output directory for plots
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        comet_variant: If metric is 'COMET', the specific COMET variant to plot
+    """
     test_set_names = sorted(test_sets.keys())
     
     if len(test_set_names) > 20:
@@ -631,7 +925,12 @@ def create_all_testsets_plot(test_sets: Dict, models: List[str], output_dir: Pat
         for model in models:
             score = None
             if model in test_sets[test_set]:
-                if metric in test_sets[test_set][model]:
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(test_sets[test_set][model], comet_variant)
+                    else:
+                        score = find_comet_score(test_sets[test_set][model])
+                elif metric in test_sets[test_set][model]:
                     score = test_sets[test_set][model][metric]
                 elif f'arabic_general_{metric}' in test_sets[test_set][model]:
                     score = test_sets[test_set][model][f'arabic_general_{metric}']
@@ -646,7 +945,8 @@ def create_all_testsets_plot(test_sets: Dict, models: List[str], output_dir: Pat
             valid_test_sets.append(test_set)
     
     if not valid_test_sets:
-        print(f"⚠️  No {metric} scores found for all test sets plot")
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+        print(f"⚠️  No {metric_label} scores found for all test sets plot")
         return
     
     # Truncate test set names for display
@@ -677,9 +977,10 @@ def create_all_testsets_plot(test_sets: Dict, models: List[str], output_dir: Pat
                         ha='center', va='bottom', fontsize=7, rotation=90)
     
     # Customize plot
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
     ax.set_xlabel('Test Set', fontsize=12, fontweight='bold')
-    ax.set_ylabel(f'{metric} Score', fontsize=12, fontweight='bold')
-    ax.set_title(f'{metric} Scores: All Test Sets Compared\n(Grouped by Model)', 
+    ax.set_ylabel(f'{metric_label} Score', fontsize=12, fontweight='bold')
+    ax.set_title(f'{metric_label} Scores: All Test Sets Compared\n(Grouped by Model)', 
                  fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(x)
     ax.set_xticklabels(display_names, rotation=45, ha='right', fontsize=9)
@@ -689,23 +990,46 @@ def create_all_testsets_plot(test_sets: Dict, models: List[str], output_dir: Pat
     
     plt.tight_layout()
     
-    # Save figure
-    output_file = output_dir / f"all_testsets_{metric.lower()}_grouped.png"
+    # Save figure with COMET variant in filename if applicable
+    if metric == 'COMET' and comet_variant:
+        safe_comet = safe_comet_filename(comet_variant)
+        output_file = output_dir / f"all_testsets_{safe_comet}_grouped.png"
+    else:
+        output_file = output_dir / f"all_testsets_{metric.lower()}_grouped.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
     
     print(f"✅ Saved: {output_file}")
 
 
-def create_all_testsets_combined_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU'):
-    """Create a single image with all test set plots side by side."""
+def create_all_testsets_combined_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU', comet_variant: Optional[str] = None):
+    """
+    Create a single image with all test set plots side by side.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        output_dir: Output directory for plots
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        comet_variant: If metric is 'COMET', the specific COMET variant to plot
+    """
     # Get all test sets that have data for this metric
     valid_test_sets = []
     for test_set, model_scores in test_sets.items():
         has_data = False
         for model in models:
             if model in model_scores:
-                if metric in model_scores[model] or \
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                        if score is not None:
+                            has_data = True
+                            break
+                    else:
+                        if find_comet_score(model_scores[model]) is not None:
+                            has_data = True
+                            break
+                elif metric in model_scores[model] or \
                    f'arabic_general_{metric}' in model_scores[model] or \
                    f'dialect_{metric}' in model_scores[model]:
                     has_data = True
@@ -746,7 +1070,12 @@ def create_all_testsets_combined_plot(test_sets: Dict, models: List[str], output
         for model in models:
             if model in model_scores:
                 score = None
-                if metric in model_scores[model]:
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                    else:
+                        score = find_comet_score(model_scores[model])
+                elif metric in model_scores[model]:
                     score = model_scores[model][metric]
                 elif f'arabic_general_{metric}' in model_scores[model]:
                     score = model_scores[model][f'arabic_general_{metric}']
@@ -767,8 +1096,9 @@ def create_all_testsets_combined_plot(test_sets: Dict, models: List[str], output
                      color=plt.cm.viridis(np.linspace(0, 1, len(model_labels))))
         
         # Customize subplot
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
         ax.set_xlabel('Model', fontsize=9)
-        ax.set_ylabel(f'{metric} Score', fontsize=9)
+        ax.set_ylabel(f'{metric_label} Score', fontsize=9)
         ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, 
                     fontsize=10, fontweight='bold')
         ax.set_xticks(range(len(model_labels)))
@@ -803,12 +1133,14 @@ def create_all_testsets_combined_plot(test_sets: Dict, models: List[str], output
 
 
 def create_all_testsets_combined_plot_by_type(test_sets: Dict, models: List[str], output_dir: Path, 
-                                             score_type: str, metric: str = 'BLEU'):
+                                             score_type: str, metric: str = 'BLEU', comet_variant: Optional[str] = None):
     """
     Create a single image with all test set plots side by side for a specific score type.
     
     Args:
         score_type: 'arabic_general' or 'dialect'
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        comet_variant: If metric is 'COMET', the specific COMET variant to plot
     """
     # Get all test sets that have data for this score type and metric
     valid_test_sets = []
@@ -816,10 +1148,21 @@ def create_all_testsets_combined_plot_by_type(test_sets: Dict, models: List[str]
         has_data = False
         for model in models:
             if model in model_scores:
-                key = f'{score_type}_{metric}'
-                if key in model_scores[model]:
-                    has_data = True
-                    break
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                        if score is not None:
+                            has_data = True
+                            break
+                    else:
+                        if find_comet_score(model_scores[model], score_type) is not None:
+                            has_data = True
+                            break
+                else:
+                    key = f'{score_type}_{metric}'
+                    if key in model_scores[model]:
+                        has_data = True
+                        break
         if has_data:
             valid_test_sets.append(test_set)
     
@@ -855,9 +1198,15 @@ def create_all_testsets_combined_plot_by_type(test_sets: Dict, models: List[str]
         
         for model in models:
             if model in model_scores:
-                key = f'{score_type}_{metric}'
-                if key in model_scores[model]:
-                    score = model_scores[model][key]
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                    else:
+                        score = find_comet_score(model_scores[model], score_type)
+                else:
+                    key = f'{score_type}_{metric}'
+                    score = model_scores[model].get(key)
+                if score is not None:
                     model_values.append(score)
                     model_labels.append(model)
         
@@ -871,8 +1220,9 @@ def create_all_testsets_combined_plot_by_type(test_sets: Dict, models: List[str]
                      color=plt.cm.viridis(np.linspace(0, 1, len(model_labels))))
         
         # Customize subplot
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
         ax.set_xlabel('Model', fontsize=9)
-        ax.set_ylabel(f'{metric} Score', fontsize=9)
+        ax.set_ylabel(f'{metric_label} Score', fontsize=9)
         title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
         ax.set_title(f"{test_set[:35] + '...' if len(test_set) > 35 else test_set}\n({title_label})", 
                     fontsize=10, fontweight='bold')
@@ -895,13 +1245,18 @@ def create_all_testsets_combined_plot_by_type(test_sets: Dict, models: List[str]
     
     # Overall title
     title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
-    fig.suptitle(f'{metric} Scores: All Test Sets ({title_label})\n(Each subplot shows one test set)', 
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    fig.suptitle(f'{metric_label} Scores: All Test Sets ({title_label})\n(Each subplot shows one test set)', 
                  fontsize=16, fontweight='bold', y=0.995)
     
     plt.tight_layout(rect=[0, 0, 1, 0.98])
     
-    # Save figure
-    output_file = output_dir / f"all_testsets_{score_type}_{metric.lower()}_combined.png"
+    # Save figure with COMET variant in filename if applicable
+    if metric == 'COMET' and comet_variant:
+        safe_comet = safe_comet_filename(comet_variant)
+        output_file = output_dir / f"all_testsets_{score_type}_{safe_comet}_combined.png"
+    else:
+        output_file = output_dir / f"all_testsets_{score_type}_{metric.lower()}_combined.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
     
@@ -919,11 +1274,14 @@ def calculate_general_dialect_difference(test_sets: Dict, models: List[str], met
     for test_set, model_scores in test_sets.items():
         for model in models:
             if model in model_scores:
-                general_key = f'arabic_general_{metric}'
-                dialect_key = f'dialect_{metric}'
-                
-                general_score = model_scores[model].get(general_key)
-                dialect_score = model_scores[model].get(dialect_key)
+                if metric == 'COMET':
+                    general_score = find_comet_score(model_scores[model], 'arabic_general')
+                    dialect_score = find_comet_score(model_scores[model], 'dialect')
+                else:
+                    general_key = f'arabic_general_{metric}'
+                    dialect_key = f'dialect_{metric}'
+                    general_score = model_scores[model].get(general_key)
+                    dialect_score = model_scores[model].get(dialect_key)
                 
                 if general_score is not None and dialect_score is not None:
                     diff = general_score - dialect_score
@@ -938,18 +1296,45 @@ def calculate_general_dialect_difference(test_sets: Dict, models: List[str], met
     return avg_differences
 
 
-def print_general_dialect_difference(test_sets: Dict, models: List[str], metric: str = 'BLEU', stats_file=None):
-    """Print average difference between general Arabic and dialect scores for each model."""
-    avg_differences = calculate_general_dialect_difference(test_sets, models, metric)
+def print_general_dialect_difference(test_sets: Dict, models: List[str], metric: str = 'BLEU', stats_file=None, comet_variant: Optional[str] = None):
+    """
+    Print average difference between general Arabic and dialect scores for each model.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        stats_file: Optional file handle to write to
+        comet_variant: If metric is 'COMET', the specific COMET variant to use
+    """
+    # For COMET with variant, calculate differences differently
+    if metric == 'COMET' and comet_variant:
+        differences = {model: [] for model in models}
+        for test_set, model_scores in test_sets.items():
+            for model in models:
+                if model in model_scores:
+                    general_score = get_comet_score_for_variant(model_scores[model], comet_variant, 'arabic_general')
+                    dialect_score = get_comet_score_for_variant(model_scores[model], comet_variant, 'dialect')
+                    if general_score is not None and dialect_score is not None:
+                        diff = general_score - dialect_score
+                        differences[model].append(diff)
+        avg_differences = {}
+        for model in models:
+            if differences[model]:
+                avg_differences[model] = np.mean(differences[model])
+    else:
+        avg_differences = calculate_general_dialect_difference(test_sets, models, metric)
     
     if not avg_differences:
-        msg = f"\n⚠️  No general/dialect score pairs found for {metric}"
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+        msg = f"\n⚠️  No general/dialect score pairs found for {metric_label}"
         print(msg)
         if stats_file:
             stats_file.write(msg + "\n")
         return
     
-    header = f"\n{'='*80}\n📊 Average Difference: General Arabic - Dialect ({metric} Score)\n{'='*80}\nPositive values mean general Arabic scores are higher.\nNegative values mean dialect scores are higher.\n\n"
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    header = f"\n{'='*80}\n📊 Average Difference: General Arabic - Dialect ({metric_label} Score)\n{'='*80}\nPositive values mean general Arabic scores are higher.\nNegative values mean dialect scores are higher.\n\n"
     print(header, end='')
     if stats_file:
         stats_file.write(header)
@@ -962,16 +1347,23 @@ def print_general_dialect_difference(test_sets: Dict, models: List[str], metric:
     for test_set, model_scores in test_sets.items():
         for model in models:
             if model in model_scores:
-                general_key = f'arabic_general_{metric}'
-                dialect_key = f'dialect_{metric}'
-                if general_key in model_scores[model] and dialect_key in model_scores[model]:
-                    model_counts[model] = model_counts.get(model, 0) + 1
+                if metric == 'COMET' and comet_variant:
+                    general_score = get_comet_score_for_variant(model_scores[model], comet_variant, 'arabic_general')
+                    dialect_score = get_comet_score_for_variant(model_scores[model], comet_variant, 'dialect')
+                    if general_score is not None and dialect_score is not None:
+                        model_counts[model] = model_counts.get(model, 0) + 1
+                else:
+                    general_key = f'arabic_general_{metric}'
+                    dialect_key = f'dialect_{metric}'
+                    if general_key in model_scores[model] and dialect_key in model_scores[model]:
+                        model_counts[model] = model_counts.get(model, 0) + 1
     
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
     for model, avg_diff in sorted_models:
         count = model_counts.get(model, 0)
         lines = [
             f"Model: {model}",
-            f"  Average difference: {avg_diff:+.4f} ({metric} points)",
+            f"  Average difference: {avg_diff:+.4f} ({metric_label} points)",
             f"  Based on {count} test set(s)"
         ]
         if avg_diff > 0:
@@ -995,14 +1387,17 @@ def calculate_ranking_stats_by_type(test_sets: Dict, models: List[str], score_ty
     Returns: Dict mapping model_name -> Dict mapping rank -> count
     """
     rankings = {model: {} for model in models}
-    key = f'{score_type}_{metric}'
     
     for test_set, model_scores in test_sets.items():
         # Collect scores for this test set and score type
         model_scores_list = []
         for model in models:
-            if model in model_scores and key in model_scores[model]:
-                score = model_scores[model][key]
+            if model in model_scores:
+                if metric == 'COMET':
+                    score = find_comet_score(model_scores[model], score_type)
+                else:
+                    key = f'{score_type}_{metric}'
+                    score = model_scores[model].get(key)
                 if score is not None:
                     model_scores_list.append((model, score))
         
@@ -1033,13 +1428,16 @@ def calculate_ranking_stats_by_type(test_sets: Dict, models: List[str], score_ty
     return rankings
 
 
-def calculate_average_rankings(test_sets: Dict, models: List[str], score_type: Optional[str] = None, metric: str = 'BLEU') -> Dict[str, float]:
+def calculate_average_rankings(test_sets: Dict, models: List[str], score_type: Optional[str] = None, metric: str = 'BLEU', comet_variant: Optional[str] = None) -> Dict[str, float]:
     """
     Calculate average ranking for each model across all test sets.
     
     Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
         score_type: 'arabic_general', 'dialect', or None (for combined)
-        metric: 'BLEU' or 'CHRF'
+        metric: 'BLEU', 'CHRF', or 'COMET'
+        comet_variant: If metric is 'COMET', the specific COMET variant to use
     
     Returns: Dict mapping model_name -> average_rank
     """
@@ -1052,11 +1450,22 @@ def calculate_average_rankings(test_sets: Dict, models: List[str], score_type: O
             if model in model_scores:
                 score = None
                 if score_type:
-                    key = f'{score_type}_{metric}'
-                    score = model_scores[model].get(key)
+                    if metric == 'COMET':
+                        if comet_variant:
+                            score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                        else:
+                            score = find_comet_score(model_scores[model], score_type)
+                    else:
+                        key = f'{score_type}_{metric}'
+                        score = model_scores[model].get(key)
                 else:
                     # Try to find the metric in various formats
-                    if metric in model_scores[model]:
+                    if metric == 'COMET':
+                        if comet_variant:
+                            score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                        else:
+                            score = find_comet_score(model_scores[model])
+                    elif metric in model_scores[model]:
                         score = model_scores[model][metric]
                     elif f'arabic_general_{metric}' in model_scores[model]:
                         score = model_scores[model][f'arabic_general_{metric}']
@@ -1100,9 +1509,19 @@ def calculate_average_rankings(test_sets: Dict, models: List[str], score_type: O
     return avg_rankings
 
 
-def print_average_rankings(test_sets: Dict, models: List[str], score_type: Optional[str] = None, metric: str = 'BLEU', stats_file=None):
-    """Print average rankings for each model."""
-    avg_rankings = calculate_average_rankings(test_sets, models, score_type, metric)
+def print_average_rankings(test_sets: Dict, models: List[str], score_type: Optional[str] = None, metric: str = 'BLEU', stats_file=None, comet_variant: Optional[str] = None):
+    """
+    Print average rankings for each model.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        score_type: 'arabic_general', 'dialect', or None (for combined)
+        metric: 'BLEU', 'CHRF', or 'COMET'
+        stats_file: Optional file handle to write to
+        comet_variant: If metric is 'COMET', the specific COMET variant to use
+    """
+    avg_rankings = calculate_average_rankings(test_sets, models, score_type, metric, comet_variant)
     
     if not avg_rankings:
         title_label = ''
@@ -1110,7 +1529,8 @@ def print_average_rankings(test_sets: Dict, models: List[str], score_type: Optio
             title_label = 'General Arabic '
         elif score_type == 'dialect':
             title_label = 'Dialect '
-        msg = f"\n⚠️  No {title_label}{metric} scores found for average ranking calculation"
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+        msg = f"\n⚠️  No {title_label}{metric_label} scores found for average ranking calculation"
         print(msg)
         if stats_file:
             stats_file.write(msg + "\n")
@@ -1125,7 +1545,8 @@ def print_average_rankings(test_sets: Dict, models: List[str], score_type: Optio
     elif score_type == 'dialect':
         title_label = 'Dialect '
     
-    header = f"\n{'='*80}\n📊 Average Rankings for {title_label}{metric} Score\n{'='*80}\nLower rank is better (1st = best)\n\n"
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    header = f"\n{'='*80}\n📊 Average Rankings for {title_label}{metric_label} Score\n{'='*80}\nLower rank is better (1st = best)\n\n"
     print(header, end='')
     if stats_file:
         stats_file.write(header)
@@ -1137,10 +1558,26 @@ def print_average_rankings(test_sets: Dict, models: List[str], score_type: Optio
         key = f'{score_type}_{metric}' if score_type else None
         for test_set, model_scores in test_sets.items():
             if model in model_scores:
-                if key and key in model_scores[model]:
+                if key and metric != 'COMET' and key in model_scores[model]:
                     count += 1
+                elif key and metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                        if score is not None:
+                            count += 1
+                    else:
+                        if find_comet_score(model_scores[model], score_type) is not None:
+                            count += 1
                 elif not key:
-                    if metric in model_scores[model] or \
+                    if metric == 'COMET':
+                        if comet_variant:
+                            score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                            if score is not None:
+                                count += 1
+                        else:
+                            if find_comet_score(model_scores[model]) is not None:
+                                count += 1
+                    elif metric in model_scores[model] or \
                        f'arabic_general_{metric}' in model_scores[model] or \
                        f'dialect_{metric}' in model_scores[model]:
                         count += 1
@@ -1154,27 +1591,77 @@ def print_average_rankings(test_sets: Dict, models: List[str], score_type: Optio
         stats_file.write("\n".join(lines) + "\n")
 
 
-def print_ranking_stats_by_type(test_sets: Dict, models: List[str], score_type: str, metric: str = 'BLEU', stats_file=None):
-    """Print ranking statistics for a specific score type."""
-    rankings = calculate_ranking_stats_by_type(test_sets, models, score_type, metric)
+def print_ranking_stats_by_type(test_sets: Dict, models: List[str], score_type: str, metric: str = 'BLEU', stats_file=None, comet_variant: Optional[str] = None):
+    """
+    Print ranking statistics for a specific score type.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        score_type: Score type ('arabic_general' or 'dialect')
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        stats_file: Optional file handle to write to
+        comet_variant: If metric is 'COMET', the specific COMET variant to use
+    """
+    # For COMET with variant, we need to calculate rankings differently
+    if metric == 'COMET' and comet_variant:
+        rankings = {model: {} for model in models}
+        for test_set, model_scores in test_sets.items():
+            model_scores_list = []
+            for model in models:
+                if model in model_scores:
+                    score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                    if score is not None:
+                        model_scores_list.append((model, score))
+            if not model_scores_list:
+                continue
+            model_scores_list.sort(key=lambda x: x[1], reverse=True)
+            current_rank = 1
+            i = 0
+            while i < len(model_scores_list):
+                score = model_scores_list[i][1]
+                tie_count = sum(1 for _, s in model_scores_list if s == score)
+                for j in range(i, i + tie_count):
+                    model = model_scores_list[j][0]
+                    if current_rank not in rankings[model]:
+                        rankings[model][current_rank] = 0
+                    rankings[model][current_rank] += 1
+                current_rank += tie_count
+                i += tie_count
+    else:
+        rankings = calculate_ranking_stats_by_type(test_sets, models, score_type, metric)
     
     title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
-    header = f"\n{'='*80}\n📊 Ranking Statistics for {title_label} {metric} Score\n{'='*80}\n"
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    header = f"\n{'='*80}\n📊 Ranking Statistics for {title_label} {metric_label} Score\n{'='*80}\n"
     print(header, end='')
     if stats_file:
         stats_file.write(header)
     
     # Calculate total test sets with data for this score type and metric
     test_sets_with_data = set()
-    key = f'{score_type}_{metric}'
     for test_set, model_scores in test_sets.items():
         for model in models:
-            if model in model_scores and key in model_scores[model]:
-                test_sets_with_data.add(test_set)
-                break
+            if model in model_scores:
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                        if score is not None:
+                            test_sets_with_data.add(test_set)
+                            break
+                    else:
+                        if find_comet_score(model_scores[model], score_type) is not None:
+                            test_sets_with_data.add(test_set)
+                            break
+                else:
+                    key = f'{score_type}_{metric}'
+                    if key in model_scores[model]:
+                        test_sets_with_data.add(test_set)
+                        break
     
     total_test_sets = len(test_sets_with_data)
-    info = f"Total test sets with {title_label} {metric} scores: {total_test_sets}\n\n"
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    info = f"Total test sets with {title_label} {metric_label} scores: {total_test_sets}\n\n"
     print(info, end='')
     if stats_file:
         stats_file.write(info)
@@ -1223,13 +1710,16 @@ def calculate_average_scores_by_type(test_sets: Dict, models: List[str], score_t
     Returns: Dict mapping model_name -> average_score
     """
     averages = {}
-    key = f'{score_type}_{metric}'
     
     for model in models:
         scores = []
         for test_set, model_scores in test_sets.items():
-            if model in model_scores and key in model_scores[model]:
-                score = model_scores[model][key]
+            if model in model_scores:
+                if metric == 'COMET':
+                    score = find_comet_score(model_scores[model], score_type)
+                else:
+                    key = f'{score_type}_{metric}'
+                    score = model_scores[model].get(key)
                 if score is not None:
                     scores.append(score)
         
@@ -1239,41 +1729,77 @@ def calculate_average_scores_by_type(test_sets: Dict, models: List[str], score_t
     return averages
 
 
-def print_average_scores_by_type(test_sets: Dict, models: List[str], score_type: str, metric: str = 'BLEU', stats_file=None):
-    """Print average scores for a specific score type."""
-    averages = calculate_average_scores_by_type(test_sets, models, score_type, metric)
+def print_average_scores_by_type(test_sets: Dict, models: List[str], score_type: str, metric: str = 'BLEU', stats_file=None, comet_variant: Optional[str] = None):
+    """
+    Print average scores for a specific score type.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        score_type: Score type ('arabic_general' or 'dialect')
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        stats_file: Optional file handle to write to
+        comet_variant: If metric is 'COMET', the specific COMET variant to use
+    """
+    # For COMET with variant, we need to calculate averages differently
+    if metric == 'COMET' and comet_variant:
+        averages = {}
+        for model in models:
+            scores = []
+            for test_set, model_scores in test_sets.items():
+                if model in model_scores:
+                    score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                    if score is not None:
+                        scores.append(score)
+            if scores:
+                averages[model] = np.mean(scores)
+    else:
+        averages = calculate_average_scores_by_type(test_sets, models, score_type, metric)
     
     if not averages:
         title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
-        msg = f"\n⚠️  No {title_label} {metric} scores found"
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+        msg = f"\n⚠️  No {title_label} {metric_label} scores found"
         print(msg)
         if stats_file:
             stats_file.write(msg + "\n")
         return
     
     title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
-    header = f"\n{'='*80}\n📊 Average {metric} Scores for {title_label} Translations\n{'='*80}\n\nModels sorted by average {metric} score:\n\n"
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    header = f"\n{'='*80}\n📊 Average {metric_label} Scores for {title_label} Translations\n{'='*80}\n\nModels sorted by average {metric_label} score:\n\n"
     print(header, end='')
     if stats_file:
         stats_file.write(header)
     
     # Count test sets for each model
     model_counts = {}
-    key = f'{score_type}_{metric}'
     for test_set, model_scores in test_sets.items():
         for model in models:
-            if model in model_scores and key in model_scores[model]:
-                model_counts[model] = model_counts.get(model, 0) + 1
+            if model in model_scores:
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                        if score is not None:
+                            model_counts[model] = model_counts.get(model, 0) + 1
+                    else:
+                        if find_comet_score(model_scores[model], score_type) is not None:
+                            model_counts[model] = model_counts.get(model, 0) + 1
+                else:
+                    key = f'{score_type}_{metric}'
+                    if key in model_scores[model]:
+                        model_counts[model] = model_counts.get(model, 0) + 1
     
     # Sort by average score (descending)
     sorted_models = sorted(averages.items(), key=lambda x: x[1], reverse=True)
     
     lines = []
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
     for model, avg_score in sorted_models:
         count = model_counts.get(model, 0)
         lines.extend([
             f"Model: {model}",
-            f"  Average {metric}: {avg_score:.4f}",
+            f"  Average {metric_label}: {avg_score:.4f}",
             f"  Based on {count} test set(s)",
             ""
         ])
@@ -1335,12 +1861,24 @@ def print_overall_scores(overall_scores: Dict[str, Dict], models: List[str], dir
                     lines.append(f"  BLEU: {model_scores[key]['BLEU']:.4f}")
                 if 'CHRF' in model_scores[key]:
                     lines.append(f"  CHRF: {model_scores[key]['CHRF']:.4f}")
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(model_scores[key]):
+                    lines.append(f"  {comet_key}: {model_scores[key][comet_key]:.4f}")
+                # Also check for legacy 'COMET' key
+                if 'COMET' in model_scores[key]:
+                    lines.append(f"  COMET: {model_scores[key]['COMET']:.4f}")
         elif direction == 'reverse':
-            # Reverse direction: direct BLEU/CHRF
+            # Reverse direction: direct BLEU/CHRF/COMET
             if 'BLEU' in model_scores:
                 lines.append(f"  BLEU: {model_scores['BLEU']:.4f}")
             if 'CHRF' in model_scores:
                 lines.append(f"  CHRF: {model_scores['CHRF']:.4f}")
+            # Extract all COMET variants
+            for comet_key in find_comet_keys(model_scores):
+                lines.append(f"  {comet_key}: {model_scores[comet_key]:.4f}")
+            # Also check for legacy 'COMET' key
+            if 'COMET' in model_scores:
+                lines.append(f"  COMET: {model_scores['COMET']:.4f}")
         elif direction == 'roundtrip':
             # Roundtrip: roundtrip scores
             if 'roundtrip' in model_scores:
@@ -1348,6 +1886,12 @@ def print_overall_scores(overall_scores: Dict[str, Dict], models: List[str], dir
                     lines.append(f"  BLEU: {model_scores['roundtrip']['BLEU']:.4f}")
                 if 'CHRF' in model_scores['roundtrip']:
                     lines.append(f"  CHRF: {model_scores['roundtrip']['CHRF']:.4f}")
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(model_scores['roundtrip']):
+                    lines.append(f"  {comet_key}: {model_scores['roundtrip'][comet_key]:.4f}")
+                # Also check for legacy 'COMET' key
+                if 'COMET' in model_scores['roundtrip']:
+                    lines.append(f"  COMET: {model_scores['roundtrip']['COMET']:.4f}")
         
         # Add metadata if available
         if 'num_test_sets' in model_scores:
@@ -1377,7 +1921,9 @@ def calculate_ranking_stats(test_sets: Dict, models: List[str], metric: str = 'B
         for model in models:
             if model in model_scores:
                 score = None
-                if metric in model_scores[model]:
+                if metric == 'COMET':
+                    score = find_comet_score(model_scores[model])
+                elif metric in model_scores[model]:
                     score = model_scores[model][metric]
                 elif f'arabic_general_{metric}' in model_scores[model]:
                     score = model_scores[model][f'arabic_general_{metric}']
@@ -1414,11 +1960,47 @@ def calculate_ranking_stats(test_sets: Dict, models: List[str], metric: str = 'B
     return rankings
 
 
-def print_ranking_stats(test_sets: Dict, models: List[str], metric: str = 'BLEU', stats_file=None):
-    """Print ranking statistics for each model."""
-    rankings = calculate_ranking_stats(test_sets, models, metric)
+def print_ranking_stats(test_sets: Dict, models: List[str], metric: str = 'BLEU', stats_file=None, comet_variant: Optional[str] = None):
+    """
+    Print ranking statistics for each model.
     
-    header = f"\n{'='*80}\n📊 Ranking Statistics for {metric} Score\n{'='*80}\n"
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        stats_file: Optional file handle to write to
+        comet_variant: If metric is 'COMET', the specific COMET variant to use
+    """
+    # For COMET with variant, we need to calculate rankings differently
+    if metric == 'COMET' and comet_variant:
+        rankings = {model: {} for model in models}
+        for test_set, model_scores in test_sets.items():
+            model_scores_list = []
+            for model in models:
+                if model in model_scores:
+                    score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                    if score is not None:
+                        model_scores_list.append((model, score))
+            if not model_scores_list:
+                continue
+            model_scores_list.sort(key=lambda x: x[1], reverse=True)
+            current_rank = 1
+            i = 0
+            while i < len(model_scores_list):
+                score = model_scores_list[i][1]
+                tie_count = sum(1 for _, s in model_scores_list if s == score)
+                for j in range(i, i + tie_count):
+                    model = model_scores_list[j][0]
+                    if current_rank not in rankings[model]:
+                        rankings[model][current_rank] = 0
+                    rankings[model][current_rank] += 1
+                current_rank += tie_count
+                i += tie_count
+    else:
+        rankings = calculate_ranking_stats(test_sets, models, metric)
+    
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    header = f"\n{'='*80}\n📊 Ranking Statistics for {metric_label} Score\n{'='*80}\n"
     print(header, end='')
     if stats_file:
         stats_file.write(header)
@@ -1428,14 +2010,25 @@ def print_ranking_stats(test_sets: Dict, models: List[str], metric: str = 'BLEU'
     for test_set, model_scores in test_sets.items():
         for model in models:
             if model in model_scores:
-                if metric in model_scores[model] or \
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                        if score is not None:
+                            test_sets_with_data.add(test_set)
+                            break
+                    else:
+                        if find_comet_score(model_scores[model]) is not None:
+                            test_sets_with_data.add(test_set)
+                            break
+                elif metric in model_scores[model] or \
                    f'arabic_general_{metric}' in model_scores[model] or \
                    f'dialect_{metric}' in model_scores[model]:
                     test_sets_with_data.add(test_set)
                     break
     
     total_test_sets = len(test_sets_with_data)
-    info = f"Total test sets with {metric} scores: {total_test_sets}\n\n"
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    info = f"Total test sets with {metric_label} scores: {total_test_sets}\n\n"
     print(info, end='')
     if stats_file:
         stats_file.write(info)
@@ -1478,16 +2071,41 @@ def print_ranking_stats(test_sets: Dict, models: List[str], metric: str = 'BLEU'
 
 
 def create_bar_plot_by_type(test_set: str, model_scores: Dict[str, Dict[str, float]], 
-                            models: List[str], output_dir: Path, score_type: str, metric: str = 'BLEU'):
-    """Create a bar plot for a specific test set, score type (arabic_general or dialect), and metric."""
-    key = f'{score_type}_{metric}'
+                            models: List[str], output_dir: Path, score_type: str, metric: str = 'BLEU', 
+                            comet_variant: Optional[str] = None):
+    """
+    Create a bar plot for a specific test set, score type (arabic_general or dialect), and metric.
+    
+    Args:
+        test_set: Name of the test set
+        model_scores: Dictionary mapping model -> scores dict
+        models: List of model names
+        output_dir: Output directory for plots
+        score_type: Score type ('arabic_general' or 'dialect')
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        comet_variant: If metric is 'COMET', the specific COMET variant to plot
+    """
+    if metric == 'COMET' and comet_variant:
+        # For specific COMET variant, construct the key
+        key = f'{score_type}_{comet_variant}'
+    elif metric == 'COMET':
+        # For COMET without variant, find any variant
+        key = None  # Will use find_comet_score instead
+    else:
+        key = f'{score_type}_{metric}'
     
     model_values = []
     model_labels = []
     
     for model in models:
-        if model in model_scores and key in model_scores[model]:
-            score = model_scores[model][key]
+        if model in model_scores:
+            if metric == 'COMET':
+                if comet_variant:
+                    score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                else:
+                    score = find_comet_score(model_scores[model], score_type)
+            else:
+                score = model_scores[model].get(key) if key else None
             if score is not None:
                 model_values.append(score)
                 model_labels.append(model)
@@ -1504,9 +2122,10 @@ def create_bar_plot_by_type(test_set: str, model_scores: Dict[str, Dict[str, flo
     
     # Customize plot
     title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
     ax.set_xlabel('Model', fontsize=12, fontweight='bold')
-    ax.set_ylabel(f'{metric} Score', fontsize=12, fontweight='bold')
-    ax.set_title(f'{metric} Scores by Model ({title_label})\nTest Set: {test_set}', 
+    ax.set_ylabel(f'{metric_label} Score', fontsize=12, fontweight='bold')
+    ax.set_title(f'{metric_label} Scores by Model ({title_label})\nTest Set: {test_set}', 
                  fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(range(len(model_labels)))
     ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=10)
@@ -1522,9 +2141,13 @@ def create_bar_plot_by_type(test_set: str, model_scores: Dict[str, Dict[str, flo
     
     plt.tight_layout()
     
-    # Save figure
+    # Save figure with COMET variant in filename if applicable
     safe_test_set = test_set.replace('/', '_').replace('.', '_')
-    output_file = output_dir / f"{safe_test_set}_{score_type}_{metric.lower()}.png"
+    if metric == 'COMET' and comet_variant:
+        safe_comet = safe_comet_filename(comet_variant)
+        output_file = output_dir / f"{safe_test_set}_{score_type}_{safe_comet}.png"
+    else:
+        output_file = output_dir / f"{safe_test_set}_{score_type}_{metric.lower()}.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
     
@@ -1532,10 +2155,18 @@ def create_bar_plot_by_type(test_set: str, model_scores: Dict[str, Dict[str, flo
 
 
 def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: Path, 
-                                 score_type: str, metric: str = 'BLEU'):
+                                 score_type: str, metric: str = 'BLEU', comet_variant: Optional[str] = None):
     """
     Create plots grouped by dialect for a specific score type.
     Groups test sets by their dialect_name and creates a separate plot for each dialect.
+    
+    Args:
+        test_sets: Dictionary mapping test_set -> {model -> scores}
+        models: List of model names
+        output_dir: Output directory for plots
+        score_type: Score type ('arabic_general' or 'dialect')
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        comet_variant: If metric is 'COMET', the specific COMET variant to plot
     """
     # Group test sets by dialect
     dialect_groups: Dict[str, Dict[str, Dict]] = defaultdict(dict)
@@ -1555,7 +2186,6 @@ def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: 
         return
     
     title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
-    key = f'{score_type}_{metric}'
     
     # Create a plot for each dialect
     for dialect_name, dialect_test_sets in sorted(dialect_groups.items()):
@@ -1563,9 +2193,22 @@ def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: 
         valid_test_sets = []
         for test_set, model_scores in dialect_test_sets.items():
             for model in models:
-                if model in model_scores and key in model_scores[model]:
-                    valid_test_sets.append(test_set)
-                    break
+                if model in model_scores:
+                    if metric == 'COMET':
+                        if comet_variant:
+                            score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                            if score is not None:
+                                valid_test_sets.append(test_set)
+                                break
+                        else:
+                            if find_comet_score(model_scores[model], score_type) is not None:
+                                valid_test_sets.append(test_set)
+                                break
+                    else:
+                        key = f'{score_type}_{metric}'
+                        if key in model_scores[model]:
+                            valid_test_sets.append(test_set)
+                            break
         
         if not valid_test_sets:
             continue
@@ -1595,8 +2238,15 @@ def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: 
             model_labels = []
             
             for model in models:
-                if model in model_scores and key in model_scores[model]:
-                    score = model_scores[model][key]
+                if model in model_scores:
+                    if metric == 'COMET':
+                        if comet_variant:
+                            score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                        else:
+                            score = find_comet_score(model_scores[model], score_type)
+                    else:
+                        key = f'{score_type}_{metric}'
+                        score = model_scores[model].get(key)
                     if score is not None:
                         model_values.append(score)
                         model_labels.append(model)
@@ -1611,8 +2261,9 @@ def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: 
                          color=plt.cm.viridis(np.linspace(0, 1, len(model_labels))))
             
             # Customize subplot
+            metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
             ax.set_xlabel('Model', fontsize=9)
-            ax.set_ylabel(f'{metric} Score', fontsize=9)
+            ax.set_ylabel(f'{metric_label} Score', fontsize=9)
             ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, 
                         fontsize=10, fontweight='bold')
             ax.set_xticks(range(len(model_labels)))
@@ -1633,14 +2284,20 @@ def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: 
             axes[idx].axis('off')
         
         # Overall title
-        fig.suptitle(f'{metric} Scores for {dialect_name} ({title_label})\n({n_plots} test set(s))', 
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+        fig.suptitle(f'{metric_label} Scores for {dialect_name} ({title_label})\n({n_plots} test set(s))', 
                      fontsize=16, fontweight='bold', y=0.995)
         
         plt.tight_layout(rect=[0, 0, 1, 0.98])
         
-        # Save figure
+        # Save figure with COMET variant in filename if applicable
         safe_dialect = dialect_name.replace('/', '_').replace('.', '_').replace(' ', '_')
-        output_file = output_dir / f"dialect_{safe_dialect}_{score_type}_{metric.lower()}.png"
+        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+        if metric == 'COMET' and comet_variant:
+            safe_comet = safe_comet_filename(comet_variant)
+            output_file = output_dir / f"dialect_{safe_dialect}_{score_type}_{safe_comet}.png"
+        else:
+            output_file = output_dir / f"dialect_{safe_dialect}_{score_type}_{metric.lower()}.png"
         plt.savefig(output_file, dpi=150, bbox_inches='tight')
         plt.close()
         
@@ -1789,9 +2446,9 @@ def main():
     parser.add_argument(
         '--metric',
         type=str,
-        choices=['BLEU', 'CHRF', 'both'],
+        choices=['BLEU', 'CHRF', 'COMET', 'both', 'all'],
         default='both',
-        help='Which metric(s) to plot (default: both)'
+        help='Which metric(s) to plot: BLEU, CHRF, COMET, both (BLEU+CHRF), or all (BLEU+CHRF+COMET). Note: COMET plots only appear with --metric COMET or --metric all (default: both)'
     )
     parser.add_argument(
         '--summary',
@@ -1825,6 +2482,50 @@ def main():
     
     print(f"✅ Found {len(models)} model(s)")
     print(f"   Models: {', '.join(models)}")
+    
+    # Warn if COMET is requested but not in metric selection
+    if args.metric not in ['COMET', 'all']:
+        print(f"\n💡 Note: COMET plots are only generated with --metric COMET or --metric all")
+        print(f"   Current metric selection: {args.metric} (COMET plots will be skipped)")
+    
+    # Debug: Check for COMET scores if metric includes COMET
+    if args.metric in ['COMET', 'all']:
+        print(f"\n🔍 Checking for COMET scores...")
+        comet_found = False
+        for direction, data in results_by_direction.items():
+            file_test_sets = data.get('file_test_sets', {})
+            for test_set, model_scores in file_test_sets.items():
+                for model in models:
+                    if model in model_scores:
+                        # Check for any COMET scores (try both with and without score_type)
+                        comet_score = find_comet_score(model_scores[model])
+                        if comet_score is not None:
+                            if not comet_found:
+                                comet_found = True
+                                print(f"   ✅ Found COMET scores!")
+                            # Find the actual key
+                            for key in sorted(model_scores[model].keys()):
+                                if isinstance(key, str) and (key.startswith('COMET_') or key == 'COMET' or 
+                                                             key.startswith('arabic_general_COMET') or 
+                                                             key.startswith('dialect_COMET')):
+                                    print(f"      {test_set} ({model}): {key} = {model_scores[model][key]}")
+                                    break
+                        # Also check for arabic_general and dialect separately
+                        for score_type in ['arabic_general', 'dialect']:
+                            comet_score = find_comet_score(model_scores[model], score_type)
+                            if comet_score is not None:
+                                if not comet_found:
+                                    comet_found = True
+                                    print(f"   ✅ Found COMET scores!")
+                                # Find the actual key
+                                for key in sorted(model_scores[model].keys()):
+                                    if isinstance(key, str) and key.startswith(f'{score_type}_COMET'):
+                                        print(f"      {test_set} ({model}): {key} = {model_scores[model][key]}")
+                                        break
+        if not comet_found:
+            print(f"   ⚠️  No COMET scores found in any test sets")
+            print(f"   Make sure you've run compute_comet_scores.py first")
+        print()  # Add blank line after debug output
     
     # Process each direction separately
     for direction, data in results_by_direction.items():
@@ -1879,57 +2580,116 @@ def main():
                     
                     # Create plots for each individual test set
                     print(f"\n📊 Creating per-test-set plots ({type_label})...")
+                    # Find all COMET variants for this score type
+                    comet_variants = []
+                    if args.metric in ['COMET', 'all']:
+                        comet_variants = find_all_comet_variants(file_test_sets, models, score_type)
+                        if comet_variants:
+                            print(f"   Found {len(comet_variants)} COMET variant(s): {', '.join(comet_variants)}")
+                    
                     for test_set, model_scores in file_test_sets.items():
-                        if args.metric in ['BLEU', 'both']:
+                        if args.metric in ['BLEU', 'both', 'all']:
                             create_bar_plot_by_type(test_set, model_scores, models, type_output_dir, score_type, 'BLEU')
-                        if args.metric in ['CHRF', 'both']:
+                        if args.metric in ['CHRF', 'both', 'all']:
                             create_bar_plot_by_type(test_set, model_scores, models, type_output_dir, score_type, 'CHRF')
+                        if args.metric in ['COMET', 'all']:
+                            # Create a plot for each COMET variant
+                            if comet_variants:
+                                for comet_variant in comet_variants:
+                                    create_bar_plot_by_type(test_set, model_scores, models, type_output_dir, score_type, 'COMET', comet_variant)
+                            else:
+                                # Fallback: try to create a plot with any COMET variant found
+                                create_bar_plot_by_type(test_set, model_scores, models, type_output_dir, score_type, 'COMET')
                     
                     # Create combined plot with all test sets side by side
                     print(f"\n📊 Creating combined plot - all test sets ({type_label})...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         create_all_testsets_combined_plot_by_type(test_sets, models, type_output_dir, score_type, 'BLEU')
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         create_all_testsets_combined_plot_by_type(test_sets, models, type_output_dir, score_type, 'CHRF')
+                    if args.metric in ['COMET', 'all']:
+                        # Create a combined plot for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                create_all_testsets_combined_plot_by_type(test_sets, models, type_output_dir, score_type, 'COMET', comet_variant)
+                        else:
+                            create_all_testsets_combined_plot_by_type(test_sets, models, type_output_dir, score_type, 'COMET')
                     
                     # Create dialect-grouped plots
                     print(f"\n📊 Creating per-dialect grouped plots ({type_label})...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         create_dialect_grouped_plot(test_sets, models, type_output_dir, score_type, 'BLEU')
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         create_dialect_grouped_plot(test_sets, models, type_output_dir, score_type, 'CHRF')
+                    if args.metric in ['COMET', 'all']:
+                        # Create a grouped plot for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                create_dialect_grouped_plot(test_sets, models, type_output_dir, score_type, 'COMET', comet_variant)
+                        else:
+                            create_dialect_grouped_plot(test_sets, models, type_output_dir, score_type, 'COMET')
                     
                     # Write score tables to stats file
                     stats_file.write("\n" + "=" * 80 + "\n")
                     stats_file.write("SCORE TABLES\n")
                     stats_file.write("=" * 80 + "\n")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         write_scores_table(test_sets, models, score_type, 'BLEU', stats_file, 
                                           f"\n{type_label} BLEU Scores by Test Set")
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         write_scores_table(test_sets, models, score_type, 'CHRF', stats_file, 
                                           f"\n{type_label} CHRF Scores by Test Set")
+                    if args.metric in ['COMET', 'all']:
+                        # Write a table for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                write_scores_table(test_sets, models, score_type, 'COMET', stats_file, 
+                                                  f"\n{type_label} {comet_variant} Scores by Test Set", comet_variant)
+                        else:
+                            write_scores_table(test_sets, models, score_type, 'COMET', stats_file, 
+                                              f"\n{type_label} COMET Scores by Test Set")
                     
                     # Print average scores
                     print(f"\n📊 Average Scores ({type_label})...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         print_average_scores_by_type(test_sets, models, score_type, 'BLEU', stats_file)
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         print_average_scores_by_type(test_sets, models, score_type, 'CHRF', stats_file)
+                    if args.metric in ['COMET', 'all']:
+                        # Print averages for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                print_average_scores_by_type(test_sets, models, score_type, 'COMET', stats_file, comet_variant)
+                        else:
+                            print_average_scores_by_type(test_sets, models, score_type, 'COMET', stats_file)
                     
                     # Print ranking statistics
                     print(f"\n📈 Ranking Statistics ({type_label})...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         print_ranking_stats_by_type(test_sets, models, score_type, 'BLEU', stats_file)
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         print_ranking_stats_by_type(test_sets, models, score_type, 'CHRF', stats_file)
+                    if args.metric in ['COMET', 'all']:
+                        # Print ranking stats for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                print_ranking_stats_by_type(test_sets, models, score_type, 'COMET', stats_file, comet_variant)
+                        else:
+                            print_ranking_stats_by_type(test_sets, models, score_type, 'COMET', stats_file)
                     
                     # Print average rankings
                     print(f"\n📊 Average Rankings ({type_label})...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         print_average_rankings(test_sets, models, score_type, 'BLEU', stats_file)
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         print_average_rankings(test_sets, models, score_type, 'CHRF', stats_file)
+                    if args.metric in ['COMET', 'all']:
+                        # Print average rankings for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                print_average_rankings(test_sets, models, score_type, 'COMET', stats_file, comet_variant)
+                        else:
+                            print_average_rankings(test_sets, models, score_type, 'COMET', stats_file)
                     
                     # Print overall scores
                     overall_scores = data.get('overall_scores', {})
@@ -1940,10 +2700,17 @@ def main():
                     # Create summary plots (heatmaps)
                     if args.summary:
                         print(f"\n📊 Creating summary heatmaps ({type_label})...")
-                        if args.metric in ['BLEU', 'both']:
+                        if args.metric in ['BLEU', 'both', 'all']:
                             create_summary_plot(test_sets, models, type_output_dir, 'BLEU')
-                        if args.metric in ['CHRF', 'both']:
+                        if args.metric in ['CHRF', 'both', 'all']:
                             create_summary_plot(test_sets, models, type_output_dir, 'CHRF')
+                        if args.metric in ['COMET', 'all']:
+                            # Create summary plots for each COMET variant
+                            if comet_variants:
+                                for comet_variant in comet_variants:
+                                    create_summary_plot(test_sets, models, type_output_dir, 'COMET', comet_variant)
+                            else:
+                                create_summary_plot(test_sets, models, type_output_dir, 'COMET')
                 
                 print(f"✅ Statistics saved to: {stats_file_path}")
             
@@ -1956,10 +2723,27 @@ def main():
                 diff_stats_file.write(f"{'='*80}\n\n")
                 
                 print(f"\n📈 Calculating General Arabic vs Dialect differences...")
-                if args.metric in ['BLEU', 'both']:
+                # Find all COMET variants for differences
+                diff_comet_variants = []
+                if args.metric in ['COMET', 'all']:
+                    diff_comet_variants = find_all_comet_variants(test_sets, models, 'arabic_general')
+                    # Also check dialect
+                    dialect_comet_variants = find_all_comet_variants(test_sets, models, 'dialect')
+                    # Combine and deduplicate
+                    all_diff_variants = set(diff_comet_variants + dialect_comet_variants)
+                    diff_comet_variants = sorted(list(all_diff_variants))
+                
+                if args.metric in ['BLEU', 'both', 'all']:
                     print_general_dialect_difference(test_sets, models, 'BLEU', diff_stats_file)
-                if args.metric in ['CHRF', 'both']:
+                if args.metric in ['CHRF', 'both', 'all']:
                     print_general_dialect_difference(test_sets, models, 'CHRF', diff_stats_file)
+                if args.metric in ['COMET', 'all']:
+                    # Print differences for each COMET variant
+                    if diff_comet_variants:
+                        for comet_variant in diff_comet_variants:
+                            print_general_dialect_difference(test_sets, models, 'COMET', diff_stats_file, comet_variant)
+                    else:
+                        print_general_dialect_difference(test_sets, models, 'COMET', diff_stats_file)
             
             print(f"✅ Difference statistics saved to: {diff_stats_file_path}")
         
@@ -1973,44 +2757,78 @@ def main():
                 
                 print(f"\n🎨 Creating visualizations for individual test sets...")
                 
+                # Find all COMET variants
+                comet_variants = []
+                if args.metric in ['COMET', 'all']:
+                    comet_variants = find_all_comet_variants(file_test_sets, models, None)
+                    if comet_variants:
+                        print(f"   Found {len(comet_variants)} COMET variant(s): {', '.join(comet_variants)}")
+                
                 # Create plots for each individual test set
                 for test_set, model_scores in file_test_sets.items():
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         create_bar_plot(test_set, model_scores, models, direction_output_dir, 'BLEU')
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         create_bar_plot(test_set, model_scores, models, direction_output_dir, 'CHRF')
+                    if args.metric in ['COMET', 'all']:
+                        # Create a plot for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                create_bar_plot(test_set, model_scores, models, direction_output_dir, 'COMET', comet_variant)
+                        else:
+                            # Fallback: try to create a plot with any COMET variant found
+                            create_bar_plot(test_set, model_scores, models, direction_output_dir, 'COMET')
                 
                 # Create combined plot with all test sets side by side
                 print(f"\n📊 Creating combined plot (all test sets side by side)...")
-                if args.metric in ['BLEU', 'both']:
+                if args.metric in ['BLEU', 'both', 'all']:
                     create_all_testsets_combined_plot(test_sets, models, direction_output_dir, 'BLEU')
-                if args.metric in ['CHRF', 'both']:
+                if args.metric in ['CHRF', 'both', 'all']:
                     create_all_testsets_combined_plot(test_sets, models, direction_output_dir, 'CHRF')
+                if args.metric in ['COMET', 'all']:
+                    # Create a combined plot for each COMET variant
+                    if comet_variants:
+                        for comet_variant in comet_variants:
+                            create_all_testsets_combined_plot(test_sets, models, direction_output_dir, 'COMET', comet_variant)
+                    else:
+                        create_all_testsets_combined_plot(test_sets, models, direction_output_dir, 'COMET')
                 
                 # Write score tables to stats file
                 stats_file.write("\n" + "=" * 80 + "\n")
                 stats_file.write("SCORE TABLES\n")
                 stats_file.write("=" * 80 + "\n")
-                if args.metric in ['BLEU', 'both']:
+                if args.metric in ['BLEU', 'both', 'all']:
                     write_scores_table(test_sets, models, None, 'BLEU', stats_file, 
                                       "\nBLEU Scores by Test Set")
-                if args.metric in ['CHRF', 'both']:
+                if args.metric in ['CHRF', 'both', 'all']:
                     write_scores_table(test_sets, models, None, 'CHRF', stats_file, 
                                       "\nCHRF Scores by Test Set")
+                if args.metric in ['COMET', 'all']:
+                    write_scores_table(test_sets, models, None, 'COMET', stats_file, 
+                                      "\nCOMET Scores by Test Set")
                 
                 # Print overall ranking statistics
                 print(f"\n📈 Overall Ranking Statistics...")
-                if args.metric in ['BLEU', 'both']:
+                if args.metric in ['BLEU', 'both', 'all']:
                     print_ranking_stats(test_sets, models, 'BLEU', stats_file)
-                if args.metric in ['CHRF', 'both']:
+                if args.metric in ['CHRF', 'both', 'all']:
                     print_ranking_stats(test_sets, models, 'CHRF', stats_file)
+                if args.metric in ['COMET', 'all']:
+                    print_ranking_stats(test_sets, models, 'COMET', stats_file)
                 
                 # Print overall average rankings
                 print(f"\n📊 Overall Average Rankings...")
-                if args.metric in ['BLEU', 'both']:
+                if args.metric in ['BLEU', 'both', 'all']:
                     print_average_rankings(test_sets, models, None, 'BLEU', stats_file)
-                if args.metric in ['CHRF', 'both']:
+                if args.metric in ['CHRF', 'both', 'all']:
                     print_average_rankings(test_sets, models, None, 'CHRF', stats_file)
+                if args.metric in ['COMET', 'all']:
+                    # Print average rankings for each COMET variant
+                    if comet_variants:
+                        for comet_variant in comet_variants:
+                            print_average_rankings(test_sets, models, None, 'COMET', stats_file, comet_variant)
+                    else:
+                        print_average_rankings(test_sets, models, None, 'COMET', stats_file)
                 
                 # Print overall scores
                 overall_scores = data.get('overall_scores', {})
@@ -2020,20 +2838,36 @@ def main():
                 
                 # Create aggregated plots (averages and grouped)
                 print(f"\n📊 Creating aggregated plots...")
-                if args.metric in ['BLEU', 'both']:
+                if args.metric in ['BLEU', 'both', 'all']:
                     create_average_plot(test_sets, models, direction_output_dir, 'BLEU')
                     create_all_testsets_plot(test_sets, models, direction_output_dir, 'BLEU')
-                if args.metric in ['CHRF', 'both']:
+                if args.metric in ['CHRF', 'both', 'all']:
                     create_average_plot(test_sets, models, direction_output_dir, 'CHRF')
                     create_all_testsets_plot(test_sets, models, direction_output_dir, 'CHRF')
+                if args.metric in ['COMET', 'all']:
+                    # Create aggregated plots for each COMET variant
+                    if comet_variants:
+                        for comet_variant in comet_variants:
+                            create_average_plot(test_sets, models, direction_output_dir, 'COMET', comet_variant)
+                            create_all_testsets_plot(test_sets, models, direction_output_dir, 'COMET', comet_variant)
+                    else:
+                        create_average_plot(test_sets, models, direction_output_dir, 'COMET')
+                        create_all_testsets_plot(test_sets, models, direction_output_dir, 'COMET')
                 
                 # Create summary plots (heatmaps)
                 if args.summary:
                     print(f"\n📊 Creating summary heatmaps...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         create_summary_plot(test_sets, models, direction_output_dir, 'BLEU')
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         create_summary_plot(test_sets, models, direction_output_dir, 'CHRF')
+                    if args.metric in ['COMET', 'all']:
+                        # Create summary plots for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                create_summary_plot(test_sets, models, direction_output_dir, 'COMET', comet_variant)
+                        else:
+                            create_summary_plot(test_sets, models, direction_output_dir, 'COMET')
             
             print(f"✅ Statistics saved to: {stats_file_path}")
         
@@ -2069,51 +2903,103 @@ def main():
                     
                     print(f"\n📊 Creating merged dialect plots ({type_label})...")
                     
+                    # Find all COMET variants for merged dialects
+                    comet_variants = []
+                    if args.metric in ['COMET', 'all']:
+                        comet_variants = find_all_comet_variants(merged_test_sets, models, score_type)
+                        if comet_variants:
+                            print(f"   Found {len(comet_variants)} COMET variant(s) for merged dialects: {', '.join(comet_variants)}")
+                    
                     # Create plots for each merged dialect
                     for dialect_name, model_scores in merged_test_sets.items():
-                        if args.metric in ['BLEU', 'both']:
+                        if args.metric in ['BLEU', 'both', 'all']:
                             create_bar_plot_by_type(f"{dialect_name} (merged)", model_scores, models, type_output_dir, score_type, 'BLEU')
-                        if args.metric in ['CHRF', 'both']:
+                        if args.metric in ['CHRF', 'both', 'all']:
                             create_bar_plot_by_type(f"{dialect_name} (merged)", model_scores, models, type_output_dir, score_type, 'CHRF')
+                        if args.metric in ['COMET', 'all']:
+                            # Create a plot for each COMET variant
+                            if comet_variants:
+                                for comet_variant in comet_variants:
+                                    create_bar_plot_by_type(f"{dialect_name} (merged)", model_scores, models, type_output_dir, score_type, 'COMET', comet_variant)
+                            else:
+                                # Fallback: try to create a plot with any COMET variant found
+                                create_bar_plot_by_type(f"{dialect_name} (merged)", model_scores, models, type_output_dir, score_type, 'COMET')
                     
                     # Create combined plot with all merged dialects side by side
                     print(f"\n📊 Creating combined plot - all merged dialects ({type_label})...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         create_all_testsets_combined_plot_by_type(merged_test_sets, models, type_output_dir, score_type, 'BLEU')
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         create_all_testsets_combined_plot_by_type(merged_test_sets, models, type_output_dir, score_type, 'CHRF')
+                    if args.metric in ['COMET', 'all']:
+                        # Create a combined plot for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                create_all_testsets_combined_plot_by_type(merged_test_sets, models, type_output_dir, score_type, 'COMET', comet_variant)
+                        else:
+                            create_all_testsets_combined_plot_by_type(merged_test_sets, models, type_output_dir, score_type, 'COMET')
                     
                     # Write score tables to stats file
                     stats_file.write("\n" + "=" * 80 + "\n")
                     stats_file.write("MERGED DIALECT SCORE TABLES\n")
                     stats_file.write("=" * 80 + "\n")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         write_scores_table(merged_test_sets, models, score_type, 'BLEU', stats_file, 
                                           f"\n{type_label} BLEU Scores for Merged Dialects")
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         write_scores_table(merged_test_sets, models, score_type, 'CHRF', stats_file, 
                                           f"\n{type_label} CHRF Scores for Merged Dialects")
+                    if args.metric in ['COMET', 'all']:
+                        # Write a table for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                write_scores_table(merged_test_sets, models, score_type, 'COMET', stats_file, 
+                                                  f"\n{type_label} {comet_variant} Scores for Merged Dialects", comet_variant)
+                        else:
+                            write_scores_table(merged_test_sets, models, score_type, 'COMET', stats_file, 
+                                              f"\n{type_label} COMET Scores for Merged Dialects")
                     
                     # Print statistics for merged dialects
                     print(f"\n📊 Average Scores for Merged Dialects ({type_label})...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         print_average_scores_by_type(merged_test_sets, models, score_type, 'BLEU', stats_file)
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         print_average_scores_by_type(merged_test_sets, models, score_type, 'CHRF', stats_file)
+                    if args.metric in ['COMET', 'all']:
+                        # Print averages for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                print_average_scores_by_type(merged_test_sets, models, score_type, 'COMET', stats_file, comet_variant)
+                        else:
+                            print_average_scores_by_type(merged_test_sets, models, score_type, 'COMET', stats_file)
                     
                     # Print ranking statistics for merged dialects
                     print(f"\n📈 Ranking Statistics for Merged Dialects ({type_label})...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         print_ranking_stats_by_type(merged_test_sets, models, score_type, 'BLEU', stats_file)
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         print_ranking_stats_by_type(merged_test_sets, models, score_type, 'CHRF', stats_file)
+                    if args.metric in ['COMET', 'all']:
+                        # Print ranking stats for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                print_ranking_stats_by_type(merged_test_sets, models, score_type, 'COMET', stats_file, comet_variant)
+                        else:
+                            print_ranking_stats_by_type(merged_test_sets, models, score_type, 'COMET', stats_file)
                     
                     # Print average rankings for merged dialects
                     print(f"\n📊 Average Rankings for Merged Dialects ({type_label})...")
-                    if args.metric in ['BLEU', 'both']:
+                    if args.metric in ['BLEU', 'both', 'all']:
                         print_average_rankings(merged_test_sets, models, score_type, 'BLEU', stats_file)
-                    if args.metric in ['CHRF', 'both']:
+                    if args.metric in ['CHRF', 'both', 'all']:
                         print_average_rankings(merged_test_sets, models, score_type, 'CHRF', stats_file)
+                    if args.metric in ['COMET', 'all']:
+                        # Print average rankings for each COMET variant
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                print_average_rankings(merged_test_sets, models, score_type, 'COMET', stats_file, comet_variant)
+                        else:
+                            print_average_rankings(merged_test_sets, models, score_type, 'COMET', stats_file)
                 
                 print(f"✅ Merged dialect statistics saved to: {stats_file_path}")
         
