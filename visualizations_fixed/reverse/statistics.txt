@@ -113,48 +113,48 @@ COMET Scores by Test Set
 
 Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..Qwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-QAraC.dev.glf.0.qa.ar                  0.7523         0.8091         0.7661            N/A         0.7392         0.6964         0.7745         0.7810         0.7959         0.7866         0.7698         0.8199         0.8637         0.7408         0.8637         0.7618
-QAraC.test.glf.0.qa.ar                 0.7487         0.8051         0.7623            N/A         0.7357         0.6950         0.7714         0.7775         0.7918         0.7845         0.7680         0.8179         0.8216         0.7397         0.8216         0.7574
-bible.dev.mgr.0.ma.ar                  0.5576         0.7016         0.5860            N/A         0.5673         0.4357         0.6813         0.6158         0.6523         0.6266         0.6211         0.7229         0.6409         0.4668         0.6409         0.5502
-bible.dev.mgr.0.tn.ar                  0.6209         0.7013         0.5744            N/A         0.6279         0.5020         0.7170         0.6613         0.6887         0.6665         0.6297         0.7447         0.9476         0.5197         0.9476         0.6337
-bible.dev.msa.0.ms.ar                  0.8467         0.8496         0.7983            N/A         0.8470         0.8298         0.8384         0.8387         0.8298         0.8115         0.8236         0.8502         0.9763         0.8017         0.9763         0.8802
-bible.dev.msa.1.ms.ar                  0.7982         0.8108         0.6979            N/A         0.8008         0.7436         0.8017         0.7844         0.7924         0.7712         0.7766         0.2469         0.9978         0.7072         0.9978         0.7971
-bible.test.mgr.0.ma.ar                 0.5375         0.7106         0.5959            N/A         0.5417         0.4164         0.6747         0.6093         0.6462         0.6069         0.6110         0.2350         0.4958         0.4618         0.4958         0.5304
-bible.test.mgr.0.tn.ar                 0.6062         0.7027         0.5673            N/A         0.6110         0.4819         0.7043         0.6460         0.6753         0.6376         0.6051         0.7268         0.5461         0.5032         0.5461         0.6125
-bible.test.msa.0.ms.ar                 0.8421         0.8404         0.7973            N/A         0.8386         0.8172         0.8315         0.8423         0.8165         0.7983         0.8189         0.8495         0.8109         0.7966         0.8109         0.8737
-bible.test.msa.1.ms.ar                 0.7895         0.8028         0.6992            N/A         0.7889         0.7210         0.8095         0.7827         0.7964         0.7606         0.7548         0.8078         0.7806         0.6919         0.7806         0.7876
-madar.dev.glf.0.qa.ar                  0.9062         0.9509         0.9310            N/A         0.8952         0.8513         0.9413         0.9283         0.9344         0.9303         0.9149         0.9443         0.7218         0.9061         0.7218         0.9056
-madar.dev.lev.0.lb.ar                  0.8376         0.9307         0.9130            N/A         0.8264         0.7527         0.9015         0.8751         0.8960         0.8693         0.8529         0.9083         0.4130         0.8204         0.4130         0.8344
-madar.dev.mgr.0.ma.ar                  0.7438         0.8916         0.8653            N/A         0.7391         0.6651         0.8360         0.8028         0.8266         0.8054         0.8226         0.8659         0.2632         0.7430         0.2632         0.7339
-madar.dev.mgr.0.tn.ar                  0.7587         0.8857         0.8589            N/A         0.7462         0.6861         0.8310         0.7888         0.8199         0.7965         0.7765         0.8440         0.3535         0.7427         0.3535         0.7880
-madar.dev.msa.0.ms.ar                  0.9667         0.9791         0.9688            N/A         0.9622         0.9516         0.9711         0.9675         0.9679         0.9486         0.9644         0.9732         0.7860         0.9564         0.7860         0.9608
-madar.dev.nil.0.eg.ar                  0.9052         0.9510         0.9371            N/A         0.9021         0.8564         0.9388         0.9265         0.9318         0.9171         0.9190         0.9426         0.6075         0.9008         0.6075         0.8870
-madar.test.glf.0.iq.ar                 0.8830         0.9402         0.9089            N/A         0.8795         0.8328         0.9315         0.9163         0.9229         0.9150         0.9014         0.9375         0.6709         0.8894         0.6709         0.8940
-madar.test.glf.0.om.ar                 0.9292         0.9540         0.9384            N/A         0.9234         0.8946         0.9508         0.9407         0.9437         0.9391         0.9329         0.9523         0.7712         0.9235         0.7712         0.9268
-madar.test.glf.0.qa.ar                 0.9098         0.9518         0.9318            N/A         0.8980         0.8557         0.9439         0.9290         0.9371         0.9310         0.9187         0.9461         0.8548         0.9072         0.8548         0.9057
-madar.test.glf.0.sa.ar                 0.9514         0.9678         0.9591            N/A         0.9424         0.9178         0.9672         0.9589         0.9612         0.9580         0.9548         0.9683         0.9363         0.9447         0.9363         0.9410
-madar.test.glf.0.ye.ar                 0.8928         0.9315         0.9049            N/A         0.8737         0.8410         0.9201         0.9115         0.9130         0.9053         0.9013         0.9285         0.8645         0.8700         0.8645         0.8871
-madar.test.glf.1.iq.ar                 0.8805         0.9355         0.9072            N/A         0.8725         0.8272         0.9289         0.9095         0.9193         0.9091         0.8954         0.9327         0.7297         0.8884         0.7297         0.8942
-madar.test.glf.1.sa.ar                 0.9036         0.9382         0.9122            N/A         0.8851         0.8393         0.9336         0.9159         0.9276         0.9187         0.9110         0.9366         0.8235         0.8910         0.8235         0.9023
-madar.test.glf.2.iq.ar                 0.8557         0.8995         0.8666            N/A         0.8480         0.7892         0.8961         0.8808         0.8812         0.8766         0.8553         0.9092         0.6845         0.8401         0.6845         0.8512
-madar.test.lev.0.jo.ar                 0.9246         0.9524         0.9388            N/A         0.9127         0.8681         0.9480         0.9389         0.9430         0.9374         0.9295         0.9518         0.4861         0.9087         0.4861         0.9143
-madar.test.lev.0.lb.ar                 0.8175         0.9269         0.9066            N/A         0.8086         0.7336         0.8917         0.8604         0.8826         0.8647         0.8413         0.9023         0.7849         0.8030         0.7849         0.8286
-madar.test.lev.0.pa.ar                 0.9094         0.9491         0.9351            N/A         0.8923         0.8332         0.9412         0.9267         0.9354         0.9291         0.9168         0.9444         0.6067         0.8898         0.6067         0.8973
-madar.test.lev.0.sy.ar                 0.9002         0.9491         0.9312            N/A         0.8837         0.8305         0.9408         0.9257         0.9328         0.9258         0.9130         0.9438         0.6245         0.8859         0.6245         0.8935
-madar.test.lev.1.jo.ar                 0.9063         0.9422         0.9295            N/A         0.8885         0.8472         0.9389         0.9249         0.9294         0.9152         0.9129         0.9404         0.5746         0.8899         0.5746         0.8982
-madar.test.lev.1.sy.ar                 0.8824         0.9377         0.9127            N/A         0.8676         0.8030         0.9293         0.9124         0.9175         0.9100         0.8964         0.9325         0.7030         0.8634         0.7030         0.8716
-madar.test.mgr.0.dz.ar                 0.8521         0.9196         0.8924            N/A         0.8503         0.8017         0.9010         0.8845         0.8897         0.8830         0.8668         0.9119         0.6064         0.8511         0.6064         0.8633
-madar.test.mgr.0.ly.ar                 0.8631         0.9246         0.8903            N/A         0.8543         0.7912         0.9086         0.8916         0.9006         0.8921         0.8680         0.9200         0.6030         0.8552         0.6030         0.8547
-madar.test.mgr.0.ma.ar                 0.8164         0.9212         0.9033            N/A         0.8016         0.7430         0.8898         0.8649         0.8820         0.8684         0.8741         0.9080         0.7058         0.8112         0.7058         0.7947
-madar.test.mgr.0.tn.ar                 0.7365         0.8624         0.8315            N/A         0.7285         0.6650         0.8093         0.7700         0.7970         0.7745         0.7547         0.8212         0.9058         0.7221         0.9058         0.7687
-madar.test.mgr.1.ly.ar                 0.8800         0.9296         0.8996            N/A         0.8696         0.8157         0.9201         0.9057         0.9090         0.9021         0.8813         0.9253         0.5678         0.8739         0.5678         0.8734
-madar.test.mgr.1.ma.ar                 0.8596         0.9293         0.9149            N/A         0.8404         0.7847         0.9172         0.8962         0.9073         0.8982         0.9027         0.9275         0.6198         0.8518         0.6198         0.8257
-madar.test.mgr.1.tn.ar                 0.7462         0.8522         0.8192            N/A         0.7331         0.6733         0.8221         0.7787         0.8115         0.7881         0.7654         0.8323         0.6380         0.7296         0.6380         0.7832
-madar.test.msa.0.ms.ar                 0.9646         0.9748         0.9644            N/A         0.9601         0.9497         0.9687         0.9644         0.9655         0.9436         0.9612         0.9717         0.9496         0.9539         0.9496         0.9586
-madar.test.nil.0.eg.ar                 0.9100         0.9541         0.9396            N/A         0.9068         0.8624         0.9428         0.9297         0.9357         0.9274         0.9242         0.9464         0.5410         0.9064         0.5410         0.8994
-madar.test.nil.0.sd.ar                 0.9147         0.9407         0.9212            N/A         0.8964         0.8555         0.9432         0.9301         0.9365         0.9302         0.9204         0.9407         0.8354         0.9023         0.8354         0.9070
-madar.test.nil.1.eg.ar                 0.9290         0.9564         0.9435            N/A         0.9233         0.8714         0.9527         0.9409         0.9458         0.9382         0.9372         0.9533         0.6798         0.9191         0.6798         0.9066
-madar.test.nil.2.eg.ar                 0.9040         0.9444         0.9296            N/A         0.8989         0.8512         0.9387         0.9273         0.9292         0.9254         0.9195         0.9414         0.7208         0.8997         0.7208         0.8917
+QAraC.dev.glf.0.qa.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+QAraC.test.glf.0.qa.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.dev.mgr.0.ma.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.dev.mgr.0.tn.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.dev.msa.0.ms.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.dev.msa.1.ms.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.test.mgr.0.ma.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.test.mgr.0.tn.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.test.msa.0.ms.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.test.msa.1.ms.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.glf.0.qa.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.lev.0.lb.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.mgr.0.ma.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.mgr.0.tn.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.msa.0.ms.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.nil.0.eg.ar                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.iq.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.om.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.qa.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.sa.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.ye.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.1.iq.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.1.sa.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.2.iq.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.0.jo.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.0.lb.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.0.pa.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.0.sy.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.1.jo.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.1.sy.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.0.dz.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.0.ly.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.0.ma.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.0.tn.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.1.ly.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.1.ma.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.1.tn.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.msa.0.ms.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.nil.0.eg.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.nil.0.sd.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.nil.1.eg.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.nil.2.eg.ar                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
 
 
 ================================================================================
@@ -477,194 +477,8 @@ Model: gpt-4.1-nano
 ================================================================================
 📊 Ranking Statistics for COMET Score
 ================================================================================
-Total test sets with COMET scores: 42
+Total test sets with COMET scores: 0
 
-Model: EuroLLM-9B-Instruct
-  Total appearances: 42/42
-  4th: 1 time
-  5th: 2 times
-  6th: 1 time
-  7th: 2 times
-  8th: 1 time
-  9th: 24 times
-  10th: 4 times
-  11th: 2 times
-  12th: 5 times
-  Win rate: 0/42 (0.0%)
-  Top-3 rate: 0/42 (0.0%)
-
-Model: Jais-2-70B-Chat
-  Total appearances: 42/42
-  1st: 29 times
-  2nd: 4 times
-  3rd: 4 times
-  4th: 2 times
-  5th: 3 times
-  Win rate: 29/42 (69.0%)
-  Top-3 rate: 37/42 (88.1%)
-
-Model: Jais-2-8B-Chat
-  Total appearances: 42/42
-  2nd: 3 times
-  3rd: 2 times
-  4th: 9 times
-  5th: 7 times
-  6th: 2 times
-  7th: 10 times
-  10th: 3 times
-  11th: 1 time
-  13th: 1 time
-  14th: 3 times
-  15th: 1 time
-  Win rate: 0/42 (0.0%)
-  Top-3 rate: 5/42 (11.9%)
-
-Model: Mistral-Small-3.2-24B-Instruct-2506
-  Total appearances: 42/42
-  5th: 1 time
-  6th: 3 times
-  8th: 2 times
-  9th: 2 times
-  10th: 3 times
-  11th: 16 times
-  12th: 12 times
-  13th: 1 time
-  14th: 2 times
-  Win rate: 0/42 (0.0%)
-  Top-3 rate: 0/42 (0.0%)
-
-Model: Qwen3-4B-Instruct-2507
-  Total appearances: 42/42
-  9th: 1 time
-  10th: 1 time
-  12th: 3 times
-  13th: 27 times
-  14th: 1 time
-  15th: 9 times
-  Win rate: 0/42 (0.0%)
-  Top-3 rate: 0/42 (0.0%)
-
-Model: aya-expanse-32b
-  Total appearances: 42/42
-  1st: 2 times
-  2nd: 2 times
-  3rd: 26 times
-  4th: 7 times
-  6th: 1 time
-  7th: 1 time
-  8th: 2 times
-  9th: 1 time
-  Win rate: 2/42 (4.8%)
-  Top-3 rate: 30/42 (71.4%)
-
-Model: aya-expanse-8b
-  Total appearances: 42/42
-  3rd: 1 time
-  5th: 9 times
-  6th: 13 times
-  7th: 9 times
-  8th: 7 times
-  9th: 3 times
-  Win rate: 0/42 (0.0%)
-  Top-3 rate: 1/42 (2.4%)
-
-Model: c4ai-command-r-08-2024
-  Total appearances: 42/42
-  3rd: 1 time
-  4th: 21 times
-  5th: 15 times
-  6th: 1 time
-  7th: 1 time
-  8th: 1 time
-  10th: 1 time
-  11th: 1 time
-  Win rate: 0/42 (0.0%)
-  Top-3 rate: 1/42 (2.4%)
-
-Model: c4ai-command-r-v01
-  Total appearances: 42/42
-  5th: 3 times
-  6th: 17 times
-  7th: 14 times
-  8th: 2 times
-  11th: 2 times
-  13th: 3 times
-  15th: 1 time
-  Win rate: 0/42 (0.0%)
-  Top-3 rate: 0/42 (0.0%)
-
-Model: c4ai-command-r7b-arabic-02-2025
-  Total appearances: 42/42
-  4th: 1 time
-  6th: 3 times
-  7th: 1 time
-  8th: 26 times
-  9th: 5 times
-  10th: 3 times
-  11th: 1 time
-  12th: 2 times
-  Win rate: 0/42 (0.0%)
-  Top-3 rate: 0/42 (0.0%)
-
-Model: command-a-translate-08-2025
-  Total appearances: 42/42
-  1st: 4 times
-  2nd: 27 times
-  3rd: 7 times
-  4th: 1 time
-  5th: 1 time
-  15th: 2 times
-  Win rate: 4/42 (9.5%)
-  Top-3 rate: 38/42 (90.5%)
-
-Model: gemma-3-27b-it
-  Total appearances: 42/42
-  1st: 6 times
-  5th: 1 time
-  9th: 1 time
-  11th: 2 times
-  12th: 1 time
-  13th: 4 times
-  14th: 27 times
-  Win rate: 6/42 (14.3%)
-  Top-3 rate: 6/42 (14.3%)
-
-Model: gemma-3-4b-it
-  Total appearances: 42/42
-  10th: 11 times
-  11th: 11 times
-  12th: 9 times
-  13th: 4 times
-  14th: 5 times
-  15th: 2 times
-  Win rate: 0/42 (0.0%)
-  Top-3 rate: 0/42 (0.0%)
-
-Model: gpt-4.1-mini
-  Total appearances: 42/42
-  1st: 6 times
-  5th: 1 time
-  9th: 1 time
-  11th: 2 times
-  12th: 1 time
-  13th: 4 times
-  14th: 27 times
-  Win rate: 6/42 (14.3%)
-  Top-3 rate: 6/42 (14.3%)
-
-Model: gpt-4.1-nano
-  Total appearances: 42/42
-  1st: 1 time
-  3rd: 1 time
-  7th: 4 times
-  8th: 1 time
-  9th: 5 times
-  10th: 15 times
-  11th: 6 times
-  12th: 8 times
-  13th: 1 time
-  Win rate: 1/42 (2.4%)
-  Top-3 rate: 2/42 (4.8%)
 
 ================================================================================
 📊 Average Rankings for BLEU Score
@@ -710,48 +524,7 @@ Lower rank is better (1st = best)
 15. gpt-4.1-mini: 14.50 (based on 42 test set(s))
 
 
-================================================================================
-📊 Average Rankings for COMET_Unbabel_XCOMET-XL Score
-================================================================================
-Lower rank is better (1st = best)
-
-1. Jais-2-70B-Chat: 1.67 (based on 42 test set(s))
-2. command-a-translate-08-2025: 2.71 (based on 42 test set(s))
-3. aya-expanse-32b: 3.52 (based on 42 test set(s))
-4. c4ai-command-r-08-2024: 4.79 (based on 42 test set(s))
-5. aya-expanse-8b: 6.36 (based on 42 test set(s))
-6. Jais-2-8B-Chat: 6.43 (based on 42 test set(s))
-7. c4ai-command-r-v01: 7.17 (based on 42 test set(s))
-8. c4ai-command-r7b-arabic-02-2025: 8.05 (based on 42 test set(s))
-9. EuroLLM-9B-Instruct: 8.74 (based on 42 test set(s))
-10. Mistral-Small-3.2-24B-Instruct-2506: 10.00 (based on 42 test set(s))
-11. gemma-3-4b-it: 10.98 (based on 42 test set(s))
-12. gemma-3-27b-it: 11.19 (based on 42 test set(s))
-13. gpt-4.1-mini: 11.19 (based on 42 test set(s))
-14. Qwen3-4B-Instruct-2507: 12.21 (based on 42 test set(s))
-
-
-================================================================================
-📊 Average Rankings for COMET_Unbabel_XCOMET-XL_ref-less Score
-================================================================================
-Lower rank is better (1st = best)
-
-1. command-a-translate-08-2025: 3.69 (based on 42 test set(s))
-2. gemma-3-27b-it: 4.36 (based on 42 test set(s))
-3. gpt-4.1-mini: 4.36 (based on 42 test set(s))
-4. aya-expanse-8b: 4.86 (based on 42 test set(s))
-5. aya-expanse-32b: 5.00 (based on 42 test set(s))
-6. gpt-4.1-nano: 5.67 (based on 42 test set(s))
-7. Jais-2-70B-Chat: 6.17 (based on 42 test set(s))
-8. c4ai-command-r-08-2024: 7.79 (based on 42 test set(s))
-9. EuroLLM-9B-Instruct: 9.19 (based on 42 test set(s))
-10. c4ai-command-r7b-arabic-02-2025: 9.60 (based on 42 test set(s))
-11. c4ai-command-r-v01: 10.19 (based on 42 test set(s))
-12. Mistral-Small-3.2-24B-Instruct-2506: 10.81 (based on 42 test set(s))
-13. Jais-2-8B-Chat: 11.74 (based on 42 test set(s))
-14. gemma-3-4b-it: 13.21 (based on 42 test set(s))
-15. Qwen3-4B-Instruct-2507: 13.38 (based on 42 test set(s))
-
+⚠️  No COMET scores found for average ranking calculation
 
 ================================================================================
 📊 Overall Scores (All Test Sets Concatenated) - Reverse Translation
