@@ -1,0 +1,23 @@
+Model Index Mapping for CHRF Scores (arabic_general)
+================================================================================
+
+Index | Model Name
+--------------------------------------------------------------------------------
+    0 | EuroLLM-9B-Instruct
+    1 | Jais-2-70B-Chat
+    2 | Jais-2-8B-Chat
+    3 | Llama-3.3-70B-Instruct
+    4 | Mistral-Small-3.2-24B-Instruct-2506
+    5 | Nile-Chat-12B
+    6 | Qwen3-4B-Instruct-2507
+    7 | aya-expanse-32b
+    8 | aya-expanse-8b
+    9 | c4ai-command-r-08-2024
+   10 | c4ai-command-r-v01
+   11 | c4ai-command-r7b-arabic-02-2025
+   12 | command-a-translate-08-2025
+   13 | gemma-3-27b-it
+   14 | gemma-3-4b-it
+   15 | gpt-4.1-mini
+   16 | gpt-4.1-nano
+================================================================================

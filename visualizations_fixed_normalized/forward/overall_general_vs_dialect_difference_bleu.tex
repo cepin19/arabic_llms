@@ -1,0 +1,35 @@
+\begin{table}[h]
+\centering
+\caption{Overall BLEU Score Comparison: General Arabic vs Dialect (Forward Direction)}
+\label{tab:overall-general-dialect-difference}
+\begin{tabular}{lccc}
+\toprule
+Model & General Arabic & Dialect & Difference \\
+\midrule
+Jais-2-70B-Chat & 8.4 & 25.4 & +17.1 \\
+Jais-2-8B-Chat & 6.4 & 14.5 & +8.1 \\
+gpt-4.1-mini & 7.3 & 15.0 & +7.8 \\
+gpt-4.1-nano & 6.9 & 12.4 & +5.6 \\
+c4ai-command-r-08-2024 & 6.7 & 11.1 & +4.4 \\
+gemma-3-27b-it & 6.9 & 10.5 & +3.7 \\
+aya-expanse-32b & 6.9 & 9.9 & +3.1 \\
+command-a-translate-08-2025 & 6.5 & 8.7 & +2.2 \\
+Llama-3.3-70B-Instruct & 6.4 & 8.6 & +2.2 \\
+gemma-3-4b-it & 5.6 & 7.1 & +1.5 \\
+c4ai-command-r7b-arabic-02-2025 & 6.8 & 8.1 & +1.2 \\
+EuroLLM-9B-Instruct & 6.4 & 7.0 & +0.6 \\
+Qwen3-4B-Instruct-2507 & 4.3 & 4.6 & +0.3 \\
+aya-expanse-8b & 6.3 & 6.5 & +0.1 \\
+c4ai-command-r-v01 & 5.3 & 5.4 & +0.1 \\
+Mistral-Small-3.2-24B-Instruct-2506 & 6.0 & 6.0 & +0.0 \\
+Nile-Chat-12B & 7.6 & 7.3 & -0.3 \\
+\midrule
+Average & 6.5 & 9.9 & +3.4 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Positive difference means Dialect scores are higher.
+\item Negative difference means General Arabic scores are higher.
+\end{tablenotes}
+\end{table}

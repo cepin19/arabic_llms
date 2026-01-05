@@ -1,0 +1,289 @@
+================================================================================
+AraBench Evaluation Results (English -> Arabic)
+================================================================================
+
+Model: CohereLabs/command-a-translate-08-2025
+Direction: English -> Arabic
+Total files processed: 42
+Files with metrics: 42
+
+Average Scores (per-file averages):
+--------------------------------------------------------------------------------
+Arabic (general):
+  BLEU: 5.7465
+  CHRF: 33.2841
+
+Dialect-specific:
+  BLEU: 7.6835
+  CHRF: 36.3366
+
+================================================================================
+Overall Scores (all test sets concatenated):
+================================================================================
+Total test sets: 42
+Total sentences: 130226
+
+Arabic (general):
+  BLEU: 6.4566
+  CHRF: 34.0166
+
+Dialect (all):
+  BLEU: 8.6602
+  CHRF: 37.6934
+
+================================================================================
+Per-file Results:
+================================================================================
+
+File: madar.test.glf.1.iq.en
+Dialect: Iraqi Arabic (iq)
+Sentences: 2000
+  Arabic (general) - BLEU: 4.1964, CHRF: 34.7206
+  Dialect - BLEU: 6.2335, CHRF: 37.2521
+
+File: QAraC.test.glf.0.qa.en
+Dialect: Qatari Arabic (qa)
+Sentences: 6713
+  Arabic (general) - BLEU: 5.9550, CHRF: 36.0296
+  Dialect - BLEU: 6.4523, CHRF: 37.1844
+
+File: madar.test.mgr.1.tn.en
+Dialect: Tunisian Arabic (tn)
+Sentences: 2000
+  Arabic (general) - BLEU: 2.1691, CHRF: 24.5999
+  Dialect - BLEU: 5.6113, CHRF: 31.6789
+
+File: bible.dev.mgr.0.ma.en
+Dialect: Moroccan Arabic (ma)
+Sentences: 600
+  Arabic (general) - BLEU: 0.9050, CHRF: 23.0355
+  Dialect - BLEU: 1.3970, CHRF: 25.0608
+
+File: madar.test.glf.0.om.en
+Dialect: Omani Arabic (om)
+Sentences: 2000
+  Arabic (general) - BLEU: 18.6929, CHRF: 49.6082
+  Dialect - BLEU: 19.0796, CHRF: 49.4257
+
+File: madar.dev.glf.0.qa.en
+Dialect: Qatari Arabic (qa)
+Sentences: 5500
+  Arabic (general) - BLEU: 5.8138, CHRF: 35.5971
+  Dialect - BLEU: 6.5218, CHRF: 36.7015
+
+File: madar.dev.msa.0.ms.en
+Dialect: Modern Standard Arabic (ms)
+Sentences: 5500
+  Arabic (general) - BLEU: 20.7019, CHRF: 54.3055
+  Dialect - BLEU: 20.5794, CHRF: 54.1673
+
+File: bible.test.msa.1.ms.en
+Dialect: Modern Standard Arabic (ms)
+Sentences: 600
+  Arabic (general) - BLEU: 6.3341, CHRF: 35.8698
+  Dialect - BLEU: 6.3256, CHRF: 35.6596
+
+File: madar.test.mgr.0.dz.en
+Dialect: Algerian Arabic (dz)
+Sentences: 2000
+  Arabic (general) - BLEU: 6.1275, CHRF: 32.5432
+  Dialect - BLEU: 6.8524, CHRF: 34.4573
+
+File: madar.dev.nil.0.eg.en
+Dialect: Egyptian Arabic (eg)
+Sentences: 5500
+  Arabic (general) - BLEU: 5.0319, CHRF: 32.1526
+  Dialect - BLEU: 6.0668, CHRF: 33.8820
+
+File: madar.test.glf.0.ye.en
+Dialect: Yemeni Arabic (ye)
+Sentences: 2000
+  Arabic (general) - BLEU: 6.6926, CHRF: 36.1463
+  Dialect - BLEU: 8.9543, CHRF: 39.1717
+
+File: madar.dev.mgr.0.tn.en
+Dialect: Tunisian Arabic (tn)
+Sentences: 5500
+  Arabic (general) - BLEU: 2.5425, CHRF: 25.8312
+  Dialect - BLEU: 6.9765, CHRF: 34.5204
+
+File: madar.test.mgr.0.tn.en
+Dialect: Tunisian Arabic (tn)
+Sentences: 6500
+  Arabic (general) - BLEU: 2.5333, CHRF: 24.9120
+  Dialect - BLEU: 5.8029, CHRF: 32.6647
+
+File: madar.test.glf.0.sa.en
+Dialect: Saudi Arabic (sa)
+Sentences: 2000
+  Arabic (general) - BLEU: 10.3734, CHRF: 43.0778
+  Dialect - BLEU: 10.6087, CHRF: 43.4852
+
+File: madar.test.lev.1.sy.en
+Dialect: Syrian Arabic (sy)
+Sentences: 2000
+  Arabic (general) - BLEU: 3.7620, CHRF: 33.0638
+  Dialect - BLEU: 4.4830, CHRF: 33.9307
+
+File: bible.test.mgr.0.tn.en
+Dialect: Tunisian Arabic (tn)
+Sentences: 600
+  Arabic (general) - BLEU: 1.7067, CHRF: 23.7127
+  Dialect - BLEU: 2.7982, CHRF: 29.5624
+
+File: madar.test.nil.0.eg.en
+Dialect: Egyptian Arabic (eg)
+Sentences: 6500
+  Arabic (general) - BLEU: 5.1772, CHRF: 32.1750
+  Dialect - BLEU: 6.6445, CHRF: 34.2843
+
+File: madar.test.glf.0.qa.en
+Dialect: Qatari Arabic (qa)
+Sentences: 6500
+  Arabic (general) - BLEU: 5.9017, CHRF: 35.4636
+  Dialect - BLEU: 6.7987, CHRF: 36.8383
+
+File: madar.test.mgr.0.ly.en
+Dialect: Libyan Arabic (ly)
+Sentences: 2000
+  Arabic (general) - BLEU: 4.6394, CHRF: 31.4289
+  Dialect - BLEU: 6.5358, CHRF: 34.8141
+
+File: madar.test.lev.0.lb.en
+Dialect: Lebanese Arabic (lb)
+Sentences: 6500
+  Arabic (general) - BLEU: 2.9052, CHRF: 29.3849
+  Dialect - BLEU: 9.0858, CHRF: 38.5214
+
+File: madar.dev.lev.0.lb.en
+Dialect: Lebanese Arabic (lb)
+Sentences: 5500
+  Arabic (general) - BLEU: 2.8323, CHRF: 30.9211
+  Dialect - BLEU: 9.3399, CHRF: 40.1864
+
+File: madar.dev.mgr.0.ma.en
+Dialect: Moroccan Arabic (ma)
+Sentences: 5500
+  Arabic (general) - BLEU: 2.3781, CHRF: 25.3796
+  Dialect - BLEU: 8.6608, CHRF: 37.0847
+
+File: QAraC.dev.glf.0.qa.en
+Dialect: Qatari Arabic (qa)
+Sentences: 6713
+  Arabic (general) - BLEU: 5.7263, CHRF: 35.3604
+  Dialect - BLEU: 6.2817, CHRF: 36.6589
+
+File: madar.test.lev.0.sy.en
+Dialect: Syrian Arabic (sy)
+Sentences: 2000
+  Arabic (general) - BLEU: 3.9083, CHRF: 33.7880
+  Dialect - BLEU: 4.5913, CHRF: 34.6941
+
+File: madar.test.lev.0.jo.en
+Dialect: Jordanian Arabic (jo)
+Sentences: 2000
+  Arabic (general) - BLEU: 4.6838, CHRF: 33.4475
+  Dialect - BLEU: 0.0655, CHRF: 10.0800
+
+File: madar.test.msa.0.ms.en
+Dialect: Modern Standard Arabic (ms)
+Sentences: 6500
+  Arabic (general) - BLEU: 20.3811, CHRF: 53.4059
+  Dialect - BLEU: 20.3803, CHRF: 53.4529
+
+File: madar.test.nil.0.sd.en
+Dialect: Sudanese Arabic (sd)
+Sentences: 2000
+  Arabic (general) - BLEU: 8.5994, CHRF: 38.7682
+  Dialect - BLEU: 10.9572, CHRF: 41.7237
+
+File: madar.test.mgr.1.ly.en
+Dialect: Libyan Arabic (ly)
+Sentences: 2000
+  Arabic (general) - BLEU: 6.0695, CHRF: 33.5907
+  Dialect - BLEU: 8.1980, CHRF: 36.9101
+
+File: madar.test.mgr.1.ma.en
+Dialect: Moroccan Arabic (ma)
+Sentences: 2000
+  Arabic (general) - BLEU: 6.8266, CHRF: 35.9162
+  Dialect - BLEU: 12.5520, CHRF: 43.2827
+
+File: bible.dev.msa.1.ms.en
+Dialect: Modern Standard Arabic (ms)
+Sentences: 600
+  Arabic (general) - BLEU: 0.2015, CHRF: 15.8942
+  Dialect - BLEU: 6.8965, CHRF: 35.6695
+
+File: madar.test.glf.0.iq.en
+Dialect: Iraqi Arabic (iq)
+Sentences: 2000
+  Arabic (general) - BLEU: 5.1525, CHRF: 35.6839
+  Dialect - BLEU: 7.1463, CHRF: 38.1542
+
+File: bible.test.msa.0.ms.en
+Dialect: Modern Standard Arabic (ms)
+Sentences: 600
+  Arabic (general) - BLEU: 7.8037, CHRF: 36.1299
+  Dialect - BLEU: 7.9752, CHRF: 35.7976
+
+File: madar.test.nil.2.eg.en
+Dialect: Egyptian Arabic (eg)
+Sentences: 2000
+  Arabic (general) - BLEU: 4.6180, CHRF: 30.5574
+  Dialect - BLEU: 6.2945, CHRF: 32.5571
+
+File: bible.dev.mgr.0.tn.en
+Dialect: Tunisian Arabic (tn)
+Sentences: 600
+  Arabic (general) - BLEU: 1.8518, CHRF: 25.1040
+  Dialect - BLEU: 2.7529, CHRF: 31.0229
+
+File: bible.dev.msa.0.ms.en
+Dialect: Modern Standard Arabic (ms)
+Sentences: 600
+  Arabic (general) - BLEU: 8.9678, CHRF: 37.5764
+  Dialect - BLEU: 8.7326, CHRF: 36.8546
+
+File: madar.test.mgr.0.ma.en
+Dialect: Moroccan Arabic (ma)
+Sentences: 6500
+  Arabic (general) - BLEU: 3.2793, CHRF: 29.9020
+  Dialect - BLEU: 10.8296, CHRF: 41.1824
+
+File: madar.test.glf.1.sa.en
+Dialect: Saudi Arabic (sa)
+Sentences: 2000
+  Arabic (general) - BLEU: 5.0617, CHRF: 34.6767
+  Dialect - BLEU: 5.2752, CHRF: 35.0191
+
+File: bible.test.mgr.0.ma.en
+Dialect: Moroccan Arabic (ma)
+Sentences: 600
+  Arabic (general) - BLEU: 0.6389, CHRF: 22.3131
+  Dialect - BLEU: 1.2951, CHRF: 24.0285
+
+File: madar.test.lev.0.pa.en
+Dialect: Palestinian Arabic (pa)
+Sentences: 2000
+  Arabic (general) - BLEU: 4.5483, CHRF: 32.3913
+  Dialect - BLEU: 7.1734, CHRF: 35.9619
+
+File: madar.test.glf.2.iq.en
+Dialect: Iraqi Arabic (iq)
+Sentences: 2000
+  Arabic (general) - BLEU: 4.9795, CHRF: 34.7516
+  Dialect - BLEU: 5.8841, CHRF: 36.3482
+
+File: madar.test.lev.1.jo.en
+Dialect: Jordanian Arabic (jo)
+Sentences: 2000
+  Arabic (general) - BLEU: 4.6630, CHRF: 35.0667
+  Dialect - BLEU: 9.4427, CHRF: 40.1103
+
+File: madar.test.nil.1.eg.en
+Dialect: Egyptian Arabic (eg)
+Sentences: 2000
+  Arabic (general) - BLEU: 6.0194, CHRF: 33.6484
+  Dialect - BLEU: 8.1730, CHRF: 36.0946
+

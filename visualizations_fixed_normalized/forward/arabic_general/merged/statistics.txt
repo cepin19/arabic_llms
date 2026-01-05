@@ -1,0 +1,658 @@
+================================================================================
+Statistics for Merged Dialects (General Arabic)
+Direction: Forward (English -> Arabic)
+================================================================================
+
+
+================================================================================
+MERGED DIALECT SCORE TABLES
+================================================================================
+
+
+General Arabic BLEU Scores for Merged Dialects
+================================================================================
+
+Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..  Nile-Chat-12BQwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Algerian Arabic                           6.4            6.2            6.0            6.5            6.0            3.6            3.9            6.8            6.4            6.8            4.4            6.9            6.1            7.0            5.6            7.0            6.4
+Egyptian Arabic                           5.2            6.0            5.5            5.4            5.2           19.8            3.4            5.6            5.3            5.6            4.3            5.7            5.2            5.6            4.9            6.0            5.6
+Iraqi Arabic                              5.5            5.4            5.1            5.3            4.8            5.0            3.8            5.7            5.2            5.3            4.0            5.8            4.8            5.4            4.7            5.9            5.8
+Jordanian Arabic                          5.5            5.3            5.0            5.1            4.8            9.9            3.6            5.6            5.0            5.5            4.7            5.6            4.7            5.4            4.6            5.7            5.4
+Lebanese Arabic                           2.9            3.4            2.9            3.0            2.8            5.0            2.1            3.1            2.9            3.1            2.3            3.2            2.9            3.2            2.5            3.3            3.1
+Libyan Arabic                             5.8            5.6            5.4            5.7            5.6            9.6            4.0            6.0            5.7            6.0            4.6            6.3            5.4            5.9            5.0            6.4            6.3
+Modern Standard Arabic                   14.1           24.5           15.6           13.9           12.9            4.8            9.0           16.1           14.5           15.7           11.5           14.9           15.9           15.8           12.7           16.6           15.3
+Moroccan Arabic                           3.0            3.2            2.9            2.9            2.8            2.8            2.1            3.2            2.9            3.2            2.4            3.1            3.0            3.2            2.6            3.2            3.1
+Omani Arabic                             20.4           19.1           18.1           19.1           17.7            7.3           12.7           19.6           18.9           19.3           14.0           20.1           18.7           20.4           17.2           21.0           20.6
+Palestinian Arabic                        4.7            4.7            4.1            5.1            4.8           10.3            3.3            5.0            5.1            5.1            4.3            5.3            4.5            4.9            4.1            5.4            5.3
+Qatari Arabic                             5.8            6.7            5.2            6.0            5.4            8.0            3.9            6.0            5.4            5.8            5.2            6.2            5.9            6.0            4.8            6.6            6.3
+Saudi Arabic                              8.5            8.5            8.0            8.3            8.0            9.9            6.3            8.6            8.2            8.5            7.5            9.4            7.8            8.8            7.5            9.5            9.1
+Sudanese Arabic                          10.2            9.2            9.0           10.1            9.6           10.1            6.4           10.1           10.3            9.5            6.6           10.5            8.6            9.6            8.9           11.1           10.6
+Syrian Arabic                             4.3            4.3            4.0            4.2            4.0            8.0            2.8            4.6            4.4            4.6            3.5            4.7            3.8            4.5            3.5            4.8            4.4
+Tunisian Arabic                           2.4            2.6            2.2            2.3            2.3            2.7            1.7            2.4            2.3            2.5            1.8            2.4            2.3            2.5            2.1            2.6            2.5
+Yemeni Arabic                             7.7            7.4            7.2            7.7            7.1            9.2            5.5            7.7            7.4            7.7            6.1            8.2            6.7            8.0            6.5            8.5            8.3
+
+
+
+General Arabic CHRF Scores for Merged Dialects
+================================================================================
+
+Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..  Nile-Chat-12BQwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Algerian Arabic                          31.6           32.4           31.4           31.3           30.6           27.6           27.0           32.7           31.5           32.3           28.7           31.8           32.5           32.1           30.2           32.8           31.9
+Egyptian Arabic                          31.1           33.2           31.8           31.0           30.0           49.7           26.9           31.9           31.0           31.7           29.3           31.4           32.1           31.9           30.1           32.5           31.8
+Iraqi Arabic                             34.9           35.7           34.4           34.2           33.2           32.7           30.5           35.3           34.1           34.7           32.1           34.9           35.1           34.8           33.0           35.8           35.4
+Jordanian Arabic                         33.6           34.7           33.5           33.0           32.2           39.1           29.3           34.3           32.9           33.8           31.7           33.7           34.2           33.9           32.0           34.8           34.3
+Lebanese Arabic                          29.3           30.8           29.6           29.3           28.2           33.4           25.9           30.0           29.0           29.9           27.6           29.5           30.1           30.1           28.2           30.5           29.9
+Libyan Arabic                            31.8           33.2           31.9           31.5           31.0           38.1           27.7           32.6           31.7           32.3           29.9           32.2           32.5           32.4           30.7           33.3           32.7
+Modern Standard Arabic                   45.6           53.9           46.4           44.4           42.8           30.8           36.6           46.6           45.6           47.6           39.1           45.6           46.6           47.3           43.0           48.5           47.1
+Moroccan Arabic                          27.1           27.8           26.6           26.6           25.9           26.7           23.9           27.0           26.8           27.5           24.5           26.8           27.8           27.3           25.9           27.7           27.4
+Omani Arabic                             49.4           49.9           48.0           47.7           45.8           33.9           40.0           49.0           47.7           48.3           42.4           48.8           49.6           49.0           46.1           50.7           49.9
+Palestinian Arabic                       31.6           33.0           31.5           31.6           30.8           39.3           28.0           32.3           31.4           32.0           30.2           32.0           32.4           32.2           30.7           33.1           32.7
+Qatari Arabic                            34.3           36.3           33.7           34.5           33.0           37.0           29.8           35.2           33.9           34.9           32.1           34.5           35.6           35.2           32.7           35.8           35.2
+Saudi Arabic                             38.3           39.8           38.3           38.0           36.9           39.6           33.4           39.1           38.0           38.7           35.9           38.9           38.9           38.9           36.8           40.3           39.5
+Sudanese Arabic                          38.8           40.1           38.7           39.2           37.8           39.8           32.6           39.9           39.0           38.8           34.5           39.3           38.8           38.9           37.0           41.0           40.2
+Syrian Arabic                            32.5           34.0           32.5           32.2           31.4           37.7           28.4           33.5           32.4           33.4           31.0           32.8           33.4           33.4           31.3           34.3           33.4
+Tunisian Arabic                          24.6           25.4           24.1           24.3           23.9           26.3           22.2           24.6           24.4           25.0           22.3           24.5           25.1           24.9           23.7           25.3           25.1
+Yemeni Arabic                            35.9           37.0           35.8           35.4           34.5           38.1           31.5           36.4           35.3           36.0           33.7           36.1           36.1           36.3           34.5           37.4           36.7
+
+
+
+General Arabic COMET Scores for Merged Dialects
+================================================================================
+
+Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..  Nile-Chat-12BQwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Algerian Arabic                           N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Egyptian Arabic                           N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Iraqi Arabic                              N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Jordanian Arabic                          N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Lebanese Arabic                           N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Libyan Arabic                             N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Modern Standard Arabic                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Moroccan Arabic                           N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Omani Arabic                              N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Palestinian Arabic                        N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Qatari Arabic                             N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Saudi Arabic                              N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Sudanese Arabic                           N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Syrian Arabic                             N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Tunisian Arabic                           N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+Yemeni Arabic                             N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+
+
+================================================================================
+📊 Average BLEU Scores for General Arabic Translations
+================================================================================
+
+Models sorted by average BLEU score:
+
+Model: Nile-Chat-12B
+  Average BLEU: 7.9
+  Based on 16 test set(s)
+
+Model: gpt-4.1-mini
+  Average BLEU: 7.7
+  Based on 16 test set(s)
+
+Model: Jais-2-70B-Chat
+  Average BLEU: 7.6
+  Based on 16 test set(s)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Average BLEU: 7.4
+  Based on 16 test set(s)
+
+Model: gpt-4.1-nano
+  Average BLEU: 7.4
+  Based on 16 test set(s)
+
+Model: aya-expanse-32b
+  Average BLEU: 7.3
+  Based on 16 test set(s)
+
+Model: gemma-3-27b-it
+  Average BLEU: 7.3
+  Based on 16 test set(s)
+
+Model: c4ai-command-r-08-2024
+  Average BLEU: 7.1
+  Based on 16 test set(s)
+
+Model: EuroLLM-9B-Instruct
+  Average BLEU: 7.0
+  Based on 16 test set(s)
+
+Model: Llama-3.3-70B-Instruct
+  Average BLEU: 6.9
+  Based on 16 test set(s)
+
+Model: aya-expanse-8b
+  Average BLEU: 6.9
+  Based on 16 test set(s)
+
+Model: command-a-translate-08-2025
+  Average BLEU: 6.6
+  Based on 16 test set(s)
+
+Model: Jais-2-8B-Chat
+  Average BLEU: 6.6
+  Based on 16 test set(s)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average BLEU: 6.5
+  Based on 16 test set(s)
+
+Model: gemma-3-4b-it
+  Average BLEU: 6.1
+  Based on 16 test set(s)
+
+Model: c4ai-command-r-v01
+  Average BLEU: 5.4
+  Based on 16 test set(s)
+
+Model: Qwen3-4B-Instruct-2507
+  Average BLEU: 4.7
+  Based on 16 test set(s)
+
+================================================================================
+📊 Average CHRF Scores for General Arabic Translations
+================================================================================
+
+Models sorted by average CHRF score:
+
+Model: Jais-2-70B-Chat
+  Average CHRF: 36.1
+  Based on 16 test set(s)
+
+Model: gpt-4.1-mini
+  Average CHRF: 35.9
+  Based on 16 test set(s)
+
+Model: Nile-Chat-12B
+  Average CHRF: 35.6
+  Based on 16 test set(s)
+
+Model: gpt-4.1-nano
+  Average CHRF: 35.2
+  Based on 16 test set(s)
+
+Model: command-a-translate-08-2025
+  Average CHRF: 35.1
+  Based on 16 test set(s)
+
+Model: aya-expanse-32b
+  Average CHRF: 35.0
+  Based on 16 test set(s)
+
+Model: gemma-3-27b-it
+  Average CHRF: 34.9
+  Based on 16 test set(s)
+
+Model: c4ai-command-r-08-2024
+  Average CHRF: 34.8
+  Based on 16 test set(s)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Average CHRF: 34.5
+  Based on 16 test set(s)
+
+Model: EuroLLM-9B-Instruct
+  Average CHRF: 34.4
+  Based on 16 test set(s)
+
+Model: Jais-2-8B-Chat
+  Average CHRF: 34.3
+  Based on 16 test set(s)
+
+Model: aya-expanse-8b
+  Average CHRF: 34.0
+  Based on 16 test set(s)
+
+Model: Llama-3.3-70B-Instruct
+  Average CHRF: 34.0
+  Based on 16 test set(s)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Average CHRF: 33.0
+  Based on 16 test set(s)
+
+Model: gemma-3-4b-it
+  Average CHRF: 32.9
+  Based on 16 test set(s)
+
+Model: c4ai-command-r-v01
+  Average CHRF: 31.6
+  Based on 16 test set(s)
+
+Model: Qwen3-4B-Instruct-2507
+  Average CHRF: 29.6
+  Based on 16 test set(s)
+
+⚠️  No General Arabic COMET scores found
+
+================================================================================
+📊 Ranking Statistics for General Arabic BLEU Score
+================================================================================
+Total test sets with General Arabic BLEU scores: 16
+
+Model: EuroLLM-9B-Instruct
+  Total appearances: 16/16
+  3rd: 1 time
+  5th: 2 times
+  6th: 1 time
+  7th: 2 times
+  8th: 3 times
+  9th: 1 time
+  10th: 1 time
+  11th: 3 times
+  12th: 1 time
+  13th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: Jais-2-70B-Chat
+  Total appearances: 16/16
+  1st: 1 time
+  2nd: 2 times
+  3rd: 2 times
+  4th: 1 time
+  6th: 1 time
+  8th: 1 time
+  9th: 3 times
+  10th: 2 times
+  11th: 1 time
+  12th: 2 times
+  Win rate: 1/16 (6.2%)
+  Top-3 rate: 5/16 (31.2%)
+
+Model: Jais-2-8B-Chat
+  Total appearances: 16/16
+  7th: 1 time
+  9th: 1 time
+  10th: 1 time
+  11th: 2 times
+  12th: 4 times
+  13th: 4 times
+  14th: 2 times
+  15th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Llama-3.3-70B-Instruct
+  Total appearances: 16/16
+  6th: 2 times
+  7th: 1 time
+  8th: 3 times
+  9th: 2 times
+  10th: 5 times
+  11th: 1 time
+  12th: 2 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Total appearances: 16/16
+  10th: 3 times
+  12th: 4 times
+  13th: 7 times
+  14th: 2 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Nile-Chat-12B
+  Total appearances: 16/16
+  1st: 10 times
+  7th: 1 time
+  12th: 1 time
+  13th: 1 time
+  17th: 3 times
+  Win rate: 10/16 (62.5%)
+  Top-3 rate: 10/16 (62.5%)
+
+Model: Qwen3-4B-Instruct-2507
+  Total appearances: 16/16
+  16th: 3 times
+  17th: 13 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: aya-expanse-32b
+  Total appearances: 16/16
+  3rd: 3 times
+  4th: 1 time
+  5th: 3 times
+  6th: 5 times
+  7th: 2 times
+  8th: 2 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 3/16 (18.8%)
+
+Model: aya-expanse-8b
+  Total appearances: 16/16
+  4th: 1 time
+  7th: 2 times
+  8th: 1 time
+  9th: 1 time
+  10th: 3 times
+  11th: 5 times
+  12th: 1 time
+  13th: 2 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r-08-2024
+  Total appearances: 16/16
+  4th: 2 times
+  5th: 5 times
+  6th: 2 times
+  7th: 1 time
+  8th: 2 times
+  9th: 2 times
+  10th: 1 time
+  11th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r-v01
+  Total appearances: 16/16
+  14th: 2 times
+  15th: 5 times
+  16th: 9 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Total appearances: 16/16
+  3rd: 6 times
+  4th: 4 times
+  5th: 3 times
+  6th: 1 time
+  8th: 1 time
+  9th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 6/16 (37.5%)
+
+Model: command-a-translate-08-2025
+  Total appearances: 16/16
+  4th: 1 time
+  9th: 2 times
+  11th: 3 times
+  12th: 1 time
+  13th: 1 time
+  14th: 6 times
+  15th: 2 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: gemma-3-27b-it
+  Total appearances: 16/16
+  2nd: 2 times
+  4th: 2 times
+  5th: 3 times
+  6th: 3 times
+  7th: 3 times
+  8th: 1 time
+  9th: 2 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 2/16 (12.5%)
+
+Model: gemma-3-4b-it
+  Total appearances: 16/16
+  14th: 4 times
+  15th: 8 times
+  16th: 4 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: gpt-4.1-mini
+  Total appearances: 16/16
+  1st: 5 times
+  2nd: 9 times
+  3rd: 2 times
+  Win rate: 5/16 (31.2%)
+  Top-3 rate: 16/16 (100.0%)
+
+Model: gpt-4.1-nano
+  Total appearances: 16/16
+  2nd: 3 times
+  3rd: 2 times
+  4th: 4 times
+  6th: 1 time
+  7th: 3 times
+  8th: 2 times
+  9th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 5/16 (31.2%)
+
+================================================================================
+📊 Ranking Statistics for General Arabic CHRF Score
+================================================================================
+Total test sets with General Arabic CHRF scores: 16
+
+Model: EuroLLM-9B-Instruct
+  Total appearances: 16/16
+  5th: 1 time
+  7th: 2 times
+  8th: 1 time
+  9th: 1 time
+  10th: 5 times
+  11th: 5 times
+  12th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Jais-2-70B-Chat
+  Total appearances: 16/16
+  1st: 2 times
+  2nd: 7 times
+  3rd: 6 times
+  4th: 1 time
+  Win rate: 2/16 (12.5%)
+  Top-3 rate: 15/16 (93.8%)
+
+Model: Jais-2-8B-Chat
+  Total appearances: 16/16
+  7th: 1 time
+  8th: 1 time
+  9th: 1 time
+  10th: 5 times
+  11th: 3 times
+  12th: 1 time
+  13th: 4 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Llama-3.3-70B-Instruct
+  Total appearances: 16/16
+  7th: 1 time
+  10th: 1 time
+  11th: 4 times
+  12th: 8 times
+  13th: 2 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Total appearances: 16/16
+  13th: 2 times
+  14th: 11 times
+  15th: 3 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: Nile-Chat-12B
+  Total appearances: 16/16
+  1st: 9 times
+  3rd: 1 time
+  5th: 1 time
+  11th: 1 time
+  15th: 1 time
+  16th: 1 time
+  17th: 2 times
+  Win rate: 9/16 (56.2%)
+  Top-3 rate: 10/16 (62.5%)
+
+Model: Qwen3-4B-Instruct-2507
+  Total appearances: 16/16
+  16th: 2 times
+  17th: 14 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: aya-expanse-32b
+  Total appearances: 16/16
+  2nd: 1 time
+  4th: 3 times
+  5th: 6 times
+  6th: 3 times
+  7th: 1 time
+  8th: 1 time
+  9th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: aya-expanse-8b
+  Total appearances: 16/16
+  8th: 1 time
+  9th: 1 time
+  10th: 2 times
+  11th: 1 time
+  12th: 5 times
+  13th: 6 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r-08-2024
+  Total appearances: 16/16
+  3rd: 1 time
+  4th: 1 time
+  5th: 1 time
+  6th: 1 time
+  8th: 6 times
+  9th: 5 times
+  11th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 1/16 (6.2%)
+
+Model: c4ai-command-r-v01
+  Total appearances: 16/16
+  15th: 3 times
+  16th: 13 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Total appearances: 16/16
+  6th: 2 times
+  8th: 4 times
+  9th: 6 times
+  10th: 3 times
+  11th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: command-a-translate-08-2025
+  Total appearances: 16/16
+  2nd: 1 time
+  3rd: 1 time
+  4th: 4 times
+  5th: 3 times
+  6th: 4 times
+  7th: 2 times
+  12th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 2/16 (12.5%)
+
+Model: gemma-3-27b-it
+  Total appearances: 16/16
+  4th: 1 time
+  5th: 1 time
+  6th: 6 times
+  7th: 6 times
+  8th: 1 time
+  9th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: gemma-3-4b-it
+  Total appearances: 16/16
+  13th: 2 times
+  14th: 5 times
+  15th: 9 times
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 0/16 (0.0%)
+
+Model: gpt-4.1-mini
+  Total appearances: 16/16
+  1st: 5 times
+  2nd: 6 times
+  3rd: 5 times
+  Win rate: 5/16 (31.2%)
+  Top-3 rate: 16/16 (100.0%)
+
+Model: gpt-4.1-nano
+  Total appearances: 16/16
+  2nd: 1 time
+  3rd: 2 times
+  4th: 6 times
+  5th: 3 times
+  7th: 3 times
+  8th: 1 time
+  Win rate: 0/16 (0.0%)
+  Top-3 rate: 3/16 (18.8%)
+
+================================================================================
+📊 Ranking Statistics for General Arabic COMET Score
+================================================================================
+Total test sets with General Arabic COMET scores: 0
+
+
+================================================================================
+📊 Average Rankings for General Arabic BLEU Score
+================================================================================
+Lower rank is better (1st = best)
+
+1. gpt-4.1-mini: 1.8 (based on 16 test set(s))
+2. c4ai-command-r7b-arabic-02-2025: 4.5 (based on 16 test set(s))
+3. gpt-4.1-nano: 5.0 (based on 16 test set(s))
+4. aya-expanse-32b: 5.5 (based on 16 test set(s))
+5. gemma-3-27b-it: 5.8 (based on 16 test set(s))
+6. Nile-Chat-12B: 5.8 (based on 16 test set(s))
+7. c4ai-command-r-08-2024: 6.7 (based on 16 test set(s))
+8. Jais-2-70B-Chat: 6.9 (based on 16 test set(s))
+9. EuroLLM-9B-Instruct: 8.4 (based on 16 test set(s))
+10. Llama-3.3-70B-Instruct: 9.1 (based on 16 test set(s))
+11. aya-expanse-8b: 9.9 (based on 16 test set(s))
+12. Jais-2-8B-Chat: 11.9 (based on 16 test set(s))
+13. command-a-translate-08-2025: 12.1 (based on 16 test set(s))
+14. Mistral-Small-3.2-24B-Instruct-2506: 12.3 (based on 16 test set(s))
+15. gemma-3-4b-it: 15.0 (based on 16 test set(s))
+16. c4ai-command-r-v01: 15.4 (based on 16 test set(s))
+17. Qwen3-4B-Instruct-2507: 16.8 (based on 16 test set(s))
+
+
+================================================================================
+📊 Average Rankings for General Arabic CHRF Score
+================================================================================
+Lower rank is better (1st = best)
+
+1. gpt-4.1-mini: 2.0 (based on 16 test set(s))
+2. Jais-2-70B-Chat: 2.4 (based on 16 test set(s))
+3. gpt-4.1-nano: 4.8 (based on 16 test set(s))
+4. aya-expanse-32b: 5.4 (based on 16 test set(s))
+5. command-a-translate-08-2025: 5.4 (based on 16 test set(s))
+6. Nile-Chat-12B: 5.8 (based on 16 test set(s))
+7. gemma-3-27b-it: 6.5 (based on 16 test set(s))
+8. c4ai-command-r-08-2024: 7.6 (based on 16 test set(s))
+9. c4ai-command-r7b-arabic-02-2025: 8.7 (based on 16 test set(s))
+10. EuroLLM-9B-Instruct: 9.6 (based on 16 test set(s))
+11. Jais-2-8B-Chat: 10.7 (based on 16 test set(s))
+12. Llama-3.3-70B-Instruct: 11.4 (based on 16 test set(s))
+13. aya-expanse-8b: 11.6 (based on 16 test set(s))
+14. Mistral-Small-3.2-24B-Instruct-2506: 14.1 (based on 16 test set(s))
+15. gemma-3-4b-it: 14.4 (based on 16 test set(s))
+16. c4ai-command-r-v01: 15.8 (based on 16 test set(s))
+17. Qwen3-4B-Instruct-2507: 16.9 (based on 16 test set(s))
+
+
+⚠️  No General Arabic COMET scores found for average ranking calculation
