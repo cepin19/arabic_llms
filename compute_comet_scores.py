@@ -166,11 +166,13 @@ def compute_dialect_comet_scores(scores_data: Dict, segment_scores_dict: Dict, c
     
     Args:
         scores_data: The scores.json data structure
-        segment_scores_dict: Dictionary mapping (filename, file_type) to segment-level scores
+        segment_scores_dict: Dictionary mapping (filename, file_type, comet_key) to segment-level scores
         comet_key: The COMET key name to use (e.g., 'COMET_wmt22-comet-da' or 'COMET_wmt22-comet-da_ref-less')
     """
     if 'results' not in scores_data:
         return
+    
+    direction = scores_data.get('direction', 'forward')
     
     # Compute average COMET score for each dialect and update merged dialect entries
     for result in scores_data['results']:
@@ -182,36 +184,55 @@ def compute_dialect_comet_scores(scores_data: Dict, segment_scores_dict: Dict, c
             if not source_files:
                 continue
             
-            # Collect segment scores only from files in this merged dialect result
-            arabic_scores = []
-            dialect_scores = []
-            
-            for filename in source_files:
-                # Collect arabic_general scores (keys are now (filename, file_type, comet_key))
-                key_arabic = (filename, 'arabic_general', comet_key)
-                if key_arabic in segment_scores_dict:
-                    arabic_scores.extend(segment_scores_dict[key_arabic])
+            if direction == 'forward':
+                # Forward direction: has arabic_general and dialect split
+                # Collect segment scores only from files in this merged dialect result
+                arabic_scores = []
+                dialect_scores = []
                 
-                # Collect dialect scores
-                key_dialect = (filename, 'dialect', comet_key)
-                if key_dialect in segment_scores_dict:
-                    dialect_scores.extend(segment_scores_dict[key_dialect])
+                for filename in source_files:
+                    # Collect arabic_general scores (keys are now (filename, file_type, comet_key))
+                    key_arabic = (filename, 'arabic_general', comet_key)
+                    if key_arabic in segment_scores_dict:
+                        arabic_scores.extend(segment_scores_dict[key_arabic])
+                    
+                    # Collect dialect scores
+                    key_dialect = (filename, 'dialect', comet_key)
+                    if key_dialect in segment_scores_dict:
+                        dialect_scores.extend(segment_scores_dict[key_dialect])
+                
+                # Compute arabic_general COMET
+                if arabic_scores:
+                    avg_comet = sum(arabic_scores) / len(arabic_scores)
+                    if 'arabic_general' not in result:
+                        result['arabic_general'] = {}
+                    result['arabic_general'][comet_key] = round(avg_comet, 4)
+                    print(f"   📊 Computed arabic_general {comet_key} for {dialect_name}: {avg_comet:.4f} ({len(arabic_scores)} segments)")
+                
+                # Compute dialect COMET
+                if dialect_scores:
+                    avg_comet = sum(dialect_scores) / len(dialect_scores)
+                    if 'dialect' not in result:
+                        result['dialect'] = {}
+                    result['dialect'][comet_key] = round(avg_comet, 4)
+                    print(f"   📊 Computed dialect {comet_key} for {dialect_name}: {avg_comet:.4f} ({len(dialect_scores)} segments)")
             
-            # Compute arabic_general COMET
-            if arabic_scores:
-                avg_comet = sum(arabic_scores) / len(arabic_scores)
-                if 'arabic_general' not in result:
-                    result['arabic_general'] = {}
-                result['arabic_general'][comet_key] = round(avg_comet, 4)
-                print(f"   📊 Computed arabic_general {comet_key} for {dialect_name}: {avg_comet:.4f} ({len(arabic_scores)} segments)")
-            
-            # Compute dialect COMET
-            if dialect_scores:
-                avg_comet = sum(dialect_scores) / len(dialect_scores)
-                if 'dialect' not in result:
-                    result['dialect'] = {}
-                result['dialect'][comet_key] = round(avg_comet, 4)
-                print(f"   📊 Computed dialect {comet_key} for {dialect_name}: {avg_comet:.4f} ({len(dialect_scores)} segments)")
+            elif direction == 'reverse':
+                # Reverse direction: direct scores (no arabic_general/dialect split)
+                # Collect segment scores from files in this merged dialect result
+                all_scores = []
+                
+                for filename in source_files:
+                    # For reverse, file_type is 'reverse'
+                    key_reverse = (filename, 'reverse', comet_key)
+                    if key_reverse in segment_scores_dict:
+                        all_scores.extend(segment_scores_dict[key_reverse])
+                
+                # Compute merged COMET
+                if all_scores:
+                    avg_comet = sum(all_scores) / len(all_scores)
+                    result[comet_key] = round(avg_comet, 4)
+                    print(f"   📊 Computed {comet_key} for {dialect_name}: {avg_comet:.4f} ({len(all_scores)} segments)")
 
 
 def find_translation_file(translation_dir: Path, filename: str, file_type: str, direction: str) -> Optional[Path]:
@@ -541,8 +562,8 @@ def process_scores_file(scores_file: Path, dataset_dir: Path, comet_model, model
         except Exception as e:
             print(f"⚠️  Error saving segment-level scores: {e}")
     
-    # Compute dialect-level scores for forward direction
-    if direction == 'forward' and segment_scores_dict:
+    # Compute dialect-level scores for forward and reverse directions
+    if direction in ['forward', 'reverse'] and segment_scores_dict:
         compute_dialect_comet_scores(scores_data, segment_scores_dict, comet_key)
     
     # Compute averages for COMET scores

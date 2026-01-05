@@ -208,70 +208,6 @@ def safe_comet_filename(comet_variant: str) -> str:
     return safe.lower()
 
 
-def extract_score(model_scores: Dict, metric: str, score_type: Optional[str] = None, 
-                  comet_variant: Optional[str] = None) -> Optional[float]:
-    """
-    Extract a score from model_scores for the given metric, score_type, and optional COMET variant.
-    
-    Args:
-        model_scores: Dictionary containing scores for a model
-        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
-        score_type: Optional score type ('arabic_general' or 'dialect')
-        comet_variant: If metric is 'COMET', the specific COMET variant to use
-    
-    Returns:
-        Score value or None if not found
-    """
-    if score_type:
-        if metric == 'COMET':
-            return get_comet_score_for_variant(model_scores, comet_variant, score_type) if comet_variant else find_comet_score(model_scores, score_type)
-        return model_scores.get(f'{score_type}_{metric}')
-    
-    # No score_type - try various formats
-    if metric == 'COMET':
-        return get_comet_score_for_variant(model_scores, comet_variant) if comet_variant else find_comet_score(model_scores)
-    
-    # Try direct key first, then prefixed keys
-    return (model_scores.get(metric) or 
-            model_scores.get(f'arabic_general_{metric}') or 
-            model_scores.get(f'dialect_{metric}'))
-
-
-def should_process_metric(metric_arg: str, metric: str) -> bool:
-    """Check if a metric should be processed based on the metric argument."""
-    return (metric_arg == 'all' or 
-            (metric_arg == 'both' and metric in ['BLEU', 'CHRF']) or 
-            metric_arg == metric)
-
-
-def process_metrics_with_comet(test_sets: Dict, models: List[str], metric_arg: str, 
-                               score_type: Optional[str], func, *args, **kwargs):
-    """
-    Helper to process metrics, handling COMET variants automatically.
-    
-    Args:
-        test_sets: Dictionary of test sets
-        models: List of models
-        metric_arg: Metric argument ('BLEU', 'CHRF', 'COMET', 'both', 'all')
-        score_type: Optional score type
-        func: Function to call for each metric/variant
-        *args, **kwargs: Additional arguments to pass to func
-    """
-    # Process standard metrics
-    for metric in ['BLEU', 'CHRF']:
-        if should_process_metric(metric_arg, metric):
-            func(test_sets, models, metric, None, score_type, *args, **kwargs)
-    
-    # Process COMET with variants
-    if should_process_metric(metric_arg, 'COMET'):
-        comet_variants = find_all_comet_variants(test_sets, models, score_type)
-        if comet_variants:
-            for variant in comet_variants:
-                func(test_sets, models, 'COMET', variant, score_type, *args, **kwargs)
-        else:
-            func(test_sets, models, 'COMET', None, score_type, *args, **kwargs)
-
-
 def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
     """
     Extract scores from scores.json data.
@@ -607,11 +543,11 @@ def collect_all_scores(scores_files: List[Path]) -> Tuple[Dict[str, Dict], List[
                     print(f"   {second_model}: {len(first_models)} first model(s) - {', '.join(sorted(first_models))}")
         else:
             merged_test_sets = data.get('merged_test_sets', {})
-        if merged_test_sets:
-            print(f"\n📊 Merged dialects summary ({direction}):")
-            for dialect_name in sorted(merged_test_sets.keys()):
-                models_with_dialect = list(merged_test_sets[dialect_name].keys())
-                print(f"   {dialect_name}: {len(models_with_dialect)} model(s) - {', '.join(models_with_dialect)}")
+            if merged_test_sets:
+                print(f"\n📊 Merged dialects summary ({direction}):")
+                for dialect_name in sorted(merged_test_sets.keys()):
+                    models_with_dialect = list(merged_test_sets[dialect_name].keys())
+                    print(f"   {dialect_name}: {len(models_with_dialect)} model(s) - {', '.join(models_with_dialect)}")
     
     # Convert nested defaultdicts to dicts
     for direction in list(results_by_direction.keys()):
@@ -687,8 +623,34 @@ def write_scores_table(test_sets: Dict, models: List[str], score_type: Optional[
         
         for model in models:
             if model in model_scores:
-                score = extract_score(model_scores[model], metric, score_type, comet_variant)
-                line += f"{score:>{model_width}.1f}" if score is not None else f"{'N/A':>{model_width}}"
+                score = None
+                if score_type:
+                    if metric == 'COMET':
+                        if comet_variant:
+                            score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                        else:
+                            score = find_comet_score(model_scores[model], score_type)
+                    else:
+                        score = model_scores[model].get(key) if key else None
+                else:
+                    # Try to find the metric in various formats
+                    if metric == 'COMET':
+                        if comet_variant:
+                            score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                        else:
+                            # For COMET, use the helper function to find any variant
+                            score = find_comet_score(model_scores[model])
+                    elif metric in model_scores[model]:
+                        score = model_scores[model][metric]
+                    elif f'arabic_general_{metric}' in model_scores[model]:
+                        score = model_scores[model][f'arabic_general_{metric}']
+                    elif f'dialect_{metric}' in model_scores[model]:
+                        score = model_scores[model][f'dialect_{metric}']
+                
+                if score is not None:
+                    line += f"{score:>{model_width}.4f}"
+                else:
+                    line += f"{'N/A':>{model_width}}"
             else:
                 line += f"{'N/A':>{model_width}}"
         
@@ -718,7 +680,22 @@ def create_bar_plot(test_set: str, model_scores: Dict[str, Dict[str, float]],
     
     for model in models:
         if model in model_scores:
-            score = extract_score(model_scores[model], metric, None, comet_variant)
+            # Try to find the metric in various formats
+            score = None
+            if metric == 'COMET':
+                if comet_variant:
+                    # Get specific COMET variant
+                    score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                else:
+                    # Fallback: find any COMET variant
+                    score = find_comet_score(model_scores[model])
+            elif metric in model_scores[model]:
+                score = model_scores[model][metric]
+            elif f'arabic_general_{metric}' in model_scores[model]:
+                score = model_scores[model][f'arabic_general_{metric}']
+            elif f'dialect_{metric}' in model_scores[model]:
+                score = model_scores[model][f'dialect_{metric}']
+            
             if score is not None:
                 model_values.append(score)
                 model_labels.append(model)
@@ -736,29 +713,38 @@ def create_bar_plot(test_set: str, model_scores: Dict[str, Dict[str, float]],
                     print(f"   Debug: First model '{first_model}' scores keys: {list(model_scores[first_model].keys())[:10]}")
         return
     
-    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-    xlabel = 'First Model (English -> Arabic)' if direction == 'roundtrip' else 'Model'
-    title_base = f'{metric_label} Scores by {xlabel}\nTest Set: {test_set}'
-    if direction == 'roundtrip':
-        title_base += '\n(Round-trip: English -> Arabic -> English)'
-    
-    # Create vertical version
+    # Create figure
     fig, ax = plt.subplots(figsize=(max(12, len(model_labels) * 0.8), 6))
+    
+    # Create bars
     bars = ax.bar(range(len(model_labels)), model_values, 
                   color=plt.cm.viridis(np.linspace(0, 1, len(model_labels))))
-    ax.set_xlabel(xlabel, fontsize=16, fontweight='bold')
-    ax.set_ylabel(f'{metric_label} Score', fontsize=16, fontweight='bold')
-    ax.set_title(title_base, fontsize=16, fontweight='bold', pad=20)
+    
+    # Customize plot
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    xlabel = 'First Model (English -> Arabic)' if direction == 'roundtrip' else 'Model'
+    title = f'{metric_label} Scores by {xlabel}\nTest Set: {test_set}'
+    if direction == 'roundtrip':
+        title += '\n(Round-trip: English -> Arabic -> English)'
+    ax.set_xlabel(xlabel, fontsize=12, fontweight='bold')
+    ax.set_ylabel(f'{metric_label} Score', fontsize=12, fontweight='bold')
+    ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(range(len(model_labels)))
-    ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=16)
+    ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=10)
     ax.grid(axis='y', alpha=0.3, linestyle='--')
     ax.set_ylim(bottom=0)
+    
+    # Add value labels on bars
     for i, (bar, val) in enumerate(zip(bars, model_values)):
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width()/2., height,
                 f'{val:.1f}',
-                ha='center', va='bottom', fontsize=15)
+                ha='center', va='bottom', fontsize=9)
+    
+    # Adjust layout
     plt.tight_layout()
+    
+    # Save figure with COMET variant in filename if applicable
     safe_test_set = test_set.replace('/', '_').replace('.', '_')
     if metric == 'COMET' and comet_variant:
         safe_comet = safe_comet_filename(comet_variant)
@@ -767,33 +753,7 @@ def create_bar_plot(test_set: str, model_scores: Dict[str, Dict[str, float]],
         output_file = output_dir / f"{safe_test_set}_{metric.lower()}.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
-    print(f"✅ Saved: {output_file}")
     
-    # Create horizontal version (rotated)
-    fig, ax = plt.subplots(figsize=(8, max(8, len(model_labels) * 0.5)))
-    bars = ax.barh(range(len(model_labels)), model_values, 
-                   color=plt.cm.viridis(np.linspace(0, 1, len(model_labels))))
-    ylabel = 'First Model (English -> Arabic)' if direction == 'roundtrip' else 'Model'
-    ax.set_ylabel(ylabel, fontsize=16, fontweight='bold')
-    ax.set_xlabel(f'{metric_label} Score', fontsize=16, fontweight='bold')
-    ax.set_title(title_base, fontsize=16, fontweight='bold', pad=20)
-    ax.set_yticks(range(len(model_labels)))
-    ax.set_yticklabels(model_labels, fontsize=16)
-    ax.grid(axis='x', alpha=0.3, linestyle='--')
-    ax.set_xlim(left=0)
-    for i, (bar, val) in enumerate(zip(bars, model_values)):
-        width = bar.get_width()
-        ax.text(width, bar.get_y() + bar.get_height()/2.,
-                f'{val:.1f}',
-                ha='left', va='center', fontsize=15)
-    plt.tight_layout()
-    if metric == 'COMET' and comet_variant:
-        safe_comet = safe_comet_filename(comet_variant)
-        output_file = output_dir / f"{safe_test_set}_{safe_comet}_rotated.png"
-    else:
-        output_file = output_dir / f"{safe_test_set}_{metric.lower()}_rotated.png"
-    plt.savefig(output_file, dpi=150, bbox_inches='tight')
-    plt.close()
     print(f"✅ Saved: {output_file}")
 
 
@@ -843,11 +803,11 @@ def create_combined_plot(test_set: str, model_scores: Dict[str, Dict[str, float]
     
     # BLEU plot
     bars1 = ax1.bar(x, bleu_values, width, color='steelblue', label='BLEU')
-    ax1.set_xlabel('Model', fontsize=16, fontweight='bold')
-    ax1.set_ylabel('BLEU Score', fontsize=16, fontweight='bold')
-    ax1.set_title('BLEU Scores', fontsize=15, fontweight='bold')
+    ax1.set_xlabel('Model', fontsize=12, fontweight='bold')
+    ax1.set_ylabel('BLEU Score', fontsize=12, fontweight='bold')
+    ax1.set_title('BLEU Scores', fontsize=13, fontweight='bold')
     ax1.set_xticks(x)
-    ax1.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=12)
+    ax1.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=10)
     ax1.grid(axis='y', alpha=0.3, linestyle='--')
     ax1.set_ylim(bottom=0)
     
@@ -857,15 +817,15 @@ def create_combined_plot(test_set: str, model_scores: Dict[str, Dict[str, float]
             height = bar.get_height()
             ax1.text(bar.get_x() + bar.get_width()/2., height,
                     f'{val:.1f}',
-                    ha='center', va='bottom', fontsize=15)
+                    ha='center', va='bottom', fontsize=9)
     
     # CHRF plot
     bars2 = ax2.bar(x, chrf_values, width, color='coral', label='CHRF')
-    ax2.set_xlabel('Model', fontsize=16, fontweight='bold')
-    ax2.set_ylabel('CHRF Score', fontsize=16, fontweight='bold')
-    ax2.set_title('CHRF Scores', fontsize=15, fontweight='bold')
+    ax2.set_xlabel('Model', fontsize=12, fontweight='bold')
+    ax2.set_ylabel('CHRF Score', fontsize=12, fontweight='bold')
+    ax2.set_title('CHRF Scores', fontsize=13, fontweight='bold')
     ax2.set_xticks(x)
-    ax2.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=12)
+    ax2.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=10)
     ax2.grid(axis='y', alpha=0.3, linestyle='--')
     ax2.set_ylim(bottom=0)
     
@@ -875,11 +835,11 @@ def create_combined_plot(test_set: str, model_scores: Dict[str, Dict[str, float]
             height = bar.get_height()
             ax2.text(bar.get_x() + bar.get_width()/2., height,
                     f'{val:.1f}',
-                    ha='center', va='bottom', fontsize=15)
+                    ha='center', va='bottom', fontsize=9)
     
     # Overall title
     fig.suptitle(f'BLEU and CHRF Scores by Model\nTest Set: {test_set}', 
-                 fontsize=16, fontweight='bold', y=1.02)
+                 fontsize=14, fontweight='bold', y=1.02)
     
     plt.tight_layout()
     
@@ -892,7 +852,7 @@ def create_combined_plot(test_set: str, model_scores: Dict[str, Dict[str, float]
     print(f"✅ Saved: {output_file}")
 
 
-def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU', comet_variant: Optional[str] = None, direction: Optional[str] = None, score_type: Optional[str] = None):
+def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, metric: str = 'BLEU', comet_variant: Optional[str] = None, direction: Optional[str] = None):
     """
     Create a summary plot showing all test sets and models.
     
@@ -903,7 +863,6 @@ def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, me
         metric: Metric name ('BLEU', 'CHRF', or 'COMET')
         comet_variant: If metric is 'COMET', the specific COMET variant to plot
         direction: Translation direction ('forward', 'reverse', 'roundtrip') - used for plot titles
-        score_type: For forward direction, 'arabic_general' or 'dialect' to prefer specific score type
     """
     # Prepare data matrix
     test_set_names = sorted(test_sets.keys())
@@ -914,8 +873,17 @@ def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, me
         for model in models:
             score = None
             if model in test_sets[test_set]:
-                # Use extract_score helper to get the right score type (handles all metrics including COMET)
-                score = extract_score(test_sets[test_set][model], metric, score_type, comet_variant)
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(test_sets[test_set][model], comet_variant)
+                    else:
+                        score = find_comet_score(test_sets[test_set][model])
+                elif metric in test_sets[test_set][model]:
+                    score = test_sets[test_set][model][metric]
+                elif f'arabic_general_{metric}' in test_sets[test_set][model]:
+                    score = test_sets[test_set][model][f'arabic_general_{metric}']
+                elif f'dialect_{metric}' in test_sets[test_set][model]:
+                    score = test_sets[test_set][model][f'dialect_{metric}']
             row.append(score if score is not None else np.nan)
         data_matrix.append(row)
     
@@ -932,8 +900,8 @@ def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, me
     # Set ticks
     ax.set_xticks(np.arange(len(models)))
     ax.set_yticks(np.arange(len(test_set_names)))
-    ax.set_xticklabels(models, rotation=45, ha='right', fontsize=15)
-    ax.set_yticklabels(test_set_names, fontsize=15)
+    ax.set_xticklabels(models, rotation=45, ha='right', fontsize=9)
+    ax.set_yticklabels(test_set_names, fontsize=9)
     
     # Add text annotations
     for i in range(len(test_set_names)):
@@ -941,19 +909,19 @@ def create_summary_plot(test_sets: Dict, models: List[str], output_dir: Path, me
             val = data_matrix[i][j]
             if not np.isnan(val):
                 text = ax.text(j, i, f'{val:.1f}',
-                             ha="center", va="center", color="black", fontsize=12)
+                             ha="center", va="center", color="black", fontsize=8)
     
     # Colorbar
     metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
     cbar = plt.colorbar(im, ax=ax)
-    cbar.set_label(f'{metric_label} Score', rotation=270, labelpad=20, fontsize=15)
+    cbar.set_label(f'{metric_label} Score', rotation=270, labelpad=20, fontsize=11)
     
     title = f'{metric_label} Scores: All Test Sets vs All Models'
     if direction == 'roundtrip':
         title += '\n(Models refer to first model: English -> Arabic)'
-    ax.set_title(title, fontsize=16, fontweight='bold', pad=20)
-    ax.set_xlabel('Model', fontsize=16, fontweight='bold')
-    ax.set_ylabel('Test Set', fontsize=16, fontweight='bold')
+    ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
+    ax.set_xlabel('Model', fontsize=12, fontweight='bold')
+    ax.set_ylabel('Test Set', fontsize=12, fontweight='bold')
     
     plt.tight_layout()
     
@@ -1017,32 +985,43 @@ def create_average_plot(test_sets: Dict, models: List[str], output_dir: Path, me
     model_names = [m[0] for m in sorted_models]
     avg_values = [m[1] for m in sorted_models]
     
-    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-    xlabel = 'First Model (English -> Arabic)' if direction == 'roundtrip' else 'Model'
-    title_base = f'Average {metric_label} Score Across All Test Sets\n(Models sorted by performance)'
-    if direction == 'roundtrip':
-        title_base += '\n(Models refer to first model: English -> Arabic)'
-    num_test_sets = len(test_sets)
-    
-    # Create vertical version
+    # Create figure
     fig, ax = plt.subplots(figsize=(max(12, len(model_names) * 0.8), 6))
+    
+    # Create bars
     bars = ax.bar(range(len(model_names)), avg_values, 
                   color=plt.cm.viridis(np.linspace(0, 1, len(model_names))))
-    ax.set_xlabel(xlabel, fontsize=16, fontweight='bold')
-    ax.set_ylabel(f'Average {metric_label} Score', fontsize=16, fontweight='bold')
-    ax.set_title(title_base, fontsize=16, fontweight='bold', pad=20)
+    
+    # Customize plot
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    xlabel = 'First Model (English -> Arabic)' if direction == 'roundtrip' else 'Model'
+    ax.set_xlabel(xlabel, fontsize=12, fontweight='bold')
+    ax.set_ylabel(f'Average {metric_label} Score', fontsize=12, fontweight='bold')
+    title = f'Average {metric_label} Score Across All Test Sets\n(Models sorted by performance)'
+    if direction == 'roundtrip':
+        title += '\n(Models refer to first model: English -> Arabic)'
+    ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(range(len(model_names)))
-    ax.set_xticklabels(model_names, rotation=45, ha='right', fontsize=16)
+    ax.set_xticklabels(model_names, rotation=45, ha='right', fontsize=10)
     ax.grid(axis='y', alpha=0.3, linestyle='--')
     ax.set_ylim(bottom=0)
+    
+    # Add value labels on bars
     for i, (bar, val) in enumerate(zip(bars, avg_values)):
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width()/2., height,
                 f'{val:.1f}',
-                ha='center', va='bottom', fontsize=15)
+                ha='center', va='bottom', fontsize=9)
+    
+    # Add number of test sets info
+    num_test_sets = len(test_sets)
     ax.text(0.02, 0.98, f'Based on {num_test_sets} test set(s)',
-            transform=ax.transAxes, fontsize=15, verticalalignment='top',
+            transform=ax.transAxes, fontsize=9, verticalalignment='top',
             bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
+    
+    plt.tight_layout()
+    
+    # Save figure with COMET variant in filename if applicable
     if metric == 'COMET' and comet_variant:
         safe_comet = safe_comet_filename(comet_variant)
         output_file = output_dir / f"average_{safe_comet}_all_testsets.png"
@@ -1050,36 +1029,7 @@ def create_average_plot(test_sets: Dict, models: List[str], output_dir: Path, me
         output_file = output_dir / f"average_{metric.lower()}_all_testsets.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
-    print(f"✅ Saved: {output_file}")
     
-    # Create horizontal version (rotated)
-    fig, ax = plt.subplots(figsize=(8, max(8, len(model_names) * 0.5)))
-    bars = ax.barh(range(len(model_names)), avg_values, 
-                   color=plt.cm.viridis(np.linspace(0, 1, len(model_names))))
-    ylabel = 'First Model (English -> Arabic)' if direction == 'roundtrip' else 'Model'
-    ax.set_ylabel(ylabel, fontsize=16, fontweight='bold')
-    ax.set_xlabel(f'Average {metric_label} Score', fontsize=16, fontweight='bold')
-    ax.set_title(title_base, fontsize=16, fontweight='bold', pad=20)
-    ax.set_yticks(range(len(model_names)))
-    ax.set_yticklabels(model_names, fontsize=16)
-    ax.grid(axis='x', alpha=0.3, linestyle='--')
-    ax.set_xlim(left=0)
-    for i, (bar, val) in enumerate(zip(bars, avg_values)):
-        width = bar.get_width()
-        ax.text(width, bar.get_y() + bar.get_height()/2.,
-                f'{val:.1f}',
-                ha='left', va='center', fontsize=15)
-    ax.text(0.02, 0.98, f'Based on {num_test_sets} test set(s)',
-            transform=ax.transAxes, fontsize=15, verticalalignment='top',
-            bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
-    plt.tight_layout()
-    if metric == 'COMET' and comet_variant:
-        safe_comet = safe_comet_filename(comet_variant)
-        output_file = output_dir / f"average_{safe_comet}_all_testsets_rotated.png"
-    else:
-        output_file = output_dir / f"average_{metric.lower()}_all_testsets_rotated.png"
-    plt.savefig(output_file, dpi=150, bbox_inches='tight')
-    plt.close()
     print(f"✅ Saved: {output_file}")
 
 
@@ -1160,19 +1110,19 @@ def create_all_testsets_plot(test_sets: Dict, models: List[str], output_dir: Pat
                 height = bar.get_height()
                 ax.text(bar.get_x() + bar.get_width()/2., height,
                         f'{val:.1f}',
-                        ha='center', va='bottom', fontsize=9, rotation=90)
+                        ha='center', va='bottom', fontsize=7, rotation=90)
     
     # Customize plot
     metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-    ax.set_xlabel('Test Set', fontsize=16, fontweight='bold')
-    ax.set_ylabel(f'{metric_label} Score', fontsize=16, fontweight='bold')
+    ax.set_xlabel('Test Set', fontsize=12, fontweight='bold')
+    ax.set_ylabel(f'{metric_label} Score', fontsize=12, fontweight='bold')
     title = f'{metric_label} Scores: All Test Sets Compared\n(Grouped by Model)'
     if direction == 'roundtrip':
         title = title.replace('(Grouped by Model)', '(Grouped by First Model: English -> Arabic)')
-    ax.set_title(title, fontsize=16, fontweight='bold', pad=20)
+    ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(x)
-    ax.set_xticklabels(display_names, rotation=45, ha='right', fontsize=15)
-    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=15)
+    ax.set_xticklabels(display_names, rotation=45, ha='right', fontsize=9)
+    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=9)
     ax.grid(axis='y', alpha=0.3, linestyle='--')
     ax.set_ylim(bottom=0)
     
@@ -1244,33 +1194,42 @@ def create_per_model_plot(test_sets: Dict, model: str, models: List[str], output
     if not scores:
         return  # Silently skip if no data
     
+    # Create figure
+    fig, ax = plt.subplots(figsize=(max(12, len(test_set_names) * 0.5), 6))
+    
+    # Create bars
+    bars = ax.bar(range(len(test_set_names)), scores, 
+                  color='steelblue', alpha=0.8)
+    
+    # Customize plot
     metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
     title_suffix = ''
     if score_type:
         title_suffix = f' ({score_type.replace("_", " ").title()})'
-    title_base = f'{metric_label} Scores for {model}{title_suffix}\nAcross All Test Sets'
-    if direction == 'roundtrip':
-        title_base += '\n(First model: English -> Arabic)'
     
-    # Create vertical version
-    fig, ax = plt.subplots(figsize=(max(12, len(test_set_names) * 0.5), 6))
-    bars = ax.bar(range(len(test_set_names)), scores, 
-                  color='steelblue', alpha=0.8)
-    ax.set_xlabel('Test Set', fontsize=16, fontweight='bold')
-    ax.set_ylabel(f'{metric_label} Score', fontsize=16, fontweight='bold')
-    ax.set_title(title_base, fontsize=16, fontweight='bold', pad=20)
+    ax.set_xlabel('Test Set', fontsize=12, fontweight='bold')
+    ax.set_ylabel(f'{metric_label} Score', fontsize=12, fontweight='bold')
+    title = f'{metric_label} Scores for {model}{title_suffix}\nAcross All Test Sets'
+    if direction == 'roundtrip':
+        title += '\n(First model: English -> Arabic)'
+    ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(range(len(test_set_names)))
     ax.set_xticklabels([name[:30] + '...' if len(name) > 30 else name for name in test_set_names], 
-                       rotation=45, ha='right', fontsize=15)
+                       rotation=45, ha='right', fontsize=9)
     ax.grid(axis='y', alpha=0.3, linestyle='--')
     ax.set_ylim(bottom=0)
+    
+    # Add value labels on bars (only if not too crowded)
     if len(test_set_names) <= 30:
         for bar, val in zip(bars, scores):
             height = bar.get_height()
             ax.text(bar.get_x() + bar.get_width()/2., height,
                     f'{val:.1f}',
-                    ha='center', va='bottom', fontsize=15)
+                    ha='center', va='bottom', fontsize=8)
+    
     plt.tight_layout()
+    
+    # Save figure with COMET variant in filename if applicable
     safe_model = model.replace('/', '_').replace('\\', '_').replace(':', '_')
     if metric == 'COMET' and comet_variant:
         safe_comet = safe_comet_filename(comet_variant)
@@ -1285,40 +1244,7 @@ def create_per_model_plot(test_sets: Dict, model: str, models: List[str], output
             output_file = output_dir / f"model_{safe_model}_{metric.lower()}_all_datasets.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
-    print(f"✅ Saved: {output_file}")
     
-    # Create horizontal version (rotated)
-    fig, ax = plt.subplots(figsize=(8, max(8, len(test_set_names) * 0.4)))
-    bars = ax.barh(range(len(test_set_names)), scores, 
-                   color='steelblue', alpha=0.8)
-    ax.set_ylabel('Test Set', fontsize=16, fontweight='bold')
-    ax.set_xlabel(f'{metric_label} Score', fontsize=16, fontweight='bold')
-    ax.set_title(title_base, fontsize=16, fontweight='bold', pad=20)
-    ax.set_yticks(range(len(test_set_names)))
-    ax.set_yticklabels([name[:30] + '...' if len(name) > 30 else name for name in test_set_names], 
-                       fontsize=15)
-    ax.grid(axis='x', alpha=0.3, linestyle='--')
-    ax.set_xlim(left=0)
-    if len(test_set_names) <= 30:
-        for bar, val in zip(bars, scores):
-            width = bar.get_width()
-            ax.text(width, bar.get_y() + bar.get_height()/2.,
-                    f'{val:.1f}',
-                    ha='left', va='center', fontsize=15)
-    plt.tight_layout()
-    if metric == 'COMET' and comet_variant:
-        safe_comet = safe_comet_filename(comet_variant)
-        if score_type:
-            output_file = output_dir / f"model_{safe_model}_{score_type}_{safe_comet}_all_datasets_rotated.png"
-        else:
-            output_file = output_dir / f"model_{safe_model}_{safe_comet}_all_datasets_rotated.png"
-    else:
-        if score_type:
-            output_file = output_dir / f"model_{safe_model}_{score_type}_{metric.lower()}_all_datasets_rotated.png"
-        else:
-            output_file = output_dir / f"model_{safe_model}_{metric.lower()}_all_datasets_rotated.png"
-    plt.savefig(output_file, dpi=150, bbox_inches='tight')
-    plt.close()
     print(f"✅ Saved: {output_file}")
 
 
@@ -1408,8 +1334,8 @@ def create_all_testsets_combined_plot(test_sets: Dict, models: List[str], output
                     model_labels.append(model)
         
         if not model_values:
-            ax.text(0.5, 0.5, 'No data', ha='center', va='center', transform=ax.transAxes, fontsize=16)
-            ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, fontsize=16)
+            ax.text(0.5, 0.5, 'No data', ha='center', va='center', transform=ax.transAxes)
+            ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, fontsize=10)
             continue
         
         # Create bars
@@ -1419,25 +1345,22 @@ def create_all_testsets_combined_plot(test_sets: Dict, models: List[str], output
         # Customize subplot
         metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
         xlabel = 'First Model (E->A)' if direction == 'roundtrip' else 'Model'
-        ax.set_xlabel(xlabel, fontsize=17)
-        ax.set_ylabel(f'{metric_label} Score', fontsize=19)
+        ax.set_xlabel(xlabel, fontsize=9)
+        ax.set_ylabel(f'{metric_label} Score', fontsize=9)
         ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, 
-                    fontsize=16, fontweight='bold')
+                    fontsize=10, fontweight='bold')
         ax.set_xticks(range(len(model_labels)))
-        ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=13)
-        ax.tick_params(axis='y', labelsize=16)
+        ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=8)
         ax.grid(axis='y', alpha=0.3, linestyle='--')
         ax.set_ylim(bottom=0)
         
-        # Add value labels on top of bars (always show)
-        y_max = max(model_values) if model_values else 1
-        y_padding = 0.02 * y_max
-        for bar, val in zip(bars, model_values):
-            height = bar.get_height()
-            y_pos = height + y_padding
-            ax.text(bar.get_x() + bar.get_width()/2., y_pos,
-                   f'{int(round(val))}',
-                   ha='center', va='bottom', fontsize=10)
+        # Add value labels on bars (only if there's space)
+        if len(model_labels) <= 8:  # Only add labels if not too crowded
+            for bar, val in zip(bars, model_values):
+                height = bar.get_height()
+                ax.text(bar.get_x() + bar.get_width()/2., height,
+                       f'{val:.1f}',
+                       ha='center', va='bottom', fontsize=7)
     
     # Hide unused subplots
     for idx in range(n_plots, len(axes)):
@@ -1448,148 +1371,16 @@ def create_all_testsets_combined_plot(test_sets: Dict, models: List[str], output
     title = f'{metric_label} Scores: All Test Sets\n(Each subplot shows one test set)'
     if direction == 'roundtrip':
         title += '\nModels refer to first model (English -> Arabic)'
-    fig.suptitle(title, fontsize=20, fontweight='bold', y=0.995)
+    fig.suptitle(title, fontsize=16, fontweight='bold', y=0.995)
     
     plt.tight_layout(rect=[0, 0, 1, 0.98])
     
     # Save figure
-    if metric == 'COMET' and comet_variant:
-        safe_comet = safe_comet_filename(comet_variant)
-        output_file = output_dir / f"all_testsets_{safe_comet}_combined.png"
-    else:
-        output_file = output_dir / f"all_testsets_{metric.lower()}_combined.png"
+    output_file = output_dir / f"all_testsets_{metric.lower()}_combined.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
+    
     print(f"✅ Saved: {output_file}")
-    
-    # Create clean version with numeric indices instead of model names
-    # First, collect all unique models across all test sets to create a consistent mapping
-    all_models_in_plot = set()
-    for test_set in valid_test_sets:
-        model_scores = test_sets[test_set]
-        for model in models:
-            if model in model_scores:
-                if metric == 'COMET':
-                    if comet_variant:
-                        score = get_comet_score_for_variant(model_scores[model], comet_variant)
-                    else:
-                        score = find_comet_score(model_scores[model])
-                elif metric in model_scores[model]:
-                    score = model_scores[model][metric]
-                elif f'arabic_general_{metric}' in model_scores[model]:
-                    score = model_scores[model][f'arabic_general_{metric}']
-                elif f'dialect_{metric}' in model_scores[model]:
-                    score = model_scores[model][f'dialect_{metric}']
-                if score is not None:
-                    all_models_in_plot.add(model)
-    
-    # Create mapping from model name to index (sorted for consistency)
-    sorted_models = sorted(all_models_in_plot)
-    model_to_index = {model: idx for idx, model in enumerate(sorted_models)}
-    
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(6 * n_cols, 5 * n_rows))
-    if n_plots == 1:
-        axes = [axes]
-    elif n_rows == 1:
-        axes = axes if isinstance(axes, list) else [axes]
-    else:
-        axes = axes.flatten()
-    
-    # Create a plot for each test set (clean version)
-    for idx, test_set in enumerate(valid_test_sets):
-        ax = axes[idx]
-        model_scores = test_sets[test_set]
-        
-        # Extract scores for this metric
-        model_values = []
-        model_indices = []
-        
-        for model in models:
-            if model in model_scores:
-                if metric == 'COMET':
-                    if comet_variant:
-                        score = get_comet_score_for_variant(model_scores[model], comet_variant)
-                    else:
-                        score = find_comet_score(model_scores[model])
-                elif metric in model_scores[model]:
-                    score = model_scores[model][metric]
-                elif f'arabic_general_{metric}' in model_scores[model]:
-                    score = model_scores[model][f'arabic_general_{metric}']
-                elif f'dialect_{metric}' in model_scores[model]:
-                    score = model_scores[model][f'dialect_{metric}']
-                
-                if score is not None and model in model_to_index:
-                    model_values.append(score)
-                    model_indices.append(model_to_index[model])
-        
-        if not model_values:
-            ax.text(0.5, 0.5, 'No data', ha='center', va='center', transform=ax.transAxes, fontsize=16)
-            ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, fontsize=16)
-            continue
-        
-        # Sort by index for consistent ordering across subplots
-        sorted_data = sorted(zip(model_indices, model_values))
-        model_indices_sorted, model_values_sorted = zip(*sorted_data) if sorted_data else ([], [])
-        
-        # Create bars (sorted by index)
-        bars = ax.bar(range(len(model_values_sorted)), model_values_sorted,
-                     color=plt.cm.viridis(np.linspace(0, 1, len(model_values_sorted))))
-        
-        # Customize subplot - clean version: numeric indices instead of model names, no axis labels
-        ax.set_title(test_set[:35] + '...' if len(test_set) > 35 else test_set, 
-                    fontsize=16, fontweight='bold')
-        ax.set_xticks(range(len(model_values_sorted)))
-        ax.set_xticklabels([str(idx) for idx in model_indices_sorted], fontsize=14)  # Use numeric indices
-        ax.tick_params(axis='y', labelsize=16)
-        ax.grid(axis='y', alpha=0.3, linestyle='--')
-        ax.set_ylim(bottom=0)
-        
-        # Add value labels on top of bars (always show)
-        y_max = max(model_values_sorted) if model_values_sorted else 1
-        y_padding = 0.02 * y_max
-        for bar, val in zip(bars, model_values_sorted):
-            height = bar.get_height()
-            y_pos = height + y_padding
-            ax.text(bar.get_x() + bar.get_width()/2., y_pos,
-                   f'{int(round(val))}',
-                   ha='center', va='bottom', fontsize=10)
-    
-    # Hide unused subplots
-    for idx in range(n_plots, len(axes)):
-        axes[idx].axis('off')
-    
-    # Overall title - clean version
-    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-    #title_clean = f'{metric_label} Scores: All Test Sets\n(Each subplot shows one test set)'
-    #if direction == 'roundtrip':
-     #   title_clean += '\nModels refer to first model (English -> Arabic)'
-    #fig.suptitle(title_clean, fontsize=20, fontweight='bold', y=0.995)
-    
-    plt.tight_layout(rect=[0, 0, 1, 0.98])
-    
-    # Save clean version
-    if metric == 'COMET' and comet_variant:
-        safe_comet = safe_comet_filename(comet_variant)
-        output_file = output_dir / f"all_testsets_{safe_comet}_combined_clean.png"
-        mapping_file = output_dir / f"all_testsets_{safe_comet}_combined_clean_mapping.txt"
-    else:
-        output_file = output_dir / f"all_testsets_{metric.lower()}_combined_clean.png"
-        mapping_file = output_dir / f"all_testsets_{metric.lower()}_combined_clean_mapping.txt"
-    
-    plt.savefig(output_file, dpi=150, bbox_inches='tight')
-    plt.close()
-    print(f"✅ Saved: {output_file}")
-    
-    # Save model name to index mapping
-    with open(mapping_file, 'w', encoding='utf-8') as f:
-        f.write(f"Model Index Mapping for {metric_label} Scores\n")
-        f.write("=" * 80 + "\n\n")
-        f.write("Index | Model Name\n")
-        f.write("-" * 80 + "\n")
-        for idx, model in enumerate(sorted_models):
-            f.write(f"{idx:5d} | {model}\n")
-        f.write("=" * 80 + "\n")
-    print(f"✅ Saved: {mapping_file}")
 
 
 def create_all_testsets_combined_plot_by_type(test_sets: Dict, models: List[str], output_dir: Path, 
@@ -1671,8 +1462,8 @@ def create_all_testsets_combined_plot_by_type(test_sets: Dict, models: List[str]
                     model_labels.append(model)
         
         if not model_values:
-            ax.text(0.5, 0.5, 'No data', ha='center', va='center', transform=ax.transAxes, fontsize=16)
-            ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, fontsize=16)
+            ax.text(0.5, 0.5, 'No data', ha='center', va='center', transform=ax.transAxes)
+            ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, fontsize=10)
             continue
         
         # Create bars
@@ -1681,26 +1472,23 @@ def create_all_testsets_combined_plot_by_type(test_sets: Dict, models: List[str]
         
         # Customize subplot
         metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-        ax.set_xlabel('Model', fontsize=17)
-        ax.set_ylabel(f'{metric_label} Score', fontsize=19)
+        ax.set_xlabel('Model', fontsize=9)
+        ax.set_ylabel(f'{metric_label} Score', fontsize=9)
         title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
         ax.set_title(f"{test_set[:35] + '...' if len(test_set) > 35 else test_set}\n({title_label})", 
-                    fontsize=16, fontweight='bold')
+                    fontsize=10, fontweight='bold')
         ax.set_xticks(range(len(model_labels)))
-        ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=13)
-        ax.tick_params(axis='y', labelsize=16)
+        ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=8)
         ax.grid(axis='y', alpha=0.3, linestyle='--')
         ax.set_ylim(bottom=0)
         
-        # Add value labels on top of bars (always show)
-        y_max = max(model_values) if model_values else 1
-        y_padding = 0.02 * y_max
-        for bar, val in zip(bars, model_values):
-            height = bar.get_height()
-            y_pos = height + y_padding
-            ax.text(bar.get_x() + bar.get_width()/2., y_pos,
-                   f'{int(round(val))}',
-                   ha='center', va='bottom', fontsize=12)
+        # Add value labels on bars (only if there's space)
+        if len(model_labels) <= 8:  # Only add labels if not too crowded
+            for bar, val in zip(bars, model_values):
+                height = bar.get_height()
+                ax.text(bar.get_x() + bar.get_width()/2., height,
+                       f'{val:.1f}',
+                       ha='center', va='bottom', fontsize=7)
     
     # Hide unused subplots
     for idx in range(n_plots, len(axes)):
@@ -1722,129 +1510,8 @@ def create_all_testsets_combined_plot_by_type(test_sets: Dict, models: List[str]
         output_file = output_dir / f"all_testsets_{score_type}_{metric.lower()}_combined.png"
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     plt.close()
+    
     print(f"✅ Saved: {output_file}")
-    
-    # Create clean version with numeric indices instead of model names
-    # First, collect all unique models across all test sets to create a consistent mapping
-    all_models_in_plot = set()
-    for test_set in valid_test_sets:
-        model_scores = test_sets[test_set]
-        for model in models:
-            if model in model_scores:
-                if metric == 'COMET':
-                    if comet_variant:
-                        score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
-                    else:
-                        score = find_comet_score(model_scores[model], score_type)
-                else:
-                    key = f'{score_type}_{metric}'
-                    score = model_scores[model].get(key)
-                if score is not None:
-                    all_models_in_plot.add(model)
-    
-    # Create mapping from model name to index (sorted for consistency)
-    sorted_models = sorted(all_models_in_plot)
-    model_to_index = {model: idx for idx, model in enumerate(sorted_models)}
-    
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(6 * n_cols, 5 * n_rows))
-    if n_plots == 1:
-        axes = [axes]
-    elif n_rows == 1:
-        axes = axes if isinstance(axes, list) else [axes]
-    else:
-        axes = axes.flatten()
-    
-    # Create a plot for each test set (clean version)
-    for idx, test_set in enumerate(valid_test_sets):
-        ax = axes[idx]
-        model_scores = test_sets[test_set]
-        
-        # Extract scores for this metric and score type
-        model_values = []
-        model_indices = []
-        model_names_list = []
-        
-        for model in models:
-            if model in model_scores:
-                if metric == 'COMET':
-                    if comet_variant:
-                        score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
-                    else:
-                        score = find_comet_score(model_scores[model], score_type)
-                else:
-                    key = f'{score_type}_{metric}'
-                    score = model_scores[model].get(key)
-                if score is not None and model in model_to_index:
-                    model_values.append(score)
-                    model_indices.append(model_to_index[model])
-                    model_names_list.append(model)
-        
-        if not model_values:
-            ax.text(0.5, 0.5, 'No data', ha='center', va='center', transform=ax.transAxes, fontsize=16)
-            ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, fontsize=16)
-            continue
-        
-        # Sort by index for consistent ordering across subplots
-        sorted_data = sorted(zip(model_indices, model_values))
-        model_indices_sorted, model_values_sorted = zip(*sorted_data) if sorted_data else ([], [])
-        
-        # Create bars (sorted by index)
-        bars = ax.bar(range(len(model_values_sorted)), model_values_sorted,
-                     color=plt.cm.viridis(np.linspace(0, 1, len(model_values_sorted))))
-        
-        # Customize subplot - clean version: numeric indices instead of model names, no axis labels
-        ax.set_title(test_set[:35] + '...' if len(test_set) > 35 else test_set, 
-                    fontsize=16, fontweight='bold')
-        ax.set_xticks(range(len(model_values_sorted)))
-        ax.set_xticklabels([str(idx) for idx in model_indices_sorted], fontsize=14)  # Use numeric indices
-        ax.tick_params(axis='y', labelsize=16)
-        ax.grid(axis='y', alpha=0.3, linestyle='--')
-        ax.set_ylim(bottom=0)
-        
-        # Add value labels on top of bars (always show)
-        y_max = max(model_values_sorted) if model_values_sorted else 1
-        y_padding = 0.02 * y_max
-        for bar, val in zip(bars, model_values_sorted):
-            height = bar.get_height()
-            y_pos = height + y_padding
-            ax.text(bar.get_x() + bar.get_width()/2., y_pos,
-                   f'{int(round(val))}',
-                   ha='center', va='bottom', fontsize=12)
-    
-    # Hide unused subplots
-    for idx in range(n_plots, len(axes)):
-        axes[idx].axis('off')
-    
-    # Overall title - clean version: no (dialect) or (General Arabic)
-    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-    fig.suptitle(f'{metric_label} Scores: All Test Sets\n(Each subplot shows one test set)', 
-                 fontsize=20, fontweight='bold', y=0.995)
-    
-    plt.tight_layout(rect=[0, 0, 1, 0.98])
-    
-    # Save clean version
-    if metric == 'COMET' and comet_variant:
-        safe_comet = safe_comet_filename(comet_variant)
-        output_file = output_dir / f"all_testsets_{score_type}_{safe_comet}_combined_clean.png"
-        mapping_file = output_dir / f"all_testsets_{score_type}_{safe_comet}_combined_clean_mapping.txt"
-    else:
-        output_file = output_dir / f"all_testsets_{score_type}_{metric.lower()}_combined_clean.png"
-        mapping_file = output_dir / f"all_testsets_{score_type}_{metric.lower()}_combined_clean_mapping.txt"
-    
-    plt.savefig(output_file, dpi=150, bbox_inches='tight')
-    plt.close()
-    print(f"✅ Saved: {output_file}")
-    
-    # Save model name to index mapping
-    with open(mapping_file, 'w', encoding='utf-8') as f:
-        f.write(f"Model Index Mapping for {metric_label} Scores ({score_type})\n")
-        f.write("=" * 80 + "\n\n")
-        f.write("Index | Model Name\n")
-        f.write("-" * 80 + "\n")
-        for idx, model in enumerate(sorted_models):
-            f.write(f"{idx:5d} | {model}\n")
-        f.write("=" * 80 + "\n")
-    print(f"✅ Saved: {mapping_file}")
 
 
 def calculate_general_dialect_difference(test_sets: Dict, models: List[str], metric: str = 'BLEU') -> Dict[str, float]:
@@ -1947,13 +1614,13 @@ def print_general_dialect_difference(test_sets: Dict, models: List[str], metric:
         count = model_counts.get(model, 0)
         lines = [
             f"Model: {model}",
-            f"  Average difference: {avg_diff:+.1f} ({metric_label} points)",
+            f"  Average difference: {avg_diff:+.4f} ({metric_label} points)",
             f"  Based on {count} test set(s)"
         ]
         if avg_diff > 0:
-            lines.append(f"  → General Arabic scores are {avg_diff:.1f} points higher on average")
+            lines.append(f"  → General Arabic scores are {avg_diff:.4f} points higher on average")
         elif avg_diff < 0:
-            lines.append(f"  → Dialect scores are {abs(avg_diff):.1f} points higher on average")
+            lines.append(f"  → Dialect scores are {abs(avg_diff):.4f} points higher on average")
         else:
             lines.append(f"  → Scores are equal on average")
         lines.append("")
@@ -2166,7 +1833,7 @@ def print_average_rankings(test_sets: Dict, models: List[str], score_type: Optio
                        f'dialect_{metric}' in model_scores[model]:
                         count += 1
         
-        line = f"{rank}. {model}: {avg_rank:.1f} (based on {count} test set(s))"
+        line = f"{rank}. {model}: {avg_rank:.2f} (based on {count} test set(s))"
         lines.append(line)
         print(line)
     
@@ -2383,7 +2050,7 @@ def print_average_scores_by_type(test_sets: Dict, models: List[str], score_type:
         count = model_counts.get(model, 0)
         lines.extend([
             f"Model: {model}",
-            f"  Average {metric_label}: {avg_score:.1f}",
+            f"  Average {metric_label}: {avg_score:.4f}",
             f"  Based on {count} test set(s)",
             ""
         ])
@@ -2442,40 +2109,40 @@ def print_overall_scores(overall_scores: Dict[str, Dict], models: List[str], dir
             key = score_type
             if key in model_scores:
                 if 'BLEU' in model_scores[key]:
-                    lines.append(f"  BLEU: {model_scores[key]['BLEU']:.1f}")
+                    lines.append(f"  BLEU: {model_scores[key]['BLEU']:.4f}")
                 if 'CHRF' in model_scores[key]:
-                    lines.append(f"  CHRF: {model_scores[key]['CHRF']:.1f}")
+                    lines.append(f"  CHRF: {model_scores[key]['CHRF']:.4f}")
                 # Extract all COMET variants
                 for comet_key in find_comet_keys(model_scores[key]):
-                    lines.append(f"  {comet_key}: {model_scores[key][comet_key]:.1f}")
+                    lines.append(f"  {comet_key}: {model_scores[key][comet_key]:.4f}")
                 # Also check for legacy 'COMET' key
                 if 'COMET' in model_scores[key]:
-                    lines.append(f"  COMET: {model_scores[key]['COMET']:.1f}")
+                    lines.append(f"  COMET: {model_scores[key]['COMET']:.4f}")
         elif direction == 'reverse':
             # Reverse direction: direct BLEU/CHRF/COMET
             if 'BLEU' in model_scores:
-                lines.append(f"  BLEU: {model_scores['BLEU']:.1f}")
+                lines.append(f"  BLEU: {model_scores['BLEU']:.4f}")
             if 'CHRF' in model_scores:
-                lines.append(f"  CHRF: {model_scores['CHRF']:.1f}")
+                lines.append(f"  CHRF: {model_scores['CHRF']:.4f}")
             # Extract all COMET variants
             for comet_key in find_comet_keys(model_scores):
-                lines.append(f"  {comet_key}: {model_scores[comet_key]:.1f}")
+                lines.append(f"  {comet_key}: {model_scores[comet_key]:.4f}")
             # Also check for legacy 'COMET' key
             if 'COMET' in model_scores:
-                lines.append(f"  COMET: {model_scores['COMET']:.1f}")
+                lines.append(f"  COMET: {model_scores['COMET']:.4f}")
         elif direction == 'roundtrip':
             # Roundtrip: roundtrip scores
             if 'roundtrip' in model_scores:
                 if 'BLEU' in model_scores['roundtrip']:
-                    lines.append(f"  BLEU: {model_scores['roundtrip']['BLEU']:.1f}")
+                    lines.append(f"  BLEU: {model_scores['roundtrip']['BLEU']:.4f}")
                 if 'CHRF' in model_scores['roundtrip']:
-                    lines.append(f"  CHRF: {model_scores['roundtrip']['CHRF']:.1f}")
+                    lines.append(f"  CHRF: {model_scores['roundtrip']['CHRF']:.4f}")
                 # Extract all COMET variants
                 for comet_key in find_comet_keys(model_scores['roundtrip']):
-                    lines.append(f"  {comet_key}: {model_scores['roundtrip'][comet_key]:.1f}")
+                    lines.append(f"  {comet_key}: {model_scores['roundtrip'][comet_key]:.4f}")
                 # Also check for legacy 'COMET' key
                 if 'COMET' in model_scores['roundtrip']:
-                    lines.append(f"  COMET: {model_scores['roundtrip']['COMET']:.1f}")
+                    lines.append(f"  COMET: {model_scores['roundtrip']['COMET']:.4f}")
         
         # Add metadata if available
         if 'num_test_sets' in model_scores:
@@ -2707,24 +2374,21 @@ def create_bar_plot_by_type(test_set: str, model_scores: Dict[str, Dict[str, flo
     # Customize plot
     title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
     metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-    ax.set_xlabel('Model', fontsize=20, fontweight='bold')
-    ax.set_ylabel(f'{metric_label} Score', fontsize=22, fontweight='bold')
+    ax.set_xlabel('Model', fontsize=12, fontweight='bold')
+    ax.set_ylabel(f'{metric_label} Score', fontsize=12, fontweight='bold')
     ax.set_title(f'{metric_label} Scores by Model ({title_label})\nTest Set: {test_set}', 
-                 fontsize=20, fontweight='bold', pad=20)
+                 fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(range(len(model_labels)))
-    ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=16)
-    ax.tick_params(axis='y', labelsize=18)
+    ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=10)
     ax.grid(axis='y', alpha=0.3, linestyle='--')
     ax.set_ylim(bottom=0)
     
-    # Add value labels on top of bars (always show)
+    # Add value labels on bars
     for bar, val in zip(bars, model_values):
         height = bar.get_height()
-        # Add padding above bar for label
-        y_pos = height + (0.02 * max(model_values) if model_values else 0.01)
-        ax.text(bar.get_x() + bar.get_width()/2., y_pos,
+        ax.text(bar.get_x() + bar.get_width()/2., height,
                 f'{val:.1f}',
-                ha='center', va='bottom', fontsize=19, fontweight='bold')
+                ha='center', va='bottom', fontsize=9)
     
     plt.tight_layout()
     
@@ -2839,8 +2503,8 @@ def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: 
                         model_labels.append(model)
             
             if not model_values:
-                ax.text(0.5, 0.5, 'No data', ha='center', va='center', transform=ax.transAxes, fontsize=14)
-                ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, fontsize=14)
+                ax.text(0.5, 0.5, 'No data', ha='center', va='center', transform=ax.transAxes)
+                ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, fontsize=10)
                 continue
             
             # Create bars
@@ -2849,12 +2513,12 @@ def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: 
             
             # Customize subplot
             metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-            ax.set_xlabel('Model', fontsize=17)
-            ax.set_ylabel(f'{metric_label} Score', fontsize=17)
+            ax.set_xlabel('Model', fontsize=9)
+            ax.set_ylabel(f'{metric_label} Score', fontsize=9)
             ax.set_title(test_set[:40] + '...' if len(test_set) > 40 else test_set, 
-                        fontsize=14, fontweight='bold')
+                        fontsize=10, fontweight='bold')
             ax.set_xticks(range(len(model_labels)))
-            ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=12)
+            ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=8)
             ax.grid(axis='y', alpha=0.3, linestyle='--')
             ax.set_ylim(bottom=0)
             
@@ -2864,7 +2528,7 @@ def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: 
                     height = bar.get_height()
                     ax.text(bar.get_x() + bar.get_width()/2., height,
                            f'{val:.1f}',
-                           ha='center', va='bottom', fontsize=11)
+                           ha='center', va='bottom', fontsize=7)
         
         # Hide unused subplots
         for idx in range(n_plots, len(axes)):
@@ -2873,7 +2537,7 @@ def create_dialect_grouped_plot(test_sets: Dict, models: List[str], output_dir: 
         # Overall title
         metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
         fig.suptitle(f'{metric_label} Scores for {dialect_name} ({title_label})\n({n_plots} test set(s))', 
-                     fontsize=18, fontweight='bold', y=0.995)
+                     fontsize=16, fontweight='bold', y=0.995)
         
         plt.tight_layout(rect=[0, 0, 1, 0.98])
         
@@ -2956,11 +2620,11 @@ def create_combined_average_plot(test_sets: Dict, models: List[str], output_dir:
     # BLEU plot
     if bleu_averages:
         bars1 = ax1.bar(x, bleu_values, width, color='steelblue', label='BLEU')
-        ax1.set_xlabel('Model', fontsize=16, fontweight='bold')
-        ax1.set_ylabel('Average BLEU Score', fontsize=16, fontweight='bold')
-        ax1.set_title('Average BLEU Across All Test Sets', fontsize=15, fontweight='bold')
+        ax1.set_xlabel('Model', fontsize=12, fontweight='bold')
+        ax1.set_ylabel('Average BLEU Score', fontsize=12, fontweight='bold')
+        ax1.set_title('Average BLEU Across All Test Sets', fontsize=13, fontweight='bold')
         ax1.set_xticks(x)
-        ax1.set_xticklabels(sorted_models, rotation=45, ha='right', fontsize=12)
+        ax1.set_xticklabels(sorted_models, rotation=45, ha='right', fontsize=10)
         ax1.grid(axis='y', alpha=0.3, linestyle='--')
         ax1.set_ylim(bottom=0)
         
@@ -2970,20 +2634,20 @@ def create_combined_average_plot(test_sets: Dict, models: List[str], output_dir:
                 height = bar.get_height()
                 ax1.text(bar.get_x() + bar.get_width()/2., height,
                         f'{val:.1f}',
-                        ha='center', va='bottom', fontsize=15)
+                        ha='center', va='bottom', fontsize=9)
     else:
         ax1.text(0.5, 0.5, 'No BLEU scores available', 
-                transform=ax1.transAxes, ha='center', va='center', fontsize=16)
-        ax1.set_title('Average BLEU Across All Test Sets', fontsize=15, fontweight='bold')
+                transform=ax1.transAxes, ha='center', va='center', fontsize=12)
+        ax1.set_title('Average BLEU Across All Test Sets', fontsize=13, fontweight='bold')
     
     # CHRF plot
     if chrf_averages:
         bars2 = ax2.bar(x, chrf_values, width, color='coral', label='CHRF')
-        ax2.set_xlabel('Model', fontsize=16, fontweight='bold')
-        ax2.set_ylabel('Average CHRF Score', fontsize=16, fontweight='bold')
-        ax2.set_title('Average CHRF Across All Test Sets', fontsize=15, fontweight='bold')
+        ax2.set_xlabel('Model', fontsize=12, fontweight='bold')
+        ax2.set_ylabel('Average CHRF Score', fontsize=12, fontweight='bold')
+        ax2.set_title('Average CHRF Across All Test Sets', fontsize=13, fontweight='bold')
         ax2.set_xticks(x)
-        ax2.set_xticklabels(sorted_models, rotation=45, ha='right', fontsize=12)
+        ax2.set_xticklabels(sorted_models, rotation=45, ha='right', fontsize=10)
         ax2.grid(axis='y', alpha=0.3, linestyle='--')
         ax2.set_ylim(bottom=0)
         
@@ -2993,16 +2657,16 @@ def create_combined_average_plot(test_sets: Dict, models: List[str], output_dir:
                 height = bar.get_height()
                 ax2.text(bar.get_x() + bar.get_width()/2., height,
                         f'{val:.1f}',
-                        ha='center', va='bottom', fontsize=15)
+                        ha='center', va='bottom', fontsize=9)
     else:
         ax2.text(0.5, 0.5, 'No CHRF scores available', 
-                transform=ax2.transAxes, ha='center', va='center', fontsize=16)
-        ax2.set_title('Average CHRF Across All Test Sets', fontsize=15, fontweight='bold')
+                transform=ax2.transAxes, ha='center', va='center', fontsize=12)
+        ax2.set_title('Average CHRF Across All Test Sets', fontsize=13, fontweight='bold')
     
     # Overall title
     num_test_sets = len(test_sets)
     fig.suptitle(f'Average BLEU and CHRF Scores Across All Test Sets\n(Models sorted by BLEU, based on {num_test_sets} test set(s))', 
-                 fontsize=16, fontweight='bold', y=1.02)
+                 fontsize=14, fontweight='bold', y=1.02)
     
     plt.tight_layout()
     
@@ -3012,282 +2676,6 @@ def create_combined_average_plot(test_sets: Dict, models: List[str], output_dir:
     plt.close()
     
     print(f"✅ Saved: {output_file}")
-
-
-def calculate_overall_general_dialect_differences(overall_scores: Dict[str, Dict], models: List[str], 
-                                                  metric: str = 'BLEU', comet_variant: Optional[str] = None) -> Dict[str, float]:
-    """
-    Calculate differences between overall general Arabic and dialect scores for each model.
-    
-    Args:
-        overall_scores: Dict mapping model_name -> overall scores dict
-        models: List of model names
-        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
-        comet_variant: If metric is 'COMET', the specific COMET variant to use
-    
-    Returns:
-        Dict mapping model_name -> difference (dialect - general)
-    """
-    differences = {}
-    
-    for model in models:
-        if model not in overall_scores:
-            continue
-        
-        model_scores = overall_scores[model]
-        
-        # Check if model has both arabic_general and dialect scores
-        if 'arabic_general' not in model_scores or 'dialect' not in model_scores:
-            continue
-        
-        general_scores = model_scores['arabic_general']
-        dialect_scores = model_scores['dialect']
-        
-        # Extract score based on metric
-        if metric == 'COMET':
-            if comet_variant:
-                general_score = get_comet_score_for_variant(general_scores, comet_variant)
-                dialect_score = get_comet_score_for_variant(dialect_scores, comet_variant)
-            else:
-                general_score = find_comet_score(general_scores)
-                dialect_score = find_comet_score(dialect_scores)
-        else:
-            general_score = general_scores.get(metric)
-            dialect_score = dialect_scores.get(metric)
-        
-        if general_score is not None and dialect_score is not None:
-            differences[model] = dialect_score - general_score  # Flipped: dialect - general
-    
-    return differences
-
-
-def create_overall_general_dialect_difference_plot(overall_scores: Dict[str, Dict], models: List[str],
-                                                   output_dir: Path, metric: str = 'BLEU', 
-                                                   comet_variant: Optional[str] = None):
-    """
-    Create a bar plot showing the difference between overall general Arabic and dialect scores.
-    Creates both vertical (standard) and horizontal (rotated, for two-column format) versions.
-    
-    Args:
-        overall_scores: Dict mapping model_name -> overall scores dict
-        models: List of model names
-        output_dir: Output directory for plots
-        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
-        comet_variant: If metric is 'COMET', the specific COMET variant to use
-    """
-    differences = calculate_overall_general_dialect_differences(overall_scores, models, metric, comet_variant)
-    
-    if not differences:
-        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-        print(f"⚠️  No overall {metric_label} score differences found (need both arabic_general and dialect scores)")
-        return
-    
-    # Sort models by difference (descending)
-    sorted_models = sorted(differences.items(), key=lambda x: x[1], reverse=True)
-    model_names = [m[0] for m in sorted_models]
-    diff_values = [m[1] for m in sorted_models]
-    
-    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-    from matplotlib.patches import Patch
-    legend_elements = [
-        Patch(facecolor='green', alpha=0.7, label='Dialect higher'),
-        Patch(facecolor='red', alpha=0.7, label='General Arabic higher')
-    ]
-    
-    # Create vertical version (standard)
-    fig, ax = plt.subplots(figsize=(max(14, len(model_names) * 0.8), 8))
-    
-    # Create bars with color based on positive/negative
-    colors = ['green' if v >= 0 else 'red' for v in diff_values]
-    bars = ax.bar(range(len(model_names)), diff_values, color=colors, alpha=0.7)
-    
-    # Add horizontal line at zero
-    ax.axhline(y=0, color='black', linestyle='-', linewidth=0.8)
-    
-    # Customize plot
-    ax.set_xlabel('Model', fontsize=16, fontweight='bold')
-    ax.set_ylabel(f'Difference (Dialect - General Arabic)', fontsize=16, fontweight='bold')
-    ax.set_title(f'Overall {metric_label} Score Difference: General Arabic vs Dialect', 
-                 fontsize=16, fontweight='bold', pad=20)
-    ax.set_xticks(range(len(model_names)))
-    ax.set_xticklabels(model_names, rotation=45, ha='right', fontsize=12)
-    ax.grid(axis='y', alpha=0.3, linestyle='--')
-    
-    # Set y-limits with padding for labels
-    y_min_val = min(diff_values) if diff_values else 0
-    y_max_val = max(diff_values) if diff_values else 1
-    y_range = y_max_val - y_min_val if diff_values else 1
-    y_padding = 0.1 * y_range if y_range > 0 else 0.1
-    ax.set_ylim(y_min_val - y_padding, y_max_val + y_padding)
-    
-    # Add value labels on bars
-    for i, (bar, val) in enumerate(zip(bars, diff_values)):
-        height = bar.get_height()
-        y_offset = 0.02 * y_range if y_range > 0 else 0.01
-        y_pos = height + (y_offset if height >= 0 else -y_offset)
-        ax.text(bar.get_x() + bar.get_width()/2., y_pos,
-                f'{val:+.1f}',
-                ha='center', va='bottom' if height >= 0 else 'top', fontsize=15)
-    
-    ax.legend(handles=legend_elements, loc='best', fontsize=12)
-    plt.tight_layout()
-    
-    # Save vertical version
-    safe_metric = metric.lower()
-    if metric == 'COMET' and comet_variant:
-        safe_comet = safe_comet_filename(comet_variant)
-        output_file = output_dir / f"overall_general_vs_dialect_difference_{safe_comet}.png"
-    else:
-        output_file = output_dir / f"overall_general_vs_dialect_difference_{safe_metric}.png"
-    plt.savefig(output_file, dpi=150, bbox_inches='tight')
-    plt.close()
-    print(f"✅ Saved: {output_file}")
-    
-    # Create horizontal version (rotated, for two-column format)
-    fig, ax = plt.subplots(figsize=(8, max(10, len(model_names) * 0.5)))
-    
-    # Create horizontal bars with color based on positive/negative
-    bars = ax.barh(range(len(model_names)), diff_values, color=colors, alpha=0.7)
-    
-    # Add vertical line at zero
-    ax.axvline(x=0, color='black', linestyle='-', linewidth=0.8)
-    
-    # Customize plot
-    ax.set_ylabel('Model', fontsize=16, fontweight='bold')
-    ax.set_xlabel(f'Difference (Dialect - General Arabic)', fontsize=16)
-    ax.set_title(f'Overall {metric_label} Score Difference: General Arabic vs Dialect', 
-                 fontsize=16, fontweight='bold', pad=20)
-    ax.set_yticks(range(len(model_names)))
-    ax.set_yticklabels(model_names, fontsize=13)
-    ax.grid(axis='x', alpha=0.3, linestyle='--')
-    
-    # Set x-limits with padding for labels
-    x_min_val = min(diff_values) if diff_values else 0
-    x_max_val = max(diff_values) if diff_values else 1
-    x_range = x_max_val - x_min_val if diff_values else 1
-    x_padding = 0.18 * x_range if x_range > 0 else 0.1
-    ax.set_xlim(x_min_val - (x_padding/2), x_max_val + x_padding)
-    
-    # Add value labels on bars
-    for i, (bar, val) in enumerate(zip(bars, diff_values)):
-        width = bar.get_width()
-        x_offset = 0.01 * x_range if x_range > 0 else 0.01
-        x_pos = width + (x_offset if width >= 0 else -x_offset)
-        ax.text(x_pos, bar.get_y() + bar.get_height()/2.,
-                f'{val:+.1f}',
-                ha='left' if width >= 0 else 'right', va='center', fontsize=12)
-    
-    ax.legend(handles=legend_elements, loc='best', fontsize=12)
-    plt.tight_layout()
-    
-    # Save horizontal version
-    if metric == 'COMET' and comet_variant:
-        safe_comet = safe_comet_filename(comet_variant)
-        output_file = output_dir / f"overall_general_vs_dialect_difference_{safe_comet}_rotated.png"
-    else:
-        output_file = output_dir / f"overall_general_vs_dialect_difference_{safe_metric}_rotated.png"
-    plt.savefig(output_file, dpi=150, bbox_inches='tight')
-    plt.close()
-    print(f"✅ Saved: {output_file}")
-
-
-def print_overall_general_dialect_difference_table(overall_scores: Dict[str, Dict], models: List[str],
-                                                   output_dir: Path, metric: str = 'BLEU',
-                                                   comet_variant: Optional[str] = None):
-    """
-    Print a LaTeX table showing overall general Arabic and dialect scores with differences.
-    
-    Args:
-        overall_scores: Dict mapping model_name -> overall scores dict
-        models: List of model names
-        output_dir: Output directory for table file
-        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
-        comet_variant: If metric is 'COMET', the specific COMET variant to use
-    """
-    differences = calculate_overall_general_dialect_differences(overall_scores, models, metric, comet_variant)
-    
-    if not differences:
-        metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-        print(f"⚠️  No overall {metric_label} score differences found")
-        return
-    
-    # Collect data for table
-    table_data = []
-    for model in sorted(models):
-        if model not in differences:
-            continue
-        
-        model_scores = overall_scores[model]
-        general_scores = model_scores['arabic_general']
-        dialect_scores = model_scores['dialect']
-        
-        if metric == 'COMET':
-            if comet_variant:
-                general_score = get_comet_score_for_variant(general_scores, comet_variant)
-                dialect_score = get_comet_score_for_variant(dialect_scores, comet_variant)
-            else:
-                general_score = find_comet_score(general_scores)
-                dialect_score = find_comet_score(dialect_scores)
-        else:
-            general_score = general_scores.get(metric)
-            dialect_score = dialect_scores.get(metric)
-        
-        if general_score is not None and dialect_score is not None:
-            diff = differences[model]
-            table_data.append({
-                'model': model,
-                'general': general_score,
-                'dialect': dialect_score,
-                'difference': diff
-            })
-    
-    if not table_data:
-        return
-    
-    # Sort by difference (descending)
-    table_data.sort(key=lambda x: x['difference'], reverse=True)
-    
-    # Create LaTeX table file
-    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
-    table_file = output_dir / f"overall_general_vs_dialect_difference_{metric.lower()}.tex"
-    if metric == 'COMET' and comet_variant:
-        safe_comet = safe_comet_filename(comet_variant)
-        table_file = output_dir / f"overall_general_vs_dialect_difference_{safe_comet}.tex"
-    
-    with open(table_file, 'w', encoding='utf-8') as f:
-        # LaTeX table header
-        f.write("\\begin{table}[h]\n")
-        f.write("\\centering\n")
-        f.write(f"\\caption{{Overall {metric_label} Score Comparison: General Arabic vs Dialect (Forward Direction)}}\n")
-        f.write("\\label{tab:overall-general-dialect-difference}\n")
-        f.write("\\begin{tabular}{lccc}\n")
-        f.write("\\toprule\n")
-        f.write("Model & General Arabic & Dialect & Difference \\\\\n")
-        f.write("\\midrule\n")
-        
-        # Data rows
-        for row in table_data:
-            # Escape special LaTeX characters in model name
-            model_name = row['model'].replace('_', '\\_').replace('&', '\\&')
-            f.write(f"{model_name} & {row['general']:.1f} & {row['dialect']:.1f} & {row['difference']:+.1f} \\\\\n")
-        
-        # Summary statistics (average row)
-        avg_general = np.mean([d['general'] for d in table_data])
-        avg_dialect = np.mean([d['dialect'] for d in table_data])
-        avg_diff = np.mean([d['difference'] for d in table_data])
-        
-        f.write("\\midrule\n")
-        f.write(f"Average & {avg_general:.1f} & {avg_dialect:.1f} & {avg_diff:+.1f} \\\\\n")
-        f.write("\\bottomrule\n")
-        f.write("\\end{tabular}\n")
-        f.write("\\begin{tablenotes}\n")
-        f.write("\\small\n")
-        f.write("\\item Positive difference means Dialect scores are higher.\n")
-        f.write("\\item Negative difference means General Arabic scores are higher.\n")
-        f.write("\\end{tablenotes}\n")
-        f.write("\\end{table}\n")
-    
-    print(f"✅ Saved: {table_file}")
 
 
 def main():
@@ -3790,16 +3178,16 @@ def main():
                     if args.summary:
                         print(f"\n📊 Creating summary heatmaps ({type_label})...")
                         if args.metric in ['BLEU', 'both', 'all']:
-                            create_summary_plot(test_sets, models, type_output_dir, 'BLEU', None, direction, score_type)
+                            create_summary_plot(test_sets, models, type_output_dir, 'BLEU')
                         if args.metric in ['CHRF', 'both', 'all']:
-                            create_summary_plot(test_sets, models, type_output_dir, 'CHRF', None, direction, score_type)
+                            create_summary_plot(test_sets, models, type_output_dir, 'CHRF')
                         if args.metric in ['COMET', 'all']:
                             # Create summary plots for each COMET variant
                             if comet_variants:
                                 for comet_variant in comet_variants:
-                                    create_summary_plot(test_sets, models, type_output_dir, 'COMET', comet_variant, direction, score_type)
+                                    create_summary_plot(test_sets, models, type_output_dir, 'COMET', comet_variant)
                             else:
-                                create_summary_plot(test_sets, models, type_output_dir, 'COMET', None, direction, score_type)
+                                create_summary_plot(test_sets, models, type_output_dir, 'COMET')
                     
                     # Create per-model plots
                     print(f"\n📊 Creating per-model plots ({type_label})...")
@@ -3817,46 +3205,6 @@ def main():
                                 create_per_model_plot(test_sets, model, models, type_output_dir, 'COMET', None, score_type)
                 
                 print(f"✅ Statistics saved to: {stats_file_path}")
-            
-            # Create overall score difference visualizations (general vs dialect)
-            overall_scores = data.get('overall_scores', {})
-            if overall_scores:
-                print(f"\n📊 Creating overall score difference visualizations (General Arabic vs Dialect)...")
-                
-                # Find all COMET variants in overall scores
-                overall_comet_variants = []
-                if args.metric in ['COMET', 'all']:
-                    # Check one model to find COMET variants
-                    for model in forward_models:
-                        if model in overall_scores:
-                            model_scores = overall_scores[model]
-                            if 'arabic_general' in model_scores:
-                                for key in find_comet_keys(model_scores['arabic_general']):
-                                    if key not in overall_comet_variants:
-                                        overall_comet_variants.append(key)
-                            if 'dialect' in model_scores:
-                                for key in find_comet_keys(model_scores['dialect']):
-                                    if key not in overall_comet_variants:
-                                        overall_comet_variants.append(key)
-                    overall_comet_variants = sorted(overall_comet_variants)
-                
-                # Create plots and tables for each metric
-                if args.metric in ['BLEU', 'both', 'all']:
-                    create_overall_general_dialect_difference_plot(overall_scores, forward_models, direction_output_dir, 'BLEU')
-                    print_overall_general_dialect_difference_table(overall_scores, forward_models, direction_output_dir, 'BLEU')
-                
-                if args.metric in ['CHRF', 'both', 'all']:
-                    create_overall_general_dialect_difference_plot(overall_scores, forward_models, direction_output_dir, 'CHRF')
-                    print_overall_general_dialect_difference_table(overall_scores, forward_models, direction_output_dir, 'CHRF')
-                
-                if args.metric in ['COMET', 'all']:
-                    if overall_comet_variants:
-                        for comet_variant in overall_comet_variants:
-                            create_overall_general_dialect_difference_plot(overall_scores, forward_models, direction_output_dir, 'COMET', comet_variant)
-                            print_overall_general_dialect_difference_table(overall_scores, forward_models, direction_output_dir, 'COMET', comet_variant)
-                    else:
-                        create_overall_general_dialect_difference_plot(overall_scores, forward_models, direction_output_dir, 'COMET')
-                        print_overall_general_dialect_difference_table(overall_scores, forward_models, direction_output_dir, 'COMET')
             
             # Print general/dialect difference statistics (comparison between the two)
             diff_stats_file_path = direction_output_dir / "general_vs_dialect_differences.txt"
