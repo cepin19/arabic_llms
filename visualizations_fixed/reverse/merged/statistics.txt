@@ -5,7 +5,7 @@ Direction: Reverse (Arabic -> English)
 
 
 ================================================================================
-MERGED DIALECT SCORE TABLES
+MERGED DIALECT SCORE TABLES (ALL DATASETS)
 ================================================================================
 
 

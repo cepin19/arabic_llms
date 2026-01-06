@@ -3,8 +3,9 @@
   "direction": "forward",
   "total_files": 42,
   "files_with_metrics": 42,
-  "merged_dialects": 16,
+  "merged_dialects": 32,
   "has_overall_scores": true,
+  "has_overall_scores_madar_only": true,
   "results": [
     {
       "arabic_general": {
@@ -951,6 +952,310 @@
       }
     },
     {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "iq",
+      "dialect_name": "Iraqi Arabic",
+      "num_test_sets": 3,
+      "source_files": [
+        "madar.test.glf.1.iq.en",
+        "madar.test.glf.0.iq.en",
+        "madar.test.glf.2.iq.en"
+      ],
+      "num_sentences": 6000,
+      "arabic_general": {
+        "BLEU": 4.7818,
+        "CHRF": 35.0543
+      },
+      "dialect": {
+        "BLEU": 6.4314,
+        "CHRF": 37.2439
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "tn",
+      "dialect_name": "Tunisian Arabic",
+      "num_test_sets": 3,
+      "source_files": [
+        "madar.test.mgr.1.tn.en",
+        "madar.dev.mgr.0.tn.en",
+        "madar.test.mgr.0.tn.en"
+      ],
+      "num_sentences": 14000,
+      "arabic_general": {
+        "BLEU": 2.492,
+        "CHRF": 25.2356
+      },
+      "dialect": {
+        "BLEU": 6.2458,
+        "CHRF": 33.2685
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "om",
+      "dialect_name": "Omani Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.glf.0.om.en"
+      ],
+      "num_sentences": 2000,
+      "arabic_general": {
+        "BLEU": 18.6929,
+        "CHRF": 49.6082
+      },
+      "dialect": {
+        "BLEU": 19.0796,
+        "CHRF": 49.4257
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "qa",
+      "dialect_name": "Qatari Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.dev.glf.0.qa.en",
+        "madar.test.glf.0.qa.en"
+      ],
+      "num_sentences": 12000,
+      "arabic_general": {
+        "BLEU": 5.8611,
+        "CHRF": 35.5249
+      },
+      "dialect": {
+        "BLEU": 6.6706,
+        "CHRF": 36.7755
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "ms",
+      "dialect_name": "Modern Standard Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.dev.msa.0.ms.en",
+        "madar.test.msa.0.ms.en"
+      ],
+      "num_sentences": 12000,
+      "arabic_general": {
+        "BLEU": 20.5288,
+        "CHRF": 53.8199
+      },
+      "dialect": {
+        "BLEU": 20.472,
+        "CHRF": 53.7817
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "dz",
+      "dialect_name": "Algerian Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.mgr.0.dz.en"
+      ],
+      "num_sentences": 2000,
+      "arabic_general": {
+        "BLEU": 6.1275,
+        "CHRF": 32.5432
+      },
+      "dialect": {
+        "BLEU": 6.8524,
+        "CHRF": 34.4573
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "eg",
+      "dialect_name": "Egyptian Arabic",
+      "num_test_sets": 4,
+      "source_files": [
+        "madar.dev.nil.0.eg.en",
+        "madar.test.nil.0.eg.en",
+        "madar.test.nil.2.eg.en",
+        "madar.test.nil.1.eg.en"
+      ],
+      "num_sentences": 16000,
+      "arabic_general": {
+        "BLEU": 5.1647,
+        "CHRF": 32.1441
+      },
+      "dialect": {
+        "BLEU": 6.6017,
+        "CHRF": 34.1496
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "ye",
+      "dialect_name": "Yemeni Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.glf.0.ye.en"
+      ],
+      "num_sentences": 2000,
+      "arabic_general": {
+        "BLEU": 6.6926,
+        "CHRF": 36.1463
+      },
+      "dialect": {
+        "BLEU": 8.9543,
+        "CHRF": 39.1717
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "sa",
+      "dialect_name": "Saudi Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.glf.0.sa.en",
+        "madar.test.glf.1.sa.en"
+      ],
+      "num_sentences": 4000,
+      "arabic_general": {
+        "BLEU": 7.8103,
+        "CHRF": 38.9348
+      },
+      "dialect": {
+        "BLEU": 8.028,
+        "CHRF": 39.3126
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "sy",
+      "dialect_name": "Syrian Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.lev.1.sy.en",
+        "madar.test.lev.0.sy.en"
+      ],
+      "num_sentences": 4000,
+      "arabic_general": {
+        "BLEU": 3.8369,
+        "CHRF": 33.4281
+      },
+      "dialect": {
+        "BLEU": 4.5382,
+        "CHRF": 34.3148
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "ly",
+      "dialect_name": "Libyan Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.mgr.0.ly.en",
+        "madar.test.mgr.1.ly.en"
+      ],
+      "num_sentences": 4000,
+      "arabic_general": {
+        "BLEU": 5.3834,
+        "CHRF": 32.5024
+      },
+      "dialect": {
+        "BLEU": 7.4069,
+        "CHRF": 35.8556
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "lb",
+      "dialect_name": "Lebanese Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.lev.0.lb.en",
+        "madar.dev.lev.0.lb.en"
+      ],
+      "num_sentences": 12000,
+      "arabic_general": {
+        "BLEU": 2.876,
+        "CHRF": 30.0926
+      },
+      "dialect": {
+        "BLEU": 9.2035,
+        "CHRF": 39.2885
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "ma",
+      "dialect_name": "Moroccan Arabic",
+      "num_test_sets": 3,
+      "source_files": [
+        "madar.dev.mgr.0.ma.en",
+        "madar.test.mgr.1.ma.en",
+        "madar.test.mgr.0.ma.en"
+      ],
+      "num_sentences": 14000,
+      "arabic_general": {
+        "BLEU": 3.4799,
+        "CHRF": 28.9879
+      },
+      "dialect": {
+        "BLEU": 10.2269,
+        "CHRF": 39.8785
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "jo",
+      "dialect_name": "Jordanian Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.lev.0.jo.en",
+        "madar.test.lev.1.jo.en"
+      ],
+      "num_sentences": 4000,
+      "arabic_general": {
+        "BLEU": 4.6742,
+        "CHRF": 34.2346
+      },
+      "dialect": {
+        "BLEU": 5.0051,
+        "CHRF": 24.7184
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "sd",
+      "dialect_name": "Sudanese Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.nil.0.sd.en"
+      ],
+      "num_sentences": 2000,
+      "arabic_general": {
+        "BLEU": 8.5994,
+        "CHRF": 38.7682
+      },
+      "dialect": {
+        "BLEU": 10.9572,
+        "CHRF": 41.7237
+      }
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "pa",
+      "dialect_name": "Palestinian Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.lev.0.pa.en"
+      ],
+      "num_sentences": 2000,
+      "arabic_general": {
+        "BLEU": 4.5483,
+        "CHRF": 32.3913
+      },
+      "dialect": {
+        "BLEU": 7.1734,
+        "CHRF": 35.9619
+      }
+    },
+    {
       "type": "overall",
       "num_test_sets": 42,
       "num_sentences": 130226,
@@ -962,6 +1267,19 @@
         "BLEU": 8.6602,
         "CHRF": 37.6934
       }
+    },
+    {
+      "type": "overall_madar_only",
+      "num_test_sets": 32,
+      "num_sentences": 112000,
+      "arabic_general": {
+        "BLEU": 6.8687,
+        "CHRF": 34.6179
+      },
+      "dialect": {
+        "BLEU": 9.4359,
+        "CHRF": 38.5598
+      }
     }
   ],
   "averages": {
@@ -972,6 +1290,16 @@
     "dialect": {
       "BLEU": 7.6835,
       "CHRF": 36.3366
+    }
+  },
+  "averages_madar_only": {
+    "arabic_general": {
+      "BLEU": 6.2894,
+      "CHRF": 34.5908
+    },
+    "dialect": {
+      "BLEU": 8.4937,
+      "CHRF": 37.4574
     }
   }
 }

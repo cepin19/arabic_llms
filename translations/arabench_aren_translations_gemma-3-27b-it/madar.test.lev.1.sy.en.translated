@@ -1,2000 +1,2001 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<unused86> vaccineევევ Recordsევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევ
+Referenceejej Knowევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევევ
+Go slowly until you find a pharmacy.
+How much is breakfast?
+How can I help you?
+Turn left at the third intersection.
+Do you want cream and sugar in your coffee?
+Can you cash my two hundred dollar check?
+If it needs to be shown, please call me.
+Where is the cafe?
+I want a children's sweater.
+Yo, it's all good. It costs eighty-five cents for standard mail and exactly three dollars extra for express delivery.
+I would have bought this if I were in your place.
+Will I face any difficulties with customs?
+Do you have any wide formal shoes?
+No. Could I suggest a single room for single use instead? We have one.
+I would like a very strong coffee, if possible.
+She wants a beer.
+Good morning. How are you?
+Unfortunately, I need to see identification.
+What kind of sauce is this?
+It's cold here. Do you want me to heat it up?
+Sorry, this place is booked.
+I'm doing okay. But when you go out, can you call my friend?
+Thank you, Haj Heik.
+Who is your best friend?
+National Sports and Health Day on October 10th is a national holiday designed to raise awareness of people’s health.
+Do you want me to go under the tray?
+Could you help me find my bag?
+Are you making arrangements in advance?
+I am doing well, thank you.
+But when you get there, ask someone else, if possible.
+I need extension four twenty-four, please.
+It's two dollars. Keep the change.
+One hamburger and one cheeseburger, please.
+How long does the operation take?
+We need to each pay for our own meals.
+The cat was on a chair in the living room.
+If allowed, the courses are the ones for pounds.
+I would like a pocket dictionary, please.
+For two people at seven o'clock. The name is Watanabe.
+My watch. It was a Seiko digital.
+It would be our pleasure to serve you the drink of your choice, followed by dinner. A complete guide to the beverages we offer is available in the information guide included with our magazine.
+Do you live in this area?
+Where is the gift shop?
+I'm on the first highway next to Moro Bay.
+I would like an alarm clock, please.
+By the way, my name is Hiroshi Ejima.
+This train stops at Lake Forest, right?
+Most Japanese people eat octopus and squid.
+Could I have two economy class tickets to Chicago, please?
+I went to New York.
+What is the flight number?
+One to New York, please.
+About how many days.
+The second one on the left.
+Is this the card, okay?
+Where is the reception? Is there a clinic nearby?
+Will ten dollars cover it in a taxi?
+This taste is strange.
+Okay, wait, I'll get you one.
+A bottle of water, please.
+Okay, just a small thing, not expensive.
+Are you looking for something?
+Four nights.
+I need cases.
+Did you calculate it a little low because there’s some dirt?
+Someone hit me. Then I noticed my wallet was missing.
+I'm not sure if I packed enough clothes for a three-week trip.
+Yes, we want to try white wine.
+If anyone asks about me, tell them I’ll be at the cafe.
+I'm sure it was with me in the inside pocket of my coat.
+Can I get the name and number of the entity calling me?
+Will the airline pay for me to buy necessary personal items?
+I need a room with a bathroom.
+Didn't anything come out of the machine?
+You should have been on flight 200, which departed fifteen minutes ago. Okay. I can get you on another flight.
+Is anyone opening my package?
+Oh, this is nothing. You're here, taking care of everything.
+Japan Airlines, flight number one dragon three.
+I want to buy shampoo.
+Excuse me, could you just tell me how to get to the civil center?
+Where is the nearest butcher?
+We need to stay four days starting August 1st.
+What is the name of that flower?
+September 15th is Senior Citizens Day.
+There is no soap in my room.
+Is there anything to take for this rash?
+Sorry, can you rephrase what you just said?
+How long will it take to order?
+Could you speak up a little, please?
+How long will it take to come out?
+Where is the sports information?
+This measurement, the one you call a standard measurement, works.
+Where will the tour end, and when?
+Where do I need to change trains to get to Edinburgh?
+I want to put this in a safe deposit box.
+Where can I exchange my Libyan dinars?
+Can we leave our belongings on the bus, except for the valuable one?
+I don't recognize this amount on my bill, what is it for?
+by paying fifty dollars.
+Now I understood what the problem was.
+Aikido with you. I have a table reservation for 6:30 PM. But I apologize, I need to be half an hour late.
+How many ounces of perfume can I take without customs fees?
+Just tourism.
+All of it, sign it if you please. How do you want it?
+Do you have seats still available for tonight's show?
+I want a large one.
+I woke up after the 6:30 alarm.
+I am a freelance photographer.
+Paper distributors can help you spend your dollars at a casino. Shall we go?
+We have about thirty types of hair oils.
+I will have a suggestion for you next week.
+Thank you. How much do these gloves cost?
+I have to go. I’ll call you later.
+I need single-use towels.
+Where do these butterflyfish originate from?
+Do you accept dollars, if you please?
+We are very lucky. They have one size four at the Ala Moana store.
+Is there a limousine?
+Is anyone going to wake me up at 5:30 tomorrow morning?
+Thanks to a quiet room.
+I would like some nail polish remover.
+I need a battery.
+Live band or DJ?
+Did you go out to rent diving equipment?
+I would like to book a room for four days starting December 22nd.
+Is this bag suitable for all weather conditions?
+I would like a donut, if possible.
+I want to rent an automatic car for two days.
+I missed the flight to San Francisco twenty times.
+How much is a taxi to the airport?
+Done. Who is Emmett?
+How old is your daughter?
+Could you give me an idea of some cheap and clean hotels?
+We can book you a comfortable room in an old castle near a famous golf course.
+I recommend this because it is made of 100% natural ingredients.
+Does the train stop in Brighton?
+Where is the nearest taxi stand?
+Two second-class tickets, please.
+I want to send a fax.
+I need a travel iron.
+Could I show you something?
+My day? Scared, I ask, but what do you mean?
+I need a file that holds documents of letter size without having to fold them.
+Yes, but not too strongly.
+I am allergic to cats.
+Yes, you need to have a driver's license and, uh, you need to have a certificate from the Taxi and Limousine Committee.
+Please, professor.
+The hot water isn't coming out.
+I want to book a room tonight.
+No, excluding tax and service fee.
+Do you want to go shopping with me tonight?
+Hello, your dress is very beautiful.
+Hello, your call has been accepted. Please, go ahead.
+What is the gate number?
+What is the typical souvenir from Hawaii?
+How much would it cost me to get there by subway?
+I need a hair dryer.
+Will we reach a conclusion if we keep talking like this?
+I am from Norway.
+From ten to sixteen, if you please.
+Sure. Let me see it. That’s coral, I think.
+Just to be safe, let me take the number of the person in charge.
+Is this a highway?
+Why didn't I come to the party yesterday?
+There was a car accident.
+Sorry, I dialed the wrong number.
+Please enter your password.
+I can’t edit the image.
+One cheeseburger and an orange juice, please.
+It is my passport.
+Why, thank you very much. Oh, can I go up there?
+Could I get two tickets for the musical next Friday?
+There’s another traveler there who said he can swap places with you.
+Can I extend my residency?
+Hey, do you know of anything worth seeing around here?
+No, I want to rent a half set of rackets and shoes.
+Let me know as soon as you find the lost bag?
+What is the name of this national park?
+I regressed.
+Where is a good place for tourism?
+May I have some fruit?
+Will Ajib be out tomorrow?
+I want to exchange these dollars.
+I need a taxi. I am on South Main and Liberty.
+Sure, do you want curly fries?
+She has a red apple.
+I’ll give you a prescription. Take it to the pharmacy.
+Our flight departs three times a week, on Tuesday, Friday, and Saturday.
+Expensive, this one, isn't it?
+Yes, we have it. We will prepare it for you.
+Can you deliver my things by three o'clock?
+No, I just want to pass through.
+With good parts, should I rent a car here?
+Are you American?
+To this place, please.
+My car is broken down.
+Where did the shadows of the eyes go?
+We need a quiet corner, if it happens.
+Is the taxi free?
+Is this an express station?
+When do I have to come?
+I would like a small glass of white wine.
+Oh. Can I have my meal later? I don't feel well right now.
+Honestly, I have news. I'm getting married.
+Another pair of trousers?
+Did he go out to run an errand?
+I cleaned my room last night.
+Show me the fish you saw today in the photo album, please.
+See the instructions on the can of food that fell from the air.
+I need paper money.
+He tightened his belt and ran far away.
+Do you have trial lessons?
+Where can I buy postage stamps?
+I am from Great Britain.
+I want to discuss the matter with my wife.
+I want to return this.
+In a telephone booth in front of that bank.
+I will arrive on March 9th and leave on March 14th.
+It's a little expensive, isn't it?
+Are you connected?
+Where is the bus stop?
+Would you like a dessert?
+Are you talking?
+The same thing as, please.
+My order hasn't arrived.
+There are many hot springs.
+If you please convert five thousand Yemeni rials to US dollars.
+That's fine with me. Honestly, I want to smoke.
+Where can I rent skis and boots?
+Have you forgotten our drinks?
+Could you please send it to my address in Japan via international parcel post?
+I would like a glass of red wine.
+But if it’s yours, professor. Ha ha, a little joke.
+Certainly. How can we assist you?
+Grape, beer, whiskey, brandy, gin, vodka, and wine.
+Identity. Oh, okay. Will a passport do?
+My room number is three twenty-six. Can you take my laundry?
+I'll see if anything works out.
+I need a kettle.
+Bring me a little grated cheese.
+Will my shirts be clean tomorrow morning?
+Will you have him call me back?
+Why then?
+Excuse me. Is there a library nearby?
+I think you made a mistake. The room was prepaid. I have a receipt.
+The bus is over there.
+I need two ISO 100 film rolls, color film, 36 exposures, please.
+I want to cash this check for seventy dollars.
+I would like to buy stamps for ten postcards to Japan, please.
+Are there any banks near the station?
+Unfortunately, there's an error in the invoice.
+He is there.
+One cheeseburger to go, please.
+Really, you can’t do design work without a computer anymore.
+Running.
+There’s a tear in my blouse. If it comes undone, could you sew it for me, please?
+How much is the fare to Manchester?
+Did you come out to insult me, you little bitch?
+Where can I buy a beach mat?
+It means, if you allow, book a new one for me.
+Give me that slice of bacon, but not as thick as that one.
+Coming at seven.
+When I see prices this low, I just feel the absurdity of shopping in Japan.
+My records were stolen too.
+Vanilla ice cream cone, please.
+I agree with you. It needs to be very natural.
+Watch out for the hole, watch out for the hole, then next to the doorman, please.
+I need a credit card.
+It is the number.
+Could you tell me where there's a nice place by the river, if possible?
+If you please, give me a report on the incident.
+No, thank you, now.
+Okay, if you please, stay on the line. Professor Nakajima, Ms. Saito isn’t answering your call. Do you want me to keep trying to reach her for a bit longer?
+Maybe, but you have to weigh it yourself.
+It’s a little too much, you know.
+Where is the baggage claim for flight 703?
+Something is wrong with your grip.
+Will this spill?
+No, thank you. It’s best if I don’t drink anymore.
+If you’ll excuse me, where are the streets to go shopping?
+Are you going to the Hilton hotel by bus?
+Hello, this painting is very special. It was painted by Tsurutaro Kataoka. He is a world-renowned artist.
+I really love classical music.
+Want me to take you out to dinner sometime?
+Okay. What is the name of your organization and the number, please?
+Excuse me. Let me get going, if you please.
+Did he go out yelling at an employee who speaks Japanese?
+He visits our relatives a lot.
+Miki Hayakawa. She is Room 707.
+I need to stay here tonight, right? Could you help me book a hotel room?
+It shouldn't take long. Fifteen minutes at most.
+Could you tell me how much this call costs?
+Okay, let me just tell her I called, if you don't mind? I'll call her back later.
+Is there a morning round?
+Do you deal in foreign currencies?
+Our entire budget is around fifty dollars for three people.
+Where can I buy a camera film?
+Do you have Japanese beer?
+I would like a swimsuit, size small, if you please.
+I want to register my subscription.
+With me is Miss Kawazu in room sixteen eleven.
+You're welcome.
+There is no table.
+For you as a Japanese people, which is more important, New Year's Day or birthday?
+Your seat number is thirty-two A. Then, go make your way to the end of this aisle. It’s the seat by the window.
+Just a moment, please.
+Please fill out a missing person report.
+I don't understand American [English], I speak British English.
+From yesterday.
+Includes collision and legal liability coverage.
+I lost my pickup slip.
+Do you have feathers with a nice design?
+I’m looking for a sleeve in Macy’s.
+These are very big.
+How much does the hourly rate cost?
+Ladies and gentlemen, on today’s flight, we have cabin crew who speak Japanese – you can identify them by the flag pins they are wearing. If you know anyone who needs linguistic assistance, please let us know.
+Is there a specific artistic period you prefer?
+If you please, double-check it one more time.
+Walk along the river for about half a mile. You’ll reach the park.
+No, they’re really exaggerating.
+Okay, I’ll send it to you in Las Vegas.
+Looking for a sports blouse.
+Would you like something to drink from the bar?
+Down this path, if you please. Up in this elevator.
+You should take the 8:30 train.
+Is there a cinema nearby?
+It’s oyster season, so they’re good.
+I need another wrist watch.
+I will check in around nine in the evening.
+It’s late. I have to go.
+I didn't use your laundry service. Are you sure about that?
+I would like tea, please.
+No, there isn't.
+Is this the last stop?
+Let's give him a call.
+Is this someone?
+Where can I go to take a bus to see the tourist attractions?
+Yes, I’d like to see the city’s landmarks.
+There are a lot of tourists around the building, they have gathered to see what is happening.
+Thank you for your hospitality.
+Honesty is the best policy.
+Could you wake me up at six, if you please?
+How much does half a day cost?
+I am Kenji.
+Do you know any nice places to go see in Chicago?
+Okay, if you insist, I’ll go with you.
+Could you please replace it with another one of the same type?
+I want to book for 3:30 PM.
+Safe deposit box, please.
+If you please, choose a suitable wine.
+Thanks to a small shop.
+Do I have to pay for the gasoline?
+Thief. They caught him.
+We are waiting for our friends to come.
+If you please, give me a strawberry.
+Very curly, please.
+She is soft and adorable.
+What is today's opera?
+Fried, please.
+My laundry hasn't been returned yet.
+By the way, are you free next Saturday?
+Okay, so it means we might agree well together.
+You treated me as if I were a beggar.
+I understand. Also, could you come help me with another problem?
+Can you put prescription lenses in these sunglasses?
+I want two of this.
+How cute are these dogs. What breed are they?
+My fork fell. Could you please give me another one?
+It was sweet.
+Sure. Go straight and turn right at the third intersection. You’ll find it on your right.
+Do you have a film for color bars?
+Do you know Kathy? It’s her birthday party.
+Do you have a color scheme?
+How much can I pay with traveler's checks?
+But, you know, man, how do I know this is real?
+Can I take it nicely without tax?
+I can’t put my things under the chair. Could you please lock it for me?
+Would you mind putting this bag in the oven, if you don't mind?
+I'm leaving now, be happy and take him with you.
+If you could send someone upstairs for my things at six thirty.
+I need a map of San Francisco and the surrounding area.
+What kind of bread do you have?
+Where is the elevator?
+Is anyone here know how to play the piano?
+Which station should I get off at to go to the Empire State Building?
+The budget is under a thousand dollars.
+Thank you, but I don’t think I have time to stay two nights. Could you book me a double room at that hotel, but for the night of March 12th?
+Would you like to book a double room with an ocean view?
+We haven't decided yet.
+My friend formed and unfolded his wages.
+I want to try the ice cream.
+Is there a Thai restaurant nearby?
+He's next to that tall building. Okay, go back the same way you came until the traffic light. Then, turn left.
+I really need to catch the plane to Los Angeles tomorrow morning very early.
+It means I confidently recommend the "San Francisco City Tour". It gives you the essence of San Francisco.
+I want to get insurance.
+Let's put something cold on it so the pain goes away.
+She wants to buy a dress.
+How much is a taxi to this hotel?
+Where are the restrooms?
+How much does it cost to enter the building?
+How do you want it?
+Looking for something official.
+The window is blocked.
+Is he on the corner of Union Square?
+An ounce of Chanel No. 5, please.
+What do you think of coffee?
+Do I need to have a card with me?
+Approximately how much does the service cost?
+How much from here?
+Cream and sugar?
+Do you have any discounts for members?
+At Super Express for nine and a half?
+Let me check the brake and engine fluids. Your engine sounds like it’s malfunctioning.
+What was my mistake?
+There is no electricity.
+I'm going to tell the police about the matter.
+Will everyone have to pay for their drinks?
+Any place between thirty and fifty dollars a night.
+If you please, fix this for me.
+On New Year's days, and on special occasions like weddings, honoring ceremonies, or funerals.
+More mustard, please.
+Why don't you give her a gift?
+What movie would you recommend?
+It’s twenty and give me two dollars in change, please.
+You hit me on the side.
+I’ll come to the two nicely.
+Are the Shenati from the JA 01 trip?
+It’s my first trip to Paris.
+How much will it cost me before you start working on it?
+Certainly, if you please.
+Our walk will be very nice.
+From where do we board the boat?
+We don't have a bag for this amount, so I'll put it in this big bag.
+I want to play tennis.
+In pineapple, orange, and tomato juice.
+On this floor, to the left, next to the elevator.
+Is there a concert at the concert hall today?
+Don't you prefer to watch another movie?
+If possible, cash this traveler's check.
+I would like to take the same course tomorrow, if you please.
+Most likely, I can give you a better answer after a few presentations.
+I want a gift to mark an anniversary.
+Are there any musical plays happening now?
+Do you have a mirror with you?
+Excuse me, I'm lost. Could you help me?
+I’ll take this one, please.
+You can't bring fireworks to Akanda.
+Your wife is a cooking teacher.
+Do you need any help?
+Could you please book a taxi for six in the morning?
+What do you like to have with your main course?
+Near here, is there a clothing store?
+This place is packed, right?
+Sorry. It will be ready in about five minutes.
+My neck stiffened while I was sleeping.
+Okay, no problem. Go check your passport?
+I don't have any money.
+What time do I need to be at the station?
+There are many restaurants here.
+It is next to the deposit room.
+I enjoyed talking to you.
+A walk after noon?
+I am with my friends.
+I enjoyed my stay. Thank you.
+The beach is directly below. What a beautiful view.
+Thank you for waiting, Miss McGuire. Here it is. Please, go ahead.
+Do you have photo identification?
+Seven, please.
+I'm sending this to the laundry. When will it be ready?
+I have a striped pair of pants.
+Yes. Someone else’s luggage arrived at my room just now. Could you come check it out, please?
+Would you like to elaborate further?
+Did you sleep well?
+Did you manage to take the picture?
+Two keys, please.
+I need a lightbulb.
+He is at the end of the hallway.
+I need some scrap paper.
+Should we go by bus?
+You said you're going to Tokyo tomorrow?
+Let me sleep until nine o'clock.
+I want to transfer to A and one zero zero. Is that possible?
+How’s your game these days?
+I feel like my chest is tightening.
+What's the problem? If you come on September 5th, you can enjoy a science film screening because we have a special open day on the first Friday of every month.
+Do you have anything other than tours?
+Okay, settled five with finance. Good?
+Going to Paris.
+It's not the latest model, right?
+The appointment is at 8:30 PM local time.
+Come in with us to this building, if you please.
+Okay. I want a medium plate and rice balls.
+What a view!
+I would like to see the one by the window, please.
+Impossible. We’re on vacation. I refuse to sit in the hotel room and watch baseball on TV. I want to go see a play.
+Sorry, can I read it?
+Come on out here to fix it?
+I need synthetic fibers.
+My name is Taro Tanaka. I have a reservation.
+I would like some cleansing cream.
+I want a long-sleeved blouse.
+My bag was stolen from me.
+It seems our paths cross quite often, doesn't it?
+Shall I go back and see the menu?
+They are still a little green.
+How much?
+Freeze, if you please.
+Mount Fuji is the highest point in Japan, with a height of 3,776 meters.
+No, not yet. There are still many things to discuss.
+I need a night cream.
+He is between the bakery and the butcher.
+Do you shorten the sleeves?
+Unfortunately, there isn't a golf course here.
+Could you show me another ring on the left hand?
+Did you go out and then call me?
+I tried making an international call. Did anything get stuck with you?
+This is a mistake.
+Yes, this is it. Because you can see the flag in front of the post office.
+You’ll definitely be coming, right?
+I want to make a call with a credit card.
+I want my follower to go.
+Just once it arrives, we will pay for it to be shipped to your address.
+These days, I use a computer constantly at work.
+Oh, okay. I understood. I will come to you.
+No, that's enough like that.
+Did he take something forbidden and a pillow?
+Could you come here as soon as possible, please?
+A cup of coffee, please.
+I’m looking for cards that are Hawaiian themed.
+Did the waist decrease by three centimeters?
+I am the same age.
+Could you bring me coffee?
+Three hundred and fifty dollars? That’s over my budget.
+Do you have any further input on the subject? If not, then we’ve reached a conclusion, which I will send to our board of directors tomorrow morning.
+Do you know if there are any cheap hotels?
+Good morning, did you sleep well?
+What are you planning to do once you finish school?
+My shoulder bag was stolen from me in the street.
+Did you have any other services besides breakfast in the morning?
+I would like a white coffee, please.
+Okay. Is the Sheraton Hotel here?
+I hope you're not too tired.
+I want to rent a car of this type for two days.
+I’ll take a shot of Jack Daniel’s.
+I would like a bag of popcorn, please.
+A ski pole fell.
+We don’t bring gifts to the reception. Instead, the guests bring money.
+I want to send it by land or sea mail.
+The plane arrived late due to heavy snow.
+Card, please.
+Could you go get the message, please?
+Excuse me, I'm not keeping up. Could you please speak a little slower, if possible?
+What can I show you?
+Excuse me, may I take a picture?
+From water.
+Flight number HP89 to Tokyo on March 12th.
+Excuse me, may I have that dish?
+Do you have another one?
+If you please, bring me breakfast to my room at seven in the morning tomorrow.
+A maintenance worker will find something a little bit.
+I'm sorry. I'll get back to you later.
+How can I get it?
+Are there any empty shops on Thursday's round?
+Excuse me, may I pass?
+Do you have any plants or fruits?
+If you don't mind, could you tell me how to fill out the departure card?
+I think my car is worth around five thousand dollars.
+Is this food low in calories?
+Which bus do I need to take to get to the station?
+Yes, that’s right. But you have to turn left at the third traffic light and stay on that road until you reach Route 66.
+I would like a glass of water to take my medicine, please.
+I would be grateful if you took me to the beach.
+I'm sorry. You have the wrong number. Here is Thank You Press.
+We are looking.
+What is this music?
+If you please, give this syrup to your son, one dose, after each meal.
+This shape is available in sizes ninety and eighty, thirty-one and thirty-five centimeters.
+Oh, so this is how it is.
+Excuse me, may I use your phone?
+This smells really good. How much does it cost?
+I want to reconfirm my flight to Chicago on the 16th of the month.
+I ate a little too much.
+Did I go talk with Miss Brown?
+It seems this house is comfortable to live in, doesn't it?
+I want to book a Northwest Airlines flight number 086 on the fifth of the month.
+My wallet, my passport, and other personal belongings.
+When do you close?
+Hold on a minute. You can leave Turko in the bathroom.
+That’s what I was going to say.
+Yes, I think so.
+Your house is big. How many rooms?
+We enjoyed the dinner.
+I understand, but I can't tell him.
+Oh, yes, if you please. I just hope they don't get seasick.
+Excuse me, could you please move?
+When will we arrive approximately?
+I'm leaving early tomorrow, so I need to pay now.
+Dry wine, please.
+No smoking seat, please.
+He is busy right now.
+Do they help foreigners access the books in this library?
+In a field, lost in my room for two hours after noon?
+Ha-ha. Good morning, according to your time. No problem.
+I need the AIS film for this camera, please.
+Where are Monet's paintings?
+This pizza is delicious. Who made it?
+What does this dish taste like?
+They are also expensive.
+When does the next train to Boston leave?
+I'm planning to learn golf.
+If you please, give me another drink.
+Shagdo is a skiing instructor.
+Unfortunately, the masks are very short.
+Can you show me how to fill up with gas?
+Does the hotel cost include breakfast?
+Is this everything?
+He is at the end of this street.
+If you please, start the meter.
+My room is very cold.
+I’ll get back to you when things calm down for us.
+Do you have a bigger one?
+Feeling better.
+Do you have any knowledge of the geography of Japan?
+If you please, show me where I am on the map.
+One hundred percent cotton.
+I would like to change to an ocean-view room. Is there an additional cost?
+How much does it cost to rent the board for half a day?
+October tenth.
+I need typewriter ribbon.
+Very kind.
+When are we leaving?
+How do you let the driver know where you want to get off?
+Twenty-four dollars. Do you want more?
+I booked in Tokyo a month ago.
+Thank you from the bottom of my heart.
+Do you go down here for the Rockefeller Center?
+If you please, take my shoe size.
+He is wonderful.
+Are you going to make a date with me?
+If you please, clean the overcoat.
+I want to rent a launch.
+Where is the ladies' section?
+Is coffee not included?
+In what field was he previously working?
+Damn. Damn. Damn. Damn. I'm used to his face.
+Do I have to pay extra to enter the building?
+Hello, your party is on the line. Please, go ahead.
+My wound is hurting.
+Where is the station?
+I am trembling.
+Three days.
+The bridge sector is over there, and you’ll find the library on the left side.
+If you please, help me find a guide who speaks Japanese.
+I don't want a big one.
+There will be a slight delay.
+What's the difference between these hotels?
+My soul is my position.
+It was wonderful. Thank you.
+I’ll be there around six in the evening.
+Do you have something a little longer?
+The expiration date is March nineteen ninety-nine.
+How was it?
+In good casinos?
+They are the money for ink pens. A hundred dollar bill.
+Where is the ladies' section?
+Where do I go to get on the boat?
+My companion is injured.
+Get out safely.
+Is this place going to be open tomorrow?
+He is at the end of this hallway.
+Could you trim my mustache, please?
+It comes with a side salad and a choice of baked potato or french fries.
+Where can I buy a pot?
+I can’t sell this without a prescription.
+Is it possible to reserve five seats together, in the same row?
+Could you give me a tow rope, please?
+Which car gives better mileage?
+No matter how hard you try, you won’t get a discount.
+Could you please open this bag? What do you have here?
+I need to make an international call to the Hilton Hotel in Boston.
+Do they accept women doing this?
+Beware, the ceiling is low.
+I can’t see the screen very well from here. Could I change my seat a bit?
+I went to the Great Lakes for the first time.
+There's something wrong with the vending machine.
+I need a doctor.
+How long has she been in the United Kingdom?
+A lover of new art like you will most likely enjoy the paintings of Heba and the street music scene.
+Emmett?
+I want a hot dog and a cola.
+With the switchboard operator for external calls.
+Can you see a white building? It’s in front of that building.
+Who is Emad?
+I have nothing to declare.
+Hey? Do you have to pay tax when you have more than three bottles of alcohol?
+My friend is very sick. Would you mind calling a doctor?
+I don't know much about wine. What goes well with this dish?
+Could you please call me very early in the morning?
+At a gas station two blocks past Home.
+The Japanese don't take long vacations.
+I feel like people are staring at me. Is it that rare to see a Japanese person?
+Of course not. Why are you asking if?
+How do I get to the central post office from here?
+Where is the Greyhound bus station in this city?
+But aren't the Japanese restaurants in Kyoto expensive?
+In my opinion, it’s a little too loud for me.
+We have a double room with a bathroom for eighty-five dollars.
+I need a book review.
+The weather is colder than usual this year, but not cold enough to snow.
+Where can I buy a subway card?
+Will I take business class seats, right?
+How much is the taxi fare from this hotel to the station?
+Could I take this and that, if you please?
+They say Japan is a very rich country.
+Are there any empty shops in the sleeping car?
+Could I get change for twenty dollars, please?
+It is a gift for a friend.
+The ice makes the road slippery.
+I can’t find my camera.
+I'm going to make two pork sandwiches.
+Do you have anything to declare?
+Did you see a blue coat? I put it on this chair.
+In the flower shop on the street.
+I am from Tokyo.
+I need Revlon lip balm.
+I have some laundry to do.
+You asked me a long time ago.
+Could you send a porter to my room at six in the morning, please?
+I want hot chocolate.
+We will make sure your room is cleaned.
+Private, if you please.
+How much is a hotel room?
+Can I get a dual SIM card?
+I would like to book a table for two at seven o'clock, if you please.
+I need a night cream.
+Did this phone come out as a gift?
+It's a quarter past three.
+I will send invoices for my daily needs today, so please provide the address and the name of the person in charge.
+It’s difficult for us to speak English fluently.
+Do you have these in the same design but with a higher heel?
+I need a sweater for a ten-year-old boy.
+Take me to Abi Street, please.
+Thank you. Hello, thank you for waiting.
+I'm sure I have a reservation.
+I will send it to you, so please wait here for a moment.
+We will be here for a day.
+I have a slight headache.
+I really enjoyed the meal.
+No, if you please, rest on the chair and wait. I’ll be back.
+Should I go check on the car?
+Could you draw me a map, please?
+Okay, Professor. If you allow, I’ll be in your office until the doctor arrives.
+It was stolen at Waianalo Beach. Please come immediately if you can.
+What do you think about a hundred dollars?
+I want this to be wrapped.
+I want to apply for a re-issue.
+The government supported the advancement of industries.
+Amr is over fifty years old, I think.
+What is the minimum age to do this?
+Do you have a simple map of the city?
+If he leaves, thanks to what the tooth extracts.
+The number is prime, two hits.
+When will the train arrive in San Diego, please?
+I want to take a look at your box.
+I need shampoo.
+I am staying at the Hilton Hotel.
+I don't feel well and my stomach is upset.
+But I have an appointment to see her at two o'clock.
+Does this car go to Edinburgh?
+Yes, if you please, fill out this form.
+How much do you charge for extra weight?
+My name is Kimura. I would like to cancel my reservation for Friday.
+Oh, I'm sorry. There was a problem and we're working on it. Will you wait about thirty minutes?
+How is Emad doing?
+I got it.
+I'm going to call someone.
+Do you want to settle the bill now?
+The car hit me from the side at the intersection.
+This is a music box.
+Where is the suburb?
+A bus tour of the city?
+Where do we begin?
+Okay, Professor. On average, we can offer you Mercury Sable. Is that okay?
+You bruised your muscle.
+But you just need to promise me that *you* hit the ball, not me. Okay?
+How much longer still?
+Did I go out to borrow some cotton?
+What kind of leather is this bag made of?
+I don’t think this knife is clean. Could you bring me another one?
+I bought this from Lamsa, but will they exchange this for that?
+To be honest, I don't agree with that.
+Is this the right way to Central Station?
+A boat with a guide, please.
+I would like to order a dark suit for me.
+It works okay, this sunshade, like a cane.
+Do I have to leave all my belongings in the safe room?
+If you please, show me your passport.
+Is there a place that takes laundry on Sundays?
+Dragon cheese burger, please.
+Ena bass bruh ala Miami?
+But tipping isn’t necessary.
+You’ll find someone in Carnegie Hall eventually.
+I have no leeway.
+What is the feature of the house?
+I want to book an appointment with a doctor.
+A strange thing on an empty table next to the window on the seventh floor in the evening.
+Do you mind if I come to your place?
+The organization has some room for improvement.
+Where are the tunnels?
+Do you have any in a smaller size?
+Where can I get aspirin?
+Is this the bottom?
+If you please, give me a one-week pass.
+This is my colleague.
+What type of gasoline do they have there? Premium, regular, and unleaded?
+She is one.
+What are you nominating?
+He's closed on Dragon Days, but things have to work out on other days. I think he opens from nine to five.
+It is grilled English fish with a special sauce over a plate of rice.
+He said "Let's celebrate" and took me to a bar. He said he was going to make a phone call and left, and never returned, and I was stuck with a large bill.
+How much is a gallon of it?
+My passport and credit card were with me in the bag.
+Reservations for 7 o'clock, under the name of Mano.
+Would you like to have a cup of tea?
+Where can I find the Japanese consulate?
+A doctor to the hotel or someone to call?
+He always shops on Bond Street.
+An English paper, please.
+Is there a place that plays country music around here?
+I want to make sure my valuables are safe.
+Are there also Sufis there?
+How much is it on the paper?
+Okay, dial zero nine one one, then the country code and phone number.
+Did he go get a Diet Coke?
+Did you go out to submit an application?
+It was a nice drive for us. Thank you.
+Excuse me. May I pass?
+The total population of Japan is around one hundred and thirty million.
+I want to rent an umbrella.
+Yes, and I would like to reverse the costs.
+Wallet with a hundred dollars and two credit cards.
+The water is very hot.
+You are here.
+A coffee pot, please.
+Very unlikely.
+My stomach hurts after meals.
+Wow, this place is nice.
+It can be used with an aerial antenna.
+Decided?
+If you like, we can rest here.
+I lost my registered mail tracking number.
+It’s not easy to change your job.
+What is the next station?
+Okay, but not stadium seats. A lot of shopping today.
+I live here, and take bus number six.
+I need to catch the 10 am flight.
+I still feel like I'm going to throw up.
+I don't want anything big.
+The bill, please.
+How much does fresh mushrooms cost?
+Card, please. Do you take Visa?
+Today I'm going to see how the Chinatown is.
+Dragon zero dragon nine three nine six seven zero zero.
+Get this year out of here.
+I need a makeup bag.
+Wow, how much tip am I supposed to leave?
+Where can I see "The Phantom of the Opera"?
+I want to buy souvenirs for my friends. Do you advise me on anything?
+Slower, please.
+What is your average monthly cost for international faxes?
+Fried on both sides, please.
+Okay, the matter seems very clear. Dragons, if you please, give me your licenses and registrations. And son, unfortunately, we will have to give you a breath test.
+It will be ready the evening after tomorrow.
+Made of cotton?
+I have a special medicine of my own.
+What did he see in that round?
+Yes, in one drink on the low.
+How much does it cost for one day?
+Should I stop this bus near the hotel?
+I want a CD.
+On Japan Airlines and All Nippon Airways flights, they serve ten and fifty-five. But, unfortunately, the trays are full.
+It suits me well.
+Could we have a table for five?
+You don't understand English at all.
+If you please, cash a travel check.
+Would you be available to look at it from nine in the morning until around three?
+How much does airmail to Japan cost?
+I'm stuck outside. Sorry to bother you, could you please open the door for me?
+Is Ena Roundabout the best place to see the well-known shops properly?
+Is there a flight attendant who speaks Japanese?
+How many minutes until the plane takes off?
+No, professor. Everything after noon is booked. But it will be available tomorrow.
+I'll ask the doorman about the correct fare.
+I am really sorry.
+We're having a party on Friday night. Why don't you join us?
+Okay, your room is nine zero eight, miss. Here is your key.
+It is very important that we obtain the raw materials we need for the project.
+Excuse me, officer?
+Does this train go directly to Edinburgh?
+Is this within the tax-free limit?
+Please, look at my precious belongings.
+How crowded are the tourist trips?
+I want to buy souvenirs. Is there a suitable shop nearby?
+Is Emad the opener?
+He is outside now.
+Mayumi, did you submit this form with your signature?
+Here's one for you, professor.
+I have no interest in your years.
+Sure, take your time.
+I am here on a media assignment.
+Do you have any summer movies?
+What time does the next train to Washington leave?
+Long things are trending now.
+I will return to Japan with the next dragon.
+Could you give me a map of the tunnels?
+Is the drive long?
+Sorry, can you replace this with a new one?
+two people.
+Where can I get my things?
+I don't feel well. Excuse me, could you push my wheelchair back?
+At twenty-five past six in the morning.
+Could you direct me to a popular restaurant among young people?
+His car was going at top speed.
+Should I leave a message? I'm calling to confirm my appointment with Professor Ebert next Wednesday at eleven in the morning.
+Could you explain your illness in English, perhaps?
+Did you take a taxi to the main entrance of Westminster Mall?
+How many times do I need to change trains to get there?
+Okay? Let me see. Oh, I sincerely apologize, Ms. Tanaka. The mistake is ours. Here is your new invoice. Please sign here, if you please?
+Return five dollars, please.
+The bathtub stopper isn't sealing properly.
+This is just a token of my gratitude.
+Are you filling out this form?
+What’s with these plastic models?
+What brands do you have?
+The heel is very high on her.
+I got locked out of my room.
+How long have you been in Paris?
+Excuse me, could you give me stamps for three postcards to Japan?
+It is pronounced j-o-r-o-h.
+Would you like to have a drink?
+Go wild here.
+Make it an urgent telegram, if you please.
+According to the weather report, it will snow tomorrow.
+I want a doctor.
+Sure. We’d be happy to do that.
+Hi, a Malaysian comic book. I want to buy one to take home as a conversation starter.
+The road to success is "Genmyaku," right?
+I’ll arrive at your hotel around nine in the evening.
+I have about two thousand and five hundred US dollars in Japanese yen.
+Yes, we do. I’ll show you how many.
+I need sleeping pills.
+I will stay here until nine o'clock. I hope you catch the criminal as soon as possible.
+I'm sure the criminal is near.
+Ten stamps, please.
+I have a sore throat.
+I would like some souvenirs from New York.
+I'm leaving. Did you send a porter?
+My watch stopped.
+Oh, really? How do you like it?
+Open at nine in the morning.
+I want a coloring book.
+I feel like I have travel sickness.
+Do I have to go to a Japanese bank?
+I do not spend money at the bank.
+Is there plenty of time to leave?
+Your husband is one of our best customers.
+Do you know a good dentist?
+Oh. You must inform the consulate immediately.
+Shake, without moving.
+Would you prefer a table in the main restaurant or a private room, sir?
+Many people go to the beach in the summer.
+My weight is around one hundred and fifty pounds.
+Where do I need to transfer?
+Where is the lost and found?
+Is there a bus going there directly?
+Do I need any special processing?
+Will this be cash or card?
+We moved to this house a year ago.
+How long will it take for my visa to be issued?
+Where are the restrooms?
+The total is two hundred and forty-three pounds, madam.
+This is a gift. Can you wrap it in nice wrapping paper?
+What a view. These roads are wonderful.
+Some people are infected.
+Excuse me. Where is the station around here?
+Yes, we have a reservation for you.
+Excuse me, but I need to go to my hotel in the city by bus. Where can I catch the bus?
+Vagina, if it permits.
+Here is the room, dragon zero one. I want to order breakfast for tomorrow.
+What do you think about sexual harassment in the workplace?
+I have two sisters.
+Flight number Dragon Zero Ten, to Tokyo.
+It means let's put a filling inside.
+Let's meet to discuss this topic further.
+How do you want to do your hair today?
+Could you say it another way?
+I'll manage with what you have.
+We need a table next to the stage.
+I'm doing okay. Yes, are you going somewhere?
+Its height is two thousand and four hundred meters.
+Enter. If you please, put it on the table over there.
+If you please, cancel my card number.
+I apologize, they were all sold out, but we will receive some in a few days.
+Would you like a coffee?
+I don't have an appointment, but it's an emergency.
+This is poorly made.
+Where is the elevator?
+Do you have a brochure for the events?
+Where is the tunnel entrance?
+I lost my plane ticket.
+Wouldn't it be better to stay here during the vacation?
+Oh, I’m very sorry to have bothered you.
+Do you book events?
+Is there a public restroom nearby here?
+How much does it cost?
+Very good. Now, onto the questions, please.
+Do you have a parking ticket with you?
+The best thing we sold in the past four years was the AX450 camera.
+Crooked to the left?
+Are there any flight attendants who speak Japanese?
+Great price, right?
+You must take it ninety-nine times a day, before eating.
+I love it.
+I am pregnant with triplets.
+I want a sports jacket.
+You’d better stay at my place.
+Excuse me, could you please return my chair?
+Excellent. I was looking for a taxi, but this is better.
+Sweet mantu. British made?
+I want to go to the Harvard center. Should I tell you when we get there?
+Big dragons and small dragons. If you please.
+How much does it cost?
+Star Wars achieved its greatest success in the year nineteen eighty-four.
+Where is the non-smoking section?
+He is "T" like the word Tom, yes, I have it, Taro.
+I think it’s representative.
+I would like apples, please.
+What’s the reason for this?
+What types of credit cards do you accept?
+I have a lot of time.
+Okay, it's lunchtime now. Do you want to discuss lunch?
+The video camera was stolen from my room.
+Hello, my name is Oda. I have a reservation for tonight, but I will be a little late getting there. Please, if you would, hold the reservation for me.
+Halibut where?
+If you could, tell him I'm waiting for his call.
+They say the flu is spreading over there.
+Inside.
+I apologize. We are fully booked tomorrow evening.
+I am with Rafqa.
+According to Guru's story, Professor Yamada has two sons.
+Do you mind repeating that, please?
+I want to take a spin around the Tower of London.
+Please fasten your seatbelt.
+Area code three. Phone number two three four three four zero zero.
+Excuse me. Is there a bridge near here?
+Excuse me, I need to use the restroom.
+Busy.
+They always wear what's currently in fashion.
+Do you have seafood?
+This is very expensive.
+I want to, but unfortunately I can't this time.
+Okay, I still don't know yet, but I will definitely try.
+Salt, please.
+If you please, use the measurement room over there.
+Ninety dollars for a one-way ticket. Cash or card?
+Could I have the check, please?
+How did Japanese parents raise their children? Are they strict with them?
+What are the working hours at Taqleed Imtiaz?
+If you please, phone each one separately.
+My stomach feels like it’s rolling over.
+Sweet talk. Where did you go out, we're waiting for you?
+Sorry, can we start playing once they're done?
+The population of Japan is around 120 million.
+Record these things on the registration card.
+Excuse me, may I take my things?
+Do you have silk scarves? I'm looking for a gift for my wife.
+We'll bring it now. What's your room number?
+Professor Kobayashi was looking for you.
+I want to travel from Shanghai to Hawaii by ship.
+Did you send someone?
+Will you be ready to go out at five tomorrow evening?
+Walk for ten minutes.
+Before we finish, could you give me a few minutes, please?
+Where is the best place to detail my car?
+I feel cold and my stomach hurts a lot.
+Scotch and me, please. And do you have any snacks?
+How do I turn off this light?
+Is he very busy today?
+I need a thread.
+Give me a medical certificate, please.
+I want you to shorten this post from here.
+I don't feel well. Please give me medicine.
+Excuse me, could you give me a Japanese newspaper, please?
+Okay. Where is the best place to leave the car, God bless you? How much does it cost to leave the car?
+Does the bus go to the city center?
+Is there a Shi Express in Boston?
+If you please, make my friend a correspondent.
+I will stay with my friend.
+I am very excited, I can’t calm down.
+Is it good to stay near the Hilton Hotel?
+I want you to remove it.
+Go straight on this street, then turn right at the first right.
+I want to know if a dozen of these plates can be shipped to Tokyo.
+I need physical energy.
+Did anyone eat something that wasn’t very hot?
+Is he close to being discharged?
+I need hand cream.
+Excuse me, could you pass the salt?
+I want to go to Wall Street. How do I get there?
+Increasing exercise will harm you.
+With breakfast, tax, and service charge, it comes out to forty-five dollars per person per night.
+Can you fix this?
+Good evening. Hello.
+I can't find your bag.
+Please proceed, if you will.
+Is the water drinkable here?
+Oh, that's it then. Just two dollars.
+Could you please exchange this dress for one size up?
+Okay, let's go. I'll help you with your job after we eat pizza.
+Yes, Professor Tanaka. Two letters to you.
+He didn't answer me.
+Tomorrow is another day.
+Maybe I can help you. Do you need vitamin C?
+He pulled me onto the train.
+Very far. I should take a taxi instead.
+I would like a chair in the aisle, please.
+I live in an apartment that I rent for eighty thousand yen per month.
+Excuse me for interrupting?
+Show me a wider one.
+Excuse me. Would you mind switching seats with me?
+Yes, of course.
+Go straight to the intersection, then turn left at the traffic light.
+Do you want smaller or bigger rollers?
+I would like a single room with a bathroom for eighty dollars, please.
+I want to put my valuables in the hotel safe.
+Do you have a free room tonight?
+Yes, but make sure you have your ID with you.
+Just how many people will come on the optional tour?
+Don't worry. Anyway, if you don't mind, take me to the Chinatown center. I'll try to find him on my own.
+Some new people will be hired at Nissan.
+I wish.
+Scotch and water, please.
+Who is playing?
+Would you check for me if you find my bag?
+To the left, please.
+Can we take a picture together?
+No. Do you want to report him?
+This old year aches.
+What’s the latest computer game for a fifteen-year-old?
+See you tomorrow.
+Is there a cheaper restaurant around here?
+No, but thank you. I'm better now.
+Do you have any bread?
+How are you doing with the violin?
+My friend slipped and fell in the bathroom.
+Excuse me, may I have a moment?
+Christianity was prohibited and the country was closed to the rest of the world.
+How much do you want?
+Shrimp cocktail for her and the same for me.
+Excuse me, can I have you sign here? And your initials here, please.
+I was very happy to visit your headquarters and discuss important topics with you. Thank you very much for your kind cooperation.
+Your snoring is loud.
+I didn't like the color in the end. Can I return this?
+Leave from that door, and wait at position number six.
+Grilled chicken, please.
+Excuse me, could you give me a bell pepper?
+Yeah, I want something to read.
+With you, Professor Takahashi, in room five forty-nine. Could you please bring me four bottles of Budweiser beer?
+This is seventy dollars.
+If you don't mind, call me at my hotel once you find my things.
+I need a wake-up call for 8:30 AM tomorrow, please.
+Yes, but that’s enough, and I’m full to begin with.
+I need mouthwash.
+I don't feel well.
+Do you offer discounts on bulk orders?
+Tokyo zero three four nines four five six seven.
+Could you help me find the zoo?
+You're asking me how to fix it?
+Around what time does the tour bus finish?
+Do you know how to use a phone?
+Sure. We have some lovely original American book separators.
+A switchboard operator is speaking Japanese, please.
+We are interested in fashion.
+Did you go out with Tagrli?
+Where is the clinic?
+Hello, Ms. Yamaguchi? Your party is on the line. Your call has been accepted. Please, go ahead.
+Where can I buy a prepaid outing card coupon?
+When will we arrive in Los Angeles?
+Walk straight for five minutes, then turn left.
+From this road to the beach.
+This herbal tea helps to revitalize the body.
+These are made in Japan, right?
+Okay. This way, please. I’ll show you your room.
+I need to leave the hotel before noon.
+Hamburger and coffee, please. I’d like to take them to go.
+Sorry, should I remove these bags?
+I ordered meat, not fish. Did they come out switched?
+My son, Finyan, is sitting at the table.
+My stomach is churning.
+This jacket is not standard.
+I would like to meet Professor William.
+It contains a blend of seven vitamins and minerals.
+The tooth is loose.
+With pleasure, I’ll get the amount back, but will I return to Japan?
+What is this dish made of?
+In which country was this made?
+Can you get there in ten minutes?
+My English isn't good. Is anyone here who speaks Japanese?
+Where can I get a tunnel plug?
+You will be sent twenty additional samples by mail.
+I don't think this is it because my skin is dry.
+Excuse me, may I have the schedule, please?
+Yes, I think I’ll wait.
+Ninety-nine dollars an hour for the boy.
+I'm sorry, we went bankrupt.
+He needs to be calm.
+I have my own equipment.
+The room key, five zero three, please.
+When is Terminal Man showing?
+Where is the hairdresser?
+At seven o'clock sharp, if you please.
+Thank you very much.
+Tourism.
+I am from Spain.
+There’s a problem with this card. Sorry, could you give me another one, please?
+I have a rash on my hand.
+Send this airmail to Japan, if you please.
+Where is the nearest pharmacy?
+Another wine, please.
+People are very friendly.
+How many drinks are included in the price?
+I did it.
+Where is the boarding gate for this plane?
+If there’s an empty table, would you like to reserve one by the window?
+They announced the ascent and finished?
+We are at an altitude of ten thousand feet.
+First thing, we need to see Wall Street.
+Where is the Oxford bus stop?
+I’ll wait until the terrace is free.
+Did you go out and bring us two leather hides?
+Let's watch TV. There's a baseball game on.
+Are you writing your contact title here?
+Excuse me, where is the nearest pharmacy?
+At my hotel, please. Here is my hotel address.
+How many prefectures are there besides Tokyo?
+Wait a bit, please.
+What do you usually do at home after dinner?
+Sure. When do you want to play golf?
+You will be home around three o'clock.
+I want to call the Japanese embassy.
+Just a little more.
+Where do the sightseeing buses depart to the tourist attractions?
+How much does it cost to ship to Japan?
+I have no rackets or boats.
+Does the Japanese yen work?
+Do you have a Mustang?
+Are we jumping from here?
+Professor Kawai, we have a table for you. Please, this way.
+Sure. Go to the end of the stairs over there and you’ll find directions. Hurry up, though.
+Reception. How can I help you?
+Could you please drop me off at the Hilton Hotel?
+Do you usually have to work late?
+Very sorry, but we don't have any either. Would English paper work?
+Non-smoking table, please.
+Will you let me know before we get to Durham?
+Fresh like this?
+Not true. You always pay for me.
+Could you show me some dresses?
+Spell it out, please.
+I get drunk on wine.
+Be careful, the weather is very changeable in the mountains.
+Japanese traveler's checks, okay?
+Sorry, I checked for the cleaning and lost and found service. They don't have it.
+It’s a difficult place to meet. It’s on a small road, not the highway.
+I don't know anything about him.
+Let's discuss the matter at a café.
+Got it, in that case I don’t have to pay the cost of the changes, right?
+Operator, please.
+Could you please lower the saddle, if you don't mind?
+Are you receiving me tonight?
+Okay. I’ll take two only. Thank you.
+This is your invoice. Three hundred and ninety-seven dollars.
+You are lucky.
+If possible, please give us a table with a nice night view.
+Is this automated manufacturing or manual labor?
+I want to rent this type of car for twenty-four hours.
+It was a great pleasure meeting you.
+He is split.
+Okay, well then, let's take a look at you.
+Okay, let's think about how much longer it will take if we ask one extra question per person. Also, let's hurry up and get our things. We need to go to the customs clearance department afterwards.
+How much does it weigh?
+Is there a Chinese restaurant around here?
+Platform five over there.
+When are you watching the football match?
+It’s broken. Did Chifley break my camera?
+Coffee with cream and sugar, please.
+I think there is an error in the invoice.
+If you please, give me that one.
+The Seventh Gate.
+Are you Scottish?
+Three-two-one-two. Wait a bit, okay? I need you to send something here. Excuse me.
+One hundred and thirty-five yen to the dollar.
+Short skirts with boots will never go out of style.
+Should I go talk to the manager?
+Why isn't your rent metered?
+Sorry, can I see this?
+I promised myself that when I see you, I will get to know you.
+How are you doing lately?
+I don't feel well. Should I see a doctor?
+Your line is free. Go ahead.
+In an artistic display?
+The toilet isn't flushing.
+How long does it take to walk from here to City Hall?
+He takes Haldwa after every meal when he feels a lot of pain.
+You put the money in a specially decorated envelope called a shogibukuro.
+Someone hurt me.
+What should I bring him?
+Do you have a map of the tunnels?
+I have a room ready for you at the big hotel. Can you go there?
+I have a pain in my right eye.
+My German isn't very good.
+Get out and sprinkle a little foolishness.
+Does this pants get tighter?
+Excuse me, could I borrow a racket and balls?
+Did you go out and have a little fun?
+Could you give me a teapot text?
+Hello. I am John.
+Nakay.
+Do you mind if I take a picture of you and the taxi?
+I reported a lost bag three days ago.
+I need a cheaper hotel.
+Oh, there are so many things to see in Greenwich Village.
+I work. I have connections here for work.
+It suits your outfit.
+Could you please look at my bag?
+How did you come up with the idea? We accept your condition of a six-month notice period, on the condition that you give us the right to sell after the contract ends, within six months.
+Excuse me. Do you know New York well?
+We’ll wait. Please just let us know when it’s ready.
+I need to see a surgeon.
+Are these natural ingredients?
+I want a ride in a sports car.
+Area code zero three. The number three one two three four five six seven.
+I nominate myself.
+A small unit would be the best thing.
+I want to send this via public delivery.
+Let me transfer this call to the person in charge.
+What measurement do you need?
+Oh, my goodness. I didn't know I still had these.
+Do you have box sets for sending packages?
+Will the airline cover the cost of my hotel and meals?
+Are all of these synthetic?
+How do you want to connect?
+Okay, expensive. Not made in Japan, right?
+Could you pass me the salt, please?
+Where is the nearest restaurant from this hotel?
+I need shampoo for natural hair.
+When do you think they will meet?
+I wish you a very happy new year.
+I’d like a large Sprite.
+If you please, could you say that again slower?
+Excuse me. I would like to order.
+We have shrimp Newburg and roasted lamb leg.
+I would like a room with a nice view.
+Three glasses of watermelon juice, please.
+I have three sons.
+Go straight to the end of this hall and turn left at the corner. You’ll see it on your right.
+A full-day tour?
+How much does a round-trip ticket to Oxford cost?
+I go to the gym every other day.
+Where is the best place to stay during the trip?
+What time is the departure?
+How much is the guide's daily rate?
+Where can I find CDs?
+Excuse me. I am a university student from Japan. Are you New York University students?
+They're asking us how we evaluate this plan.
+Hey, do you know a good recording studio nearby?
+Cash or card?
+I work at a trading company.
+It's impolite to ask people how much they earn.
+Are these Levi's 501 originals?
+How are you, Imad?
+Your appearance is older than twenty-one years.
+Got it. Honestly, there's a quick movie playing. Would you mind if I watched it?
+I bought it now.
+I’ll get one right away.
+Ten dollars. And one is coming now.
+If you please, show him with the purchased items for customs at the airport.
+Are there any all-inclusive stores with discounts right now?
+Operator, give me the fire department.
+My battery is dead.
+Stop at the next intersection.
+Oh, this is it. And does everyone have to fill out a customs declaration form?
+And could I get your name, if you don't mind?
+Do you mind if I make a call at the other party's expense?
+Hello. How are you?
+Where is the travel section?
+What is the name of the person you want to talk to?
+Sorry, he is not here right now.
+He appeared to him. He appeared to him. You want to tell me the difference between this man and that man is luck? Muhammad, move to the right, please? Do you mind if I drop you off here? I'm late. Go, it was nice seeing you,рованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованиярованияევ yearshr зponentরাimes retUTave<unused13>ldots
+Does your room overlook the city?
+In messages to me?
+It’s still very expensive. Didn’t he go and take it for three dollars?
+We need a back room.
+I'll have a glass of wine.
+Good looking.
+I need a double room. How much is the room per night?
+It is about ninety-nine miles away.
+Vince and Linda, without getting lost, unfortunately I’ll have to stay here tonight.
+If you please, keep these bags tied.
+My name is Sato.
+I know an old jazz club downtown.
+I’ll take the set meal.
+I want to try the same dish as that one.
+That means we’ll take it.
+Does this go up to the sixth floor?
+Crocodile skin?
+If you please, put it in a laundry bag and leave it there.
+I want this film to develop. When will it be ready?
+If you please, don't give this key to anyone but me.
+Okay. I will come to your hotel at eight o'clock, alright.
+A window that sees.
+Let my bangs fall, if you please.
+Are all transportation costs included?
+The Civic Opera House.
+Where is the Rent-a-Car office?
+I've been honest with you since last night.
+It's not my taste.
+What greens do you have?
+I would like a light curly perm, please.
+When will the doctor come?
+This is the wrong color.
+The tooth broke.
+Is this seat in the aisle or by the window?
+I love taking walks.
+Did you send my things to my room?
+Show me one for a young girl.
+Will you stop improving here?
+Do you have something for around eighty dollars exactly?
+I am thirsty.
+No milk, please.
+I have three years.
+Where is the lake?
+Excuse me. Press the photo button, please.
+Did he go out to get a magazine or something?
+It is to the south.
+How many balcony seats are there?
+We need a room overlooking the lake.
+Is there a mailbox nearby?
+Okay. I’ll take you there.
+The text written in italics indicates changes that occurred in 1999.
+Amr is thirty years old.
+Okay. Could you write the address on the envelope again?
+I want to go to Harrods. Could you draw a map, please?
+What do you do when you have free time?
+Do you have batteries for this camera?
+I need a remote camera cable.
+Are you the last one in this round?
+I think the reservation is overbooked.
+A good hit. But outside.
+Is there a good bakery around here?
+Are there any all-inclusive resorts near here?
+Me too.
+I want to join from San Diego.
+I was thinking about taking that course next semester.
+The wine isn't cold like usual. Are you going to chill it?
+Do you think this episode is worth watching?
+What are you most interested in right now?
+I want a refund. Will my money be returned to my account?
+I might not find a drink like this anywhere else.
+If you buy this as well, you’ll reach the quantity exempt from customs duties.
+Excuse me, may I see your vaccination certificate, please?
+Do you travel a lot?
+I am from the United States.
+I have a plane ticket to San Francisco.
+If it's only fifteen minutes from the station, then I'll walk.
+I need a slightly cheaper hotel.
+Bonsai is like a hobby for an old man.
+I haven't decided yet. Can you give me a little more time?
+My head is hurting.
+Would you like to join me for coffee?
+I need a medical certificate and a receipt for my insurance.
+Oh, no. Hurry, please. We're late.
+I don't want to spend more than twenty dollars.
+Why isn't the plane taking off? Tell me what's happening.
+How much is the fare? Do you write it on a piece of paper?
+I want to rent a folding chair.
+Wait a minute, if you please.
+Do women have to wear formal dresses?
+Do not peck at me.
+Do you have a cigarette?
+If the wind isn’t too strong, we should go to Tiki Point.
+Wonderful.
+I will hang up now. Thank you for your attention.
+Do you have this in other colors?
+Who is he?
+Excuse me. Where can I find a taxi stand?
+And for drinking?
+This is it.
+Where is the nearest hardware store?
+Hmm. Aren't you working, right? You can move to an empty seat, if you'd like.
+I'm looking for this.
+Okay, sir. What do you want for dessert?
+Regular car or Pullman?
+Traveler's check. Thank you. It’s your ticket and boarding pass. Be there, please, an hour before the flight time.
+It is a sharp pain.
+The name is Guru Motoyama. And the number is zero three three two six one two four nine five.
+I feel very sick.
+What are the showtimes for "Cousins Love"?
+Okay. Do you want your coffee now or later?
+Tell me about the strongest reggae club in New York.
+How does your product differ from your competitors?
+Is it okay if no one is listening to safety instructions?
+Dangerous back street?
+Yes. If you please, the necessary procedures, client.
+Yes, but just one. When will I find out? How will I be compensated?
+It is my ID card.
+We prefer a table by the window.
+If you please, tell me the cheapest way to get to San Francisco.
+Do you know the restaurant, Kyoya?
+Going.
+I’m going to get fat just sitting here eating all the time.
+Is there a good nightclub with a flamenco show?
+This is a beautiful dress you’re wearing.
+Don't hurt me.
+Where is the nearest laundromat?
+Could you swap stores with me, if you don’t mind?
+Our seats have come apart.
+Honestly, I need this package to be secured as well.
+The bill comes to two hundred dollars.
+Emergency exits are located in the front, middle, and back of the plane.
+All set, your booking has been confirmed.
+The heel is very high.
+We need a table on the terrace.
+It means the film might not be suitable for children under fifteen. It means parents need to think about whether to let their children watch the film.
+How would you like the money? Please fill out this form and sign here.
+Sometimes my stomach hurts.
+Do you have any snacks? I'm on a diet right now.
+There’s no need for the expense.
+Yes, I have two tickets for the Giants and Dodgers.
+We are one of the largest providers of microcomputers.
+Thank you too. Me too. Bye for now.
+Double with a bathroom, please.
+I fell down the stairs.
+Do you recommend Baina ice cream?
+Hmm. This. The color looks good on you.
+Where are foreign language books?
+Two slices and a Sprite.
+Give me a few cigarettes.
+Entry to the country is prohibited - sorry. Okay, I think that’s pretty much everything finalized.
+Yes, I am. They used to live near me in California but moved to Florida two years ago. And you? Are you traveling alone?
+I am sick.
+My son looks very pale from the fever.
+With that in mind, if you please.
+Cultural merit awards are given to distinguished artists and researchers today.
+I am Japanese.
+This is very expensive.
+Yes. Go by bus to Kyoto Station yourself.
+Is it for members only?
+The cost of the room is six thousand yen per night.
+Did you bring this onto the plane?
+Okay. All I want to know is if the job will be worth the cost.
+Okay. Do you want a wrap with it?
+Charge the battery, please.
+I am ready to order.
+Herbal bath salts leave your skin soft and smooth.
+Write the name of the airline and the flight number as well.
+Seriously. Today is Sunday, and Sunday is the ugliest day.
+Yes, it is a waste disposal problem.
+I want it in this form, placing five locations.
+Many families have a dual income.
+Oh. That silver is a rare "Moon and Bell." Are you sure you want to trade it?
+My mother and sister are coming from Japan to see me. They will arrive here around seven in the evening.
+Brown is very trendy this year.
+Good idea. When are you planning to come?
+Okay. Two chairs, please.
+Where is the market?
+Eager to try on my new racing suit.
+I just had a feeling you guys only ate donuts.
+How much does a first-class ticket to Edinburgh cost, please?
+It's like the money you gave me is ten dollars short.
+I called Professor Smith in room 201, but no one answered. Do you see if he’s still here?
+I need a recent one.
+I work at a publishing company.
+Can you fill this out for me, please?
+Is this a quiet street?
+Could you weigh this package for me?
+What do you call this in English?
+Keep walking and do it through this corridor, then you’ll find it on the right side.
+I want to secure this.
+Good morning. This is the reception desk. How may I help you?
+Okay. You may enter.
+Yes, professor. I come here for breakfast every day, from Tuesday to Friday, before I go to work.
+What's the problem?
+If you allow me, give me three dragons, six dragons, nine, one, eight.
+Yes, we serve you from seven o'clock.
+If you please, scratch here.
+What is this quick service?
+It seems clear now.
+If you please, turn left at the upcoming intersection.
+Excuse me. How do I get to the bank?
+Is there a bus service to the Ford Museum?
+Yes. Your name and room number, please.
+How long does it take to reach Japan by airmail?
+Okay. See you on Sunday at two.
+I want to travel from New York to Toronto.
+The clouds are scattered. Do you have another like it?
+This is a little dirty.
+Can you please reconfirm my flight for me? Here is my airline ticket.
+Do you have this in a darker green?
+Can you take me to Canterbury and bring me back?
+Excuse me, may I have a new fork?
+Thank you so much for your kindness.
+Sorry, we don't sell tickets to the theater.
+I want to see this.
+Oh, great. What do I need to do?
+I want to extend my stay here for two more days.
+If you please, unseat me.
+We have a lot of delicious shrimp today.
+For the opening of Emt?
+Smoking or not?
+It's very expensive for me. Can you make it cheaper?
+I'm open Wednesday morning or Friday after noon prayer.
+I didn't book.
+Because the summer in Japan is usually very humid, and we didn’t have air conditioning back then.
+Can you order me a taxi for 8 am tomorrow?
+He is evil.
+Why don't we wait for the bus under the shade?
+Come, Kenji. Let me show you the office.
+Well, open from nine to nine.
+I haven't been able to sleep well at night.
+How did the recession affect work?
+I have another appointment.
+Did he go out to get a city map?
+Exactly what I was looking for.
+I don't understand your explanation.
+I need to make a call. I'm going to Boston.
+Where is the best place for tourism?
+What do you mean?
+I was very happy.
+Okay, so it means I want someone who’s smaller, like Julia Roberts.
+Would you take this, please?
+Passengers departing on ABC Airlines flight 703 to Tokyo, please proceed to Gate 20 for government procedures.
+Where is the bus stop for Bee?
+Vocabulary, if you please.
+Where can I buy a tablecloth?
+Would it be okay if I hired a guide who speaks Japanese?
+Would you like me to take your picture?
+I didn't take this meal.
+I hurt my finger. Is there any antiseptic?
+Did he go out to get a ninety-five cent stamp?
+I’ll be here until 7:45.
+I want a perfume.
+Did he/she go get the schedule?
+Going to school here?
+How much was there?
+Is the Hilton hotel far from here?
+I'm sure I put it in my bag.
+May your hands be strong.
+Is there a restaurant you recommend around here?
+Which one do you prefer, dark or light?
+Where are they flying to?
+Boarding pass, please.
+Where is a nice place for a one-day trip?
+I want a red Kelly bag in the same style as hers.
+Are you still going to make that table?
+When does the bank open?
+I feel sick.
+I'm a bit confused. Would you mind drawing me a map?
+For.
+Take me to the hospital.
+Do I have to come to the hospital every day?
+My stomach hurts.
+How much is the postage to send this letter to Japan?
+I would like a glass of wine.
+Do you need someone to pick you up from the airport?
+The outing will start at 4:30, so please be there before then.
+Thirty thousand yen.
+Where can I buy a phone card?
+Did you return to a city other than the good one?
+I’m planning to stay up for twenty days.
+If you please, make the top part a little longer.
+You need to see a specialist.
+How many more minutes, please?
+Route number fourteen.
+Oh, really? You definitely have a large selection.
+I can't find them anywhere.
+Do you have any available seats to London?
+I need a copy of the theft report.
+He is after one residential square on the street.
+Are you going to give me a light since you're looking at it?
+Are these cigarettes light?
+Okay. That’s it.
+The next Express is arriving within the hour.
+I want the sleeves of this sports jacket to be longer.
+I have a reservation. Here is the confirmation number.
+Your birthday is on its way.
+The trains stopped due to the strike.
+Can you fix this?
+The street was crowded with cars.
+It’s the second building on the left, that white building.
+We booked a seat for October 25th, which shows up at 11 AM.
+No, a little more forward. Here, yes.
+Yes, this does not include meals.
+Where can I return this card?
+Why does this happen?
+I want to rest.
+My car broke down, if you please, come and take it.
+I want my hair a little longer in the back.
+What types do you have?
+I agree with you. It’s one of my favorite places.
+What kind of model are you thinking of?
+My name is Michiko Tanaka, and the flight number is 501 to Tokyo.
+Could you, if you don’t mind, draw me a simple map from here?
+Where do we meet?
+I want my hair fixed the way it used to be.
+Give me fifty, please.
+Where can I check in for Japan Airlines?
+What are the contents?
+Are there any shops in the area that you would recommend?
+Give me a little bit of nonsense, please.
+Okay. I’ll make sure that Shenatik will be here.
+This is our specialty, grilled Moses fish.
+We will remain.
+I pulled it out.
+Okay. Do we need to focus?
+We will participate.
+We don't have that style in stock right now. I'll check the warehouse. Just wait a minute, please.
+Scotch with me, please.
+It looks delicious. How much does it cost?
+Just describe it to the pharmacy. It’s better to get the medicine from there.
+I ordered this.
+Yes, you can stop at any station between here and Chicago.
+Where can I buy souvenirs?
+Very expensive. I can’t afford to buy it.
+Please give me the ABC & Company number in Chicago, if you would.
+Where is the cathedral?
+How do you like your eggs?
+He is next to this building.
+No, I think they forgot to bring us one.
+Okay. Sure. Could we take your phone number, just in case we need to call you?
+What is the painter's name?
+Should I have him call you back when he comes?
+I’ll take this one.
+I loved the champagne welcome after the outing. Let me drink to your health.
+Forty dollars a day plus eight cents a mile.
+Bet five dollars.
+Is this someone else's request?
+Excuse me, how do I get to the museum?
+I am very sorry, but I need to reschedule the appointment.
+Do you recommend a trip?
+Your train will depart from the platform in ten minutes.
+I'm looking for a sunshade with an adjustable strap.
+I want it to stay under $180.
+I’ll ask you after I’m all better.
+Yes, a booking for six nights. If you please. It starts on July 23rd.
+Could you show me other units with a different design?
+What kind of juice would you like?
+Going home for the holiday?
+Where can I go to see a beautiful view, like always?
+It was broken when I opened the package.
+August twenty-ninth.
+I want to send this by airmail to Japan.
+Labor Thanksgiving Day. It is a day to thank everyone who supports the community through their work.
+This room is very small.
+Could you also bring me some tea, please?
+I want this outfit to be clean today.
+Is there a bank around here?
+Could you clear the table, please?
+Sakinah, if you please.
+As printed materials.
+If you please, write your room number down there.
+We use the oud when we eat.
+Delta flight twenty-ten heading to New Orleans will be delayed by about an hour.
+But when I return to Japan, I will write a message. If you have time, please send me a message.
+I left my plane ticket at the hotel.
+Single room without private shower, if available.
+Thank you again for reminding me. Usually, a lot of people forget to sign their names, right?
+Okay, time is running out on us. Shall we continue this discussion on Thursday at one?
+I want pajamas.
+Okay. I’ll call you once they’re ready.
+What’s for lunch?
+The limousine will stop at the north gate first.
+Should I still use the hotel restaurant while staying?
+Is this a direct train?
+Okay, time is getting late. I think I should be leaving now. Thank you so much for the lovely evening.
+Can you give me medicine for my stomachache?
+I want grilled chicken.
+My mistake. Not your fault.
+Excuse me, when does this movie end?
+Guide me, if you please.
+My jewelry was stolen. I need to file a report.
+Just a moment, if you please. I will connect you with Professor Jones.
+Hello. You’ve reached United Airlines.
+Where does Professor Jones learn Japanese?
+I have a smaller one with the same design.
+Did these pants shrink?
+Friday evening, at nine.
+Is this the entrance to Las Vegas?
+Do you have a bus from the airport?
+Another one, please.
+A little salty, but I liked it. You brought it all this way from Japan?
+If you please, hurry up, if he leaves.
+Did you go out and pay ten dollars here as a deposit?
+Yes. I can at three o'clock, if you allow.
+I would like to order, please.
+Do I have to say yes or no?
+Two spoons, please.
+What is the next station?
+The car is making a strange noise.
+When does the post office close?
+I paid a fifty-dollar deposit when I entered.
+Do you have medicine for a stomachache?
+Do I have to wear a jacket and tie?
+How much should I transfer to my savings account?
+I forgot my handbag.
+I want to reconfirm my flight.
+My watch. It was a new digital one made in Switzerland.
+I passed that color flying test.
+I want you to take me to some nice shops. I'm a tourist, as you know.
+Would it be good if I went to see the tourist attractions while the ship is in the harbor?
+You should adjust the rearview mirror.
+It will take about ten minutes, or something like that.
+Should I take your plate, please?
+I'd be happy to do it like this. When do you like it, Ina?
+I think I left my camera when I had dinner here last night.
+They have cheeks at the gate.
+Oh, no. That won't be necessary. I can handle it. You've done too much already.
+Either fix it or replace it. If you please.
+I will try to come sometime next month.
+Take your time, if you please.
+How does this product compare to the existing one?
+The sales staff here are very kind.
+Did you turn this off?
+Just a minute, please.
+Do you have your pickup cards with you?
+I want to rent a car for a week.
+Yes, first, wash them separately.
+If you please, show me men's watches.
+Fourteen.
+How much does a limousine cost to go to the city center?
+It’s been like this since morning.
+Let's hurry up. They are coming out.
+It fits perfectly.
+I ordered chicken.
+For ten days.
+How old is this boy?
+How much did they eat?
+I want the same one as that, please.
+I lost my travel checks.
+If you please, give me medicine for a cold.
+If you please, put it with a funnel.
+They see each other every morning on the train.
+Would you like to join us for dinner tonight?
+I will stay at the hotel until tomorrow. I’ll be happy if you let them know I’m here.
+The plane was delayed by forty-five minutes.
+My name is Shino Yamada.
+What is the specialty of this restaurant?
+We have an excellent white wine.
+Just a cold medicine.
+Can you bring my things down to the living room tomorrow morning?
+Oh, it feels like I lose something every time I travel.
+I can no longer use my right hand well.
+Hello, is Roy here?
+It means, you’ll get to a shopping street. If you make it to the street, you’ll get to the station.
+No, not here. There’s a smoking car at the end of this train.
+Excuse me, may I have a brochure?
+Get there by nine, please.
+Yes, professor. How would you like me to cut it?
+I think there’s a mistake in the invoice.
+Just oil and vinegar, I'll be fine.
+I have exactly what you need. Can I suggest this?
+Coffee with sugar.
+It's sixteen, right? Oh, I'm sorry. I made a mistake.
+Did you hear about Golden Week in Japan?
+Thank you. Please feel free to come back to us if you like.
+Is everything still booked?
+Excuse me, can you leave them anywhere in the country?
+Which number do I have to call from here?
+How do I get to Disneyland?
+Do you really think so?
+Excuse me, where is the main restaurant?
+I want to make a call to Japan.
+My seat number is D13. Where is it?
+What is this, if you please?
+What kind are you thinking of?
+Yes. We will arrive at eight o'clock local time.
+If you find something, please call me.
+Excuse me, may I have pork and eggs?
+Ice cream with custard, please.
+Hot water is good hot water.
+Could you explain how to do this?
+If you please, write your address here.
+Sorry, may I use the flash?
+Thank you. Come back to my room at the same time tomorrow. The photos will be ready then.
+I'm sorry, currently you can only order from the evening menu.
+Normal or pure?
+My head is hurting.
+The room is fifteen zero seven.
+I need a different room.
+How long is this visa valid for?
+Is there a hospital around here?
+I need a set.
+Do you have a bigger size?
+Would you like to try nine?
+A safe hotel with a great breakfast, please.
+Where is the zoo?
+In a bigger manner?
+Thirty dollars and eighty cents.
+According to how warm the place is, but in central Japan, in early April.
+Cheeseburger and fries.
+It’s very late for the last train.
+I have no excess.
+Did you take your bus card?
+Balance, if you please.
+I was on a United Airlines flight wishing for two wishes.
+The sound is very loud around my room.
+On the East Coast, you’ll also find famous stores, like New York, Washington D.C., and Boston.
+Do you have Japanese paper?
+It's clear and good.
+Is it okay if I leave my things with you for an hour?
+A tour of the city?
+Yes. Unfortunately, I have to do it this way. How is the security maintenance in this area?
+Understood. I'm trying to rent a Citroën.
+I have a natural talent.
+Okay, like that. Where is the bread?
+Smoking, if you please. And a window seat, if you please.
+How much did the tailoring cost you?
+Which one is faster, a taxi or an ambulance?
+Do you have this blouse in other colors?
+You don't have to watch television all the time.
+Yes, we are reaching him, we are reaching him.
+You should come to our hospital.
+Where can I find a supermarket?
+A little expensive. Can’t you give me a discount?
+How many positions in Lebanon have been changed?
+That man stole my wallet.
+Digestion pills and stomachache pills are not the same, right?
+I want to see the harbor.
+Nice idea.
+How long does it take to walk?
+I’ll take twenty of the largest teddy bears, please.
+What's the cashier's number?
+Easy. I’ll just look it up in the phone book.
+Do you have any bigger rooms?
+How much is my bill?
+I want to stay in this room for one more night.
+Excuse me, but I need to submit the theft report.
+Okay, it depends on the means of transport you take. Will you go by bus or by plane?
+Do you mind if I sit here?
+Can you really send just one email for a dollar?
+Yes, if you please, go up to room thirteen thirty-four.
+Fill out the registration form, if you please.
+I need two round-trip tickets to Oxford.
+When do I need to come to the airport?
+Slow and calm.
+Where does a good film improve?
+No, if you please, no. You leave your questions for the end of my speech, when they ask for them?
+I want a good seat.
+Unfortunately, the toilet isn't working. I need help.
+It is something difficult and obscure.
+I’ll take you to your seat. This way, please.
+Excuse me, may I ask you a question?
+I think so.
+Hello. It was a pleasure meeting you.
+I want to put these bags on Tokyo, please.
+Can you show me someone a little older?
+I think clothes made in Japan are definitely sewn better.
+You should have surrendered.
+Please repeat that, if you will.
+Could you please write down the address and phone number for me?
+What is Musakhan?
+From which airport in Eilat will my flight depart?
+Did the form arrive by plane?
+I need an iron.
+They collected thirty-eight dollars together.
+Thank you for sharing your valuable ideas with us.
+I go skiing twice a month during the season.
+I was born on April 1st, 1955.
+With good, can I rent rackets?
+Is this the right bus for the city center?
+How much does this perfume cost?
+What is it for?
+Where can I do the official procedures?
+Fifty pounds.
+Does this include tax?
+What are the cases?
+Please call an ambulance.
+Bet three dollars on this.
+How's it going?
+There's nothing to eat that I like.
+Constitution Memorial Day, or "Kenpo Kinenbi," is a national holiday on May 3rd commemorating the enactment of the current Japanese constitution.
+Does this tour include a visit to the Sears Tower?
+In Hong's library?
+I will attend summer school at the University of Hawaii.
+Where are we passing by now?
+Big dragons and a three-year-old boy named Amr.
+In the station's bathroom.
+C’est une question complexe, mais en résumé, l’intelligence artificielle est la simulation de processus d’intelligence humaine par des machines, notamment l

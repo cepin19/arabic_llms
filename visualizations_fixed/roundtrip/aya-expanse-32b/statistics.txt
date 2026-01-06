@@ -1,0 +1,782 @@
+================================================================================
+Statistics for Round-trip (English -> Arabic dialect -> English)
+Second Model (Arabic -> English): aya-expanse-32b
+Note: Model names refer to the first model (English -> Arabic)
+================================================================================
+
+
+================================================================================
+SCORE TABLES
+================================================================================
+
+
+BLEU Scores by Test Set
+================================================================================
+
+Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..Qwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+QAraC.dev.glf.0.qa.en                    35.4           30.1           28.9           33.9           28.8           28.5           34.1           35.7           31.9           31.3           34.7           34.7           35.5           26.6           35.0           36.0
+QAraC.test.glf.0.qa.en                   35.2           30.3           28.3           33.8           29.1           28.6           33.7           35.5           31.8           30.6           34.5           34.4           35.0           27.0           34.8           35.8
+bible.dev.mgr.0.ma.en                    53.8           34.0           37.5           44.9           36.9           39.4           49.6           50.8           40.6           37.8           48.3           46.1           44.4           46.1           47.6           49.0
+bible.dev.mgr.0.tn.en                    51.5           40.4           40.4           48.1           38.2           43.0           47.6           51.7           43.2           37.1           49.2           44.5           43.8           42.7           51.7           51.3
+bible.dev.msa.0.ms.en                    51.9           46.3           48.4           49.9           49.1           43.4           44.2           49.1           48.1           37.8           46.7           44.5           46.1           45.8           52.3           53.0
+bible.dev.msa.1.ms.en                    52.0           46.1           49.3           49.5           49.4           43.6           44.1           49.1           48.5           37.7           47.0           44.2           46.2           46.0           52.8           52.9
+bible.test.mgr.0.ma.en                   54.0           37.7           39.8           44.7           35.8           37.8           47.4           49.9           41.3           38.9           48.5           46.5           45.0           44.9           50.6           50.4
+bible.test.mgr.0.tn.en                   51.3           40.4           40.5           48.0           37.8           42.6           48.7           50.8           43.7           37.9           49.3           46.0           44.9           43.2           49.5           51.4
+bible.test.msa.0.ms.en                   50.9           49.0           51.7           50.0           50.0           42.7           44.1           48.1           48.2           37.5           47.4           45.2           45.9           45.3           52.2           53.1
+bible.test.msa.1.ms.en                   51.0           49.2           50.3           49.8           50.1           43.0           44.0           48.4           48.4           37.5           47.3           45.2           45.8           45.2           52.1           52.8
+madar.dev.glf.0.qa.en                    55.0           48.7           45.1           51.9           46.7           43.7           54.4           57.0           49.1           49.0           54.4           53.5           55.4           40.7           53.7           56.7
+madar.dev.lev.0.lb.en                    53.0           41.6           42.5           42.9           37.2           43.0           53.4           56.7           48.0           48.5           53.7           47.8           46.3           38.0           53.8           52.5
+madar.dev.mgr.0.ma.en                    54.1           38.8           34.6           37.6           32.3           32.2           50.1           56.5           38.9           48.5           49.1           45.6           40.1           37.5           47.8           48.7
+madar.dev.mgr.0.tn.en                    48.9           32.0           33.4           41.5           31.8           41.0           49.1           55.9           40.4           48.2           53.8           44.9           37.6           34.7           46.9           48.2
+madar.dev.msa.0.ms.en                    55.1           58.9           59.5           56.6           53.9           47.4           57.1           57.0           55.0           49.6           55.6           54.6           56.6           51.9           60.1           59.7
+madar.dev.nil.0.eg.en                    53.2           45.7           49.3           44.3           45.4           43.1           49.7           56.6           48.3           49.4           46.4           53.7           49.1           41.1           51.9           51.9
+madar.test.glf.0.iq.en                   51.2           40.4           35.8           48.0           50.5           43.2           54.2           56.0           47.2           48.9           53.0           52.7           47.7           34.4           51.7           53.6
+madar.test.glf.0.om.en                   54.8           45.5           40.4           53.8           47.9           37.7           54.3           55.5           48.6           48.3           54.5           52.3           54.2           50.6           54.1           55.2
+madar.test.glf.0.qa.en                   55.6           48.6           44.9           51.6           46.2           43.4           54.1           56.8           48.8           48.7           53.9           54.0           56.0           40.2           53.8           57.1
+madar.test.glf.0.sa.en                   55.2           47.7           47.9           55.3           53.6           45.7           56.6           55.4           53.5           48.4           54.2           53.4           55.5           49.2           56.6           56.4
+madar.test.glf.0.ye.en                   54.4           46.5           45.1           48.5           50.0           39.1           57.1           55.2           52.2           48.4           53.5           52.9           53.2           46.6           54.2           54.3
+madar.test.glf.1.iq.en                   50.8           40.3           36.5           48.0           50.4           43.2           54.4           55.9           47.2           48.6           53.0           53.3           47.8           34.2           51.7           53.4
+madar.test.glf.1.sa.en                   55.6           47.7           47.7           55.3           53.7           45.6           56.3           55.3           53.5           48.6           54.1           53.6           55.5           49.2           56.5           56.4
+madar.test.glf.2.iq.en                   50.8           40.4           36.6           48.1           50.3           43.2           54.4           56.1           47.2           48.6           53.1           53.2           47.8           34.1           51.8           53.7
+madar.test.lev.0.jo.en                   53.9           45.2           46.0           46.5           50.6           44.5           51.8           55.2           46.7           49.4           53.5            0.2           48.3           46.0           52.5           53.8
+madar.test.lev.0.lb.en                   52.7           39.8           40.9           43.4           36.9           42.9           53.1           56.9           47.4           49.1           53.7           47.7           46.8           37.5           53.0           52.7
+madar.test.lev.0.pa.en                   54.4           43.5           43.9           45.3           47.9           38.8           55.2           55.7           46.7           49.1           53.1           52.4           51.4           48.8           52.7           53.0
+madar.test.lev.0.sy.en                   53.9           41.4           43.4           47.3           50.4           40.2           56.4           55.5           51.9           48.7           53.1           53.1           49.7           45.4           52.0           51.9
+madar.test.lev.1.jo.en                   53.5           45.1           45.3           46.2           50.6           44.4           52.0           55.3           46.7           49.6           53.6           51.2           48.2           45.9           52.6           53.5
+madar.test.lev.1.sy.en                   54.1           41.4           43.6           47.5           50.7           40.1           56.3           55.4           51.7           48.5           53.1           53.1           49.4           45.3           52.1           51.9
+madar.test.mgr.0.dz.en                   54.1           32.4           26.6           41.0           33.3           38.9           51.7           55.3           42.2           48.3           53.4           50.8           39.0           31.5           47.7           50.0
+madar.test.mgr.0.ly.en                   52.1           40.7           37.8           45.6           42.2           32.0           50.8           55.4           45.1           48.7           53.3           50.9           47.1           34.9           51.1           50.7
+madar.test.mgr.0.ma.en                   54.4           39.6           35.5           37.8           31.7           32.0           49.2           56.3           38.6           48.4           49.1           45.3           39.1           37.3           47.2           48.8
+madar.test.mgr.0.tn.en                   48.3           31.2           33.4           41.8           31.6           40.3           49.2           55.9           40.4           48.0           53.3           45.5           37.0           34.3           46.8           47.4
+madar.test.mgr.1.ly.en                   52.2           40.5           37.9           45.4           42.2           32.2           50.8           55.7           45.0           48.7           53.4           51.1           47.1           35.4           50.9           51.2
+madar.test.mgr.1.ma.en                   53.4           37.9           34.1           36.8           31.5           31.7           48.2           55.1           37.5           48.0           48.8           45.0           38.1           36.5           46.8           48.2
+madar.test.mgr.1.tn.en                   45.9           30.9           33.0           41.7           30.8           39.4           48.2           54.6           38.8           47.2           52.6           44.2           35.8           33.1           45.8           46.6
+madar.test.msa.0.ms.en                   55.6           58.8           59.4           56.7           54.2           47.1           57.2           56.8           54.8           49.6           55.3           55.0           56.5           51.9           60.4           59.9
+madar.test.nil.0.eg.en                   52.9           46.9           48.8           44.6           44.7           42.6           50.0           56.6           48.1           49.8           45.5           53.9           49.1           40.7           52.2           52.0
+madar.test.nil.0.sd.en                   54.2           43.3           42.3           45.8           47.2           41.2           51.6           56.3           45.6           48.8           53.7           51.6           49.0           39.8           51.9           53.7
+madar.test.nil.1.eg.en                   51.6           44.2           48.5           44.1           43.3           41.6           49.3           55.2           47.0           49.2           44.9           52.7           48.4           39.2           51.5           51.1
+madar.test.nil.2.eg.en                   51.6           43.9           48.2           44.0           43.2           41.6           49.2           55.2           47.1           49.0           44.9           52.3           48.5           39.7           51.5           51.1
+
+
+
+CHRF Scores by Test Set
+================================================================================
+
+Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..Qwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+QAraC.dev.glf.0.qa.en                    62.0           57.9           56.0           60.6           55.2           54.5           61.0           62.5           58.5           58.8           61.2           62.9           62.7           54.1           62.0           63.1
+QAraC.test.glf.0.qa.en                   62.2           58.0           55.6           60.6           55.7           54.7           61.1           62.7           58.8           58.7           61.1           63.0           62.4           54.7           62.4           63.1
+bible.dev.mgr.0.ma.en                    68.9           54.6           52.4           61.9           52.9           56.4           65.9           67.1           58.9           57.2           64.4           64.2           61.6           63.1           64.2           65.4
+bible.dev.mgr.0.tn.en                    66.6           58.8           57.5           64.5           53.6           60.1           64.4           67.6           60.9           56.9           65.1           62.7           61.3           60.3           67.1           66.9
+bible.dev.msa.0.ms.en                    67.7           63.2           64.6           66.1           65.3           61.0           62.5           65.8           65.4           57.4           63.3           63.2           63.3           62.7           67.7           68.8
+bible.dev.msa.1.ms.en                    67.8           63.0           64.6           66.0           65.6           61.1           62.4           65.9           65.7           57.3           63.7           62.9           63.5           63.0           68.4           68.8
+bible.test.mgr.0.ma.en                   69.3           57.7           54.8           61.3           52.2           54.7           64.7           66.7           59.3           58.6           64.9           64.8           62.5           62.1           66.9           66.4
+bible.test.mgr.0.tn.en                   66.8           59.2           57.5           64.4           53.4           60.0           65.4           67.1           61.2           57.5           65.7           63.9           62.4           60.0           66.2           67.3
+bible.test.msa.0.ms.en                   67.4           65.9           66.5           66.8           66.6           60.5           62.4           65.5           65.5           57.6           64.5           63.9           64.2           62.7           68.4           69.0
+bible.test.msa.1.ms.en                   67.5           66.0           66.4           66.6           66.8           60.6           62.4           65.8           65.7           57.8           64.7           64.1           64.1           62.4           68.3           68.7
+madar.dev.glf.0.qa.en                    69.5           64.6           61.2           66.8           62.4           59.0           69.5           71.2           64.9           65.7           69.0           70.6           70.0           57.3           68.7           71.1
+madar.dev.lev.0.lb.en                    67.8           58.9           59.1           59.9           54.8           58.3           68.4           71.0           64.1           65.1           68.6           65.4           62.5           55.7           68.6           67.7
+madar.dev.mgr.0.ma.en                    68.8           55.2           49.1           54.9           48.5           47.8           65.7           70.7           57.3           65.4           64.8           63.9           58.1           55.3           64.3           65.2
+madar.dev.mgr.0.tn.en                    64.1           50.3           51.2           58.8           47.9           56.4           65.5           70.3           58.5           65.1           68.5           63.7           56.8           52.7           63.6           65.0
+madar.dev.msa.0.ms.en                    69.7           73.4           73.5           70.9           68.8           62.8           71.7           71.3           70.3           66.3           70.1           71.3           71.1           67.3           74.1           73.5
+madar.dev.nil.0.eg.en                    67.9           62.6           64.8           61.0           61.8           58.2           65.8           70.8           64.6           66.0           62.4           70.6           64.9           57.8           67.3           67.4
+madar.test.glf.0.iq.en                   65.8           57.0           52.8           63.5           65.1           58.5           69.0           70.1           62.8           65.4           67.6           69.6           63.4           51.2           66.8           68.4
+madar.test.glf.0.om.en                   68.8           61.5           56.4           68.4           63.3           53.3           69.1           69.7           64.4           65.2           68.8           69.0           69.3           66.2           68.9           69.8
+madar.test.glf.0.qa.en                   69.5           64.1           60.7           66.4           61.7           58.5           68.7           70.9           64.5           65.1           68.3           70.5           70.3           56.7           68.6           71.1
+madar.test.glf.0.sa.en                   69.1           63.7           63.7           69.5           67.9           60.9           71.0           69.8           68.3           65.2           68.6           70.3           70.1           64.4           70.9           70.5
+madar.test.glf.0.ye.en                   68.5           62.6           60.4           63.9           64.8           54.4           71.3           69.8           67.0           65.2           68.0           68.8           68.2           62.5           69.0           69.0
+madar.test.glf.1.iq.en                   65.5           56.9           53.3           63.7           65.1           58.6           69.1           70.2           62.9           65.3           67.6           69.9           63.4           51.3           66.7           68.1
+madar.test.glf.1.sa.en                   69.4           63.6           63.4           69.5           68.0           60.7           70.9           69.7           68.2           65.2           68.7           70.3           70.0           64.5           70.8           70.5
+madar.test.glf.2.iq.en                   65.5           57.0           53.7           63.6           65.1           58.5           69.2           70.2           62.8           65.3           67.7           69.9           63.5           51.2           66.9           68.2
+madar.test.lev.0.jo.en                   68.1           61.5           61.7           62.7           65.3           59.4           67.0           69.6           62.9           65.7           68.0           11.2           64.3           62.1           67.9           68.7
+madar.test.lev.0.lb.en                   67.2           57.4           57.8           59.9           54.4           58.0           67.9           71.0           63.6           65.1           68.1           65.2           62.8           55.1           67.9           67.7
+madar.test.lev.0.pa.en                   68.4           60.8           60.3           61.7           63.4           54.0           69.6           70.0           63.0           65.3           67.5           69.2           66.8           63.8           68.1           68.0
+madar.test.lev.0.sy.en                   68.2           58.9           59.8           63.3           65.4           55.5           70.4           70.0           67.3           65.2           67.6           69.7           65.6           61.7           67.3           67.0
+madar.test.lev.1.jo.en                   67.7           61.4           61.3           62.5           65.3           59.4           67.1           69.7           62.8           65.7           68.1           68.1           64.2           62.0           67.7           68.3
+madar.test.lev.1.sy.en                   68.3           58.7           60.1           63.4           65.6           55.2           70.3           70.0           67.2           65.2           67.5           69.8           65.4           61.6           67.3           67.3
+madar.test.mgr.0.dz.en                   68.3           49.1           42.3           58.2           49.4           54.3           67.0           69.7           59.7           65.2           67.9           68.0           57.7           50.3           64.5           66.4
+madar.test.mgr.0.ly.en                   66.7           58.1           55.0           61.8           58.5           47.7           66.4           70.0           62.2           65.2           67.9           68.4           64.0           52.8           67.2           66.9
+madar.test.mgr.0.ma.en                   68.6           55.7           49.7           55.1           48.2           47.6           65.1           70.4           56.9           65.1           64.1           63.5           57.4           54.7           63.9           65.1
+madar.test.mgr.0.tn.en                   63.5           49.5           51.0           58.9           47.6           55.7           65.4           70.1           58.3           64.7           67.8           63.7           56.1           51.9           63.7           64.1
+madar.test.mgr.1.ly.en                   66.6           57.9           55.1           61.7           58.4           47.9           66.4           70.1           62.1           65.2           68.0           68.6           64.0           53.0           67.1           67.0
+madar.test.mgr.1.ma.en                   67.7           54.7           48.4           54.4           48.0           47.3           64.3           69.4           56.1           64.7           63.9           63.0           57.1           54.4           63.3           64.4
+madar.test.mgr.1.tn.en                   62.0           49.2           50.7           58.7           47.0           54.8           64.5           69.3           57.1           64.2           67.2           62.9           55.3           50.9           62.9           63.3
+madar.test.msa.0.ms.en                   69.9           73.1           73.0           70.8           68.7           62.4           71.5           71.0           69.8           65.9           69.5           71.3           71.0           67.1           73.7           73.4
+madar.test.nil.0.eg.en                   67.3           63.0           64.3           61.1           61.1           57.7           65.8           70.7           64.1           65.9           61.5           70.5           64.7           57.5           67.4           67.2
+madar.test.nil.0.sd.en                   68.4           60.2           58.6           62.0           62.9           56.5           67.4           70.6           62.1           65.3           67.9           68.6           65.2           56.9           67.6           68.5
+madar.test.nil.1.eg.en                   66.2           61.1           64.0           60.9           60.7           57.0           65.2           69.7           63.5           65.5           61.3           69.8           64.2           56.7           66.9           66.6
+madar.test.nil.2.eg.en                   66.2           61.1           63.6           60.8           60.4           57.1           65.1           69.6           63.5           65.6           61.2           69.5           64.3           57.0           67.0           66.6
+
+
+
+COMET Scores by Test Set
+================================================================================
+
+Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..Qwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+QAraC.dev.glf.0.qa.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+QAraC.test.glf.0.qa.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.dev.mgr.0.ma.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.dev.mgr.0.tn.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.dev.msa.0.ms.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.dev.msa.1.ms.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.test.mgr.0.ma.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.test.mgr.0.tn.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.test.msa.0.ms.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+bible.test.msa.1.ms.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.glf.0.qa.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.lev.0.lb.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.mgr.0.ma.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.mgr.0.tn.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.msa.0.ms.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.dev.nil.0.eg.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.iq.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.om.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.qa.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.sa.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.0.ye.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.1.iq.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.1.sa.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.glf.2.iq.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.0.jo.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.0.lb.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.0.pa.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.0.sy.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.1.jo.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.lev.1.sy.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.0.dz.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.0.ly.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.0.ma.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.0.tn.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.1.ly.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.1.ma.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.mgr.1.tn.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.msa.0.ms.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.nil.0.eg.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.nil.0.sd.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.nil.1.eg.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+madar.test.nil.2.eg.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
+
+
+================================================================================
+📊 Ranking Statistics for BLEU Score
+================================================================================
+Total test sets with BLEU scores: 42
+
+Model: EuroLLM-9B-Instruct
+  Total appearances: 42/42
+  1st: 2 times
+  2nd: 7 times
+  3rd: 17 times
+  4th: 7 times
+  5th: 1 time
+  6th: 2 times
+  7th: 4 times
+  9th: 1 time
+  10th: 1 time
+  Win rate: 2/42 (4.8%)
+  Top-3 rate: 26/42 (61.9%)
+
+Model: Jais-2-70B-Chat
+  Total appearances: 42/42
+  4th: 2 times
+  7th: 2 times
+  9th: 1 time
+  10th: 2 times
+  11th: 3 times
+  12th: 6 times
+  13th: 4 times
+  14th: 12 times
+  15th: 8 times
+  16th: 2 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: Jais-2-8B-Chat
+  Total appearances: 42/42
+  3rd: 3 times
+  4th: 1 time
+  6th: 1 time
+  7th: 1 time
+  8th: 2 times
+  9th: 2 times
+  12th: 2 times
+  13th: 5 times
+  14th: 17 times
+  15th: 7 times
+  16th: 1 time
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 3/42 (7.1%)
+
+Model: Llama-3.3-70B-Instruct
+  Total appearances: 42/42
+  4th: 2 times
+  5th: 1 time
+  6th: 3 times
+  7th: 3 times
+  8th: 3 times
+  9th: 7 times
+  10th: 7 times
+  11th: 4 times
+  12th: 8 times
+  13th: 2 times
+  14th: 2 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Total appearances: 42/42
+  5th: 3 times
+  6th: 1 time
+  7th: 1 time
+  8th: 4 times
+  9th: 4 times
+  10th: 2 times
+  11th: 1 time
+  12th: 2 times
+  13th: 9 times
+  14th: 3 times
+  15th: 4 times
+  16th: 8 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: Qwen3-4B-Instruct-2507
+  Total appearances: 42/42
+  10th: 2 times
+  11th: 3 times
+  12th: 4 times
+  13th: 3 times
+  14th: 2 times
+  15th: 15 times
+  16th: 13 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: aya-expanse-32b
+  Total appearances: 42/42
+  1st: 3 times
+  2nd: 5 times
+  3rd: 8 times
+  4th: 2 times
+  5th: 6 times
+  6th: 9 times
+  7th: 3 times
+  8th: 1 time
+  9th: 1 time
+  14th: 4 times
+  Win rate: 3/42 (7.1%)
+  Top-3 rate: 16/42 (38.1%)
+
+Model: aya-expanse-8b
+  Total appearances: 42/42
+  1st: 24 times
+  2nd: 8 times
+  3rd: 1 time
+  4th: 1 time
+  5th: 1 time
+  6th: 4 times
+  7th: 1 time
+  8th: 1 time
+  9th: 1 time
+  Win rate: 24/42 (57.1%)
+  Top-3 rate: 33/42 (78.6%)
+
+Model: c4ai-command-r-08-2024
+  Total appearances: 42/42
+  8th: 6 times
+  9th: 4 times
+  10th: 14 times
+  11th: 12 times
+  12th: 6 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: c4ai-command-r-v01
+  Total appearances: 42/42
+  4th: 1 time
+  5th: 1 time
+  6th: 4 times
+  7th: 7 times
+  8th: 3 times
+  9th: 6 times
+  11th: 6 times
+  12th: 2 times
+  13th: 4 times
+  15th: 3 times
+  16th: 5 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Total appearances: 42/42
+  2nd: 7 times
+  3rd: 3 times
+  4th: 8 times
+  5th: 7 times
+  6th: 3 times
+  7th: 2 times
+  8th: 2 times
+  9th: 3 times
+  10th: 3 times
+  11th: 3 times
+  12th: 1 time
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 10/42 (23.8%)
+
+Model: command-a-translate-08-2025
+  Total appearances: 42/42
+  2nd: 4 times
+  4th: 3 times
+  5th: 5 times
+  6th: 3 times
+  7th: 4 times
+  8th: 12 times
+  9th: 2 times
+  10th: 1 time
+  11th: 2 times
+  12th: 1 time
+  13th: 4 times
+  16th: 1 time
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 4/42 (9.5%)
+
+Model: gemma-3-27b-it
+  Total appearances: 42/42
+  3rd: 3 times
+  4th: 2 times
+  5th: 1 time
+  6th: 1 time
+  7th: 2 times
+  8th: 6 times
+  9th: 9 times
+  10th: 8 times
+  11th: 7 times
+  12th: 3 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 3/42 (7.1%)
+
+Model: gemma-3-4b-it
+  Total appearances: 42/42
+  7th: 1 time
+  9th: 1 time
+  10th: 2 times
+  11th: 1 time
+  12th: 7 times
+  13th: 11 times
+  14th: 2 times
+  15th: 5 times
+  16th: 12 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: gpt-4.1-mini
+  Total appearances: 42/42
+  1st: 5 times
+  2nd: 6 times
+  4th: 7 times
+  5th: 6 times
+  6th: 8 times
+  7th: 8 times
+  8th: 2 times
+  Win rate: 5/42 (11.9%)
+  Top-3 rate: 11/42 (26.2%)
+
+Model: gpt-4.1-nano
+  Total appearances: 42/42
+  1st: 8 times
+  2nd: 5 times
+  3rd: 7 times
+  4th: 6 times
+  5th: 10 times
+  6th: 3 times
+  7th: 3 times
+  Win rate: 8/42 (19.0%)
+  Top-3 rate: 20/42 (47.6%)
+
+================================================================================
+📊 Ranking Statistics for CHRF Score
+================================================================================
+Total test sets with CHRF scores: 42
+
+Model: EuroLLM-9B-Instruct
+  Total appearances: 42/42
+  1st: 2 times
+  2nd: 4 times
+  3rd: 7 times
+  4th: 6 times
+  5th: 7 times
+  6th: 6 times
+  7th: 4 times
+  8th: 4 times
+  10th: 1 time
+  12th: 1 time
+  Win rate: 2/42 (4.8%)
+  Top-3 rate: 13/42 (31.0%)
+
+Model: Jais-2-70B-Chat
+  Total appearances: 42/42
+  3rd: 1 time
+  4th: 1 time
+  7th: 2 times
+  11th: 4 times
+  12th: 9 times
+  13th: 8 times
+  14th: 11 times
+  15th: 6 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 1/42 (2.4%)
+
+Model: Jais-2-8B-Chat
+  Total appearances: 42/42
+  3rd: 1 time
+  4th: 1 time
+  6th: 2 times
+  8th: 2 times
+  9th: 4 times
+  12th: 1 time
+  13th: 3 times
+  14th: 17 times
+  15th: 9 times
+  16th: 2 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 1/42 (2.4%)
+
+Model: Llama-3.3-70B-Instruct
+  Total appearances: 42/42
+  4th: 3 times
+  5th: 1 time
+  6th: 1 time
+  7th: 3 times
+  9th: 11 times
+  10th: 5 times
+  11th: 5 times
+  12th: 6 times
+  13th: 6 times
+  14th: 1 time
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  Total appearances: 42/42
+  4th: 1 time
+  5th: 1 time
+  7th: 2 times
+  8th: 1 time
+  9th: 5 times
+  10th: 2 times
+  11th: 4 times
+  12th: 2 times
+  13th: 7 times
+  14th: 5 times
+  15th: 4 times
+  16th: 8 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: Qwen3-4B-Instruct-2507
+  Total appearances: 42/42
+  11th: 1 time
+  12th: 6 times
+  13th: 4 times
+  14th: 1 time
+  15th: 13 times
+  16th: 17 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: aya-expanse-32b
+  Total appearances: 42/42
+  1st: 5 times
+  2nd: 1 time
+  3rd: 9 times
+  4th: 3 times
+  5th: 4 times
+  6th: 4 times
+  7th: 11 times
+  8th: 1 time
+  14th: 4 times
+  Win rate: 5/42 (11.9%)
+  Top-3 rate: 15/42 (35.7%)
+
+Model: aya-expanse-8b
+  Total appearances: 42/42
+  1st: 23 times
+  2nd: 8 times
+  3rd: 2 times
+  4th: 1 time
+  5th: 2 times
+  6th: 2 times
+  7th: 2 times
+  8th: 2 times
+  Win rate: 23/42 (54.8%)
+  Top-3 rate: 33/42 (78.6%)
+
+Model: c4ai-command-r-08-2024
+  Total appearances: 42/42
+  6th: 3 times
+  8th: 1 time
+  9th: 6 times
+  10th: 19 times
+  11th: 8 times
+  12th: 5 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: c4ai-command-r-v01
+  Total appearances: 42/42
+  3rd: 2 times
+  4th: 4 times
+  6th: 4 times
+  7th: 2 times
+  8th: 9 times
+  9th: 1 time
+  10th: 4 times
+  11th: 4 times
+  12th: 4 times
+  15th: 4 times
+  16th: 4 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 2/42 (4.8%)
+
+Model: c4ai-command-r7b-arabic-02-2025
+  Total appearances: 42/42
+  2nd: 5 times
+  3rd: 2 times
+  4th: 3 times
+  5th: 10 times
+  6th: 3 times
+  7th: 3 times
+  8th: 4 times
+  9th: 3 times
+  10th: 3 times
+  11th: 3 times
+  12th: 3 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 7/42 (16.7%)
+
+Model: command-a-translate-08-2025
+  Total appearances: 42/42
+  1st: 1 time
+  2nd: 11 times
+  3rd: 7 times
+  4th: 2 times
+  5th: 2 times
+  6th: 5 times
+  7th: 4 times
+  8th: 5 times
+  11th: 2 times
+  12th: 1 time
+  13th: 1 time
+  16th: 1 time
+  Win rate: 1/42 (2.4%)
+  Top-3 rate: 19/42 (45.2%)
+
+Model: gemma-3-27b-it
+  Total appearances: 42/42
+  3rd: 2 times
+  4th: 3 times
+  5th: 2 times
+  7th: 1 time
+  8th: 8 times
+  9th: 11 times
+  10th: 6 times
+  11th: 8 times
+  12th: 1 time
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 2/42 (4.8%)
+
+Model: gemma-3-4b-it
+  Total appearances: 42/42
+  8th: 1 time
+  9th: 1 time
+  10th: 2 times
+  11th: 3 times
+  12th: 3 times
+  13th: 13 times
+  14th: 3 times
+  15th: 6 times
+  16th: 10 times
+  Win rate: 0/42 (0.0%)
+  Top-3 rate: 0/42 (0.0%)
+
+Model: gpt-4.1-mini
+  Total appearances: 42/42
+  1st: 2 times
+  2nd: 8 times
+  3rd: 5 times
+  4th: 4 times
+  5th: 4 times
+  6th: 9 times
+  7th: 7 times
+  8th: 3 times
+  Win rate: 2/42 (4.8%)
+  Top-3 rate: 15/42 (35.7%)
+
+Model: gpt-4.1-nano
+  Total appearances: 42/42
+  1st: 9 times
+  2nd: 5 times
+  3rd: 4 times
+  4th: 10 times
+  5th: 9 times
+  6th: 3 times
+  7th: 1 time
+  8th: 1 time
+  Win rate: 9/42 (21.4%)
+  Top-3 rate: 18/42 (42.9%)
+
+================================================================================
+📊 Ranking Statistics for COMET Score
+================================================================================
+Total test sets with COMET scores: 0
+
+
+================================================================================
+📊 Average Rankings for BLEU Score
+================================================================================
+Lower rank is better (1st = best)
+
+1. aya-expanse-8b: 2.4 (based on 42 test set(s))
+2. gpt-4.1-nano: 3.6 (based on 42 test set(s))
+3. EuroLLM-9B-Instruct: 3.8 (based on 42 test set(s))
+4. gpt-4.1-mini: 4.6 (based on 42 test set(s))
+5. aya-expanse-32b: 5.3 (based on 42 test set(s))
+6. c4ai-command-r7b-arabic-02-2025: 5.7 (based on 42 test set(s))
+7. command-a-translate-08-2025: 7.5 (based on 42 test set(s))
+8. gemma-3-27b-it: 8.7 (based on 42 test set(s))
+9. Llama-3.3-70B-Instruct: 9.6 (based on 42 test set(s))
+10. c4ai-command-r-v01: 10.2 (based on 42 test set(s))
+11. c4ai-command-r-08-2024: 10.2 (based on 42 test set(s))
+12. Mistral-Small-3.2-24B-Instruct-2506: 11.9 (based on 42 test set(s))
+13. Jais-2-8B-Chat: 12.1 (based on 42 test set(s))
+14. Jais-2-70B-Chat: 12.6 (based on 42 test set(s))
+15. gemma-3-4b-it: 13.5 (based on 42 test set(s))
+16. Qwen3-4B-Instruct-2507: 14.3 (based on 42 test set(s))
+
+
+================================================================================
+📊 Average Rankings for CHRF Score
+================================================================================
+Lower rank is better (1st = best)
+
+1. aya-expanse-8b: 2.4 (based on 42 test set(s))
+2. gpt-4.1-nano: 3.5 (based on 42 test set(s))
+3. gpt-4.1-mini: 4.7 (based on 42 test set(s))
+4. EuroLLM-9B-Instruct: 5.0 (based on 42 test set(s))
+5. command-a-translate-08-2025: 5.3 (based on 42 test set(s))
+6. aya-expanse-32b: 5.5 (based on 42 test set(s))
+7. c4ai-command-r7b-arabic-02-2025: 6.5 (based on 42 test set(s))
+8. gemma-3-27b-it: 8.5 (based on 42 test set(s))
+9. c4ai-command-r-v01: 9.5 (based on 42 test set(s))
+10. Llama-3.3-70B-Instruct: 9.8 (based on 42 test set(s))
+11. c4ai-command-r-08-2024: 10.0 (based on 42 test set(s))
+12. Mistral-Small-3.2-24B-Instruct-2506: 12.2 (based on 42 test set(s))
+13. Jais-2-70B-Chat: 12.4 (based on 42 test set(s))
+14. Jais-2-8B-Chat: 12.5 (based on 42 test set(s))
+15. gemma-3-4b-it: 13.5 (based on 42 test set(s))
+16. Qwen3-4B-Instruct-2507: 14.7 (based on 42 test set(s))
+
+
+⚠️  No COMET scores found for average ranking calculation
+
+================================================================================
+📊 Overall Scores (All Test Sets Concatenated) - Round-trip Translation
+================================================================================
+
+Model: EuroLLM-9B-Instruct
+  BLEU: 51.5
+  CHRF: 67.0
+  Test sets: 42
+  Sentences: 130226
+
+Model: Jais-2-70B-Chat
+  BLEU: 42.2
+  CHRF: 59.9
+  Test sets: 42
+  Sentences: 130226
+
+Model: Jais-2-8B-Chat
+  BLEU: 41.7
+  CHRF: 58.6
+  Test sets: 42
+  Sentences: 130226
+
+Model: Llama-3.3-70B-Instruct
+  BLEU: 45.5
+  CHRF: 62.4
+  Test sets: 42
+  Sentences: 130226
+
+Model: Mistral-Small-3.2-24B-Instruct-2506
+  BLEU: 41.8
+  CHRF: 58.4
+  Test sets: 42
+  Sentences: 130226
+
+Model: Qwen3-4B-Instruct-2507
+  BLEU: 40.2
+  CHRF: 56.5
+  Test sets: 42
+  Sentences: 130226
+
+Model: aya-expanse-32b
+  BLEU: 50.2
+  CHRF: 66.6
+  Test sets: 42
+  Sentences: 130226
+
+Model: aya-expanse-8b
+  BLEU: 53.7
+  CHRF: 69.2
+  Test sets: 42
+  Sentences: 130226
+
+Model: c4ai-command-r-08-2024
+  BLEU: 45.4
+  CHRF: 62.6
+  Test sets: 42
+  Sentences: 130226
+
+Model: c4ai-command-r-v01
+  BLEU: 45.9
+  CHRF: 63.8
+  Test sets: 42
+  Sentences: 130226
+
+Model: c4ai-command-r7b-arabic-02-2025
+  BLEU: 50.1
+  CHRF: 66.0
+  Test sets: 42
+  Sentences: 130226
+
+Model: command-a-translate-08-2025
+  BLEU: 47.9
+  CHRF: 66.1
+  Test sets: 42
+  Sentences: 130226
+
+Model: gemma-3-27b-it
+  BLEU: 46.4
+  CHRF: 63.7
+  Test sets: 42
+  Sentences: 130226
+
+Model: gemma-3-4b-it
+  BLEU: 39.9
+  CHRF: 57.7
+  Test sets: 42
+  Sentences: 130226
+
+Model: gpt-4.1-mini
+  BLEU: 50.7
+  CHRF: 66.9
+  Test sets: 42
+  Sentences: 130226
+
+Model: gpt-4.1-nano
+  BLEU: 51.4
+  CHRF: 67.4
+  Test sets: 42
+  Sentences: 130226

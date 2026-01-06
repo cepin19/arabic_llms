@@ -17,6 +17,16 @@ Dialect-specific:
   BLEU: 2.9992
   CHRF: 25.1283
 
+Average Scores - MADAR Only (per-file averages):
+--------------------------------------------------------------------------------
+Arabic (general):
+  BLEU: 3.6887
+  CHRF: 27.3002
+
+Dialect-specific:
+  BLEU: 3.4760
+  CHRF: 25.9148
+
 ================================================================================
 Overall Scores (all test sets concatenated):
 ================================================================================
@@ -30,6 +40,20 @@ Arabic (general):
 Dialect (all):
   BLEU: 3.4170
   CHRF: 25.4145
+
+================================================================================
+Overall Scores - MADAR Only (all test sets concatenated):
+================================================================================
+Total test sets: 32
+Total sentences: 112000
+
+Arabic (general):
+  BLEU: 4.0629
+  CHRF: 27.2015
+
+Dialect (all):
+  BLEU: 3.8488
+  CHRF: 25.9257
 
 ================================================================================
 Per-file Results:

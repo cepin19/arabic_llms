@@ -1,0 +1,37 @@
+\begin{table}[htbp]
+\centering
+\caption{Overall Scores (All Test Sets Concatenated): Forward Translation (Dialect)}
+\label{tab:overall_scores_forward_dialect}
+\begin{tabular}{l@{\hspace{3pt}}c@{\hspace{3pt}}c@{\hspace{3pt}}c}
+\toprule
+Model & Size & BLEU & CHRF \\
+\midrule
+\multicolumn{4}{l}{\textit{Arabic-Specialized}} \\
+\midrule
+Jais-2-70B-Chat & 70B & 30.1 & 55.6 \\
+Jais-2-8B-Chat & 8B & 17.5 & 44.8 \\
+Nile-Chat-12B & 12B & 8.1 & 34.7 \\
+c4ai-command-r7b-arabic-02-2025 & 7B & 8.9 & 35.4 \\
+\midrule
+\multicolumn{4}{l}{\textit{Multilingual}} \\
+\midrule
+EuroLLM-9B-Instruct & 9B & 7.6 & 33.8 \\
+Llama-3.3-70B-Instruct & 70B & 9.6 & 36.2 \\
+Mistral-Small-3.2-24B-Instruct-2506 & 24B & 6.6 & 28.8 \\
+Qwen3-4B-Instruct-2507 & 4B & 5.1 & 28.1 \\
+aya-expanse-32b & 32B & 11.1 & 39.4 \\
+aya-expanse-8b & 8B & 7.0 & 33.5 \\
+c4ai-command-r-08-2024 & 32B & 12.6 & 40.4 \\
+c4ai-command-r-v01 & 35B & 5.8 & 31.2 \\
+command-a-translate-08-2025 & 111B & 9.4 & 38.6 \\
+gemma-3-27b-it & 27B & 12.0 & 40.5 \\
+gemma-3-4b-it & 4B & 8.1 & 33.7 \\
+\midrule
+\multicolumn{4}{l}{\textit{Commercial API}} \\
+\midrule
+gpt-4.1-mini & N/A & 17.4 & 46.9 \\
+gpt-4.1-nano & N/A & 14.2 & 43.8 \\
+\midrule
+\bottomrule
+\end{tabular}
+\end{table}

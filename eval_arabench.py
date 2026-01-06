@@ -55,6 +55,14 @@ def extract_dialect_from_filename(filename: str) -> Optional[str]:
     return None
 
 
+def is_madar_file(filename: str) -> bool:
+    """
+    Check if a filename belongs to the MADAR dataset.
+    MADAR files start with 'madar.', while bible and QAraC files start with 'bible.' and 'QAraC.' respectively.
+    """
+    return filename.startswith('madar.')
+
+
 def get_output_paths(input_file: Path, output_dir: Path, dialect: str) -> Tuple[Path, Path]:
     """
     Generate output paths for Arabic and dialect translations.
@@ -397,30 +405,43 @@ async def translate_arabench_file_reverse(
 def compute_merged_dialect_scores(
     all_metrics: List[Dict],
     dataset_dir: Path,
-    output_dir: Path
+    output_dir: Path,
+    madar_only: bool = False
 ) -> List[Dict]:
     """
     Merge test sets by dialect, concatenate files, and recompute scores.
     
-    Returns list of merged dialect metrics with type='dialect_merged'.
+    Args:
+        all_metrics: List of all file metrics
+        dataset_dir: Path to dataset directory
+        output_dir: Path to output directory
+        madar_only: If True, only include MADAR files (exclude bible and QAraC)
+    
+    Returns list of merged dialect metrics with type='dialect_merged' (or 'dialect_merged_madar_only' if madar_only=True).
     """
     # Group metrics by dialect
     dialect_groups = defaultdict(list)
     
     for metrics in all_metrics:
         if 'dialect_code' in metrics and 'dialect_name' in metrics:
+            filename = metrics.get('filename', '')
+            # Filter by dataset if madar_only is True
+            if madar_only and not is_madar_file(filename):
+                continue
             dialect_code = metrics['dialect_code']
             dialect_name = metrics['dialect_name']
             dialect_groups[(dialect_code, dialect_name)].append(metrics)
     
     merged_results = []
+    result_type = 'dialect_merged_madar_only' if madar_only else 'dialect_merged'
     
     for (dialect_code, dialect_name), metrics_list in dialect_groups.items():
         if len(metrics_list) < 1:
             continue
         
+        dataset_label = "MADAR only" if madar_only else "all datasets"
         print(f"\n{'='*80}")
-        print(f"🔄 Merging {len(metrics_list)} test set(s) for {dialect_name} ({dialect_code})...")
+        print(f"🔄 Merging {len(metrics_list)} test set(s) for {dialect_name} ({dialect_code}) - {dataset_label}...")
         print(f"{'='*80}\n")
         
         # Collect all file tuples (ref, arabic_general, dialect) - only include if ALL exist
@@ -430,6 +451,10 @@ def compute_merged_dialect_scores(
         for m in metrics_list:
             filename = m.get('filename', '')
             if not filename:
+                continue
+            
+            # Additional filter: ensure it's MADAR if madar_only is True
+            if madar_only and not is_madar_file(filename):
                 continue
             
             # Get reference file
@@ -496,7 +521,7 @@ def compute_merged_dialect_scores(
         
         # Create merged result entry
         merged_result = {
-            'type': 'dialect_merged',
+            'type': result_type,
             'dialect_code': dialect_code,
             'dialect_name': dialect_name,
             'num_test_sets': len(metrics_list),
@@ -514,12 +539,19 @@ def compute_merged_dialect_scores(
 def compute_merged_dialect_scores_reverse(
     all_metrics: List[Dict],
     dataset_dir: Path,
-    output_dir: Path
+    output_dir: Path,
+    madar_only: bool = False
 ) -> List[Dict]:
     """
     Merge test sets by dialect for reverse translation, concatenate files, and recompute scores.
     
-    Returns list of merged dialect metrics with type='dialect_merged'.
+    Args:
+        all_metrics: List of all file metrics
+        dataset_dir: Path to dataset directory
+        output_dir: Path to output directory
+        madar_only: If True, only include MADAR files (exclude bible and QAraC)
+    
+    Returns list of merged dialect metrics with type='dialect_merged' (or 'dialect_merged_madar_only' if madar_only=True).
     """
     # Group metrics by dialect
     dialect_groups = defaultdict(list)
@@ -527,6 +559,10 @@ def compute_merged_dialect_scores_reverse(
     for metrics in all_metrics:
         filename = metrics.get('filename', '')
         if not filename:
+            continue
+        
+        # Filter by dataset if madar_only is True
+        if madar_only and not is_madar_file(filename):
             continue
         
         # Extract dialect from Arabic filename (e.g., madar.test.glf.0.qa.ar -> qa)
@@ -538,13 +574,15 @@ def compute_merged_dialect_scores_reverse(
         dialect_groups[(dialect_code, dialect_name)].append(metrics)
     
     merged_results = []
+    result_type = 'dialect_merged_madar_only' if madar_only else 'dialect_merged'
     
     for (dialect_code, dialect_name), metrics_list in dialect_groups.items():
         if len(metrics_list) < 1:
             continue
         
+        dataset_label = "MADAR only" if madar_only else "all datasets"
         print(f"\n{'='*80}")
-        print(f"🔄 Merging {len(metrics_list)} test set(s) for {dialect_name} ({dialect_code})...")
+        print(f"🔄 Merging {len(metrics_list)} test set(s) for {dialect_name} ({dialect_code}) - {dataset_label}...")
         print(f"{'='*80}\n")
         
         # Collect all file tuples (ref, translated) - only include if ALL exist
@@ -554,6 +592,10 @@ def compute_merged_dialect_scores_reverse(
         for m in metrics_list:
             filename = m.get('filename', '')
             if not filename:
+                continue
+            
+            # Additional filter: ensure it's MADAR if madar_only is True
+            if madar_only and not is_madar_file(filename):
                 continue
             
             # Get reference file (English)
@@ -612,7 +654,7 @@ def compute_merged_dialect_scores_reverse(
         
         # Create merged result entry (for reverse, no arabic_general/dialect split)
         merged_result = {
-            'type': 'dialect_merged',
+            'type': result_type,
             'dialect_code': dialect_code,
             'dialect_name': dialect_name,
             'num_test_sets': len(metrics_list),
@@ -632,7 +674,8 @@ def compute_overall_scores(
     dataset_dir: Path,
     output_dir: Path,
     roundtrip_output_dir: Optional[Path] = None,
-    direction: str = 'forward'
+    direction: str = 'forward',
+    madar_only: bool = False
 ) -> Optional[Dict]:
     """
     Compute overall BLEU and CHRF scores by concatenating all test sets.
@@ -643,6 +686,7 @@ def compute_overall_scores(
         output_dir: Path to output directory
         roundtrip_output_dir: Path to roundtrip output directory (for roundtrip direction)
         direction: 'forward', 'reverse', or 'roundtrip'
+        madar_only: If True, only include MADAR files (exclude bible and QAraC)
     
     Returns:
         Dictionary with overall scores, or None if no files found
@@ -650,8 +694,10 @@ def compute_overall_scores(
     if not all_metrics:
         return None
     
+    dataset_label = "MADAR only" if madar_only else "all datasets"
+    result_type = 'overall_madar_only' if madar_only else 'overall'
     print(f"\n{'='*80}")
-    print(f"🔄 Computing overall scores (all test sets concatenated)...")
+    print(f"🔄 Computing overall scores ({dataset_label}) - all test sets concatenated...")
     print(f"{'='*80}\n")
     
     if direction == 'forward':
@@ -664,6 +710,10 @@ def compute_overall_scores(
         for m in all_metrics:
             filename = m.get('filename', '')
             if not filename:
+                continue
+            
+            # Filter by dataset if madar_only is True
+            if madar_only and not is_madar_file(filename):
                 continue
             
             # Get reference file
@@ -710,7 +760,7 @@ def compute_overall_scores(
         print(f"   Dialect (all) - BLEU: {dialect_metrics['BLEU']:.4f}, CHRF: {dialect_metrics['CHRF']:.4f}")
         
         return {
-            'type': 'overall',
+            'type': result_type,
             'num_test_sets': len(source_files),
             'num_sentences': min_len,
             'arabic_general': arabic_metrics,
@@ -726,6 +776,10 @@ def compute_overall_scores(
         for m in all_metrics:
             filename = m.get('filename', '')
             if not filename:
+                continue
+            
+            # Filter by dataset if madar_only is True
+            if madar_only and not is_madar_file(filename):
                 continue
             
             # Get reference file (English)
@@ -762,7 +816,7 @@ def compute_overall_scores(
         print(f"   Overall - BLEU: {overall_metrics['BLEU']:.4f}, CHRF: {overall_metrics['CHRF']:.4f}")
         
         return {
-            'type': 'overall',
+            'type': result_type,
             'num_test_sets': len(source_files),
             'num_sentences': min_len,
             'BLEU': overall_metrics['BLEU'],
@@ -782,6 +836,10 @@ def compute_overall_scores(
         for m in all_metrics:
             filename = m.get('filename', '')
             if not filename:
+                continue
+            
+            # Filter by dataset if madar_only is True
+            if madar_only and not is_madar_file(filename):
                 continue
             
             # Source file is the original English file
@@ -817,7 +875,7 @@ def compute_overall_scores(
         print(f"   Overall - BLEU: {overall_metrics['BLEU']:.4f}, CHRF: {overall_metrics['CHRF']:.4f}")
         
         return {
-            'type': 'overall',
+            'type': result_type,
             'num_test_sets': len(source_files),
             'num_sentences': min_len,
             'roundtrip': overall_metrics
@@ -909,8 +967,10 @@ async def process_all_files(
                 metrics['type'] = 'file'
                 all_metrics.append(metrics)
         
-        # Compute merged dialect scores for reverse translation
+        # Compute merged dialect scores for reverse translation (both regular and madar_only)
         merged_dialect_results = compute_merged_dialect_scores_reverse(all_metrics, dataset_dir, output_dir)
+        merged_dialect_results_madar_only = compute_merged_dialect_scores_reverse(all_metrics, dataset_dir, output_dir, madar_only=True)
+        merged_dialect_results.extend(merged_dialect_results_madar_only)
         direction_str = 'reverse'
     
     else:
@@ -933,19 +993,26 @@ async def process_all_files(
                 metrics['type'] = 'file'
                 all_metrics.append(metrics)
         
-        # Compute merged dialect scores (only for forward translation)
+        # Compute merged dialect scores (only for forward translation) - both regular and madar_only
         merged_dialect_results = compute_merged_dialect_scores(all_metrics, dataset_dir, output_dir)
+        merged_dialect_results_madar_only = compute_merged_dialect_scores(all_metrics, dataset_dir, output_dir, madar_only=True)
+        merged_dialect_results.extend(merged_dialect_results_madar_only)
         direction_str = 'forward'
     
-    # Compute overall scores by concatenating all test sets
+    # Compute overall scores by concatenating all test sets (both regular and madar_only)
     overall_result = compute_overall_scores(
         all_metrics, dataset_dir, output_dir, roundtrip_output_dir, direction_str
+    )
+    overall_result_madar_only = compute_overall_scores(
+        all_metrics, dataset_dir, output_dir, roundtrip_output_dir, direction_str, madar_only=True
     )
     
     # Combine all results (individual files + merged dialects + overall)
     all_results = all_metrics + merged_dialect_results
     if overall_result:
         all_results.append(overall_result)
+    if overall_result_madar_only:
+        all_results.append(overall_result_madar_only)
     
     # Determine output dir for scores (use roundtrip_output_dir for roundtrip)
     scores_output_dir = roundtrip_output_dir if roundtrip else output_dir
@@ -958,10 +1025,11 @@ async def process_all_files(
         'files_with_metrics': len(all_metrics),
         'merged_dialects': len(merged_dialect_results),
         'has_overall_scores': overall_result is not None,
+        'has_overall_scores_madar_only': overall_result_madar_only is not None,
         'results': all_results
     }
     
-    # Compute averages
+    # Compute averages (both regular and madar_only)
     if all_metrics:
         if roundtrip:
             # For round-trip translation, we have roundtrip scores
@@ -972,6 +1040,16 @@ async def process_all_files(
                 'BLEU': round(sum(bleu_scores) / len(bleu_scores), 4) if bleu_scores else 0,
                 'CHRF': round(sum(chrf_scores) / len(chrf_scores), 4) if chrf_scores else 0,
             }
+            
+            # MADAR-only averages
+            bleu_scores_madar = [m['roundtrip']['BLEU'] for m in all_metrics if 'roundtrip' in m and is_madar_file(m.get('filename', ''))]
+            chrf_scores_madar = [m['roundtrip']['CHRF'] for m in all_metrics if 'roundtrip' in m and is_madar_file(m.get('filename', ''))]
+            
+            if bleu_scores_madar or chrf_scores_madar:
+                scores_summary['averages_madar_only'] = {
+                    'BLEU': round(sum(bleu_scores_madar) / len(bleu_scores_madar), 4) if bleu_scores_madar else 0,
+                    'CHRF': round(sum(chrf_scores_madar) / len(chrf_scores_madar), 4) if chrf_scores_madar else 0,
+                }
         elif reverse:
             # For reverse translation, we only have BLEU and CHRF directly
             bleu_scores = [m['BLEU'] for m in all_metrics if 'BLEU' in m]
@@ -981,6 +1059,16 @@ async def process_all_files(
                 'BLEU': round(sum(bleu_scores) / len(bleu_scores), 4) if bleu_scores else 0,
                 'CHRF': round(sum(chrf_scores) / len(chrf_scores), 4) if chrf_scores else 0,
             }
+            
+            # MADAR-only averages
+            bleu_scores_madar = [m['BLEU'] for m in all_metrics if 'BLEU' in m and is_madar_file(m.get('filename', ''))]
+            chrf_scores_madar = [m['CHRF'] for m in all_metrics if 'CHRF' in m and is_madar_file(m.get('filename', ''))]
+            
+            if bleu_scores_madar or chrf_scores_madar:
+                scores_summary['averages_madar_only'] = {
+                    'BLEU': round(sum(bleu_scores_madar) / len(bleu_scores_madar), 4) if bleu_scores_madar else 0,
+                    'CHRF': round(sum(chrf_scores_madar) / len(chrf_scores_madar), 4) if chrf_scores_madar else 0,
+                }
         else:
             # For forward translation, we have arabic_general and dialect
             arabic_bleu_scores = [m['arabic_general']['BLEU'] for m in all_metrics if 'arabic_general' in m]
@@ -998,6 +1086,24 @@ async def process_all_files(
                     'CHRF': round(sum(dialect_chrf_scores) / len(dialect_chrf_scores), 4) if dialect_chrf_scores else 0,
                 }
             }
+            
+            # MADAR-only averages
+            arabic_bleu_scores_madar = [m['arabic_general']['BLEU'] for m in all_metrics if 'arabic_general' in m and is_madar_file(m.get('filename', ''))]
+            arabic_chrf_scores_madar = [m['arabic_general']['CHRF'] for m in all_metrics if 'arabic_general' in m and is_madar_file(m.get('filename', ''))]
+            dialect_bleu_scores_madar = [m['dialect']['BLEU'] for m in all_metrics if 'dialect' in m and is_madar_file(m.get('filename', ''))]
+            dialect_chrf_scores_madar = [m['dialect']['CHRF'] for m in all_metrics if 'dialect' in m and is_madar_file(m.get('filename', ''))]
+            
+            if arabic_bleu_scores_madar or arabic_chrf_scores_madar or dialect_bleu_scores_madar or dialect_chrf_scores_madar:
+                scores_summary['averages_madar_only'] = {
+                    'arabic_general': {
+                        'BLEU': round(sum(arabic_bleu_scores_madar) / len(arabic_bleu_scores_madar), 4) if arabic_bleu_scores_madar else 0,
+                        'CHRF': round(sum(arabic_chrf_scores_madar) / len(arabic_chrf_scores_madar), 4) if arabic_chrf_scores_madar else 0,
+                    },
+                    'dialect': {
+                        'BLEU': round(sum(dialect_bleu_scores_madar) / len(dialect_bleu_scores_madar), 4) if dialect_bleu_scores_madar else 0,
+                        'CHRF': round(sum(dialect_chrf_scores_madar) / len(dialect_chrf_scores_madar), 4) if dialect_chrf_scores_madar else 0,
+                    }
+                }
     
     # Save JSON
     scores_file.write_text(json.dumps(scores_summary, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -1033,6 +1139,21 @@ async def process_all_files(
                 f.write(f"  BLEU: {scores_summary['averages']['dialect']['BLEU']:.4f}\n")
                 f.write(f"  CHRF: {scores_summary['averages']['dialect']['CHRF']:.4f}\n\n")
         
+        # Write MADAR-only averages if available
+        if all_metrics and 'averages_madar_only' in scores_summary:
+            f.write("Average Scores - MADAR Only (per-file averages):\n")
+            f.write("-" * 80 + "\n")
+            if roundtrip or reverse:
+                f.write(f"  BLEU: {scores_summary['averages_madar_only']['BLEU']:.4f}\n")
+                f.write(f"  CHRF: {scores_summary['averages_madar_only']['CHRF']:.4f}\n\n")
+            else:
+                f.write(f"Arabic (general):\n")
+                f.write(f"  BLEU: {scores_summary['averages_madar_only']['arabic_general']['BLEU']:.4f}\n")
+                f.write(f"  CHRF: {scores_summary['averages_madar_only']['arabic_general']['CHRF']:.4f}\n\n")
+                f.write(f"Dialect-specific:\n")
+                f.write(f"  BLEU: {scores_summary['averages_madar_only']['dialect']['BLEU']:.4f}\n")
+                f.write(f"  CHRF: {scores_summary['averages_madar_only']['dialect']['CHRF']:.4f}\n\n")
+        
         # Write overall scores if available
         if overall_result:
             f.write("=" * 80 + "\n")
@@ -1053,6 +1174,27 @@ async def process_all_files(
             elif direction_str == 'roundtrip':
                 f.write(f"  BLEU: {overall_result['roundtrip']['BLEU']:.4f}\n")
                 f.write(f"  CHRF: {overall_result['roundtrip']['CHRF']:.4f}\n\n")
+        
+        # Write MADAR-only overall scores if available
+        if overall_result_madar_only:
+            f.write("=" * 80 + "\n")
+            f.write("Overall Scores - MADAR Only (all test sets concatenated):\n")
+            f.write("=" * 80 + "\n")
+            f.write(f"Total test sets: {overall_result_madar_only.get('num_test_sets', 0)}\n")
+            f.write(f"Total sentences: {overall_result_madar_only.get('num_sentences', 0)}\n\n")
+            if direction_str == 'forward':
+                f.write(f"Arabic (general):\n")
+                f.write(f"  BLEU: {overall_result_madar_only['arabic_general']['BLEU']:.4f}\n")
+                f.write(f"  CHRF: {overall_result_madar_only['arabic_general']['CHRF']:.4f}\n\n")
+                f.write(f"Dialect (all):\n")
+                f.write(f"  BLEU: {overall_result_madar_only['dialect']['BLEU']:.4f}\n")
+                f.write(f"  CHRF: {overall_result_madar_only['dialect']['CHRF']:.4f}\n\n")
+            elif direction_str == 'reverse':
+                f.write(f"  BLEU: {overall_result_madar_only['BLEU']:.4f}\n")
+                f.write(f"  CHRF: {overall_result_madar_only['CHRF']:.4f}\n\n")
+            elif direction_str == 'roundtrip':
+                f.write(f"  BLEU: {overall_result_madar_only['roundtrip']['BLEU']:.4f}\n")
+                f.write(f"  CHRF: {overall_result_madar_only['roundtrip']['CHRF']:.4f}\n\n")
         
         f.write("=" * 80 + "\n")
         f.write("Per-file Results:\n")
@@ -1087,6 +1229,13 @@ async def process_all_files(
         else:
             print(f"   Arabic (general) - BLEU: {scores_summary['averages']['arabic_general']['BLEU']:.4f}, CHRF: {scores_summary['averages']['arabic_general']['CHRF']:.4f}")
             print(f"   Dialect-specific - BLEU: {scores_summary['averages']['dialect']['BLEU']:.4f}, CHRF: {scores_summary['averages']['dialect']['CHRF']:.4f}")
+    if all_metrics and 'averages_madar_only' in scores_summary:
+        print(f"\n📈 Average Scores - MADAR Only (per-file averages):")
+        if roundtrip or reverse:
+            print(f"   BLEU: {scores_summary['averages_madar_only']['BLEU']:.4f}, CHRF: {scores_summary['averages_madar_only']['CHRF']:.4f}")
+        else:
+            print(f"   Arabic (general) - BLEU: {scores_summary['averages_madar_only']['arabic_general']['BLEU']:.4f}, CHRF: {scores_summary['averages_madar_only']['arabic_general']['CHRF']:.4f}")
+            print(f"   Dialect-specific - BLEU: {scores_summary['averages_madar_only']['dialect']['BLEU']:.4f}, CHRF: {scores_summary['averages_madar_only']['dialect']['CHRF']:.4f}")
     if overall_result:
         print(f"\n📈 Overall Scores (all test sets concatenated):")
         print(f"   Total test sets: {overall_result.get('num_test_sets', 0)}")
@@ -1098,6 +1247,17 @@ async def process_all_files(
             print(f"   BLEU: {overall_result['BLEU']:.4f}, CHRF: {overall_result['CHRF']:.4f}")
         elif direction_str == 'roundtrip':
             print(f"   BLEU: {overall_result['roundtrip']['BLEU']:.4f}, CHRF: {overall_result['roundtrip']['CHRF']:.4f}")
+    if overall_result_madar_only:
+        print(f"\n📈 Overall Scores - MADAR Only (all test sets concatenated):")
+        print(f"   Total test sets: {overall_result_madar_only.get('num_test_sets', 0)}")
+        print(f"   Total sentences: {overall_result_madar_only.get('num_sentences', 0)}")
+        if direction_str == 'forward':
+            print(f"   Arabic (general) - BLEU: {overall_result_madar_only['arabic_general']['BLEU']:.4f}, CHRF: {overall_result_madar_only['arabic_general']['CHRF']:.4f}")
+            print(f"   Dialect (all) - BLEU: {overall_result_madar_only['dialect']['BLEU']:.4f}, CHRF: {overall_result_madar_only['dialect']['CHRF']:.4f}")
+        elif direction_str == 'reverse':
+            print(f"   BLEU: {overall_result_madar_only['BLEU']:.4f}, CHRF: {overall_result_madar_only['CHRF']:.4f}")
+        elif direction_str == 'roundtrip':
+            print(f"   BLEU: {overall_result_madar_only['roundtrip']['BLEU']:.4f}, CHRF: {overall_result_madar_only['roundtrip']['CHRF']:.4f}")
     print(f"{'='*80}\n")
 
 

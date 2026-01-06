@@ -1,0 +1,28 @@
+\begin{table}[htbp]
+\centering
+\caption{Average Merged Dialect Scores: General vs. Dialect-Specific Prompt}
+\label{tab:prompt_comparison}
+\begin{tabular}{l@{\hspace{3pt}}c@{\hspace{3pt}}cc@{\hspace{3pt}}cc}
+\toprule
+Model & Size & \multicolumn{2}{c@{\hspace{3pt}}}{BLEU} & \multicolumn{2}{c@{\hspace{3pt}}}{CHRF} \\\cmidrule(lr){3-4} \cmidrule(lr){5-6} &  & General & Dialect & General & Dialect \\
+\midrule
+Jais-2-70B-Chat & 70B & 6.91 & 19.27 & 34.36 & 46.60 \\
+Jais-2-8B-Chat & 8B & 6.04 & 11.71 & 32.73 & 37.97 \\
+Nile-Chat-12B & 12B & 6.69 & 6.24 & 33.71 & 32.75 \\
+c4ai-command-r7b-arabic-02-2025 & 7B & 6.61 & 7.43 & 32.87 & 33.74 \\
+EuroLLM-9B-Instruct & 9B & 6.25 & 6.70 & 32.72 & 32.83 \\
+Llama-3.3-70B-Instruct & 70B & 6.17 & 7.83 & 32.37 & 34.56 \\
+Mistral-Small-3.2-24B-Instruct-2506 & 24B & 5.83 & 5.83 & 31.38 & 28.83 \\
+Qwen3-4B-Instruct-2507 & 4B & 4.12 & 4.08 & 27.99 & 26.82 \\
+aya-expanse-32b & 32B & 6.50 & 8.71 & 33.42 & 36.67 \\
+aya-expanse-8b & 8B & 6.14 & 6.24 & 32.40 & 32.61 \\
+c4ai-command-r-08-2024 & 32B & 6.39 & 10.06 & 33.12 & 37.79 \\
+c4ai-command-r-v01 & 35B & 4.86 & 4.98 & 30.21 & 30.04 \\
+command-a-translate-08-2025 & 111B & 5.96 & 7.66 & 33.42 & 35.84 \\
+gemma-3-27b-it & 27B & 6.48 & 9.90 & 33.22 & 38.32 \\
+gemma-3-4b-it & 4B & 5.48 & 6.59 & 31.32 & 32.10 \\
+gpt-4.1-mini & N/A & 6.91 & 14.18 & 34.13 & 43.98 \\
+gpt-4.1-nano & N/A & 6.59 & 11.95 & 33.47 & 41.52 \\
+\bottomrule
+\end{tabular}
+\end{table}

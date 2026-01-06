@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+\centering
+\caption{Roundtrip Translation Results (English → Arabic → English): Top Model Pairs}
+\label{tab:roundtrip}
+\begin{tabular}{l@{\hspace{3pt}}c@{\hspace{3pt}}c}
+\toprule
+Model Pair & BLEU & CHRF \\
+\midrule
+gpt 4.1 mini Jais 2 70B Chat & 55.97 & 71.85 \\
+aya expanse 8b Jais 2 70B Chat & 55.86 & 71.94 \\
+gpt 4.1 nano Jais 2 70B Chat & 55.84 & 71.73 \\
+EuroLLM 9B Instruct Jais 2 70B Chat & 54.75 & 70.28 \\
+aya expanse 8b aya expanse 32b & 53.74 & 69.13 \\
+c4ai command r7b arabic 02 2025 Jais 2 70B Chat & 53.70 & 69.19 \\
+aya expanse 32b Jais 2 70B Chat & 53.18 & 69.85 \\
+EuroLLM 9B Instruct aya expanse 32b & 51.99 & 67.27 \\
+gpt 4.1 nano aya expanse 32b & 51.69 & 67.61 \\
+gpt 4.1 mini aya expanse 32b & 51.00 & 67.10 \\
+c4ai command r7b arabic 02 2025 aya expanse 32b & 50.55 & 66.24 \\
+aya expanse 32b aya expanse 32b & 50.55 & 66.75 \\
+command a translate 08 2025 Jais 2 70B Chat & 50.14 & 68.82 \\
+gemma 3 27b it Jais 2 70B Chat & 49.52 & 67.17 \\
+Llama 3.3 70B Instruct Jais 2 70B Chat & 48.85 & 65.81 \\
+\bottomrule
+\end{tabular}
+\end{table}

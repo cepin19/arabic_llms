@@ -3,399 +3,835 @@
   "direction": "reverse",
   "total_files": 42,
   "files_with_metrics": 42,
-  "merged_dialects": 0,
+  "merged_dialects": 32,
   "has_overall_scores": true,
+  "has_overall_scores_madar_only": true,
   "results": [
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 43.8588,
+      "CHRF": 64.034,
       "filename": "madar.test.nil.1.eg.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.5119889974594116,
-      "COMET_Unbabel_XCOMET-XL": 0.7818552255630493
+      "num_sentences": 2000,
+      "dialect_code": "eg",
+      "dialect_name": "Egyptian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 39.9732,
+      "CHRF": 60.1029,
       "filename": "madar.test.mgr.1.ly.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.25802892446517944,
-      "COMET_Unbabel_XCOMET-XL": 0.7449449300765991
+      "num_sentences": 2000,
+      "dialect_code": "ly",
+      "dialect_name": "Libyan Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 27.3007,
+      "CHRF": 47.81,
       "filename": "madar.dev.mgr.0.ma.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.22814491391181946,
-      "COMET_Unbabel_XCOMET-XL": 0.5371866226196289
+      "num_sentences": 5500,
+      "dialect_code": "ma",
+      "dialect_name": "Moroccan Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 29.674,
+      "CHRF": 50.623,
       "filename": "madar.test.lev.0.lb.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8453161716461182,
-      "COMET_Unbabel_XCOMET-XL": 0.9314351081848145
+      "num_sentences": 6500,
+      "dialect_code": "lb",
+      "dialect_name": "Lebanese Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 39.1132,
+      "CHRF": 58.3078,
       "filename": "madar.test.nil.2.eg.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.30176299810409546,
-      "COMET_Unbabel_XCOMET-XL": 0.7724074125289917
+      "num_sentences": 2000,
+      "dialect_code": "eg",
+      "dialect_name": "Egyptian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 38.8101,
+      "CHRF": 57.7182,
       "filename": "madar.test.lev.0.pa.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.3074227571487427,
-      "COMET_Unbabel_XCOMET-XL": 0.7335754632949829
+      "num_sentences": 2000,
+      "dialect_code": "pa",
+      "dialect_name": "Palestinian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 37.33,
+      "CHRF": 55.7728,
       "filename": "madar.test.glf.1.sa.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.6602402925491333,
-      "COMET_Unbabel_XCOMET-XL": 0.8379733562469482
+      "num_sentences": 2000,
+      "dialect_code": "sa",
+      "dialect_name": "Saudi Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 38.9479,
+      "CHRF": 58.7734,
       "filename": "madar.test.glf.0.iq.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.5630836486816406,
-      "COMET_Unbabel_XCOMET-XL": 0.7919752597808838
+      "num_sentences": 2000,
+      "dialect_code": "iq",
+      "dialect_name": "Iraqi Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 41.0844,
+      "CHRF": 58.371,
       "filename": "madar.test.lev.1.sy.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.5943305492401123,
-      "COMET_Unbabel_XCOMET-XL": 0.8097162246704102
+      "num_sentences": 2000,
+      "dialect_code": "sy",
+      "dialect_name": "Syrian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 34.1406,
+      "CHRF": 54.0344,
       "filename": "madar.test.mgr.0.ly.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.3665027320384979,
-      "COMET_Unbabel_XCOMET-XL": 0.6689885854721069
+      "num_sentences": 2000,
+      "dialect_code": "ly",
+      "dialect_name": "Libyan Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 26.5726,
+      "CHRF": 51.1432,
       "filename": "madar.test.mgr.0.dz.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.32056406140327454,
-      "COMET_Unbabel_XCOMET-XL": 0.7223644256591797
+      "num_sentences": 2000,
+      "dialect_code": "dz",
+      "dialect_name": "Algerian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 23.3881,
+      "CHRF": 43.7263,
       "filename": "madar.test.mgr.0.tn.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9083495140075684,
-      "COMET_Unbabel_XCOMET-XL": 0.9479553699493408
+      "num_sentences": 6500,
+      "dialect_code": "tn",
+      "dialect_name": "Tunisian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 48.1911,
+      "CHRF": 63.5036,
       "filename": "madar.test.nil.0.sd.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7050509452819824,
-      "COMET_Unbabel_XCOMET-XL": 0.854597806930542
+      "num_sentences": 2000,
+      "dialect_code": "sd",
+      "dialect_name": "Sudanese Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 41.7092,
+      "CHRF": 58.8647,
       "filename": "madar.dev.glf.0.qa.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.5225629210472107,
-      "COMET_Unbabel_XCOMET-XL": 0.7386358976364136
+      "num_sentences": 5500,
+      "dialect_code": "qa",
+      "dialect_name": "Qatari Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 46.1879,
+      "CHRF": 66.0831,
       "filename": "madar.dev.msa.0.ms.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.3127623200416565,
-      "COMET_Unbabel_XCOMET-XL": 0.6963487267494202
+      "num_sentences": 5500,
+      "dialect_code": "ms",
+      "dialect_name": "Modern Standard Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 23.9017,
+      "CHRF": 47.4763,
       "filename": "bible.test.msa.0.ms.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 1.0,
-      "COMET_Unbabel_XCOMET-XL": 0.927833080291748
+      "num_sentences": 600,
+      "dialect_code": "ms",
+      "dialect_name": "Modern Standard Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 38.219,
+      "CHRF": 57.5883,
       "filename": "madar.test.glf.0.ye.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.754907488822937,
-      "COMET_Unbabel_XCOMET-XL": 0.8528392314910889
+      "num_sentences": 2000,
+      "dialect_code": "ye",
+      "dialect_name": "Yemeni Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 15.6727,
+      "CHRF": 45.786,
       "filename": "QAraC.dev.glf.0.qa.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9407519102096558,
-      "COMET_Unbabel_XCOMET-XL": 0.6849381327629089
+      "num_sentences": 6713,
+      "dialect_code": "qa",
+      "dialect_name": "Qatari Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 41.3116,
+      "CHRF": 58.6194,
       "filename": "madar.test.glf.0.qa.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9069396257400513,
-      "COMET_Unbabel_XCOMET-XL": 0.9434670209884644
+      "num_sentences": 6500,
+      "dialect_code": "qa",
+      "dialect_name": "Qatari Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 19.9393,
+      "CHRF": 40.4301,
       "filename": "madar.test.mgr.1.tn.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.27852490544319153,
-      "COMET_Unbabel_XCOMET-XL": 0.7230198383331299
+      "num_sentences": 2000,
+      "dialect_code": "tn",
+      "dialect_name": "Tunisian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 16.6491,
+      "CHRF": 41.6205,
       "filename": "bible.dev.mgr.0.ma.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.46549728512763977,
-      "COMET_Unbabel_XCOMET-XL": 0.8363120555877686
+      "num_sentences": 600,
+      "dialect_code": "ma",
+      "dialect_name": "Moroccan Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 45.8339,
+      "CHRF": 62.339,
       "filename": "madar.test.glf.0.sa.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7663283348083496,
-      "COMET_Unbabel_XCOMET-XL": 0.8789758682250977
+      "num_sentences": 2000,
+      "dialect_code": "sa",
+      "dialect_name": "Saudi Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 41.1779,
+      "CHRF": 58.5576,
       "filename": "madar.test.lev.1.jo.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.22481343150138855,
-      "COMET_Unbabel_XCOMET-XL": 0.6638327836990356
+      "num_sentences": 2000,
+      "dialect_code": "jo",
+      "dialect_name": "Jordanian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 40.3563,
+      "CHRF": 57.5201,
       "filename": "madar.test.lev.0.sy.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.3098819851875305,
-      "COMET_Unbabel_XCOMET-XL": 0.7692776918411255
+      "num_sentences": 2000,
+      "dialect_code": "sy",
+      "dialect_name": "Syrian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 38.6922,
+      "CHRF": 58.9095,
       "filename": "madar.dev.nil.0.eg.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.21385234594345093,
-      "COMET_Unbabel_XCOMET-XL": 0.6717813014984131
+      "num_sentences": 5500,
+      "dialect_code": "eg",
+      "dialect_name": "Egyptian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 33.1921,
+      "CHRF": 53.7575,
       "filename": "madar.test.mgr.0.ma.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7366031408309937,
-      "COMET_Unbabel_XCOMET-XL": 0.9016531705856323
+      "num_sentences": 6500,
+      "dialect_code": "ma",
+      "dialect_name": "Moroccan Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 44.9085,
+      "CHRF": 62.8555,
       "filename": "madar.test.glf.0.om.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7910619974136353,
-      "COMET_Unbabel_XCOMET-XL": 0.8545998334884644
+      "num_sentences": 2000,
+      "dialect_code": "om",
+      "dialect_name": "Omani Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 39.2,
+      "CHRF": 59.7706,
       "filename": "madar.test.lev.0.jo.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.6229956150054932,
-      "COMET_Unbabel_XCOMET-XL": 0.8169384002685547
+      "num_sentences": 2000,
+      "dialect_code": "jo",
+      "dialect_name": "Jordanian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 24.8283,
+      "CHRF": 45.4685,
       "filename": "madar.dev.mgr.0.tn.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.21294818818569183,
-      "COMET_Unbabel_XCOMET-XL": 0.4245449900627136
+      "num_sentences": 5500,
+      "dialect_code": "tn",
+      "dialect_name": "Tunisian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 38.6649,
+      "CHRF": 58.4688,
       "filename": "madar.test.mgr.1.ma.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.30698925256729126,
-      "COMET_Unbabel_XCOMET-XL": 0.7433760166168213
+      "num_sentences": 2000,
+      "dialect_code": "ma",
+      "dialect_name": "Moroccan Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 19.8047,
+      "CHRF": 42.904,
       "filename": "bible.test.msa.1.ms.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.9177463054656982,
-      "COMET_Unbabel_XCOMET-XL": 0.8987311124801636
+      "num_sentences": 600,
+      "dialect_code": "ms",
+      "dialect_name": "Modern Standard Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 44.6479,
+      "CHRF": 64.5741,
       "filename": "madar.test.msa.0.ms.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7638100385665894,
-      "COMET_Unbabel_XCOMET-XL": 0.9538923501968384
+      "num_sentences": 6500,
+      "dialect_code": "ms",
+      "dialect_name": "Modern Standard Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 39.4945,
+      "CHRF": 57.7917,
       "filename": "madar.test.glf.1.iq.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.6109687089920044,
-      "COMET_Unbabel_XCOMET-XL": 0.8122410774230957
+      "num_sentences": 2000,
+      "dialect_code": "iq",
+      "dialect_name": "Iraqi Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 17.454,
+      "CHRF": 40.9345,
       "filename": "bible.test.mgr.0.tn.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.26380977034568787,
-      "COMET_Unbabel_XCOMET-XL": 0.7382721900939941
+      "num_sentences": 600,
+      "dialect_code": "tn",
+      "dialect_name": "Tunisian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 17.8004,
+      "CHRF": 40.9971,
       "filename": "bible.dev.mgr.0.tn.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.569463312625885,
-      "COMET_Unbabel_XCOMET-XL": 0.8862175941467285
+      "num_sentences": 600,
+      "dialect_code": "tn",
+      "dialect_name": "Tunisian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 24.5759,
+      "CHRF": 47.4702,
       "filename": "bible.dev.msa.0.ms.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.7705527544021606,
-      "COMET_Unbabel_XCOMET-XL": 0.9526581764221191
+      "num_sentences": 600,
+      "dialect_code": "ms",
+      "dialect_name": "Modern Standard Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 41.7742,
+      "CHRF": 60.261,
       "filename": "madar.test.nil.0.eg.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.2762240767478943,
-      "COMET_Unbabel_XCOMET-XL": 0.7293317317962646
+      "num_sentences": 6500,
+      "dialect_code": "eg",
+      "dialect_name": "Egyptian Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 15.9951,
+      "CHRF": 45.9703,
       "filename": "QAraC.test.glf.0.qa.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.8679606914520264,
-      "COMET_Unbabel_XCOMET-XL": 0.8854632377624512
+      "num_sentences": 6713,
+      "dialect_code": "qa",
+      "dialect_name": "Qatari Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 21.0837,
+      "CHRF": 44.3606,
       "filename": "bible.dev.msa.1.ms.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.997899055480957,
-      "COMET_Unbabel_XCOMET-XL": 0.9936974048614502
+      "num_sentences": 600,
+      "dialect_code": "ms",
+      "dialect_name": "Modern Standard Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 36.7202,
+      "CHRF": 57.9962,
       "filename": "madar.test.glf.2.iq.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.4187372922897339,
-      "COMET_Unbabel_XCOMET-XL": 0.8027178049087524
+      "num_sentences": 2000,
+      "dialect_code": "iq",
+      "dialect_name": "Iraqi Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 17.707,
+      "CHRF": 40.6087,
       "filename": "bible.test.mgr.0.ma.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.5538144111633301,
-      "COMET_Unbabel_XCOMET-XL": 0.7447211742401123
+      "num_sentences": 600,
+      "dialect_code": "ma",
+      "dialect_name": "Moroccan Arabic",
+      "type": "file"
     },
     {
-      "BLEU": 0.0,
-      "CHRF": 0.0,
+      "BLEU": 35.681,
+      "CHRF": 54.9466,
       "filename": "madar.dev.lev.0.lb.ar",
-      "num_sentences": 1,
-      "type": "file",
-      "COMET_Unbabel_XCOMET-XL_ref-less": 0.2134084701538086,
-      "COMET_Unbabel_XCOMET-XL": 0.5433152914047241
+      "num_sentences": 5500,
+      "dialect_code": "lb",
+      "dialect_name": "Lebanese Arabic",
+      "type": "file"
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "eg",
+      "dialect_name": "Egyptian Arabic",
+      "num_test_sets": 4,
+      "source_files": [
+        "madar.test.nil.1.eg.ar",
+        "madar.test.nil.2.eg.ar",
+        "madar.dev.nil.0.eg.ar",
+        "madar.test.nil.0.eg.ar"
+      ],
+      "num_sentences": 16000,
+      "BLEU": 40.6676,
+      "CHRF": 60.026
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "ly",
+      "dialect_name": "Libyan Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.mgr.1.ly.ar",
+        "madar.test.mgr.0.ly.ar"
+      ],
+      "num_sentences": 4000,
+      "BLEU": 37.0638,
+      "CHRF": 57.035
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "ma",
+      "dialect_name": "Moroccan Arabic",
+      "num_test_sets": 5,
+      "source_files": [
+        "madar.dev.mgr.0.ma.ar",
+        "bible.dev.mgr.0.ma.ar",
+        "madar.test.mgr.0.ma.ar",
+        "madar.test.mgr.1.ma.ar",
+        "bible.test.mgr.0.ma.ar"
+      ],
+      "num_sentences": 15200,
+      "BLEU": 28.5252,
+      "CHRF": 49.7195
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "lb",
+      "dialect_name": "Lebanese Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.lev.0.lb.ar",
+        "madar.dev.lev.0.lb.ar"
+      ],
+      "num_sentences": 12000,
+      "BLEU": 32.4173,
+      "CHRF": 52.6158
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "pa",
+      "dialect_name": "Palestinian Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.lev.0.pa.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 38.8101,
+      "CHRF": 57.7182
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "sa",
+      "dialect_name": "Saudi Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.glf.1.sa.ar",
+        "madar.test.glf.0.sa.ar"
+      ],
+      "num_sentences": 4000,
+      "BLEU": 41.677,
+      "CHRF": 59.0742
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "iq",
+      "dialect_name": "Iraqi Arabic",
+      "num_test_sets": 3,
+      "source_files": [
+        "madar.test.glf.0.iq.ar",
+        "madar.test.glf.1.iq.ar",
+        "madar.test.glf.2.iq.ar"
+      ],
+      "num_sentences": 6000,
+      "BLEU": 38.3398,
+      "CHRF": 58.1857
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "sy",
+      "dialect_name": "Syrian Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.lev.1.sy.ar",
+        "madar.test.lev.0.sy.ar"
+      ],
+      "num_sentences": 4000,
+      "BLEU": 40.7266,
+      "CHRF": 57.9456
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "dz",
+      "dialect_name": "Algerian Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.mgr.0.dz.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 26.5726,
+      "CHRF": 51.1432
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "tn",
+      "dialect_name": "Tunisian Arabic",
+      "num_test_sets": 5,
+      "source_files": [
+        "madar.test.mgr.0.tn.ar",
+        "madar.test.mgr.1.tn.ar",
+        "madar.dev.mgr.0.tn.ar",
+        "bible.test.mgr.0.tn.ar",
+        "bible.dev.mgr.0.tn.ar"
+      ],
+      "num_sentences": 15200,
+      "BLEU": 22.1851,
+      "CHRF": 43.2854
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "sd",
+      "dialect_name": "Sudanese Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.nil.0.sd.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 48.1911,
+      "CHRF": 63.5036
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "qa",
+      "dialect_name": "Qatari Arabic",
+      "num_test_sets": 4,
+      "source_files": [
+        "madar.dev.glf.0.qa.ar",
+        "QAraC.dev.glf.0.qa.ar",
+        "madar.test.glf.0.qa.ar",
+        "QAraC.test.glf.0.qa.ar"
+      ],
+      "num_sentences": 25426,
+      "BLEU": 26.8212,
+      "CHRF": 51.4609
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "ms",
+      "dialect_name": "Modern Standard Arabic",
+      "num_test_sets": 6,
+      "source_files": [
+        "madar.dev.msa.0.ms.ar",
+        "bible.test.msa.0.ms.ar",
+        "bible.test.msa.1.ms.ar",
+        "madar.test.msa.0.ms.ar",
+        "bible.dev.msa.0.ms.ar",
+        "bible.dev.msa.1.ms.ar"
+      ],
+      "num_sentences": 14400,
+      "BLEU": 37.1412,
+      "CHRF": 57.6037
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "ye",
+      "dialect_name": "Yemeni Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.glf.0.ye.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 38.219,
+      "CHRF": 57.5883
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "jo",
+      "dialect_name": "Jordanian Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.lev.1.jo.ar",
+        "madar.test.lev.0.jo.ar"
+      ],
+      "num_sentences": 4000,
+      "BLEU": 40.1482,
+      "CHRF": 59.1634
+    },
+    {
+      "type": "dialect_merged",
+      "dialect_code": "om",
+      "dialect_name": "Omani Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.glf.0.om.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 44.9085,
+      "CHRF": 62.8555
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "eg",
+      "dialect_name": "Egyptian Arabic",
+      "num_test_sets": 4,
+      "source_files": [
+        "madar.test.nil.1.eg.ar",
+        "madar.test.nil.2.eg.ar",
+        "madar.dev.nil.0.eg.ar",
+        "madar.test.nil.0.eg.ar"
+      ],
+      "num_sentences": 16000,
+      "BLEU": 40.6676,
+      "CHRF": 60.026
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "ly",
+      "dialect_name": "Libyan Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.mgr.1.ly.ar",
+        "madar.test.mgr.0.ly.ar"
+      ],
+      "num_sentences": 4000,
+      "BLEU": 37.0638,
+      "CHRF": 57.035
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "ma",
+      "dialect_name": "Moroccan Arabic",
+      "num_test_sets": 3,
+      "source_files": [
+        "madar.dev.mgr.0.ma.ar",
+        "madar.test.mgr.0.ma.ar",
+        "madar.test.mgr.1.ma.ar"
+      ],
+      "num_sentences": 14000,
+      "BLEU": 31.6514,
+      "CHRF": 52.0931
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "lb",
+      "dialect_name": "Lebanese Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.lev.0.lb.ar",
+        "madar.dev.lev.0.lb.ar"
+      ],
+      "num_sentences": 12000,
+      "BLEU": 32.4173,
+      "CHRF": 52.6158
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "pa",
+      "dialect_name": "Palestinian Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.lev.0.pa.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 38.8101,
+      "CHRF": 57.7182
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "sa",
+      "dialect_name": "Saudi Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.glf.1.sa.ar",
+        "madar.test.glf.0.sa.ar"
+      ],
+      "num_sentences": 4000,
+      "BLEU": 41.677,
+      "CHRF": 59.0742
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "iq",
+      "dialect_name": "Iraqi Arabic",
+      "num_test_sets": 3,
+      "source_files": [
+        "madar.test.glf.0.iq.ar",
+        "madar.test.glf.1.iq.ar",
+        "madar.test.glf.2.iq.ar"
+      ],
+      "num_sentences": 6000,
+      "BLEU": 38.3398,
+      "CHRF": 58.1857
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "sy",
+      "dialect_name": "Syrian Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.lev.1.sy.ar",
+        "madar.test.lev.0.sy.ar"
+      ],
+      "num_sentences": 4000,
+      "BLEU": 40.7266,
+      "CHRF": 57.9456
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "dz",
+      "dialect_name": "Algerian Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.mgr.0.dz.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 26.5726,
+      "CHRF": 51.1432
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "tn",
+      "dialect_name": "Tunisian Arabic",
+      "num_test_sets": 3,
+      "source_files": [
+        "madar.test.mgr.0.tn.ar",
+        "madar.test.mgr.1.tn.ar",
+        "madar.dev.mgr.0.tn.ar"
+      ],
+      "num_sentences": 14000,
+      "BLEU": 23.4588,
+      "CHRF": 43.9329
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "sd",
+      "dialect_name": "Sudanese Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.nil.0.sd.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 48.1911,
+      "CHRF": 63.5036
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "qa",
+      "dialect_name": "Qatari Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.dev.glf.0.qa.ar",
+        "madar.test.glf.0.qa.ar"
+      ],
+      "num_sentences": 12000,
+      "BLEU": 41.4964,
+      "CHRF": 58.7324
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "ms",
+      "dialect_name": "Modern Standard Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.dev.msa.0.ms.ar",
+        "madar.test.msa.0.ms.ar"
+      ],
+      "num_sentences": 12000,
+      "BLEU": 45.361,
+      "CHRF": 65.2697
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "ye",
+      "dialect_name": "Yemeni Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.glf.0.ye.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 38.219,
+      "CHRF": 57.5883
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "jo",
+      "dialect_name": "Jordanian Arabic",
+      "num_test_sets": 2,
+      "source_files": [
+        "madar.test.lev.1.jo.ar",
+        "madar.test.lev.0.jo.ar"
+      ],
+      "num_sentences": 4000,
+      "BLEU": 40.1482,
+      "CHRF": 59.1634
+    },
+    {
+      "type": "dialect_merged_madar_only",
+      "dialect_code": "om",
+      "dialect_name": "Omani Arabic",
+      "num_test_sets": 1,
+      "source_files": [
+        "madar.test.glf.0.om.ar"
+      ],
+      "num_sentences": 2000,
+      "BLEU": 44.9085,
+      "CHRF": 62.8555
     },
     {
       "type": "overall",
       "num_test_sets": 42,
-      "num_sentences": 42,
-      "BLEU": 0.0,
-      "CHRF": 0.0
+      "num_sentences": 130226,
+      "BLEU": 32.7051,
+      "CHRF": 53.6723
+    },
+    {
+      "type": "overall_madar_only",
+      "num_test_sets": 32,
+      "num_sentences": 112000,
+      "BLEU": 36.6779,
+      "CHRF": 56.1708
     }
   ],
   "averages": {
-    "BLEU": 0.0,
-    "CHRF": 0.0,
-    "COMET_Unbabel_XCOMET-XL_ref-less": 0.5515,
-    "COMET_Unbabel_XCOMET-XL": 0.7906
+    "BLEU": 33.1326,
+    "CHRF": 53.7345
+  },
+  "averages_madar_only": {
+    "BLEU": 37.5289,
+    "CHRF": 56.8351
   }
 }

@@ -208,6 +208,24 @@ def safe_comet_filename(comet_variant: str) -> str:
     return safe.lower()
 
 
+def filter_madar_only_test_sets(test_sets: Dict) -> Dict:
+    """
+    Filter test sets to only include MADAR files (exclude bible and QAraC).
+    
+    Args:
+        test_sets: Dictionary mapping test_set_name -> {model -> scores}
+    
+    Returns:
+        Filtered dictionary with only MADAR test sets
+    """
+    madar_only = {}
+    for test_set, model_scores in test_sets.items():
+        # Check if test set name starts with 'madar.'
+        if test_set.startswith('madar.'):
+            madar_only[test_set] = model_scores
+    return madar_only
+
+
 def extract_score(model_scores: Dict, metric: str, score_type: Optional[str] = None, 
                   comet_variant: Optional[str] = None) -> Optional[float]:
     """
@@ -272,7 +290,7 @@ def process_metrics_with_comet(test_sets: Dict, models: List[str], metric_arg: s
             func(test_sets, models, 'COMET', None, score_type, *args, **kwargs)
 
 
-def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
+def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict], Optional[Dict]]:
     """
     Extract scores from scores.json data.
     
@@ -280,18 +298,20 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
         - file_scores: Dict mapping test_set_name -> {metric_type -> score, metadata}
         - merged_scores: Dict mapping dialect_name -> {metric_type -> score, metadata}
         - overall_scores: Dict with overall scores (or None if not present)
+        - overall_scores_madar_only: Dict with MADAR-only overall scores (or None if not present)
     """
     file_scores = {}
     merged_scores = {}
     overall_scores = None
+    overall_scores_madar_only = None
     
     if 'results' not in scores_data:
-        return file_scores, merged_scores, overall_scores
+        return file_scores, merged_scores, overall_scores, overall_scores_madar_only
     
     for result in scores_data['results']:
         result_type = result.get('type', 'file')  # Default to 'file' for backward compatibility
         
-        # Handle overall scores (all test sets concatenated)
+        # Handle overall scores (all test sets concatenated) - both regular and madar_only
         if result_type == 'overall':
             overall_scores = {}
             
@@ -353,9 +373,73 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
             if 'num_sentences' in result:
                 overall_scores['num_sentences'] = result['num_sentences']
         
-        # Handle merged dialect results
-        elif result_type == 'dialect_merged':
+        elif result_type == 'overall_madar_only':
+            overall_scores_madar_only = {}
+            
+            # Forward direction: has arabic_general and dialect
+            if 'arabic_general' in result:
+                overall_scores['arabic_general'] = {}
+                if 'BLEU' in result['arabic_general']:
+                    overall_scores['arabic_general']['BLEU'] = result['arabic_general']['BLEU']
+                if 'CHRF' in result['arabic_general']:
+                    overall_scores['arabic_general']['CHRF'] = result['arabic_general']['CHRF']
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['arabic_general']):
+                    overall_scores['arabic_general'][comet_key] = result['arabic_general'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['arabic_general']:
+                    overall_scores['arabic_general']['COMET'] = result['arabic_general']['COMET']
+            
+            if 'dialect' in result:
+                overall_scores['dialect'] = {}
+                if 'BLEU' in result['dialect']:
+                    overall_scores['dialect']['BLEU'] = result['dialect']['BLEU']
+                if 'CHRF' in result['dialect']:
+                    overall_scores['dialect']['CHRF'] = result['dialect']['CHRF']
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['dialect']):
+                    overall_scores['dialect'][comet_key] = result['dialect'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['dialect']:
+                    overall_scores['dialect']['COMET'] = result['dialect']['COMET']
+            
+            # Reverse/Roundtrip: direct BLEU/CHRF/COMET
+            if 'BLEU' in result and 'CHRF' in result:
+                overall_scores['BLEU'] = result['BLEU']
+                overall_scores['CHRF'] = result['CHRF']
+            # Extract all COMET variants
+            for comet_key in find_comet_keys(result):
+                overall_scores[comet_key] = result[comet_key]
+            # Also check for legacy 'COMET' key
+            if 'COMET' in result:
+                overall_scores['COMET'] = result['COMET']
+            
+            # Roundtrip: has roundtrip scores
+            if 'roundtrip' in result:
+                overall_scores['roundtrip'] = {}
+                if 'BLEU' in result['roundtrip']:
+                    overall_scores['roundtrip']['BLEU'] = result['roundtrip']['BLEU']
+                if 'CHRF' in result['roundtrip']:
+                    overall_scores['roundtrip']['CHRF'] = result['roundtrip']['CHRF']
+                # Extract all COMET variants
+                for comet_key in find_comet_keys(result['roundtrip']):
+                    overall_scores['roundtrip'][comet_key] = result['roundtrip'][comet_key]
+                # Also check for legacy 'COMET' key
+                if 'COMET' in result['roundtrip']:
+                    overall_scores['roundtrip']['COMET'] = result['roundtrip']['COMET']
+            
+            # Store metadata
+            if 'num_test_sets' in result:
+                overall_scores['num_test_sets'] = result['num_test_sets']
+            if 'num_sentences' in result:
+                overall_scores['num_sentences'] = result['num_sentences']
+        
+        # Handle merged dialect results (both regular and madar_only)
+        elif result_type in ('dialect_merged', 'dialect_merged_madar_only'):
             dialect_name = result.get('dialect_name', 'unknown')
+            # For madar_only, append suffix to dialect name to distinguish
+            if result_type == 'dialect_merged_madar_only':
+                dialect_name = f"{dialect_name} "
             merged_scores[dialect_name] = {}
             
             # Check if this is a forward direction merged dialect (has arabic_general/dialect split)
@@ -404,6 +488,7 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
             if 'num_sentences' in result:
                 merged_scores[dialect_name]['num_sentences'] = result['num_sentences']
             merged_scores[dialect_name]['is_merged'] = True
+            merged_scores[dialect_name]['is_madar_only'] = (result_type == 'dialect_merged_madar_only')
         
         # Handle individual file results
         else:
@@ -480,7 +565,7 @@ def extract_scores(scores_data: Dict) -> Tuple[Dict, Dict, Optional[Dict]]:
                     file_scores[test_set]['num_sentences'] = result['num_sentences']
                 file_scores[test_set]['is_merged'] = False
     
-    return file_scores, merged_scores, overall_scores
+    return file_scores, merged_scores, overall_scores, overall_scores_madar_only
 
 
 def extract_second_model(scores_data: Dict, scores_path: Path) -> Optional[str]:
@@ -557,7 +642,7 @@ def collect_all_scores(scores_files: List[Path]) -> Tuple[Dict[str, Dict], List[
                     })
                 }
             
-            file_scores, merged_scores, overall_scores = extract_scores(scores_data)
+            file_scores, merged_scores, overall_scores, overall_scores_madar_only = extract_scores(scores_data)
             
             # Add file scores grouped by second model
             for test_set, metrics in file_scores.items():
@@ -567,6 +652,11 @@ def collect_all_scores(scores_files: List[Path]) -> Tuple[Dict[str, Dict], List[
             if overall_scores:
                 results_by_direction[direction]['second_models'][second_model]['overall_scores'][model_name] = overall_scores
                 print(f"   Found overall scores for first model '{model_name}' with second model '{second_model}' (roundtrip)")
+            if overall_scores_madar_only:
+                if 'overall_scores_madar_only' not in results_by_direction[direction]['second_models'][second_model]:
+                    results_by_direction[direction]['second_models'][second_model]['overall_scores_madar_only'] = {}
+                results_by_direction[direction]['second_models'][second_model]['overall_scores_madar_only'][model_name] = overall_scores_madar_only
+                print(f"   Found MADAR-only overall scores for first model '{model_name}' with second model '{second_model}' (roundtrip)")
         else:
             # For non-roundtrip directions, use standard structure
             if direction not in results_by_direction:
@@ -576,7 +666,7 @@ def collect_all_scores(scores_files: List[Path]) -> Tuple[Dict[str, Dict], List[
                     'overall_scores': defaultdict(dict),
                 }
             
-            file_scores, merged_scores, overall_scores = extract_scores(scores_data)
+            file_scores, merged_scores, overall_scores, overall_scores_madar_only = extract_scores(scores_data)
             
             # Add file scores
             for test_set, metrics in file_scores.items():
@@ -591,6 +681,11 @@ def collect_all_scores(scores_files: List[Path]) -> Tuple[Dict[str, Dict], List[
             if overall_scores:
                 results_by_direction[direction]['overall_scores'][model_name] = overall_scores
                 print(f"   Found overall scores for model '{model_name}' (direction: {direction})")
+            if overall_scores_madar_only:
+                if 'overall_scores_madar_only' not in results_by_direction[direction]:
+                    results_by_direction[direction]['overall_scores_madar_only'] = {}
+                results_by_direction[direction]['overall_scores_madar_only'][model_name] = overall_scores_madar_only
+                print(f"   Found MADAR-only overall scores for model '{model_name}' (direction: {direction})")
     
     # Debug: Print summary of merged dialects found per direction
     for direction, data in results_by_direction.items():
@@ -2394,6 +2489,181 @@ def print_average_scores_by_type(test_sets: Dict, models: List[str], score_type:
         stats_file.write(output)
 
 
+def create_overall_scores_plot(overall_scores: Dict[str, Dict], models: List[str], 
+                              output_dir: Path, direction: str, score_type: Optional[str] = None,
+                              metric: str = 'BLEU', comet_variant: Optional[str] = None):
+    """
+    Create a bar plot for overall scores (all test sets concatenated).
+    
+    Args:
+        overall_scores: Dict mapping model_name -> overall scores dict
+        models: List of model names
+        output_dir: Output directory for plots
+        direction: Translation direction ('forward', 'reverse', 'roundtrip')
+        score_type: For forward direction, 'arabic_general' or 'dialect' (None for reverse/roundtrip)
+        metric: Metric name ('BLEU', 'CHRF', or 'COMET')
+        comet_variant: If metric is 'COMET', the specific COMET variant to plot
+    """
+    if not overall_scores:
+        return
+    
+    # Extract scores for this metric
+    model_values = []
+    model_labels = []
+    
+    for model in models:
+        if model not in overall_scores:
+            continue
+        
+        model_scores = overall_scores[model]
+        score = None
+        
+        if direction == 'forward' and score_type:
+            # Forward direction with specific score type
+            key = score_type
+            if key in model_scores:
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = model_scores[key].get(comet_variant)
+                    else:
+                        # Find any COMET variant
+                        for k in model_scores[key].keys():
+                            if isinstance(k, str) and k.startswith('COMET_'):
+                                score = model_scores[key][k]
+                                break
+                        if score is None and 'COMET' in model_scores[key]:
+                            score = model_scores[key]['COMET']
+                else:
+                    score = model_scores[key].get(metric)
+        elif direction == 'reverse':
+            # Reverse direction: direct BLEU/CHRF/COMET
+            if metric == 'COMET':
+                if comet_variant:
+                    score = model_scores.get(comet_variant)
+                else:
+                    # Find any COMET variant
+                    for k in model_scores.keys():
+                        if isinstance(k, str) and k.startswith('COMET_'):
+                            score = model_scores[k]
+                            break
+                    if score is None and 'COMET' in model_scores:
+                        score = model_scores['COMET']
+            else:
+                score = model_scores.get(metric)
+        elif direction == 'roundtrip':
+            # Roundtrip: roundtrip scores
+            if 'roundtrip' in model_scores:
+                roundtrip_scores = model_scores['roundtrip']
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = roundtrip_scores.get(comet_variant)
+                    else:
+                        for k in roundtrip_scores.keys():
+                            if isinstance(k, str) and k.startswith('COMET_'):
+                                score = roundtrip_scores[k]
+                                break
+                        if score is None and 'COMET' in roundtrip_scores:
+                            score = roundtrip_scores['COMET']
+                else:
+                    score = roundtrip_scores.get(metric)
+        
+        if score is not None:
+            model_values.append(score)
+            model_labels.append(model)
+    
+    if not model_values:
+        return
+    
+    # Create vertical version
+    metric_label = comet_variant if (metric == 'COMET' and comet_variant) else metric
+    title_label = ''
+    if direction == 'forward' and score_type:
+        title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
+    elif direction == 'reverse':
+        title_label = 'Reverse Translation'
+    elif direction == 'roundtrip':
+        title_label = 'Round-trip Translation'
+    
+    title_base = f'Overall {metric_label} Scores (All Test Sets Concatenated)'
+    if title_label:
+        title_base += f'\n{title_label}'
+    
+    fig, ax = plt.subplots(figsize=(max(12, len(model_labels) * 0.8), 6))
+    bars = ax.bar(range(len(model_labels)), model_values, 
+                  color=plt.cm.viridis(np.linspace(0, 1, len(model_labels))))
+    ax.set_xlabel('Model', fontsize=16, fontweight='bold')
+    ax.set_ylabel(f'{metric_label} Score', fontsize=16, fontweight='bold')
+    ax.set_title(title_base, fontsize=16, fontweight='bold', pad=20)
+    ax.set_xticks(range(len(model_labels)))
+    ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=16)
+    ax.grid(axis='y', alpha=0.3, linestyle='--')
+    ax.set_ylim(bottom=0)
+    
+    # Add value labels on top of bars
+    for bar, val in zip(bars, model_values):
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{val:.1f}',
+                ha='center', va='bottom', fontsize=15)
+    
+    plt.tight_layout()
+    
+    # Save figure
+    if metric == 'COMET' and comet_variant:
+        safe_comet = safe_comet_filename(comet_variant)
+        if score_type:
+            output_file = output_dir / f"overall_{score_type}_{safe_comet}.png"
+        else:
+            output_file = output_dir / f"overall_{safe_comet}.png"
+    else:
+        if score_type:
+            output_file = output_dir / f"overall_{score_type}_{metric.lower()}.png"
+        else:
+            output_file = output_dir / f"overall_{metric.lower()}.png"
+    
+    plt.savefig(output_file, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"✅ Saved: {output_file}")
+    
+    # Create horizontal version (rotated)
+    fig, ax = plt.subplots(figsize=(8, max(8, len(model_labels) * 0.5)))
+    bars = ax.barh(range(len(model_labels)), model_values, 
+                   color=plt.cm.viridis(np.linspace(0, 1, len(model_labels))))
+    ax.set_ylabel('Model', fontsize=16, fontweight='bold')
+    ax.set_xlabel(f'{metric_label} Score', fontsize=16, fontweight='bold')
+    ax.set_title(title_base, fontsize=16, fontweight='bold', pad=20)
+    ax.set_yticks(range(len(model_labels)))
+    ax.set_yticklabels(model_labels, fontsize=16)
+    ax.grid(axis='x', alpha=0.3, linestyle='--')
+    ax.set_xlim(left=0)
+    
+    # Add value labels on bars
+    for bar, val in zip(bars, model_values):
+        width = bar.get_width()
+        ax.text(width, bar.get_y() + bar.get_height()/2.,
+                f'{val:.1f}',
+                ha='left', va='center', fontsize=15)
+    
+    plt.tight_layout()
+    
+    # Save rotated version
+    if metric == 'COMET' and comet_variant:
+        safe_comet = safe_comet_filename(comet_variant)
+        if score_type:
+            output_file = output_dir / f"overall_{score_type}_{safe_comet}_rotated.png"
+        else:
+            output_file = output_dir / f"overall_{safe_comet}_rotated.png"
+    else:
+        if score_type:
+            output_file = output_dir / f"overall_{score_type}_{metric.lower()}_rotated.png"
+        else:
+            output_file = output_dir / f"overall_{metric.lower()}_rotated.png"
+    
+    plt.savefig(output_file, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"✅ Saved: {output_file}")
+
+
 def print_overall_scores(overall_scores: Dict[str, Dict], models: List[str], direction: str, 
                          score_type: Optional[str] = None, stats_file=None):
     """
@@ -3562,6 +3832,49 @@ def main():
                     if overall_scores:
                         print(f"\n📊 Overall Scores (All Test Sets Concatenated)...")
                         print_overall_scores(overall_scores, models, direction, None, stats_file)
+                        
+                        # Create overall scores plots
+                        print(f"\n📊 Creating overall scores plots...")
+                        if direction == 'forward':
+                            # Forward direction: create plots for arabic_general and dialect
+                            for score_type in ['arabic_general', 'dialect']:
+                                if args.metric in ['BLEU', 'both', 'all']:
+                                    create_overall_scores_plot(overall_scores, models, direction_output_dir, 
+                                                              direction, score_type, 'BLEU')
+                                if args.metric in ['CHRF', 'both', 'all']:
+                                    create_overall_scores_plot(overall_scores, models, direction_output_dir, 
+                                                              direction, score_type, 'CHRF')
+                                if args.metric in ['COMET', 'all']:
+                                    # Find COMET variants from overall scores
+                                    comet_variants = set()
+                                    for model_scores in overall_scores.values():
+                                        if score_type in model_scores:
+                                            for key in model_scores[score_type].keys():
+                                                if isinstance(key, str) and key.startswith('COMET_'):
+                                                    comet_variants.add(key)
+                                    if comet_variants:
+                                        for comet_variant in sorted(comet_variants):
+                                            create_overall_scores_plot(overall_scores, models, direction_output_dir, 
+                                                                      direction, score_type, 'COMET', comet_variant)
+                        else:
+                            # Reverse or roundtrip direction: direct scores
+                            if args.metric in ['BLEU', 'both', 'all']:
+                                create_overall_scores_plot(overall_scores, models, direction_output_dir, 
+                                                          direction, None, 'BLEU')
+                            if args.metric in ['CHRF', 'both', 'all']:
+                                create_overall_scores_plot(overall_scores, models, direction_output_dir, 
+                                                          direction, None, 'CHRF')
+                            if args.metric in ['COMET', 'all']:
+                                # Find COMET variants from overall scores
+                                comet_variants = set()
+                                for model_scores in overall_scores.values():
+                                    for key in model_scores.keys():
+                                        if isinstance(key, str) and key.startswith('COMET_'):
+                                            comet_variants.add(key)
+                                if comet_variants:
+                                    for comet_variant in sorted(comet_variants):
+                                        create_overall_scores_plot(overall_scores, models, direction_output_dir, 
+                                                                  direction, None, 'COMET', comet_variant)
                     
                     # Create aggregated plots (averages and grouped)
                     print(f"\n📊 Creating aggregated plots...")
@@ -3785,6 +4098,62 @@ def main():
                     if overall_scores:
                         print(f"\n📊 Overall Scores ({type_label})...")
                         print_overall_scores(overall_scores, models, direction, score_type, stats_file)
+                        
+                        # Create overall scores plots
+                        print(f"\n📊 Creating overall scores plots ({type_label})...")
+                        if args.metric in ['BLEU', 'both', 'all']:
+                            create_overall_scores_plot(overall_scores, models, type_output_dir, 
+                                                      direction, score_type, 'BLEU')
+                        if args.metric in ['CHRF', 'both', 'all']:
+                            create_overall_scores_plot(overall_scores, models, type_output_dir, 
+                                                      direction, score_type, 'CHRF')
+                        if args.metric in ['COMET', 'all']:
+                            # Find COMET variants from overall scores
+                            comet_variants = set()
+                            for model_scores in overall_scores.values():
+                                if score_type and score_type in model_scores:
+                                    for key in model_scores[score_type].keys():
+                                        if isinstance(key, str) and key.startswith('COMET_'):
+                                            comet_variants.add(key)
+                                elif not score_type:
+                                    for key in model_scores.keys():
+                                        if isinstance(key, str) and key.startswith('COMET_'):
+                                            comet_variants.add(key)
+                            if comet_variants:
+                                for comet_variant in sorted(comet_variants):
+                                    create_overall_scores_plot(overall_scores, models, type_output_dir, 
+                                                              direction, score_type, 'COMET', comet_variant)
+                    
+                    # Print MADAR-only overall scores
+                    overall_scores_madar_only = data.get('overall_scores_madar_only', {})
+                    if overall_scores_madar_only:
+                        print(f"\n📊 Overall Scores - MADAR Only ({type_label})...")
+                        print_overall_scores(overall_scores_madar_only, models, direction, score_type, stats_file)
+                        
+                        # Create MADAR-only overall scores plots
+                        print(f"\n📊 Creating MADAR-only overall scores plots ({type_label})...")
+                        if args.metric in ['BLEU', 'both', 'all']:
+                            create_overall_scores_plot(overall_scores_madar_only, models, type_output_dir, 
+                                                      direction, score_type, 'BLEU')
+                        if args.metric in ['CHRF', 'both', 'all']:
+                            create_overall_scores_plot(overall_scores_madar_only, models, type_output_dir, 
+                                                      direction, score_type, 'CHRF')
+                        if args.metric in ['COMET', 'all']:
+                            # Find COMET variants from overall scores
+                            comet_variants = set()
+                            for model_scores in overall_scores_madar_only.values():
+                                if score_type and score_type in model_scores:
+                                    for key in model_scores[score_type].keys():
+                                        if isinstance(key, str) and key.startswith('COMET_'):
+                                            comet_variants.add(key)
+                                elif not score_type:
+                                    for key in model_scores.keys():
+                                        if isinstance(key, str) and key.startswith('COMET_'):
+                                            comet_variants.add(key)
+                            if comet_variants:
+                                for comet_variant in sorted(comet_variants):
+                                    create_overall_scores_plot(overall_scores_madar_only, models, type_output_dir, 
+                                                              direction, score_type, 'COMET', comet_variant)
                     
                     # Create summary plots (heatmaps)
                     if args.summary:
@@ -3815,6 +4184,187 @@ def main():
                                     create_per_model_plot(test_sets, model, models, type_output_dir, 'COMET', comet_variant, score_type)
                             else:
                                 create_per_model_plot(test_sets, model, models, type_output_dir, 'COMET', None, score_type)
+                    
+                    # Create MADAR-only versions of all individual test set visualizations
+                    test_sets_madar_only = filter_madar_only_test_sets(file_test_sets)
+                    if test_sets_madar_only:
+                        print(f"\n🎨 Creating MADAR-only visualizations for {type_label}...")
+                        madar_only_output_dir = type_output_dir / 'madar_only'
+                        madar_only_output_dir.mkdir(parents=True, exist_ok=True)
+                        
+                        # Create stats file for MADAR-only
+                        madar_stats_file_path = madar_only_output_dir / "statistics.txt"
+                        with open(madar_stats_file_path, 'w', encoding='utf-8') as madar_stats_file:
+                            madar_stats_file.write(f"{'='*80}\n")
+                            madar_stats_file.write(f"Statistics for {type_label} Translations - MADAR Only\n")
+                            madar_stats_file.write(f"Direction: {dir_label}\n")
+                            madar_stats_file.write(f"{'='*80}\n\n")
+                            
+                            # Find COMET variants for MADAR-only
+                            madar_comet_variants = []
+                            if args.metric in ['COMET', 'all']:
+                                madar_comet_variants = find_all_comet_variants(test_sets_madar_only, forward_models, score_type)
+                                if madar_comet_variants:
+                                    print(f"   Found {len(madar_comet_variants)} COMET variant(s) for MADAR-only: {', '.join(madar_comet_variants)}")
+                            
+                            # Create plots for each individual MADAR test set
+                            print(f"\n📊 Creating per-test-set plots for MADAR-only ({type_label})...")
+                            for test_set, model_scores in test_sets_madar_only.items():
+                                if args.metric in ['BLEU', 'both', 'all']:
+                                    create_bar_plot_by_type(test_set, model_scores, forward_models, madar_only_output_dir, score_type, 'BLEU')
+                                if args.metric in ['CHRF', 'both', 'all']:
+                                    create_bar_plot_by_type(test_set, model_scores, forward_models, madar_only_output_dir, score_type, 'CHRF')
+                                if args.metric in ['COMET', 'all']:
+                                    if madar_comet_variants:
+                                        for comet_variant in madar_comet_variants:
+                                            create_bar_plot_by_type(test_set, model_scores, forward_models, madar_only_output_dir, score_type, 'COMET', comet_variant)
+                                    else:
+                                        create_bar_plot_by_type(test_set, model_scores, forward_models, madar_only_output_dir, score_type, 'COMET')
+                            
+                            # Create combined plot with all MADAR test sets side by side
+                            print(f"\n📊 Creating combined plot - all MADAR test sets ({type_label})...")
+                            if args.metric in ['BLEU', 'both', 'all']:
+                                create_all_testsets_combined_plot_by_type(test_sets_madar_only, forward_models, madar_only_output_dir, score_type, 'BLEU')
+                            if args.metric in ['CHRF', 'both', 'all']:
+                                create_all_testsets_combined_plot_by_type(test_sets_madar_only, forward_models, madar_only_output_dir, score_type, 'CHRF')
+                            if args.metric in ['COMET', 'all']:
+                                if madar_comet_variants:
+                                    for comet_variant in madar_comet_variants:
+                                        create_all_testsets_combined_plot_by_type(test_sets_madar_only, forward_models, madar_only_output_dir, score_type, 'COMET', comet_variant)
+                                else:
+                                    create_all_testsets_combined_plot_by_type(test_sets_madar_only, forward_models, madar_only_output_dir, score_type, 'COMET')
+                            
+                            # Create dialect-grouped plots for MADAR-only
+                            print(f"\n📊 Creating per-dialect grouped plots for MADAR-only ({type_label})...")
+                            if args.metric in ['BLEU', 'both', 'all']:
+                                create_dialect_grouped_plot(test_sets_madar_only, models, madar_only_output_dir, score_type, 'BLEU')
+                            if args.metric in ['CHRF', 'both', 'all']:
+                                create_dialect_grouped_plot(test_sets_madar_only, models, madar_only_output_dir, score_type, 'CHRF')
+                            if args.metric in ['COMET', 'all']:
+                                if madar_comet_variants:
+                                    for comet_variant in madar_comet_variants:
+                                        create_dialect_grouped_plot(test_sets_madar_only, models, madar_only_output_dir, score_type, 'COMET', comet_variant)
+                                else:
+                                    create_dialect_grouped_plot(test_sets_madar_only, models, madar_only_output_dir, score_type, 'COMET')
+                            
+                            # Write score tables to stats file
+                            madar_stats_file.write("\n" + "=" * 80 + "\n")
+                            madar_stats_file.write("SCORE TABLES \n")
+                            madar_stats_file.write("=" * 80 + "\n")
+                            if args.metric in ['BLEU', 'both', 'all']:
+                                write_scores_table(test_sets_madar_only, models, score_type, 'BLEU', madar_stats_file, 
+                                                  f"\n{type_label} BLEU Scores by Test Set ")
+                            if args.metric in ['CHRF', 'both', 'all']:
+                                write_scores_table(test_sets_madar_only, models, score_type, 'CHRF', madar_stats_file, 
+                                                  f"\n{type_label} CHRF Scores by Test Set ")
+                            if args.metric in ['COMET', 'all']:
+                                if madar_comet_variants:
+                                    for comet_variant in madar_comet_variants:
+                                        write_scores_table(test_sets_madar_only, models, score_type, 'COMET', madar_stats_file, 
+                                                          f"\n{type_label} {comet_variant} Scores by Test Set ", comet_variant)
+                                else:
+                                    write_scores_table(test_sets_madar_only, models, score_type, 'COMET', madar_stats_file, 
+                                                      f"\n{type_label} COMET Scores by Test Set ")
+                            
+                            # Print average scores
+                            print(f"\n📊 Average Scores for MADAR-only ({type_label})...")
+                            if args.metric in ['BLEU', 'both', 'all']:
+                                print_average_scores_by_type(test_sets_madar_only, models, score_type, 'BLEU', madar_stats_file)
+                            if args.metric in ['CHRF', 'both', 'all']:
+                                print_average_scores_by_type(test_sets_madar_only, models, score_type, 'CHRF', madar_stats_file)
+                            if args.metric in ['COMET', 'all']:
+                                if madar_comet_variants:
+                                    for comet_variant in madar_comet_variants:
+                                        print_average_scores_by_type(test_sets_madar_only, models, score_type, 'COMET', madar_stats_file, comet_variant)
+                                else:
+                                    print_average_scores_by_type(test_sets_madar_only, models, score_type, 'COMET', madar_stats_file)
+                            
+                            # Print ranking statistics
+                            print(f"\n📈 Ranking Statistics for MADAR-only ({type_label})...")
+                            if args.metric in ['BLEU', 'both', 'all']:
+                                print_ranking_stats_by_type(test_sets_madar_only, models, score_type, 'BLEU', madar_stats_file)
+                            if args.metric in ['CHRF', 'both', 'all']:
+                                print_ranking_stats_by_type(test_sets_madar_only, models, score_type, 'CHRF', madar_stats_file)
+                            if args.metric in ['COMET', 'all']:
+                                if madar_comet_variants:
+                                    for comet_variant in madar_comet_variants:
+                                        print_ranking_stats_by_type(test_sets_madar_only, models, score_type, 'COMET', madar_stats_file, comet_variant)
+                                else:
+                                    print_ranking_stats_by_type(test_sets_madar_only, models, score_type, 'COMET', madar_stats_file)
+                            
+                            # Print average rankings
+                            print(f"\n📊 Average Rankings for MADAR-only ({type_label})...")
+                            if args.metric in ['BLEU', 'both', 'all']:
+                                print_average_rankings(test_sets_madar_only, models, score_type, 'BLEU', madar_stats_file)
+                            if args.metric in ['CHRF', 'both', 'all']:
+                                print_average_rankings(test_sets_madar_only, models, score_type, 'CHRF', madar_stats_file)
+                            if args.metric in ['COMET', 'all']:
+                                if madar_comet_variants:
+                                    for comet_variant in madar_comet_variants:
+                                        print_average_rankings(test_sets_madar_only, models, score_type, 'COMET', madar_stats_file, comet_variant)
+                                else:
+                                    print_average_rankings(test_sets_madar_only, models, score_type, 'COMET', madar_stats_file)
+                            
+                            # Create summary plots (heatmaps) for MADAR-only
+                            if args.summary:
+                                print(f"\n📊 Creating summary heatmaps for MADAR-only ({type_label})...")
+                                if args.metric in ['BLEU', 'both', 'all']:
+                                    create_summary_plot(test_sets_madar_only, models, madar_only_output_dir, 'BLEU', None, direction, score_type)
+                                if args.metric in ['CHRF', 'both', 'all']:
+                                    create_summary_plot(test_sets_madar_only, models, madar_only_output_dir, 'CHRF', None, direction, score_type)
+                                if args.metric in ['COMET', 'all']:
+                                    if madar_comet_variants:
+                                        for comet_variant in madar_comet_variants:
+                                            create_summary_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', comet_variant, direction, score_type)
+                                    else:
+                                        create_summary_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', None, direction, score_type)
+                            
+                            # Create per-model plots for MADAR-only
+                            print(f"\n📊 Creating per-model plots for MADAR-only ({type_label})...")
+                            for model in models:
+                                if args.metric in ['BLEU', 'both', 'all']:
+                                    create_per_model_plot(test_sets_madar_only, model, models, madar_only_output_dir, 'BLEU', None, score_type)
+                                if args.metric in ['CHRF', 'both', 'all']:
+                                    create_per_model_plot(test_sets_madar_only, model, models, madar_only_output_dir, 'CHRF', None, score_type)
+                                if args.metric in ['COMET', 'all']:
+                                    if madar_comet_variants:
+                                        for comet_variant in madar_comet_variants:
+                                            create_per_model_plot(test_sets_madar_only, model, models, madar_only_output_dir, 'COMET', comet_variant, score_type)
+                                    else:
+                                        create_per_model_plot(test_sets_madar_only, model, models, madar_only_output_dir, 'COMET', None, score_type)
+                            
+                            # Create average plots for MADAR-only
+                            print(f"\n📊 Creating average plots for MADAR-only ({type_label})...")
+                            if args.metric in ['BLEU', 'both', 'all']:
+                                create_average_plot(test_sets_madar_only, models, madar_only_output_dir, 'BLEU', None, direction)
+                            if args.metric in ['CHRF', 'both', 'all']:
+                                create_average_plot(test_sets_madar_only, models, madar_only_output_dir, 'CHRF', None, direction)
+                            if args.metric in ['COMET', 'all']:
+                                if madar_comet_variants:
+                                    for comet_variant in madar_comet_variants:
+                                        create_average_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', comet_variant, direction)
+                                else:
+                                    create_average_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', None, direction)
+                            
+                            # Create combined average plot for MADAR-only
+                            if args.metric in ['BLEU', 'CHRF', 'both', 'all']:
+                                print(f"\n📊 Creating combined average plot for MADAR-only ({type_label})...")
+                                create_combined_average_plot(test_sets_madar_only, models, madar_only_output_dir)
+                            
+                            # Create all test sets plot for MADAR-only
+                            print(f"\n📊 Creating all test sets plot for MADAR-only ({type_label})...")
+                            if args.metric in ['BLEU', 'both', 'all']:
+                                create_all_testsets_plot(test_sets_madar_only, models, madar_only_output_dir, 'BLEU', None, direction)
+                            if args.metric in ['CHRF', 'both', 'all']:
+                                create_all_testsets_plot(test_sets_madar_only, models, madar_only_output_dir, 'CHRF', None, direction)
+                            if args.metric in ['COMET', 'all']:
+                                if madar_comet_variants:
+                                    for comet_variant in madar_comet_variants:
+                                        create_all_testsets_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', comet_variant, direction)
+                                else:
+                                    create_all_testsets_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', None, direction)
+                        
+                        print(f"✅ MADAR-only statistics saved to: {madar_stats_file_path}")
                 
                 print(f"✅ Statistics saved to: {stats_file_path}")
             
@@ -3994,6 +4544,54 @@ def main():
                 if overall_scores:
                     print(f"\n📊 Overall Scores (All Test Sets Concatenated)...")
                     print_overall_scores(overall_scores, models, direction, None, stats_file)
+                    
+                    # Create overall scores plots
+                
+                # Handle MADAR-only overall scores
+                overall_scores_madar_only = data.get('overall_scores_madar_only', {})
+                if overall_scores_madar_only:
+                    print(f"\n📊 Overall Scores - MADAR Only (All Test Sets Concatenated)...")
+                    print_overall_scores(overall_scores_madar_only, models, direction, None, stats_file)
+                    
+                    # Create MADAR-only overall scores plots
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        create_overall_scores_plot(overall_scores_madar_only, models, direction_output_dir, 
+                                                  direction, None, 'BLEU')
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        create_overall_scores_plot(overall_scores_madar_only, models, direction_output_dir, 
+                                                  direction, None, 'CHRF')
+                    if args.metric in ['COMET', 'all']:
+                        # Find COMET variants from overall scores
+                        comet_variants = set()
+                        for model_scores in overall_scores_madar_only.values():
+                            for key in model_scores.keys():
+                                if isinstance(key, str) and key.startswith('COMET_'):
+                                    comet_variants.add(key)
+                        if comet_variants:
+                            for comet_variant in sorted(comet_variants):
+                                create_overall_scores_plot(overall_scores_madar_only, models, direction_output_dir, 
+                                                          direction, None, 'COMET', comet_variant)
+                
+                if overall_scores:
+                    # Create overall scores plots
+                    print(f"\n📊 Creating overall scores plots...")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        create_overall_scores_plot(overall_scores, models, direction_output_dir, 
+                                                  direction, None, 'BLEU')
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        create_overall_scores_plot(overall_scores, models, direction_output_dir, 
+                                                  direction, None, 'CHRF')
+                    if args.metric in ['COMET', 'all']:
+                        # Find COMET variants from overall scores
+                        comet_variants = set()
+                        for model_scores in overall_scores.values():
+                            for key in model_scores.keys():
+                                if isinstance(key, str) and key.startswith('COMET_'):
+                                    comet_variants.add(key)
+                        if comet_variants:
+                            for comet_variant in sorted(comet_variants):
+                                create_overall_scores_plot(overall_scores, models, direction_output_dir, 
+                                                          direction, None, 'COMET', comet_variant)
                 
                 # Create aggregated plots (averages and grouped)
                 print(f"\n📊 Creating aggregated plots...")
@@ -4043,6 +4641,125 @@ def main():
                         else:
                             create_per_model_plot(test_sets, model, models, direction_output_dir, 'COMET', None, None, direction)
             
+            # Create MADAR-only versions for reverse direction
+            test_sets_madar_only = filter_madar_only_test_sets(file_test_sets)
+            if test_sets_madar_only:
+                print(f"\n🎨 Creating MADAR-only visualizations for reverse direction...")
+                madar_only_output_dir = direction_output_dir / 'madar_only'
+                madar_only_output_dir.mkdir(parents=True, exist_ok=True)
+                
+                # Create stats file for MADAR-only
+                madar_stats_file_path = madar_only_output_dir / "statistics.txt"
+                with open(madar_stats_file_path, 'w', encoding='utf-8') as madar_stats_file:
+                    madar_stats_file.write(f"{'='*80}\n")
+                    madar_stats_file.write(f"Statistics for {dir_label} - MADAR Only\n")
+                    madar_stats_file.write(f"{'='*80}\n\n")
+                    
+                    # Find COMET variants for MADAR-only
+                    madar_comet_variants = []
+                    if args.metric in ['COMET', 'all']:
+                        madar_comet_variants = find_all_comet_variants(test_sets_madar_only, models, None)
+                        if madar_comet_variants:
+                            print(f"   Found {len(madar_comet_variants)} COMET variant(s) for MADAR-only: {', '.join(madar_comet_variants)}")
+                    
+                    # Create plots for each individual MADAR test set
+                    print(f"\n📊 Creating per-test-set plots for MADAR-only...")
+                    for test_set, model_scores in test_sets_madar_only.items():
+                        if args.metric in ['BLEU', 'both', 'all']:
+                            create_bar_plot(test_set, model_scores, models, madar_only_output_dir, 'BLEU', None, direction)
+                        if args.metric in ['CHRF', 'both', 'all']:
+                            create_bar_plot(test_set, model_scores, models, madar_only_output_dir, 'CHRF', None, direction)
+                        if args.metric in ['COMET', 'all']:
+                            if madar_comet_variants:
+                                for comet_variant in madar_comet_variants:
+                                    create_bar_plot(test_set, model_scores, models, madar_only_output_dir, 'COMET', comet_variant, direction)
+                            else:
+                                create_bar_plot(test_set, model_scores, models, madar_only_output_dir, 'COMET', None, direction)
+                    
+                    # Create combined plot with all MADAR test sets side by side
+                    print(f"\n📊 Creating combined plot - all MADAR test sets...")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        create_all_testsets_combined_plot(test_sets_madar_only, models, madar_only_output_dir, 'BLEU', None, direction)
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        create_all_testsets_combined_plot(test_sets_madar_only, models, madar_only_output_dir, 'CHRF', None, direction)
+                    if args.metric in ['COMET', 'all']:
+                        if madar_comet_variants:
+                            for comet_variant in madar_comet_variants:
+                                create_all_testsets_combined_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', comet_variant, direction)
+                        else:
+                            create_all_testsets_combined_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', None, direction)
+                    
+                    # Create aggregated plots (averages and grouped) for MADAR-only
+                    print(f"\n📊 Creating aggregated plots for MADAR-only...")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        create_average_plot(test_sets_madar_only, models, madar_only_output_dir, 'BLEU', None, direction)
+                        create_all_testsets_plot(test_sets_madar_only, models, madar_only_output_dir, 'BLEU', None, direction)
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        create_average_plot(test_sets_madar_only, models, madar_only_output_dir, 'CHRF', None, direction)
+                        create_all_testsets_plot(test_sets_madar_only, models, madar_only_output_dir, 'CHRF', None, direction)
+                    if args.metric in ['COMET', 'all']:
+                        if madar_comet_variants:
+                            for comet_variant in madar_comet_variants:
+                                create_average_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', comet_variant, direction)
+                                create_all_testsets_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', comet_variant, direction)
+                        else:
+                            create_average_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', None, direction)
+                            create_all_testsets_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', None, direction)
+                    
+                    # Create summary plots (heatmaps) for MADAR-only
+                    if args.summary:
+                        print(f"\n📊 Creating summary heatmaps for MADAR-only...")
+                        if args.metric in ['BLEU', 'both', 'all']:
+                            create_summary_plot(test_sets_madar_only, models, madar_only_output_dir, 'BLEU', None, direction)
+                        if args.metric in ['CHRF', 'both', 'all']:
+                            create_summary_plot(test_sets_madar_only, models, madar_only_output_dir, 'CHRF', None, direction)
+                        if args.metric in ['COMET', 'all']:
+                            if madar_comet_variants:
+                                for comet_variant in madar_comet_variants:
+                                    create_summary_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', comet_variant, direction)
+                            else:
+                                create_summary_plot(test_sets_madar_only, models, madar_only_output_dir, 'COMET', None, direction)
+                    
+                    # Create per-model plots for MADAR-only
+                    print(f"\n📊 Creating per-model plots for MADAR-only...")
+                    for model in models:
+                        if args.metric in ['BLEU', 'both', 'all']:
+                            create_per_model_plot(test_sets_madar_only, model, models, madar_only_output_dir, 'BLEU', None, None, direction)
+                        if args.metric in ['CHRF', 'both', 'all']:
+                            create_per_model_plot(test_sets_madar_only, model, models, madar_only_output_dir, 'CHRF', None, None, direction)
+                        if args.metric in ['COMET', 'all']:
+                            if madar_comet_variants:
+                                for comet_variant in madar_comet_variants:
+                                    create_per_model_plot(test_sets_madar_only, model, models, madar_only_output_dir, 'COMET', comet_variant, None, direction)
+                            else:
+                                create_per_model_plot(test_sets_madar_only, model, models, madar_only_output_dir, 'COMET', None, None, direction)
+                    
+                    # Create combined average plot for MADAR-only
+                    if args.metric in ['BLEU', 'CHRF', 'both', 'all']:
+                        print(f"\n📊 Creating combined average plot for MADAR-only...")
+                        create_combined_average_plot(test_sets_madar_only, models, madar_only_output_dir)
+                    
+                    # Write score tables to stats file
+                    madar_stats_file.write("\n" + "=" * 80 + "\n")
+                    madar_stats_file.write("SCORE TABLES \n")
+                    madar_stats_file.write("=" * 80 + "\n")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        write_scores_table(test_sets_madar_only, models, None, 'BLEU', madar_stats_file, 
+                                          f"\nBLEU Scores by Test Set ")
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        write_scores_table(test_sets_madar_only, models, None, 'CHRF', madar_stats_file, 
+                                          f"\nCHRF Scores by Test Set ")
+                    if args.metric in ['COMET', 'all']:
+                        if madar_comet_variants:
+                            for comet_variant in madar_comet_variants:
+                                write_scores_table(test_sets_madar_only, models, None, 'COMET', madar_stats_file, 
+                                                  f"\n{comet_variant} Scores by Test Set ", comet_variant)
+                        else:
+                            write_scores_table(test_sets_madar_only, models, None, 'COMET', madar_stats_file, 
+                                              f"\nCOMET Scores by Test Set ")
+                
+                print(f"✅ MADAR-only statistics saved to: {madar_stats_file_path}")
+            
             print(f"✅ Statistics saved to: {stats_file_path}")
         
         elif direction == 'roundtrip':
@@ -4054,12 +4771,29 @@ def main():
         print(f"\n🔍 Debug: Checking merged dialects for direction '{direction}'...")
         print(f"   merged_test_sets is {'not empty' if merged_test_sets else 'EMPTY'} ({len(merged_test_sets)} dialects)")
         print(f"   direction in ['forward', 'reverse']: {direction in ['forward', 'reverse']}")
-        if merged_test_sets and direction in ['forward', 'reverse']:
-            print(f"\n🎨 Creating visualizations for merged dialects...")
+        
+        # Separate regular merged and madar_only merged scores
+        merged_test_sets_regular = {}
+        merged_test_sets_madar_only = {}
+        for dialect_name, model_scores in merged_test_sets.items():
+            # Check if this is a madar_only merged score by checking any model's is_madar_only flag
+            is_madar_only = False
+            for model in model_scores:
+                if model_scores[model].get('is_madar_only', False):
+                    is_madar_only = True
+                    break
+            if is_madar_only:
+                merged_test_sets_madar_only[dialect_name] = model_scores
+            else:
+                merged_test_sets_regular[dialect_name] = model_scores
+        
+        # Process regular merged scores
+        if merged_test_sets_regular and direction in ['forward', 'reverse']:
+            print(f"\n🎨 Creating visualizations for merged dialects (all datasets)...")
             
             # Check which models have merged dialect results
             models_with_merged = set()
-            for dialect_name, model_scores in merged_test_sets.items():
+            for dialect_name, model_scores in merged_test_sets_regular.items():
                 models_with_merged.update(model_scores.keys())
             
             models_missing_merged = set(models) - models_with_merged
@@ -4072,8 +4806,8 @@ def main():
             # Check if merged dialects have arabic_general/dialect split (forward) or direct scores (reverse)
             # Only check for metric keys, not metadata keys like dialect_code, dialect_name, etc.
             has_score_type_split = False
-            metadata_keys = {'dialect_code', 'dialect_name', 'num_test_sets', 'num_sentences', 'is_merged'}
-            for dialect_name, model_scores in merged_test_sets.items():
+            metadata_keys = {'dialect_code', 'dialect_name', 'num_test_sets', 'num_sentences', 'is_merged', 'is_madar_only'}
+            for dialect_name, model_scores in merged_test_sets_regular.items():
                 for model in model_scores:
                     # Check for metric keys with arabic_general_ or dialect_ prefix
                     metric_keys = [k for k in model_scores[model].keys() if k not in metadata_keys]
@@ -4114,14 +4848,14 @@ def main():
                     # Find all COMET variants for merged dialects
                     comet_variants = []
                     if args.metric in ['COMET', 'all']:
-                        comet_variants = find_all_comet_variants(merged_test_sets, models, score_type)
+                        comet_variants = find_all_comet_variants(merged_test_sets_regular, models, score_type)
                         if comet_variants:
                             print(f"   Found {len(comet_variants)} COMET variant(s) for merged dialects: {', '.join(comet_variants)}")
                     
                     # Create plots for each merged dialect
-                    print(f"   Processing {len(merged_test_sets)} merged dialect(s)...")
+                    print(f"   Processing {len(merged_test_sets_regular)} merged dialect(s)...")
                     print(f"   args.metric = {args.metric}")
-                    for dialect_name, model_scores in merged_test_sets.items():
+                    for dialect_name, model_scores in merged_test_sets_regular.items():
                         print(f"   Creating plots for {dialect_name} ({len(model_scores)} models)...")
                         print(f"      Models in dialect: {list(model_scores.keys())[:3]}")
                         if args.metric in ['BLEU', 'both', 'all']:
@@ -4154,106 +4888,324 @@ def main():
                     print(f"\n📊 Creating combined plot - all merged dialects ({type_label})...")
                     if args.metric in ['BLEU', 'both', 'all']:
                         if score_type:
-                            create_all_testsets_combined_plot_by_type(merged_test_sets, models, type_output_dir, score_type, 'BLEU')
+                            create_all_testsets_combined_plot_by_type(merged_test_sets_regular, models, type_output_dir, score_type, 'BLEU')
                         else:
-                            create_all_testsets_combined_plot(merged_test_sets, models, type_output_dir, 'BLEU', None, direction)
+                            create_all_testsets_combined_plot(merged_test_sets_regular, models, type_output_dir, 'BLEU', None, direction)
                     if args.metric in ['CHRF', 'both', 'all']:
                         if score_type:
-                            create_all_testsets_combined_plot_by_type(merged_test_sets, models, type_output_dir, score_type, 'CHRF')
+                            create_all_testsets_combined_plot_by_type(merged_test_sets_regular, models, type_output_dir, score_type, 'CHRF')
                         else:
-                            create_all_testsets_combined_plot(merged_test_sets, models, type_output_dir, 'CHRF', None, direction)
+                            create_all_testsets_combined_plot(merged_test_sets_regular, models, type_output_dir, 'CHRF', None, direction)
                     if args.metric in ['COMET', 'all']:
                         # Create a combined plot for each COMET variant
                         if comet_variants:
                             for comet_variant in comet_variants:
                                 if score_type:
-                                    create_all_testsets_combined_plot_by_type(merged_test_sets, models, type_output_dir, score_type, 'COMET', comet_variant)
+                                    create_all_testsets_combined_plot_by_type(merged_test_sets_regular, models, type_output_dir, score_type, 'COMET', comet_variant)
                                 else:
-                                    create_all_testsets_combined_plot(merged_test_sets, models, type_output_dir, 'COMET', comet_variant, direction)
+                                    create_all_testsets_combined_plot(merged_test_sets_regular, models, type_output_dir, 'COMET', comet_variant, direction)
                         else:
                             if score_type:
-                                create_all_testsets_combined_plot_by_type(merged_test_sets, models, type_output_dir, score_type, 'COMET')
+                                create_all_testsets_combined_plot_by_type(merged_test_sets_regular, models, type_output_dir, score_type, 'COMET')
                             else:
-                                create_all_testsets_combined_plot(merged_test_sets, models, type_output_dir, 'COMET', None, direction)
+                                create_all_testsets_combined_plot(merged_test_sets_regular, models, type_output_dir, 'COMET', None, direction)
                     
                     # Create per-model plots for merged dialects
                     print(f"\n📊 Creating per-model plots for merged dialects ({type_label})...")
                     for model in models:
                         if args.metric in ['BLEU', 'both', 'all']:
-                            create_per_model_plot(merged_test_sets, model, models, type_output_dir, 'BLEU', None, score_type)
+                            create_per_model_plot(merged_test_sets_regular, model, models, type_output_dir, 'BLEU', None, score_type)
                         if args.metric in ['CHRF', 'both', 'all']:
-                            create_per_model_plot(merged_test_sets, model, models, type_output_dir, 'CHRF', None, score_type)
+                            create_per_model_plot(merged_test_sets_regular, model, models, type_output_dir, 'CHRF', None, score_type)
                         if args.metric in ['COMET', 'all']:
                             # Create per-model plots for each COMET variant
                             if comet_variants:
                                 for comet_variant in comet_variants:
-                                    create_per_model_plot(merged_test_sets, model, models, type_output_dir, 'COMET', comet_variant, score_type)
+                                    create_per_model_plot(merged_test_sets_regular, model, models, type_output_dir, 'COMET', comet_variant, score_type)
                             else:
-                                create_per_model_plot(merged_test_sets, model, models, type_output_dir, 'COMET', None, score_type)
+                                create_per_model_plot(merged_test_sets_regular, model, models, type_output_dir, 'COMET', None, score_type)
                     
                     # Write score tables to stats file
                     stats_file.write("\n" + "=" * 80 + "\n")
-                    stats_file.write("MERGED DIALECT SCORE TABLES\n")
+                    stats_file.write("MERGED DIALECT SCORE TABLES (ALL DATASETS)\n")
                     stats_file.write("=" * 80 + "\n")
                     if args.metric in ['BLEU', 'both', 'all']:
-                        write_scores_table(merged_test_sets, models, score_type, 'BLEU', stats_file, 
+                        write_scores_table(merged_test_sets_regular, models, score_type, 'BLEU', stats_file, 
                                           f"\n{type_label} BLEU Scores for Merged Dialects")
                     if args.metric in ['CHRF', 'both', 'all']:
-                        write_scores_table(merged_test_sets, models, score_type, 'CHRF', stats_file, 
+                        write_scores_table(merged_test_sets_regular, models, score_type, 'CHRF', stats_file, 
                                           f"\n{type_label} CHRF Scores for Merged Dialects")
                     if args.metric in ['COMET', 'all']:
                         # Write a table for each COMET variant
                         if comet_variants:
                             for comet_variant in comet_variants:
-                                write_scores_table(merged_test_sets, models, score_type, 'COMET', stats_file, 
+                                write_scores_table(merged_test_sets_regular, models, score_type, 'COMET', stats_file, 
                                                   f"\n{type_label} {comet_variant} Scores for Merged Dialects", comet_variant)
                         else:
-                            write_scores_table(merged_test_sets, models, score_type, 'COMET', stats_file, 
+                            write_scores_table(merged_test_sets_regular, models, score_type, 'COMET', stats_file, 
                                               f"\n{type_label} COMET Scores for Merged Dialects")
                     
                     # Print statistics for merged dialects
                     print(f"\n📊 Average Scores for Merged Dialects ({type_label})...")
                     if args.metric in ['BLEU', 'both', 'all']:
-                        print_average_scores_by_type(merged_test_sets, models, score_type, 'BLEU', stats_file)
+                        print_average_scores_by_type(merged_test_sets_regular, models, score_type, 'BLEU', stats_file)
                     if args.metric in ['CHRF', 'both', 'all']:
-                        print_average_scores_by_type(merged_test_sets, models, score_type, 'CHRF', stats_file)
+                        print_average_scores_by_type(merged_test_sets_regular, models, score_type, 'CHRF', stats_file)
                     if args.metric in ['COMET', 'all']:
                         # Print averages for each COMET variant
                         if comet_variants:
                             for comet_variant in comet_variants:
-                                print_average_scores_by_type(merged_test_sets, models, score_type, 'COMET', stats_file, comet_variant)
+                                print_average_scores_by_type(merged_test_sets_regular, models, score_type, 'COMET', stats_file, comet_variant)
                         else:
-                            print_average_scores_by_type(merged_test_sets, models, score_type, 'COMET', stats_file)
+                            print_average_scores_by_type(merged_test_sets_regular, models, score_type, 'COMET', stats_file)
                     
                     # Print ranking statistics for merged dialects
                     print(f"\n📈 Ranking Statistics for Merged Dialects ({type_label})...")
                     if args.metric in ['BLEU', 'both', 'all']:
-                        print_ranking_stats_by_type(merged_test_sets, models, score_type, 'BLEU', stats_file)
+                        print_ranking_stats_by_type(merged_test_sets_regular, models, score_type, 'BLEU', stats_file)
                     if args.metric in ['CHRF', 'both', 'all']:
-                        print_ranking_stats_by_type(merged_test_sets, models, score_type, 'CHRF', stats_file)
+                        print_ranking_stats_by_type(merged_test_sets_regular, models, score_type, 'CHRF', stats_file)
                     if args.metric in ['COMET', 'all']:
                         # Print ranking stats for each COMET variant
                         if comet_variants:
                             for comet_variant in comet_variants:
-                                print_ranking_stats_by_type(merged_test_sets, models, score_type, 'COMET', stats_file, comet_variant)
+                                print_ranking_stats_by_type(merged_test_sets_regular, models, score_type, 'COMET', stats_file, comet_variant)
                         else:
-                            print_ranking_stats_by_type(merged_test_sets, models, score_type, 'COMET', stats_file)
+                            print_ranking_stats_by_type(merged_test_sets_regular, models, score_type, 'COMET', stats_file)
                     
                     # Print average rankings for merged dialects
                     print(f"\n📊 Average Rankings for Merged Dialects ({type_label})...")
                     if args.metric in ['BLEU', 'both', 'all']:
-                        print_average_rankings(merged_test_sets, models, score_type, 'BLEU', stats_file)
+                        print_average_rankings(merged_test_sets_regular, models, score_type, 'BLEU', stats_file)
                     if args.metric in ['CHRF', 'both', 'all']:
-                        print_average_rankings(merged_test_sets, models, score_type, 'CHRF', stats_file)
+                        print_average_rankings(merged_test_sets_regular, models, score_type, 'CHRF', stats_file)
                     if args.metric in ['COMET', 'all']:
                         # Print average rankings for each COMET variant
                         if comet_variants:
                             for comet_variant in comet_variants:
-                                print_average_rankings(merged_test_sets, models, score_type, 'COMET', stats_file, comet_variant)
+                                print_average_rankings(merged_test_sets_regular, models, score_type, 'COMET', stats_file, comet_variant)
                         else:
-                            print_average_rankings(merged_test_sets, models, score_type, 'COMET', stats_file)
+                            print_average_rankings(merged_test_sets_regular, models, score_type, 'COMET', stats_file)
                 
                 print(f"✅ Merged dialect statistics saved to: {stats_file_path}")
+        
+        # Process madar_only merged scores
+        if merged_test_sets_madar_only and direction in ['forward', 'reverse']:
+            print(f"\n🎨 Creating visualizations for merged dialects ...")
+            
+            # Check which models have merged dialect results
+            models_with_merged = set()
+            for dialect_name, model_scores in merged_test_sets_madar_only.items():
+                models_with_merged.update(model_scores.keys())
+            
+            models_missing_merged = set(models) - models_with_merged
+            if models_missing_merged:
+                print(f"⚠️  Warning: {len(models_missing_merged)} model(s) missing MADAR-only merged dialect results:")
+                print(f"   {', '.join(sorted(models_missing_merged))}")
+                print(f"   These models need to re-run the evaluation script to compute merged dialect scores.")
+                print(f"   Only {len(models_with_merged)} model(s) will appear in MADAR-only merged dialect visualizations.\n")
+            
+            # Check if merged dialects have arabic_general/dialect split (forward) or direct scores (reverse)
+            has_score_type_split = False
+            metadata_keys = {'dialect_code', 'dialect_name', 'num_test_sets', 'num_sentences', 'is_merged', 'is_madar_only'}
+            for dialect_name, model_scores in merged_test_sets_madar_only.items():
+                for model in model_scores:
+                    metric_keys = [k for k in model_scores[model].keys() if k not in metadata_keys]
+                    if any(key.startswith('arabic_general_') or key.startswith('dialect_') for key in metric_keys):
+                        has_score_type_split = True
+                        break
+                if has_score_type_split:
+                    break
+            
+            if has_score_type_split:
+                score_types = ['arabic_general', 'dialect']
+            else:
+                score_types = [None]
+            
+            for score_type in score_types:
+                if score_type:
+                    type_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
+                    type_output_dir = direction_output_dir / score_type / 'merged_madar_only'
+                else:
+                    type_label = 'Merged Dialects '
+                    type_output_dir = direction_output_dir / 'merged_madar_only'
+                type_output_dir.mkdir(parents=True, exist_ok=True)
+                print(f"   📁 Output directory: {type_output_dir}")
+                
+                # Create stats file for madar_only merged dialects
+                stats_file_path = type_output_dir / "statistics.txt"
+                with open(stats_file_path, 'w', encoding='utf-8') as stats_file:
+                    stats_file.write(f"{'='*80}\n")
+                    stats_file.write(f"Statistics for Merged Dialects - MADAR Only ({type_label})\n")
+                    stats_file.write(f"Direction: {dir_label}\n")
+                    stats_file.write(f"{'='*80}\n\n")
+                    
+                    print(f"\n📊 Creating MADAR-only merged dialect plots ({type_label})...")
+                    
+                    # Find all COMET variants for merged dialects
+                    comet_variants = []
+                    if args.metric in ['COMET', 'all']:
+                        comet_variants = find_all_comet_variants(merged_test_sets_madar_only, models, score_type)
+                        if comet_variants:
+                            print(f"   Found {len(comet_variants)} COMET variant(s) for MADAR-only merged dialects: {', '.join(comet_variants)}")
+                    
+                    # Create plots for each merged dialect
+                    print(f"   Processing {len(merged_test_sets_madar_only)} MADAR-only merged dialect(s)...")
+                    for dialect_name, model_scores in merged_test_sets_madar_only.items():
+                        print(f"   Creating plots for {dialect_name} ({len(model_scores)} models)...")
+                        if args.metric in ['BLEU', 'both', 'all']:
+                            if score_type:
+                                create_bar_plot_by_type(f"{dialect_name} (merged, MADAR only)", model_scores, models, type_output_dir, score_type, 'BLEU')
+                            else:
+                                create_bar_plot(f"{dialect_name} (merged, MADAR only)", model_scores, models, type_output_dir, 'BLEU', None, direction)
+                        if args.metric in ['CHRF', 'both', 'all']:
+                            if score_type:
+                                create_bar_plot_by_type(f"{dialect_name} (merged, MADAR only)", model_scores, models, type_output_dir, score_type, 'CHRF')
+                            else:
+                                create_bar_plot(f"{dialect_name} (merged, MADAR only)", model_scores, models, type_output_dir, 'CHRF', None, direction)
+                        if args.metric in ['COMET', 'all']:
+                            if comet_variants:
+                                for comet_variant in comet_variants:
+                                    if score_type:
+                                        create_bar_plot_by_type(f"{dialect_name} (merged, MADAR only)", model_scores, models, type_output_dir, score_type, 'COMET', comet_variant)
+                                    else:
+                                        create_bar_plot(f"{dialect_name} (merged, MADAR only)", model_scores, models, type_output_dir, 'COMET', comet_variant, direction)
+                            else:
+                                if score_type:
+                                    create_bar_plot_by_type(f"{dialect_name} (merged, MADAR only)", model_scores, models, type_output_dir, score_type, 'COMET')
+                                else:
+                                    create_bar_plot(f"{dialect_name} (merged, MADAR only)", model_scores, models, type_output_dir, 'COMET', None, direction)
+                    
+                    # Create combined plot with all merged dialects side by side
+                    print(f"\n📊 Creating combined plot - all MADAR-only merged dialects ({type_label})...")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        if score_type:
+                            create_all_testsets_combined_plot_by_type(merged_test_sets_madar_only, models, type_output_dir, score_type, 'BLEU')
+                        else:
+                            create_all_testsets_combined_plot(merged_test_sets_madar_only, models, type_output_dir, 'BLEU', None, direction)
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        if score_type:
+                            create_all_testsets_combined_plot_by_type(merged_test_sets_madar_only, models, type_output_dir, score_type, 'CHRF')
+                        else:
+                            create_all_testsets_combined_plot(merged_test_sets_madar_only, models, type_output_dir, 'CHRF', None, direction)
+                    if args.metric in ['COMET', 'all']:
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                if score_type:
+                                    create_all_testsets_combined_plot_by_type(merged_test_sets_madar_only, models, type_output_dir, score_type, 'COMET', comet_variant)
+                                else:
+                                    create_all_testsets_combined_plot(merged_test_sets_madar_only, models, type_output_dir, 'COMET', comet_variant, direction)
+                        else:
+                            if score_type:
+                                create_all_testsets_combined_plot_by_type(merged_test_sets_madar_only, models, type_output_dir, score_type, 'COMET')
+                            else:
+                                create_all_testsets_combined_plot(merged_test_sets_madar_only, models, type_output_dir, 'COMET', None, direction)
+                    
+                    # Create per-model plots for merged dialects
+                    print(f"\n📊 Creating per-model plots for MADAR-only merged dialects ({type_label})...")
+                    for model in models:
+                        if args.metric in ['BLEU', 'both', 'all']:
+                            create_per_model_plot(merged_test_sets_madar_only, model, models, type_output_dir, 'BLEU', None, score_type)
+                        if args.metric in ['CHRF', 'both', 'all']:
+                            create_per_model_plot(merged_test_sets_madar_only, model, models, type_output_dir, 'CHRF', None, score_type)
+                        if args.metric in ['COMET', 'all']:
+                            if comet_variants:
+                                for comet_variant in comet_variants:
+                                    create_per_model_plot(merged_test_sets_madar_only, model, models, type_output_dir, 'COMET', comet_variant, score_type)
+                            else:
+                                create_per_model_plot(merged_test_sets_madar_only, model, models, type_output_dir, 'COMET', None, score_type)
+                    
+                    # Create summary plots (heatmaps) for merged dialects
+                    if args.summary:
+                        print(f"\n📊 Creating summary heatmaps for MADAR-only merged dialects ({type_label})...")
+                        if args.metric in ['BLEU', 'both', 'all']:
+                            create_summary_plot(merged_test_sets_madar_only, models, type_output_dir, 'BLEU', None, direction, score_type)
+                        if args.metric in ['CHRF', 'both', 'all']:
+                            create_summary_plot(merged_test_sets_madar_only, models, type_output_dir, 'CHRF', None, direction, score_type)
+                        if args.metric in ['COMET', 'all']:
+                            if comet_variants:
+                                for comet_variant in comet_variants:
+                                    create_summary_plot(merged_test_sets_madar_only, models, type_output_dir, 'COMET', comet_variant, direction, score_type)
+                            else:
+                                create_summary_plot(merged_test_sets_madar_only, models, type_output_dir, 'COMET', None, direction, score_type)
+                    
+                    # Create average plots for merged dialects
+                    print(f"\n📊 Creating average plots for MADAR-only merged dialects ({type_label})...")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        create_average_plot(merged_test_sets_madar_only, models, type_output_dir, 'BLEU', None, direction)
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        create_average_plot(merged_test_sets_madar_only, models, type_output_dir, 'CHRF', None, direction)
+                    if args.metric in ['COMET', 'all']:
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                create_average_plot(merged_test_sets_madar_only, models, type_output_dir, 'COMET', comet_variant, direction)
+                        else:
+                            create_average_plot(merged_test_sets_madar_only, models, type_output_dir, 'COMET', None, direction)
+                    
+                    # Create combined average plot (BLEU + CHRF) for merged dialects
+                    if args.metric in ['BLEU', 'CHRF', 'both', 'all']:
+                        print(f"\n📊 Creating combined average plot for MADAR-only merged dialects ({type_label})...")
+                        create_combined_average_plot(merged_test_sets_madar_only, models, type_output_dir)
+                    
+                    # Write score tables to stats file
+                    stats_file.write("\n" + "=" * 80 + "\n")
+                    stats_file.write("MERGED DIALECT SCORE TABLES \n")
+                    stats_file.write("=" * 80 + "\n")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        write_scores_table(merged_test_sets_madar_only, models, score_type, 'BLEU', stats_file, 
+                                          f"\n{type_label} BLEU Scores for Merged Dialects ")
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        write_scores_table(merged_test_sets_madar_only, models, score_type, 'CHRF', stats_file, 
+                                          f"\n{type_label} CHRF Scores for Merged Dialects ")
+                    if args.metric in ['COMET', 'all']:
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                write_scores_table(merged_test_sets_madar_only, models, score_type, 'COMET', stats_file, 
+                                                  f"\n{type_label} {comet_variant} Scores for Merged Dialects ", comet_variant)
+                        else:
+                            write_scores_table(merged_test_sets_madar_only, models, score_type, 'COMET', stats_file, 
+                                              f"\n{type_label} COMET Scores for Merged Dialects ")
+                    
+                    # Print statistics for merged dialects
+                    print(f"\n📊 Average Scores for MADAR-only Merged Dialects ({type_label})...")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        print_average_scores_by_type(merged_test_sets_madar_only, models, score_type, 'BLEU', stats_file)
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        print_average_scores_by_type(merged_test_sets_madar_only, models, score_type, 'CHRF', stats_file)
+                    if args.metric in ['COMET', 'all']:
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                print_average_scores_by_type(merged_test_sets_madar_only, models, score_type, 'COMET', stats_file, comet_variant)
+                        else:
+                            print_average_scores_by_type(merged_test_sets_madar_only, models, score_type, 'COMET', stats_file)
+                    
+                    # Print ranking statistics for merged dialects
+                    print(f"\n📈 Ranking Statistics for MADAR-only Merged Dialects ({type_label})...")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        print_ranking_stats_by_type(merged_test_sets_madar_only, models, score_type, 'BLEU', stats_file)
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        print_ranking_stats_by_type(merged_test_sets_madar_only, models, score_type, 'CHRF', stats_file)
+                    if args.metric in ['COMET', 'all']:
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                print_ranking_stats_by_type(merged_test_sets_madar_only, models, score_type, 'COMET', stats_file, comet_variant)
+                        else:
+                            print_ranking_stats_by_type(merged_test_sets_madar_only, models, score_type, 'COMET', stats_file)
+                    
+                    # Print average rankings for merged dialects
+                    print(f"\n📊 Average Rankings for MADAR-only Merged Dialects ({type_label})...")
+                    if args.metric in ['BLEU', 'both', 'all']:
+                        print_average_rankings(merged_test_sets_madar_only, models, score_type, 'BLEU', stats_file)
+                    if args.metric in ['CHRF', 'both', 'all']:
+                        print_average_rankings(merged_test_sets_madar_only, models, score_type, 'CHRF', stats_file)
+                    if args.metric in ['COMET', 'all']:
+                        if comet_variants:
+                            for comet_variant in comet_variants:
+                                print_average_rankings(merged_test_sets_madar_only, models, score_type, 'COMET', stats_file, comet_variant)
+                        else:
+                            print_average_rankings(merged_test_sets_madar_only, models, score_type, 'COMET', stats_file)
+                
+                print(f"✅ MADAR-only merged dialect statistics saved to: {stats_file_path}")
         
         print(f"\n{'='*80}")
         print(f"✅ Visualization complete for direction: {direction}")

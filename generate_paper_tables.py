@@ -58,16 +58,71 @@ def categorize_model(model_name: str) -> str:
         return 'Arabic-Specialized'
     elif 'nile' in model_lower:
         return 'Arabic-Specialized'
+    elif 'c4ai-command-r7b-arabic' in model_lower or 'command-r7b-arabic' in model_lower:
+        return 'Arabic-Specialized'
     elif 'aya' in model_lower:
-        return 'Multilingual (Arabic-focused)'
+        return 'Multilingual'
     elif 'command' in model_lower:
-        return 'Multilingual (Arabic-focused)'
+        return 'Multilingual'
     elif 'gpt-4' in model_lower:
         return 'Commercial API'
     elif 'gemma' in model_lower or 'eurollm' in model_lower or 'mistral' in model_lower or 'qwen' in model_lower or 'llama' in model_lower or 'falcon' in model_lower:
-        return 'General Multilingual'
+        return 'Multilingual'
     else:
         return 'Other'
+
+
+def get_model_size(model_name: str) -> Optional[str]:
+    """Get model size from model name."""
+    model_lower = model_name.lower()
+    
+    # Arabic-Specialized
+    if 'jais-2-8b' in model_lower:
+        return '8B'
+    elif 'jais-2-70b' in model_lower:
+        return '70B'
+    elif 'nile-chat-12b' in model_lower or 'nile-chat-4b' in model_lower:
+        if '12b' in model_lower:
+            return '12B'
+        elif '4b' in model_lower:
+            return '4B'
+    elif 'c4ai-command-r7b-arabic' in model_lower or 'command-r7b-arabic' in model_lower:
+        return '7B'
+    
+    # Multilingual
+    elif 'aya-expanse-8b' in model_lower or 'aya-expanse-32b' in model_lower:
+        if '8b' in model_lower:
+            return '8B'
+        elif '32b' in model_lower:
+            return '32B'
+    elif 'c4ai-command-r-08-2024' in model_lower or 'command-r-08-2024' in model_lower:
+        return '32B'
+    elif 'c4ai-command-r-v01' in model_lower or 'command-r-v01' in model_lower:
+        return '35B'
+    elif 'command-a-translate' in model_lower:
+        return '111B'
+    elif 'gemma-3-4b' in model_lower:
+        return '4B'
+    elif 'gemma-3-27b' in model_lower:
+        return '27B'
+    elif 'eurollm-9b' in model_lower:
+        return '9B'
+    elif 'mistral-small-3.2-24b' in model_lower:
+        return '24B'
+    elif 'qwen3-4b' in model_lower:
+        return '4B'
+    elif 'llama-3.3-70b' in model_lower:
+        return '70B'
+    elif 'falcon-h1-34b' in model_lower:
+        return '34B'
+    
+    # Commercial API
+    elif 'gpt-4.1-nano' in model_lower:
+        return 'N/A'
+    elif 'gpt-4.1-mini' in model_lower:
+        return 'N/A'
+    
+    return None
 
 
 def load_scores_file(scores_file: Path) -> Optional[Dict]:
@@ -172,18 +227,22 @@ def process_forward_translations(fixed_translations_dir: Path) -> Dict:
             
             results[model_name] = model_results
         
-        # Extract dialect-specific results from merged dialects
+        # Extract dialect-specific results from merged dialects (both regular and madar_only)
         if 'results' in data:
             for result in data['results']:
-                if result.get('type') == 'dialect_merged':
+                if result.get('type') in ('dialect_merged', 'dialect_merged_madar_only'):
                     dialect_code = result.get('dialect_code', '')
                     dialect_name = result.get('dialect_name', dialect_code)
+                    # For madar_only, append suffix to distinguish
+                    if result.get('type') == 'dialect_merged_madar_only':
+                        dialect_name = f"{dialect_name} "
                     
                     if 'arabic_general' in result:
                         dialect_results[dialect_name][model_name] = {
                             'arabic_general': result['arabic_general'].copy(),
                             'dialect': result.get('dialect', {}).copy(),
-                            'category': model_category  # Preserve category
+                            'category': model_category,  # Preserve category
+                            'is_madar_only': (result.get('type') == 'dialect_merged_madar_only')
                         }
     
     results['_dialect_breakdown'] = dict(dialect_results)
@@ -324,27 +383,29 @@ def generate_forward_table_latex(forward_results: Dict, metrics: List[str] = Non
         by_category[results['category']].append((model_name, results))
     
     # Sort categories
-    category_order = ['Arabic-Specialized', 'Multilingual (Arabic-focused)', 
-                     'General Multilingual', 'Commercial API', 'Other']
+    category_order = ['Arabic-Specialized', 'Multilingual', 'Commercial API', 'Other']
     
     latex = []
-    latex.append("\\begin{table*}[htbp]")
+    latex.append("\\begin{table}[htbp]")
     latex.append("\\centering")
     latex.append("\\caption{Forward Translation Results (English → Arabic): Overall Performance}")
     latex.append("\\label{tab:forward_overall}")
-    latex.append("\\resizebox{\\textwidth}{!}{")
-    latex.append("\\begin{tabular}{l" + "c" * len(metrics) * 2 + "}")
+    # Use 3pt spacing between all columns
+    col_spec = "l@{\\hspace{3pt}}c"  # Model and Size columns
+    for i, metric in enumerate(metrics):
+        col_spec += "@{\\hspace{3pt}}cc"  # Two columns per metric (General and Dialect)
+    latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
     latex.append("\\toprule")
     
     # Header
-    header = "Model & "
+    header = "Model & Size & "
     for metric in metrics:
-        header += f"\\multicolumn{{2}}{{c}}{{{metric}}} & "
+        header += f"\\multicolumn{{2}}{{c@{{\\hspace{{3pt}}}}}}{{{metric}}} & "
     header = header.rstrip(" & ") + " \\\\"
-    header += "\\cmidrule(lr){2-3} " if len(metrics) > 0 else ""
+    header += "\\cmidrule(lr){3-4} " if len(metrics) > 0 else ""
     for i, metric in enumerate(metrics):
         if i > 0:
-            header += "\\cmidrule(lr){" + str(2 + i*2) + "-" + str(3 + i*2) + "} "
+            header += "\\cmidrule(lr){" + str(5 + i*2) + "-" + str(6 + i*2) + "} "
     header += " & General & Dialect " * len(metrics) + "\\\\"
     latex.append(header)
     latex.append("\\midrule")
@@ -355,13 +416,15 @@ def generate_forward_table_latex(forward_results: Dict, metrics: List[str] = Non
             continue
         
         # Category header
-        latex.append(f"\\multicolumn{{{1 + len(metrics)*2}}}{{l}}{{\\textit{{{escape_latex(category)}}}}} \\\\")
+        latex.append(f"\\multicolumn{{{2 + len(metrics)*2}}}{{l}}{{\\textit{{{escape_latex(category)}}}}} \\\\")
         latex.append("\\midrule")
         
         # Models in category
         models_in_cat = sorted(by_category[category], key=lambda x: x[0])
         for model_name, results in models_in_cat:
-            row = f"{escape_latex(model_name)} & "
+            model_size = get_model_size(model_name)
+            size_display = model_size if model_size else "---"
+            row = f"{escape_latex(model_name)} & {size_display} & "
             for metric in metrics:
                 ag_val = results['arabic_general'].get(metric)
                 dial_val = results['dialect'].get(metric)
@@ -373,8 +436,435 @@ def generate_forward_table_latex(forward_results: Dict, metrics: List[str] = Non
     
     latex.append("\\bottomrule")
     latex.append("\\end{tabular}")
-    latex.append("}")
-    latex.append("\\end{table*}")
+    latex.append("\\end{table}")
+    
+    return "\n".join(latex)
+
+
+def generate_prompt_comparison_table_latex(forward_results: Dict, metrics: List[str] = None) -> str:
+    """
+    Generate LaTeX table comparing average merged dialect scores using 
+    general prompt (arabic_general) vs dialect-specific prompt (dialect).
+    
+    Args:
+        forward_results: Dictionary from process_forward_translations
+        metrics: List of metrics to include (default: ['BLEU', 'CHRF'])
+    
+    Returns:
+        LaTeX table string
+    """
+    if metrics is None:
+        metrics = ['BLEU', 'CHRF']
+    
+    # Extract dialect breakdown
+    dialect_breakdown = forward_results.get('_dialect_breakdown', {})
+    if not dialect_breakdown:
+        return "% No merged dialect data available for prompt comparison"
+    
+    # Collect scores for each model across all dialects
+    model_scores = defaultdict(lambda: {
+        'arabic_general': defaultdict(list),  # metric -> [scores]
+        'dialect': defaultdict(list),  # metric -> [scores]
+        'category': None
+    })
+    
+    # Iterate through all dialects and collect scores
+    for dialect_name, models_data in dialect_breakdown.items():
+        for model_name, scores_data in models_data.items():
+            if model_name in forward_results:
+                category = forward_results[model_name].get('category', 'Other')
+            else:
+                category = scores_data.get('category', 'Other')
+            
+            model_scores[model_name]['category'] = category
+            
+            # Collect arabic_general scores
+            if 'arabic_general' in scores_data:
+                ag_scores = scores_data['arabic_general']
+                for metric in metrics:
+                    if metric in ag_scores:
+                        model_scores[model_name]['arabic_general'][metric].append(ag_scores[metric])
+            
+            # Collect dialect scores
+            if 'dialect' in scores_data:
+                dial_scores = scores_data['dialect']
+                for metric in metrics:
+                    if metric in dial_scores:
+                        model_scores[model_name]['dialect'][metric].append(dial_scores[metric])
+    
+    # Compute averages for each model
+    model_averages = {}
+    for model_name, scores in model_scores.items():
+        category = scores['category']
+        averages = {
+            'category': category,
+            'arabic_general': {},
+            'dialect': {}
+        }
+        
+        for metric in metrics:
+            # Average for arabic_general
+            ag_scores = scores['arabic_general'][metric]
+            if ag_scores:
+                averages['arabic_general'][metric] = np.mean(ag_scores)
+            else:
+                averages['arabic_general'][metric] = None
+            
+            # Average for dialect
+            dial_scores = scores['dialect'][metric]
+            if dial_scores:
+                averages['dialect'][metric] = np.mean(dial_scores)
+            else:
+                averages['dialect'][metric] = None
+        
+        model_averages[model_name] = averages
+    
+    if not model_averages:
+        return "% No scores found for prompt comparison"
+    
+    # Group by category
+    by_category = defaultdict(list)
+    for model_name, averages in model_averages.items():
+        category = averages['category']
+        by_category[category].append((model_name, averages))
+    
+    # Sort categories
+    category_order = ['Arabic-Specialized', 'Multilingual', 'Commercial API', 'Other']
+    
+    # Generate LaTeX
+    latex = []
+    latex.append("\\begin{table}[htbp]")
+    latex.append("\\centering")
+    latex.append("\\caption{Average Merged Dialect Scores: General vs. Dialect-Specific Prompt}")
+    latex.append("\\label{tab:prompt_comparison}")
+    
+    # Column specification
+    col_spec = "l@{\\hspace{3pt}}c"  # Model and Size
+    for metric in metrics:
+        col_spec += "@{\\hspace{3pt}}cc"  # Two columns per metric (General and Dialect)
+    latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
+    latex.append("\\toprule")
+    
+    # Header
+    header = "Model & Size & "
+    for metric in metrics:
+        header += f"\\multicolumn{{2}}{{c@{{\\hspace{{3pt}}}}}}{{{metric}}} & "
+    header = header.rstrip(" & ") + " \\\\"
+    
+    # Add cmidrules
+    if len(metrics) > 0:
+        start_col = 3
+        for i, metric in enumerate(metrics):
+            if i > 0:
+                header += " "
+            header += f"\\cmidrule(lr){{{start_col + i*2}-{start_col + i*2 + 1}}}"
+    header += " & "
+    
+    # Sub-header
+    sub_header = " & "
+    for metric in metrics:
+        sub_header += "General & Dialect & "
+    sub_header = sub_header.rstrip(" & ") + " \\\\"
+    header += sub_header
+    
+    latex.append(header)
+    latex.append("\\midrule")
+    
+    # Data rows
+    for category in category_order:
+        if category not in by_category:
+            continue
+        
+        models_in_category = sorted(by_category[category], key=lambda x: x[0])
+        
+        for model_name, averages in models_in_category:
+            model_size = get_model_size(model_name)
+            size_display = model_size if model_size else "---"
+            
+            row = f"{escape_latex(model_name)} & {size_display} & "
+            
+            for metric in metrics:
+                ag_score = averages['arabic_general'].get(metric)
+                dial_score = averages['dialect'].get(metric)
+                
+                ag_display = format_number(ag_score, 2)
+                dial_display = format_number(dial_score, 2)
+                
+                row += f"{ag_display} & {dial_display} & "
+            
+            row = row.rstrip(" & ") + " \\\\"
+            latex.append(row)
+    
+    latex.append("\\bottomrule")
+    latex.append("\\end{tabular}")
+    latex.append("\\end{table}")
+    
+    return "\n".join(latex)
+
+
+def generate_dialect_prompt_comparison_table_latex(forward_results: Dict, metrics: List[str] = None) -> str:
+    """
+    Generate LaTeX table comparing average merged dialect scores using 
+    general prompt (arabic_general) vs dialect-specific prompt (dialect),
+    averaged across all models for each dialect.
+    
+    Args:
+        forward_results: Dictionary from process_forward_translations
+        metrics: List of metrics to include (default: ['BLEU', 'CHRF'])
+    
+    Returns:
+        LaTeX table string
+    """
+    if metrics is None:
+        metrics = ['BLEU', 'CHRF']
+    
+    # Extract dialect breakdown
+    dialect_breakdown = forward_results.get('_dialect_breakdown', {})
+    if not dialect_breakdown:
+        return "% No merged dialect data available for dialect prompt comparison"
+    
+    # Collect scores for each dialect across all models
+    # Deduplicate dialects by removing trailing spaces (MADAR-only indicator)
+    dialect_scores = defaultdict(lambda: {
+        'arabic_general': defaultdict(list),  # metric -> [scores]
+        'dialect': defaultdict(list),  # metric -> [scores]
+    })
+    
+    # Iterate through all dialects and collect scores
+    # Filter to only include non-MADAR-only dialects (those without trailing space)
+    for dialect_name, models_data in dialect_breakdown.items():
+        # Skip MADAR-only dialects (they have trailing space)
+        if dialect_name.endswith(' '):
+            continue
+        
+        for model_name, scores_data in models_data.items():
+            # Collect arabic_general scores
+            if 'arabic_general' in scores_data:
+                ag_scores = scores_data['arabic_general']
+                for metric in metrics:
+                    if metric in ag_scores:
+                        dialect_scores[dialect_name]['arabic_general'][metric].append(ag_scores[metric])
+            
+            # Collect dialect scores
+            if 'dialect' in scores_data:
+                dial_scores = scores_data['dialect']
+                for metric in metrics:
+                    if metric in dial_scores:
+                        dialect_scores[dialect_name]['dialect'][metric].append(dial_scores[metric])
+    
+    # Compute averages for each dialect
+    dialect_averages = {}
+    for dialect_name, scores in dialect_scores.items():
+        averages = {
+            'arabic_general': {},
+            'dialect': {}
+        }
+        
+        for metric in metrics:
+            # Average for arabic_general
+            ag_scores = scores['arabic_general'][metric]
+            if ag_scores:
+                averages['arabic_general'][metric] = np.mean(ag_scores)
+            else:
+                averages['arabic_general'][metric] = None
+            
+            # Average for dialect
+            dial_scores = scores['dialect'][metric]
+            if dial_scores:
+                averages['dialect'][metric] = np.mean(dial_scores)
+            else:
+                averages['dialect'][metric] = None
+        
+        dialect_averages[dialect_name] = averages
+    
+    if not dialect_averages:
+        return "% No scores found for dialect prompt comparison"
+    
+    # Sort dialects by name
+    sorted_dialects = sorted(dialect_averages.items(), key=lambda x: x[0])
+    
+    # Generate LaTeX
+    latex = []
+    latex.append("\\begin{table}[htbp]")
+    latex.append("\\centering")
+    latex.append("\\caption{Average Merged Dialect Scores Across Models: General vs. Dialect-Specific Prompt}")
+    latex.append("\\label{tab:dialect_prompt_comparison}")
+    
+    # Column specification (removed # Models column)
+    col_spec = "l"  # Dialect
+    for metric in metrics:
+        col_spec += "@{\\hspace{3pt}}cc"  # Two columns per metric (General and Dialect)
+    latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
+    latex.append("\\toprule")
+    
+    # Header
+    header = "Dialect & "
+    for metric in metrics:
+        header += f"\\multicolumn{{2}}{{c@{{\\hspace{{3pt}}}}}}{{{metric}}} & "
+    header = header.rstrip(" & ") + " \\\\"
+    
+    # Add cmidrules
+    if len(metrics) > 0:
+        start_col = 2
+        for i, metric in enumerate(metrics):
+            if i > 0:
+                header += " "
+            header += f"\\cmidrule(lr){{{start_col + i*2}-{start_col + i*2 + 1}}}"
+    header += " & "
+    
+    # Sub-header
+    sub_header = ""
+    for metric in metrics:
+        sub_header += "General & Dialect & "
+    sub_header = sub_header.rstrip(" & ") + " \\\\"
+    header += sub_header
+    
+    latex.append(header)
+    latex.append("\\midrule")
+    
+    # Data rows
+    for dialect_name, averages in sorted_dialects:
+        row = f"{escape_latex(dialect_name)} & "
+        
+        for metric in metrics:
+            ag_score = averages['arabic_general'].get(metric)
+            dial_score = averages['dialect'].get(metric)
+            
+            ag_display = format_number(ag_score, 1)
+            dial_display = format_number(dial_score, 1)
+            
+            row += f"{ag_display} & {dial_display} & "
+        
+        row = row.rstrip(" & ") + " \\\\"
+        latex.append(row)
+    
+    latex.append("\\bottomrule")
+    latex.append("\\end{tabular}")
+    latex.append("\\end{table}")
+    
+    return "\n".join(latex)
+
+
+def generate_model_dialect_prompt_comparison_table_latex(forward_results: Dict, model_name: str, metrics: List[str] = None) -> str:
+    """
+    Generate LaTeX table comparing merged dialect scores using 
+    general prompt (arabic_general) vs dialect-specific prompt (dialect),
+    for a specific model across all dialects.
+    
+    Args:
+        forward_results: Dictionary from process_forward_translations
+        model_name: Name of the model to generate table for
+        metrics: List of metrics to include (default: ['BLEU', 'CHRF'])
+    
+    Returns:
+        LaTeX table string
+    """
+    if metrics is None:
+        metrics = ['BLEU', 'CHRF']
+    
+    # Extract dialect breakdown
+    dialect_breakdown = forward_results.get('_dialect_breakdown', {})
+    if not dialect_breakdown:
+        return "% No merged dialect data available for model dialect prompt comparison"
+    
+    # Collect scores for this model across all dialects
+    dialect_scores = {}
+    
+    # Iterate through all dialects and collect scores for this model
+    for dialect_name, models_data in dialect_breakdown.items():
+        # Skip MADAR-only dialects (they have trailing space)
+        if dialect_name.endswith(' '):
+            continue
+        
+        # Check if this model has scores for this dialect
+        if model_name not in models_data:
+            continue
+        
+        scores_data = models_data[model_name]
+        dialect_scores[dialect_name] = {
+            'arabic_general': {},
+            'dialect': {}
+        }
+        
+        # Collect arabic_general scores
+        if 'arabic_general' in scores_data:
+            ag_scores = scores_data['arabic_general']
+            for metric in metrics:
+                if metric in ag_scores:
+                    dialect_scores[dialect_name]['arabic_general'][metric] = ag_scores[metric]
+        
+        # Collect dialect scores
+        if 'dialect' in scores_data:
+            dial_scores = scores_data['dialect']
+            for metric in metrics:
+                if metric in dial_scores:
+                    dialect_scores[dialect_name]['dialect'][metric] = dial_scores[metric]
+    
+    if not dialect_scores:
+        return f"% No scores found for model {model_name} in dialect prompt comparison"
+    
+    # Sort dialects by name
+    sorted_dialects = sorted(dialect_scores.items(), key=lambda x: x[0])
+    
+    # Generate LaTeX
+    latex = []
+    latex.append("\\begin{table}[htbp]")
+    latex.append("\\centering")
+    latex.append(f"\\caption{{Merged Dialect Scores: General vs. Dialect-Specific Prompt ({escape_latex(model_name)})}}")
+    safe_model_name = model_name.replace(' ', '_').replace('-', '_').lower()
+    latex.append(f"\\label{{tab:model_dialect_prompt_comparison_{safe_model_name}}}")
+    
+    # Column specification
+    col_spec = "l"  # Dialect
+    for metric in metrics:
+        col_spec += "@{\\hspace{3pt}}cc"  # Two columns per metric (General and Dialect)
+    latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
+    latex.append("\\toprule")
+    
+    # Header
+    header = "Dialect & "
+    for metric in metrics:
+        header += f"\\multicolumn{{2}}{{c@{{\\hspace{{3pt}}}}}}{{{metric}}} & "
+    header = header.rstrip(" & ") + " \\\\"
+    
+    # Add cmidrules
+    if len(metrics) > 0:
+        start_col = 2
+        for i, metric in enumerate(metrics):
+            if i > 0:
+                header += " "
+            header += f"\\cmidrule(lr){{{start_col + i*2}-{start_col + i*2 + 1}}}"
+    header += " & "
+    
+    # Sub-header
+    sub_header = ""
+    for metric in metrics:
+        sub_header += "General & Dialect & "
+    sub_header = sub_header.rstrip(" & ") + " \\\\"
+    header += sub_header
+    
+    latex.append(header)
+    latex.append("\\midrule")
+    
+    # Data rows
+    for dialect_name, scores in sorted_dialects:
+        row = f"{escape_latex(dialect_name)} & "
+        
+        for metric in metrics:
+            ag_score = scores['arabic_general'].get(metric)
+            dial_score = scores['dialect'].get(metric)
+            
+            ag_display = format_number(ag_score, 1)
+            dial_display = format_number(dial_score, 1)
+            
+            row += f"{ag_display} & {dial_display} & "
+        
+        row = row.rstrip(" & ") + " \\\\"
+        latex.append(row)
+    
+    latex.append("\\bottomrule")
+    latex.append("\\end{tabular}")
+    latex.append("\\end{table}")
     
     return "\n".join(latex)
 
@@ -400,23 +890,27 @@ def generate_dialect_table_latex(forward_results: Dict, metrics: List[str] = Non
     all_models = sorted(all_models)
     
     latex = []
-    latex.append("\\begin{table*}[htbp]")
+    latex.append("\\begin{table}[htbp]")
     latex.append("\\centering")
     latex.append("\\caption{Forward Translation: Dialect-Specific Performance (Dialect Variant)}")
     latex.append("\\label{tab:forward_dialects}")
-    latex.append("\\resizebox{\\textwidth}{!}{")
-    latex.append("\\begin{tabular}{l" + "c" * len(metrics) * len(dialects) + "}")
+    # Use 3pt spacing between all columns
+    col_spec = "l@{\\hspace{3pt}}c"  # Model and Size columns
+    for dialect in dialects:
+        for metric in metrics:
+            col_spec += "@{\\hspace{3pt}}c"
+    latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
     latex.append("\\toprule")
     
     # Header
-    header = "Model & "
+    header = "Model & Size & "
     for dialect in dialects:
-        header += f"\\multicolumn{{{len(metrics)}}}{{c}}{{{escape_latex(dialect)}}} & "
+        header += f"\\multicolumn{{{len(metrics)}}}{{c@{{\\hspace{{3pt}}}}}}{{{escape_latex(dialect)}}} & "
     header = header.rstrip(" & ") + " \\\\"
     latex.append(header)
     
     # Sub-header for metrics
-    subheader = " & "
+    subheader = " & & "
     for dialect in dialects:
         for metric in metrics:
             subheader += f"{escape_latex(metric)} & "
@@ -426,7 +920,9 @@ def generate_dialect_table_latex(forward_results: Dict, metrics: List[str] = Non
     
     # Data rows
     for model in all_models:
-        row = f"{escape_latex(model)} & "
+        model_size = get_model_size(model)
+        size_display = model_size if model_size else "---"
+        row = f"{escape_latex(model)} & {size_display} & "
         for dialect in dialects:
             if model in dialect_breakdown[dialect]:
                 scores = dialect_breakdown[dialect][model].get('dialect', {})
@@ -440,8 +936,7 @@ def generate_dialect_table_latex(forward_results: Dict, metrics: List[str] = Non
     
     latex.append("\\bottomrule")
     latex.append("\\end{tabular}")
-    latex.append("}")
-    latex.append("\\end{table*}")
+    latex.append("\\end{table}")
     
     return "\n".join(latex)
 
@@ -457,19 +952,22 @@ def generate_reverse_table_latex(reverse_results: Dict, metrics: List[str] = Non
         by_category[results['category']].append((model_name, results))
     
     # Sort categories
-    category_order = ['Arabic-Specialized', 'Multilingual (Arabic-focused)', 
-                     'General Multilingual', 'Commercial API', 'Other']
+    category_order = ['Arabic-Specialized', 'Multilingual', 'Commercial API', 'Other']
     
     latex = []
     latex.append("\\begin{table}[htbp]")
     latex.append("\\centering")
     latex.append("\\caption{Reverse Translation Results (Arabic → English): Overall Performance}")
     latex.append("\\label{tab:reverse_overall}")
-    latex.append("\\begin{tabular}{l" + "c" * len(metrics) + "}")
+    # Use 3pt spacing between all columns
+    col_spec = "l@{\\hspace{3pt}}c"  # Model and Size columns
+    for metric in metrics:
+        col_spec += "@{\\hspace{3pt}}c"
+    latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
     latex.append("\\toprule")
     
     # Header
-    header = "Model & " + " & ".join([escape_latex(m) for m in metrics]) + " \\\\"
+    header = "Model & Size & " + " & ".join([escape_latex(m) for m in metrics]) + " \\\\"
     latex.append(header)
     latex.append("\\midrule")
     
@@ -479,13 +977,15 @@ def generate_reverse_table_latex(reverse_results: Dict, metrics: List[str] = Non
             continue
         
         # Category header
-        latex.append(f"\\multicolumn{{{1 + len(metrics)}}}{{l}}{{\\textit{{{escape_latex(category)}}}}} \\\\")
+        latex.append(f"\\multicolumn{{{2 + len(metrics)}}}{{l}}{{\\textit{{{escape_latex(category)}}}}} \\\\")
         latex.append("\\midrule")
         
         # Models in category
         models_in_cat = sorted(by_category[category], key=lambda x: x[0])
         for model_name, results in models_in_cat:
-            row = f"{escape_latex(model_name)} & "
+            model_size = get_model_size(model_name)
+            size_display = model_size if model_size else "---"
+            row = f"{escape_latex(model_name)} & {size_display} & "
             for metric in metrics:
                 val = results['scores'].get(metric)
                 row += f"{format_number(val)} & "
@@ -559,6 +1059,44 @@ def generate_average_rankings_table_latex(test_sets: Dict, models: List[str],
                         count += 1
         model_counts[model] = count
     
+    # Calculate wins (number of test sets where model has highest score)
+    model_wins = {model: 0 for model in models}
+    for test_set, model_scores in test_sets.items():
+        best_score = None
+        best_model = None
+        for model in models:
+            if model not in model_scores:
+                continue
+            
+            score = None
+            if key and metric != 'COMET':
+                score = model_scores[model].get(key)
+            elif key and metric == 'COMET':
+                if comet_variant:
+                    score = get_comet_score_for_variant(model_scores[model], comet_variant, score_type)
+                else:
+                    score = find_comet_score(model_scores[model], score_type)
+            elif not key:
+                if metric == 'COMET':
+                    if comet_variant:
+                        score = get_comet_score_for_variant(model_scores[model], comet_variant)
+                    else:
+                        score = find_comet_score(model_scores[model])
+                else:
+                    score = model_scores[model].get(metric)
+                    if score is None:
+                        score = model_scores[model].get(f'arabic_general_{metric}')
+                    if score is None:
+                        score = model_scores[model].get(f'dialect_{metric}')
+            
+            if score is not None:
+                if best_score is None or score > best_score:
+                    best_score = score
+                    best_model = model
+        
+        if best_model is not None:
+            model_wins[best_model] = model_wins.get(best_model, 0) + 1
+    
     # Generate LaTeX
     latex = []
     latex.append("\\begin{table}[htbp]")
@@ -579,14 +1117,270 @@ def generate_average_rankings_table_latex(test_sets: Dict, models: List[str],
         safe_comet = comet_variant.replace('-', '_').replace(' ', '_').lower()
         label += f"_{safe_comet}"
     latex.append(f"\\label{{tab:{label}}}")
-    latex.append("\\begin{tabular}{lcc}")
+    # Use 3pt spacing between all columns (removed Rank column)
+    latex.append("\\begin{tabular}{l@{\\hspace{3pt}}c@{\\hspace{3pt}}c@{\\hspace{3pt}}c@{\\hspace{3pt}}c}")
     latex.append("\\toprule")
-    latex.append("Rank & Model & Avg. Rank \\\\")
+    latex.append("Model & Size & Wins & Avg. Rank \\\\")
     latex.append("\\midrule")
     
-    for rank, (model, avg_rank) in enumerate(sorted_models, 1):
+    for model, avg_rank in sorted_models:
         count = model_counts.get(model, 0)
-        latex.append(f"{rank} & {escape_latex(model)} & {avg_rank:.1f} ({count} test sets) \\\\")
+        wins = model_wins.get(model, 0)
+        model_size = get_model_size(model)
+        size_display = model_size if model_size else "---"
+        latex.append(f"{escape_latex(model)} & {size_display} & {wins} & {avg_rank:.1f} ({count} test sets) \\\\")
+    
+    latex.append("\\bottomrule")
+    latex.append("\\end{tabular}")
+    latex.append("\\end{table}")
+    
+    return "\n".join(latex)
+
+
+def generate_overall_scores_table_latex(overall_scores: Dict[str, Dict], models: List[str],
+                                       direction: str, score_type: Optional[str] = None,
+                                       metrics: List[str] = None, comet_variants: List[str] = None) -> str:
+    """
+    Generate LaTeX table for overall scores (all test sets concatenated).
+    
+    Args:
+        overall_scores: Dict mapping model_name -> overall scores dict
+        models: List of model names
+        direction: Translation direction ('forward', 'reverse', 'roundtrip')
+        score_type: For forward direction, 'arabic_general' or 'dialect' (None for reverse/roundtrip)
+        metrics: List of metrics to include (default: ['BLEU', 'CHRF'])
+        comet_variants: List of COMET variant keys to include
+    """
+    if metrics is None:
+        metrics = ['BLEU', 'CHRF']
+    
+    if not overall_scores:
+        return f"% No overall scores found for {direction} direction"
+    
+    # Group by category
+    by_category = defaultdict(list)
+    for model_name in models:
+        if model_name not in overall_scores:
+            continue
+        category = categorize_model(model_name)
+        by_category[category].append((model_name, overall_scores[model_name]))
+    
+    # Sort categories
+    category_order = ['Arabic-Specialized', 'Multilingual', 'Commercial API', 'Other']
+    
+    # Determine all metrics to include
+    all_metrics = list(metrics)
+    if comet_variants:
+        all_metrics.extend(comet_variants)
+    
+    # Determine title and label
+    if direction == 'forward' and score_type:
+        title_label = 'General Arabic' if score_type == 'arabic_general' else 'Dialect'
+        title = f"Overall Scores (All Test Sets Concatenated): Forward Translation ({title_label})"
+        label = f"overall_scores_forward_{score_type}"
+    elif direction == 'reverse':
+        title = "Overall Scores (All Test Sets Concatenated): Reverse Translation"
+        label = "overall_scores_reverse"
+    elif direction == 'roundtrip':
+        title = "Overall Scores (All Test Sets Concatenated): Roundtrip Translation"
+        label = "overall_scores_roundtrip"
+    else:
+        title = f"Overall Scores (All Test Sets Concatenated): {direction.title()}"
+        label = f"overall_scores_{direction}"
+    
+    latex = []
+    latex.append("\\begin{table}[htbp]")
+    latex.append("\\centering")
+    latex.append(f"\\caption{{{escape_latex(title)}}}")
+    latex.append(f"\\label{{tab:{label}}}")
+    # Use 3pt spacing between all columns
+    col_spec = "l@{\\hspace{3pt}}c"  # Model and Size columns
+    for metric in all_metrics:
+        col_spec += "@{\\hspace{3pt}}c"
+    latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
+    latex.append("\\toprule")
+    
+    # Header
+    header = "Model & Size & " + " & ".join([escape_latex(m) for m in all_metrics]) + " \\\\"
+    latex.append(header)
+    latex.append("\\midrule")
+    
+    # Data rows
+    for category in category_order:
+        if category not in by_category:
+            continue
+        
+        # Category header
+        latex.append(f"\\multicolumn{{{2 + len(all_metrics)}}}{{l}}{{\\textit{{{escape_latex(category)}}}}} \\\\")
+        latex.append("\\midrule")
+        
+        # Models in category
+        models_in_cat = sorted(by_category[category], key=lambda x: x[0])
+        for model_name, model_scores in models_in_cat:
+            model_size = get_model_size(model_name)
+            size_display = model_size if model_size else "---"
+            row = f"{escape_latex(model_name)} & {size_display} & "
+            
+            # Extract scores based on direction and score_type
+            scores_dict = {}
+            if direction == 'forward' and score_type:
+                if score_type in model_scores:
+                    scores_dict = model_scores[score_type]
+            elif direction == 'reverse':
+                scores_dict = model_scores
+            elif direction == 'roundtrip':
+                if 'roundtrip' in model_scores:
+                    scores_dict = model_scores['roundtrip']
+                else:
+                    scores_dict = model_scores
+            
+            for metric in all_metrics:
+                val = scores_dict.get(metric)
+                row += f"{format_number(val, decimals=1)} & "
+            
+            row = row.rstrip(" & ") + " \\\\"
+            latex.append(row)
+        
+        latex.append("\\midrule")
+    
+    latex.append("\\bottomrule")
+    latex.append("\\end{tabular}")
+    latex.append("\\end{table}")
+    
+    return "\n".join(latex)
+
+
+def generate_testset_ranking_table_latex(results_by_direction: Dict, direction: str = 'forward', 
+                                          score_type: Optional[str] = None, 
+                                          use_merged: bool = False,
+                                          metrics: List[str] = None) -> str:
+    """
+    Generate LaTeX table ranking test sets/dialects by difficulty (average scores).
+    
+    Args:
+        results_by_direction: Dictionary with direction -> {file_test_sets, merged_test_sets, ...}
+        direction: Translation direction ('forward' or 'reverse')
+        score_type: For forward direction, 'arabic_general' or 'dialect' (None for reverse)
+        use_merged: If True, use merged_test_sets; if False, use file_test_sets
+        metrics: List of metrics to include (default: ['BLEU', 'CHRF'])
+    
+    Returns:
+        LaTeX table string
+    """
+    if metrics is None:
+        metrics = ['BLEU', 'CHRF']
+    
+    if direction not in results_by_direction:
+        return "% No data available for this direction"
+    
+    direction_data = results_by_direction[direction]
+    
+    # Select which data source to use
+    if use_merged:
+        test_sets_data = direction_data.get('merged_test_sets', {})
+        data_type = "Merged Dialects"
+    else:
+        test_sets_data = direction_data.get('file_test_sets', {})
+        data_type = "Test Sets"
+    
+    if not test_sets_data:
+        return f"% No {data_type.lower()} available for this direction"
+    
+    # Collect all test sets/dialects with their scores
+    testset_scores = defaultdict(lambda: defaultdict(list))  # testset -> metric -> [scores]
+    
+    # Process test sets/dialects
+    for test_set, model_scores in test_sets_data.items():
+        for model, scores in model_scores.items():
+            for metric in metrics:
+                score = None
+                if direction == 'forward' and score_type:
+                    # Forward direction with score_type
+                    score_key = f'{score_type}_{metric}'
+                    score = scores.get(score_key)
+                else:
+                    # Reverse direction or no score_type
+                    score = scores.get(metric)
+                
+                if score is not None:
+                    testset_scores[test_set][metric].append(score)
+    
+    if not testset_scores:
+        return f"% No {data_type.lower()} scores available"
+    
+    # Compute average scores for each test set/dialect
+    testset_averages = []
+    for testset_name, metric_scores in testset_scores.items():
+        avg_scores = {}
+        for metric in metrics:
+            scores_list = metric_scores.get(metric, [])
+            if scores_list:
+                avg_scores[metric] = np.mean(scores_list)
+            else:
+                avg_scores[metric] = None
+        
+        # Use average of all metrics for ranking (or BLEU if available)
+        ranking_score = avg_scores.get('BLEU') or avg_scores.get('CHRF') or 0.0
+        if ranking_score > 0:
+            testset_averages.append((testset_name, avg_scores, ranking_score))
+    
+    # Sort by ranking score (descending - higher scores = easier)
+    testset_averages.sort(key=lambda x: x[2], reverse=True)
+    
+    # Generate LaTeX table
+    latex = []
+    latex.append("\\begin{table}[htbp]")
+    latex.append("\\centering")
+    
+    title_parts = []
+    if use_merged:
+        title_parts.append("Merged Dialects")
+    else:
+        title_parts.append("Test Sets")
+    
+    if direction == 'forward':
+        if score_type == 'arabic_general':
+            title_parts.append("General Arabic")
+        elif score_type == 'dialect':
+            title_parts.append("Dialect")
+        title_parts.append("Forward Translation")
+    else:
+        title_parts.append("Reverse Translation")
+    title_parts.append("Rankings")
+    
+    title = ": ".join(title_parts)
+    latex.append(f"\\caption{{{escape_latex(title)}}}")
+    
+    label = f"testset_ranking_{direction}"
+    if use_merged:
+        label += "_merged"
+    if score_type:
+        label += f"_{score_type}"
+    latex.append(f"\\label{{tab:{label}}}")
+    
+    # Use 3pt spacing between all columns
+    col_spec = "l@{\\hspace{3pt}}c"  # Rank and Test Set/Dialect columns
+    for metric in metrics:
+        col_spec += "@{\\hspace{3pt}}c"
+    latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
+    latex.append("\\toprule")
+    
+    # Header
+    header = "Rank & Test Set/Dialect & " + " & ".join([escape_latex(m) for m in metrics]) + " \\\\"
+    latex.append(header)
+    latex.append("\\midrule")
+    
+    # Data rows
+    for rank, (testset_name, avg_scores, _) in enumerate(testset_averages, 1):
+        row = f"{rank} & {escape_latex(testset_name)} & "
+        for metric in metrics:
+            score = avg_scores.get(metric)
+            if score is not None:
+                row += f"{format_number(score, decimals=1)} & "
+            else:
+                row += "--- & "
+        row = row.rstrip(" & ") + " \\\\"
+        latex.append(row)
     
     latex.append("\\bottomrule")
     latex.append("\\end{tabular}")
@@ -613,8 +1407,11 @@ def generate_roundtrip_table_latex(roundtrip_results: Dict, metrics: List[str] =
     latex.append("\\centering")
     latex.append("\\caption{Roundtrip Translation Results (English → Arabic → English): Top Model Pairs}")
     latex.append("\\label{tab:roundtrip}")
-    latex.append("\\resizebox{0.9\\textwidth}{!}{")
-    latex.append("\\begin{tabular}{l" + "c" * len(metrics) + "}")
+    # Use 3pt spacing between all columns
+    col_spec = "l"  # Model Pair column
+    for metric in metrics:
+        col_spec += "@{\\hspace{3pt}}c"
+    latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
     latex.append("\\toprule")
     
     # Header
@@ -635,7 +1432,6 @@ def generate_roundtrip_table_latex(roundtrip_results: Dict, metrics: List[str] =
     
     latex.append("\\bottomrule")
     latex.append("\\end{tabular}")
-    latex.append("}")
     latex.append("\\end{table}")
     
     return "\n".join(latex)
@@ -840,6 +1636,30 @@ def main():
     with open(output_dir / 'dialect_table.tex', 'w') as f:
         f.write(dialect_table)
     
+    prompt_comparison_table = generate_prompt_comparison_table_latex(forward_results, metrics)
+    with open(output_dir / 'prompt_comparison_table.tex', 'w') as f:
+        f.write(prompt_comparison_table)
+    
+    dialect_prompt_comparison_table = generate_dialect_prompt_comparison_table_latex(forward_results, metrics)
+    with open(output_dir / 'dialect_prompt_comparison_table.tex', 'w') as f:
+        f.write(dialect_prompt_comparison_table)
+    
+    # Generate per-model dialect prompt comparison tables
+    print("Generating per-model dialect prompt comparison tables...")
+    dialect_breakdown = forward_results.get('_dialect_breakdown', {})
+    if dialect_breakdown:
+        # Get all unique models from dialect breakdown
+        all_models = set()
+        for models_data in dialect_breakdown.values():
+            all_models.update(models_data.keys())
+        
+        for model_name in sorted(all_models):
+            model_table = generate_model_dialect_prompt_comparison_table_latex(forward_results, model_name, metrics)
+            safe_model_name = model_name.replace(' ', '_').replace('-', '_').replace('/', '_').lower()
+            filename = f'model_dialect_prompt_comparison_{safe_model_name}.tex'
+            with open(output_dir / filename, 'w') as f:
+                f.write(model_table)
+    
     reverse_table = generate_reverse_table_latex(reverse_results, metrics)
     with open(output_dir / 'reverse_table.tex', 'w') as f:
         f.write(reverse_table)
@@ -847,6 +1667,168 @@ def main():
     roundtrip_table = generate_roundtrip_table_latex(roundtrip_results, metrics)
     with open(output_dir / 'roundtrip_table.tex', 'w') as f:
         f.write(roundtrip_table)
+    
+    # Generate overall scores tables
+    if collect_all_scores:
+        print("Generating overall scores tables...")
+        
+        # Find all scores.json files
+        scores_files = []
+        for path in fixed_translations_dir.rglob("scores.json"):
+            scores_files.append(path)
+        
+        if scores_files:
+            # Collect all scores
+            results_by_direction, all_models = collect_all_scores(scores_files)
+            
+            # Forward direction - overall scores by score type
+            if 'forward' in results_by_direction:
+                forward_data = results_by_direction['forward']
+                overall_scores = forward_data.get('overall_scores', {})
+                
+                if overall_scores:
+                    # Combined table with all metrics
+                    table = generate_overall_scores_table_latex(
+                        overall_scores, all_models, 'forward', 'arabic_general',
+                        metrics=['BLEU', 'CHRF']
+                    )
+                    filename = 'forward_overall_scores_arabic_general.tex'
+                    with open(output_dir / filename, 'w') as f:
+                        f.write(table)
+                    
+                    table = generate_overall_scores_table_latex(
+                        overall_scores, all_models, 'forward', 'dialect',
+                        metrics=['BLEU', 'CHRF']
+                    )
+                    filename = 'forward_overall_scores_dialect.tex'
+                    with open(output_dir / filename, 'w') as f:
+                        f.write(table)
+                    
+                    # COMET variants for regular overall scores
+                    if args.include_comet:
+                        comet_variants = set()
+                        for model_scores in overall_scores.values():
+                            for score_type_key in ['arabic_general', 'dialect']:
+                                if score_type_key in model_scores:
+                                    for key in model_scores[score_type_key].keys():
+                                        if isinstance(key, str) and key.startswith('COMET_'):
+                                            comet_variants.add(key)
+                        
+                        for comet_variant in sorted(comet_variants):
+                            for score_type in ['arabic_general', 'dialect']:
+                                table = generate_overall_scores_table_latex(
+                                    overall_scores, all_models, 'forward', score_type,
+                                    metrics=['BLEU', 'CHRF'], comet_variants=[comet_variant]
+                                )
+                                safe_comet = comet_variant.replace('-', '_').replace(' ', '_').lower()
+                                filename = f'forward_overall_scores_{score_type}_comet_{safe_comet}.tex'
+                                with open(output_dir / filename, 'w') as f:
+                                    f.write(table)
+                
+                # MADAR-only overall scores
+                overall_scores_madar_only = forward_data.get('overall_scores_madar_only', {})
+                if overall_scores_madar_only:
+                    table = generate_overall_scores_table_latex(
+                        overall_scores_madar_only, all_models, 'forward', 'arabic_general',
+                        metrics=['BLEU', 'CHRF']
+                    )
+                    filename = 'forward_overall_scores_madar_only_arabic_general.tex'
+                    with open(output_dir / filename, 'w') as f:
+                        f.write(table)
+                    
+                    table = generate_overall_scores_table_latex(
+                        overall_scores_madar_only, all_models, 'forward', 'dialect',
+                        metrics=['BLEU', 'CHRF']
+                    )
+                    filename = 'forward_overall_scores_madar_only_dialect.tex'
+                    with open(output_dir / filename, 'w') as f:
+                        f.write(table)
+                    
+                    # COMET variants for MADAR-only
+                    if args.include_comet:
+                        # Find COMET variants from MADAR-only overall scores
+                        comet_variants = set()
+                        for model_scores in overall_scores_madar_only.values():
+                            for score_type_key in ['arabic_general', 'dialect']:
+                                if score_type_key in model_scores:
+                                    for key in model_scores[score_type_key].keys():
+                                        if isinstance(key, str) and key.startswith('COMET_'):
+                                            comet_variants.add(key)
+                        
+                        for comet_variant in sorted(comet_variants):
+                            for score_type in ['arabic_general', 'dialect']:
+                                table = generate_overall_scores_table_latex(
+                                    overall_scores_madar_only, all_models, 'forward', score_type,
+                                    metrics=['BLEU', 'CHRF'], comet_variants=[comet_variant]
+                                )
+                                safe_comet = comet_variant.replace('-', '_').replace(' ', '_').lower()
+                                filename = f'forward_overall_scores_madar_only_{score_type}_comet_{safe_comet}.tex'
+                                with open(output_dir / filename, 'w') as f:
+                                    f.write(table)
+            
+            # Reverse direction - overall scores
+            if 'reverse' in results_by_direction:
+                reverse_data = results_by_direction['reverse']
+                overall_scores = reverse_data.get('overall_scores', {})
+                
+                if overall_scores:
+                    # Combined table with all metrics
+                    table = generate_overall_scores_table_latex(
+                        overall_scores, all_models, 'reverse', None,
+                        metrics=['BLEU', 'CHRF']
+                    )
+                    filename = 'reverse_overall_scores.tex'
+                    with open(output_dir / filename, 'w') as f:
+                        f.write(table)
+                    
+                    # COMET variants
+                    if args.include_comet:
+                        comet_variants = set()
+                        for model_scores in overall_scores.values():
+                            for key in model_scores.keys():
+                                if isinstance(key, str) and key.startswith('COMET_'):
+                                    comet_variants.add(key)
+                        
+                        for comet_variant in sorted(comet_variants):
+                            table = generate_overall_scores_table_latex(
+                                overall_scores, all_models, 'reverse', None,
+                                metrics=['BLEU', 'CHRF'], comet_variants=[comet_variant]
+                            )
+                            safe_comet = comet_variant.replace('-', '_').replace(' ', '_').lower()
+                            filename = f'reverse_overall_scores_comet_{safe_comet}.tex'
+                            with open(output_dir / filename, 'w') as f:
+                                f.write(table)
+                
+                # MADAR-only overall scores
+                overall_scores_madar_only = reverse_data.get('overall_scores_madar_only', {})
+                if overall_scores_madar_only:
+                    table = generate_overall_scores_table_latex(
+                        overall_scores_madar_only, all_models, 'reverse', None,
+                        metrics=['BLEU', 'CHRF']
+                    )
+                    filename = 'reverse_overall_scores_madar_only.tex'
+                    with open(output_dir / filename, 'w') as f:
+                        f.write(table)
+                    
+                    # COMET variants for MADAR-only
+                    if args.include_comet:
+                        comet_variants = set()
+                        for model_scores in overall_scores_madar_only.values():
+                            for key in model_scores.keys():
+                                if isinstance(key, str) and key.startswith('COMET_'):
+                                    comet_variants.add(key)
+                        
+                        for comet_variant in sorted(comet_variants):
+                            table = generate_overall_scores_table_latex(
+                                overall_scores_madar_only, all_models, 'reverse', None,
+                                metrics=['BLEU', 'CHRF'], comet_variants=[comet_variant]
+                            )
+                            safe_comet = comet_variant.replace('-', '_').replace(' ', '_').lower()
+                            filename = f'reverse_overall_scores_madar_only_comet_{safe_comet}.tex'
+                            with open(output_dir / filename, 'w') as f:
+                                f.write(table)
+    else:
+        print("⚠️  Skipping overall scores tables (functions not available)")
     
     # Generate average ranking tables
     if collect_all_scores and calculate_average_rankings:
@@ -940,19 +1922,35 @@ def main():
                             with open(output_dir / filename, 'w') as f:
                                 f.write(table)
             
-            # Merged dialects
+            # Merged dialects (regular)
             if 'forward' in results_by_direction:
                 forward_data = results_by_direction['forward']
                 merged_test_sets = forward_data.get('merged_test_sets', {})
                 
-                if merged_test_sets:
+                # Separate regular and madar_only merged scores
+                merged_test_sets_regular = {k: v for k, v in merged_test_sets.items() if not k.endswith('')}
+                merged_test_sets_madar_only = {k: v for k, v in merged_test_sets.items() if k.endswith('')}
+                
+                if merged_test_sets_regular:
                     for score_type in ['arabic_general', 'dialect']:
                         for metric in ['BLEU', 'CHRF']:
                             table = generate_average_rankings_table_latex(
-                                merged_test_sets, all_models, score_type, metric,
+                                merged_test_sets_regular, all_models, score_type, metric,
                                 title=f"Average Rankings: Merged Dialects ({score_type}, {metric})"
                             )
                             filename = f'forward_merged_avg_rankings_{score_type}_{metric.lower()}.tex'
+                            with open(output_dir / filename, 'w') as f:
+                                f.write(table)
+                
+                # MADAR-only merged dialects
+                if merged_test_sets_madar_only:
+                    for score_type in ['arabic_general', 'dialect']:
+                        for metric in ['BLEU', 'CHRF']:
+                            table = generate_average_rankings_table_latex(
+                                merged_test_sets_madar_only, all_models, score_type, metric,
+                                title=f"Average Rankings: Merged Dialects - MADAR Only ({score_type}, {metric})"
+                            )
+                            filename = f'forward_merged_madar_only_avg_rankings_{score_type}_{metric.lower()}.tex'
                             with open(output_dir / filename, 'w') as f:
                                 f.write(table)
             
@@ -960,17 +1958,160 @@ def main():
                 reverse_data = results_by_direction['reverse']
                 merged_test_sets = reverse_data.get('merged_test_sets', {})
                 
-                if merged_test_sets:
+                # Separate regular and madar_only merged scores
+                merged_test_sets_regular = {k: v for k, v in merged_test_sets.items() if not k.endswith('')}
+                merged_test_sets_madar_only = {k: v for k, v in merged_test_sets.items() if k.endswith('')}
+                
+                if merged_test_sets_regular:
                     for metric in ['BLEU', 'CHRF']:
                         table = generate_average_rankings_table_latex(
-                            merged_test_sets, all_models, None, metric,
+                            merged_test_sets_regular, all_models, None, metric,
                             title=f"Average Rankings: Merged Dialects - Reverse ({metric})"
                         )
                         filename = f'reverse_merged_avg_rankings_{metric.lower()}.tex'
                         with open(output_dir / filename, 'w') as f:
                             f.write(table)
+                
+                # MADAR-only merged dialects
+                if merged_test_sets_madar_only:
+                    for metric in ['BLEU', 'CHRF']:
+                        table = generate_average_rankings_table_latex(
+                            merged_test_sets_madar_only, all_models, None, metric,
+                            title=f"Average Rankings: Merged Dialects - Reverse, MADAR Only ({metric})"
+                        )
+                        filename = f'reverse_merged_madar_only_avg_rankings_{metric.lower()}.tex'
+                        with open(output_dir / filename, 'w') as f:
+                            f.write(table)
     else:
         print("⚠️  Skipping average ranking tables (functions not available)")
+    
+    # Generate test set/dialect ranking tables
+    if collect_all_scores and results_by_direction:
+        print("\nGenerating test set/dialect ranking tables...")
+        
+        # Forward direction - file test sets
+        if 'forward' in results_by_direction:
+            forward_data = results_by_direction['forward']
+            file_test_sets = forward_data.get('file_test_sets', {})
+            
+            if file_test_sets:
+                # General Arabic
+                table = generate_testset_ranking_table_latex(
+                    results_by_direction, 'forward', 'arabic_general', use_merged=False
+                )
+                filename = 'forward_testset_ranking_arabic_general.tex'
+                with open(output_dir / filename, 'w') as f:
+                    f.write(table)
+                print(f"   ✅ {filename}")
+                
+                # Dialect
+                table = generate_testset_ranking_table_latex(
+                    results_by_direction, 'forward', 'dialect', use_merged=False
+                )
+                filename = 'forward_testset_ranking_dialect.tex'
+                with open(output_dir / filename, 'w') as f:
+                    f.write(table)
+                print(f"   ✅ {filename}")
+            
+            # Merged dialects (regular)
+            merged_test_sets = forward_data.get('merged_test_sets', {})
+            # Separate regular and madar_only
+            merged_test_sets_regular = {k: v for k, v in merged_test_sets.items() if not k.endswith('')}
+            merged_test_sets_madar_only = {k: v for k, v in merged_test_sets.items() if k.endswith('')}
+            
+            if merged_test_sets_regular:
+                # Temporarily replace merged_test_sets with regular only for table generation
+                forward_data['merged_test_sets'] = merged_test_sets_regular
+                # General Arabic
+                table = generate_testset_ranking_table_latex(
+                    results_by_direction, 'forward', 'arabic_general', use_merged=True
+                )
+                filename = 'forward_merged_dialect_ranking_arabic_general.tex'
+                with open(output_dir / filename, 'w') as f:
+                    f.write(table)
+                print(f"   ✅ {filename}")
+                
+                # Dialect
+                table = generate_testset_ranking_table_latex(
+                    results_by_direction, 'forward', 'dialect', use_merged=True
+                )
+                filename = 'forward_merged_dialect_ranking_dialect.tex'
+                with open(output_dir / filename, 'w') as f:
+                    f.write(table)
+                print(f"   ✅ {filename}")
+                # Restore original merged_test_sets
+                forward_data['merged_test_sets'] = merged_test_sets
+            
+            # MADAR-only merged dialects
+            if merged_test_sets_madar_only:
+                # Temporarily replace merged_test_sets with madar_only for table generation
+                forward_data['merged_test_sets'] = merged_test_sets_madar_only
+                # General Arabic
+                table = generate_testset_ranking_table_latex(
+                    results_by_direction, 'forward', 'arabic_general', use_merged=True
+                )
+                filename = 'forward_merged_madar_only_dialect_ranking_arabic_general.tex'
+                with open(output_dir / filename, 'w') as f:
+                    f.write(table)
+                print(f"   ✅ {filename}")
+                
+                # Dialect
+                table = generate_testset_ranking_table_latex(
+                    results_by_direction, 'forward', 'dialect', use_merged=True
+                )
+                filename = 'forward_merged_madar_only_dialect_ranking_dialect.tex'
+                with open(output_dir / filename, 'w') as f:
+                    f.write(table)
+                print(f"   ✅ {filename}")
+                # Restore original merged_test_sets
+                forward_data['merged_test_sets'] = merged_test_sets
+        
+        # Reverse direction
+        if 'reverse' in results_by_direction:
+            reverse_data = results_by_direction['reverse']
+            file_test_sets = reverse_data.get('file_test_sets', {})
+            
+            if file_test_sets:
+                table = generate_testset_ranking_table_latex(
+                    results_by_direction, 'reverse', None, use_merged=False
+                )
+                filename = 'reverse_testset_ranking.tex'
+                with open(output_dir / filename, 'w') as f:
+                    f.write(table)
+                print(f"   ✅ {filename}")
+            
+            # Merged dialects (regular)
+            merged_test_sets = reverse_data.get('merged_test_sets', {})
+            # Separate regular and madar_only
+            merged_test_sets_regular = {k: v for k, v in merged_test_sets.items() if not k.endswith('')}
+            merged_test_sets_madar_only = {k: v for k, v in merged_test_sets.items() if k.endswith('')}
+            
+            if merged_test_sets_regular:
+                # Temporarily replace merged_test_sets with regular only for table generation
+                reverse_data['merged_test_sets'] = merged_test_sets_regular
+                table = generate_testset_ranking_table_latex(
+                    results_by_direction, 'reverse', None, use_merged=True
+                )
+                filename = 'reverse_merged_dialect_ranking.tex'
+                with open(output_dir / filename, 'w') as f:
+                    f.write(table)
+                print(f"   ✅ {filename}")
+                # Restore original merged_test_sets
+                reverse_data['merged_test_sets'] = merged_test_sets
+            
+            # MADAR-only merged dialects
+            if merged_test_sets_madar_only:
+                # Temporarily replace merged_test_sets with madar_only for table generation
+                reverse_data['merged_test_sets'] = merged_test_sets_madar_only
+                table = generate_testset_ranking_table_latex(
+                    results_by_direction, 'reverse', None, use_merged=True
+                )
+                filename = 'reverse_merged_madar_only_dialect_ranking.tex'
+                with open(output_dir / filename, 'w') as f:
+                    f.write(table)
+                print(f"   ✅ {filename}")
+                # Restore original merged_test_sets
+                reverse_data['merged_test_sets'] = merged_test_sets
     
     # Generate figure LaTeX
     print("Generating LaTeX figure code...")
@@ -1006,8 +2147,10 @@ def main():
     print("   - roundtrip_table.tex")
     print("   - figures.tex")
     print("   - results_section.tex")
-    if collect_all_scores and calculate_average_rankings:
-        print("   - average_ranking tables (forward_*, reverse_*, *_merged_*)")
+    if collect_all_scores:
+        print("   - overall_scores tables (forward_*, reverse_*)")
+        if calculate_average_rankings:
+            print("   - average_ranking tables (forward_*, reverse_*, *_merged_*)")
 
 
 if __name__ == '__main__':
