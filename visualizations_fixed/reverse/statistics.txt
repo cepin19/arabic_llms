@@ -612,97 +612,97 @@ Lower rank is better (1st = best)
 ================================================================================
 
 Model: EuroLLM-9B-Instruct
-  BLEU: 29.5
-  CHRF: 49.2
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 33.2
+  CHRF: 51.4
+  Test sets: 26
+  Sentences: 79000
 
 Model: Jais-2-70B-Chat
-  BLEU: 51.4
-  CHRF: 67.8
-  Test sets: 32
-  Sentences: 112000
+  BLEU: 49.4
+  CHRF: 66.5
+  Test sets: 26
+  Sentences: 79000
 
 Model: Jais-2-8B-Chat
-  BLEU: 41.3
-  CHRF: 61.0
-  Test sets: 32
-  Sentences: 112000
+  BLEU: 40.5
+  CHRF: 60.3
+  Test sets: 26
+  Sentences: 79000
 
 Model: Mistral-Small-3.2-24B-Instruct-2506
-  BLEU: 27.4
-  CHRF: 47.6
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 30.4
+  CHRF: 49.6
+  Test sets: 26
+  Sentences: 79000
 
 Model: Nile-Chat-12B
-  BLEU: 36.8
-  CHRF: 55.3
-  Test sets: 32
-  Sentences: 112000
+  BLEU: 37.3
+  CHRF: 55.8
+  Test sets: 26
+  Sentences: 79000
 
 Model: Qwen3-4B-Instruct-2507
-  BLEU: 21.0
-  CHRF: 41.7
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 23.5
+  CHRF: 43.2
+  Test sets: 26
+  Sentences: 79000
 
 Model: aya-expanse-32b
-  BLEU: 40.8
-  CHRF: 58.6
-  Test sets: 32
-  Sentences: 112000
+  BLEU: 41.3
+  CHRF: 59.0
+  Test sets: 26
+  Sentences: 79000
 
 Model: aya-expanse-8b
-  BLEU: 31.6
-  CHRF: 51.4
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 35.9
+  CHRF: 54.1
+  Test sets: 26
+  Sentences: 79000
 
 Model: c4ai-command-r-08-2024
-  BLEU: 33.4
-  CHRF: 53.8
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 37.6
+  CHRF: 56.6
+  Test sets: 26
+  Sentences: 79000
 
 Model: c4ai-command-r-v01
-  BLEU: 31.4
-  CHRF: 51.0
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 35.6
+  CHRF: 53.8
+  Test sets: 26
+  Sentences: 79000
 
 Model: c4ai-command-r7b-arabic-02-2025
-  BLEU: 30.8
-  CHRF: 50.6
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 34.9
+  CHRF: 53.2
+  Test sets: 26
+  Sentences: 79000
 
 Model: command-a-translate-08-2025
-  BLEU: 41.3
-  CHRF: 60.0
-  Test sets: 32
-  Sentences: 112000
+  BLEU: 41.8
+  CHRF: 60.3
+  Test sets: 26
+  Sentences: 79000
 
 Model: gemma-3-27b-it
-  BLEU: 37.7
-  CHRF: 57.2
-  Test sets: 32
-  Sentences: 112000
+  BLEU: 38.3
+  CHRF: 57.7
+  Test sets: 26
+  Sentences: 79000
 
 Model: gemma-3-4b-it
-  BLEU: 26.6
-  CHRF: 47.5
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 30.7
+  CHRF: 50.2
+  Test sets: 26
+  Sentences: 79000
 
 Model: gpt-4.1-mini
-  BLEU: 35.6
-  CHRF: 56.1
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 40.4
+  CHRF: 59.2
+  Test sets: 26
+  Sentences: 79000
 
 Model: gpt-4.1-nano
-  BLEU: 33.2
-  CHRF: 53.7
-  Test sets: 42
-  Sentences: 130226
+  BLEU: 37.6
+  CHRF: 56.5
+  Test sets: 26
+  Sentences: 79000

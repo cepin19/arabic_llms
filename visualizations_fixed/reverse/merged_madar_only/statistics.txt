@@ -14,22 +14,22 @@ Merged Dialects  BLEU Scores for Merged Dialects
 
 Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..  Nile-Chat-12BQwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Algerian Arabic                           N/A           36.5           29.3            N/A            N/A           29.0            N/A           32.3            N/A            N/A            N/A            N/A           33.1           30.7            N/A            N/A            N/A
-Egyptian Arabic                           N/A           56.1           44.7            N/A            N/A           42.2            N/A           44.5            N/A            N/A            N/A            N/A           44.5           41.7            N/A            N/A            N/A
-Iraqi Arabic                              N/A           45.7           37.1            N/A            N/A           38.6            N/A           43.6            N/A            N/A            N/A            N/A           43.7           41.1            N/A            N/A            N/A
-Jordanian Arabic                          N/A           48.4           41.2            N/A            N/A           41.4            N/A           45.1            N/A            N/A            N/A            N/A           44.0           42.0            N/A            N/A            N/A
-Lebanese Arabic                           N/A           56.7           44.9            N/A            N/A           33.3            N/A           37.1            N/A            N/A            N/A            N/A           38.6           32.9            N/A            N/A            N/A
-Libyan Arabic                             N/A           45.4           37.6            N/A            N/A           37.0            N/A           40.4            N/A            N/A            N/A            N/A           41.3           39.1            N/A            N/A            N/A
-Modern Standard Arabic                    N/A           66.4           49.6            N/A            N/A           45.4            N/A           50.1            N/A            N/A            N/A            N/A           50.2           45.9            N/A            N/A            N/A
-Moroccan Arabic                           N/A           49.3           39.9            N/A            N/A           30.0            N/A           36.0            N/A            N/A            N/A            N/A           38.5           32.2            N/A            N/A            N/A
-Omani Arabic                              N/A           52.6           45.2            N/A            N/A           44.4            N/A           48.9            N/A            N/A            N/A            N/A           49.4           47.0            N/A            N/A            N/A
-Palestinian Arabic                        N/A           48.7           42.1            N/A            N/A           40.3            N/A           44.5            N/A            N/A            N/A            N/A           43.9           41.5            N/A            N/A            N/A
-Qatari Arabic                             N/A           51.7           42.8            N/A            N/A           39.2            N/A           43.1            N/A            N/A            N/A            N/A           43.0           41.9            N/A            N/A            N/A
-Saudi Arabic                              N/A           49.3           41.6            N/A            N/A           41.1            N/A           45.5            N/A            N/A            N/A            N/A           45.8           44.0            N/A            N/A            N/A
-Sudanese Arabic                           N/A           54.3           46.1            N/A            N/A           46.4            N/A           52.6            N/A            N/A            N/A            N/A           52.1           49.3            N/A            N/A            N/A
-Syrian Arabic                             N/A           49.0           41.0            N/A            N/A           39.8            N/A           44.4            N/A            N/A            N/A            N/A           44.4           40.7            N/A            N/A            N/A
-Tunisian Arabic                           N/A           39.0           30.9            N/A            N/A           23.8            N/A           26.7            N/A            N/A            N/A            N/A           27.5           24.0            N/A            N/A            N/A
-Yemeni Arabic                             N/A           46.8           38.4            N/A            N/A           39.9            N/A           43.6            N/A            N/A            N/A            N/A           43.5           40.3            N/A            N/A            N/A
+Algerian Arabic                          25.1           36.5           29.3            N/A           23.8           29.0           18.7           32.3           27.3           29.1           27.7           27.3           33.1           30.7           23.8           32.4           29.8
+Egyptian Arabic                          38.0           54.1           45.1            N/A           35.4           43.1           25.7           45.7           40.8           40.9           40.0           39.0           45.6           42.9           35.1           44.5           42.1
+Iraqi Arabic                             33.8           45.7           37.1            N/A           32.0           38.6           25.1           43.6           37.0           39.7           36.2           35.4           43.7           41.1           32.3           41.4           38.4
+Jordanian Arabic                         37.2           48.4           41.2            N/A           34.0           41.4           25.2           45.1           40.0           40.7           39.2           38.5           44.0           42.0           34.3           43.6           41.4
+Lebanese Arabic                          24.8           51.5           41.2            N/A           22.3           31.1           15.7           34.2           28.2           31.5           29.1           26.6           35.9           30.1           22.5           33.3           31.0
+Libyan Arabic                            33.7           45.4           37.6            N/A           30.0           37.0           22.3           40.4           35.7           37.2           34.6           33.9           41.3           39.1           30.6           41.1           38.1
+Modern Standard Arabic                   44.1           62.9           47.5            N/A           42.2           44.5           37.4           49.1           44.8           45.1           43.7           43.7           49.6           45.0           40.3           44.6           43.2
+Moroccan Arabic                          27.3           50.8           41.8            N/A           24.1           32.6           18.2           39.0           33.2           36.2           33.2           34.9           41.5           35.1           25.7           39.5           36.0
+Omani Arabic                             44.0           52.6           45.2            N/A           41.4           44.4           35.1           48.9           44.4           45.1           43.0           43.7           49.4           47.0           40.8           48.0           45.8
+Palestinian Arabic                       36.2           48.7           42.1            N/A           32.2           40.3           23.3           44.5           39.4           41.5           38.4           36.8           43.9           41.5           33.0           43.7           41.2
+Qatari Arabic                            35.3           50.8           42.2            N/A           32.8           39.1           24.9           43.0           37.8           39.7           37.3           36.1           43.0           41.6           33.4           41.8           39.5
+Saudi Arabic                             39.8           49.3           41.6            N/A           36.7           41.1           28.6           45.5           40.5           42.4           39.7           39.2           45.8           44.0           37.1           45.5           42.4
+Sudanese Arabic                          44.2           54.3           46.1            N/A           41.6           46.4           33.2           52.6           46.2           47.9           45.2           45.1           52.1           49.3           39.9           51.4           47.1
+Syrian Arabic                            34.2           49.0           41.0            N/A           30.2           39.8           22.3           44.4           38.4           40.5           38.5           36.1           44.4           40.7           30.4           43.5           40.1
+Tunisian Arabic                          17.6           36.5           28.9            N/A           15.8           23.1           11.9           25.9           19.5           23.1           19.9           19.5           26.8           23.2           16.5           27.7           23.8
+Yemeni Arabic                            36.6           46.8           38.4            N/A           31.9           39.9           24.9           43.6           37.5           38.9           36.5           37.2           43.5           40.3           32.1           42.3           39.7
 
 
 
@@ -38,22 +38,22 @@ Merged Dialects  CHRF Scores for Merged Dialects
 
 Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..  Nile-Chat-12BQwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Algerian Arabic                           N/A           57.1           51.9            N/A            N/A           49.9            N/A           52.1            N/A            N/A            N/A            N/A           53.8           51.5            N/A            N/A            N/A
-Egyptian Arabic                           N/A           71.8           64.3            N/A            N/A           60.1            N/A           62.2            N/A            N/A            N/A            N/A           63.0           61.0            N/A            N/A            N/A
-Iraqi Arabic                              N/A           64.4           57.8            N/A            N/A           57.2            N/A           60.8            N/A            N/A            N/A            N/A           62.0           60.1            N/A            N/A            N/A
-Jordanian Arabic                          N/A           66.6           61.7            N/A            N/A           59.6            N/A           62.6            N/A            N/A            N/A            N/A           63.0           61.3            N/A            N/A            N/A
-Lebanese Arabic                           N/A           71.4           63.6            N/A            N/A           51.8            N/A           55.6            N/A            N/A            N/A            N/A           58.1           53.0            N/A            N/A            N/A
-Libyan Arabic                             N/A           64.4           58.6            N/A            N/A           56.3            N/A           59.0            N/A            N/A            N/A            N/A           60.5           58.4            N/A            N/A            N/A
-Modern Standard Arabic                    N/A           79.3           69.0            N/A            N/A           63.6            N/A           67.7            N/A            N/A            N/A            N/A           68.5           65.9            N/A            N/A            N/A
-Moroccan Arabic                           N/A           66.5           60.1            N/A            N/A           49.8            N/A           54.9            N/A            N/A            N/A            N/A           57.6           52.9            N/A            N/A            N/A
-Omani Arabic                              N/A           68.8           63.9            N/A            N/A           62.3            N/A           65.2            N/A            N/A            N/A            N/A           66.0           64.4            N/A            N/A            N/A
-Palestinian Arabic                        N/A           65.9           60.9            N/A            N/A           58.3            N/A           61.3            N/A            N/A            N/A            N/A           61.8           59.8            N/A            N/A            N/A
-Qatari Arabic                             N/A           67.2           60.7            N/A            N/A           57.2            N/A           60.1            N/A            N/A            N/A            N/A           60.5           59.4            N/A            N/A            N/A
-Saudi Arabic                              N/A           66.0           60.6            N/A            N/A           59.2            N/A           62.3            N/A            N/A            N/A            N/A           63.1           61.6            N/A            N/A            N/A
-Sudanese Arabic                           N/A           70.4           65.0            N/A            N/A           63.0            N/A           67.5            N/A            N/A            N/A            N/A           67.9           65.8            N/A            N/A            N/A
-Syrian Arabic                             N/A           66.2           60.6            N/A            N/A           58.0            N/A           61.5            N/A            N/A            N/A            N/A           62.5           59.6            N/A            N/A            N/A
-Tunisian Arabic                           N/A           57.7           51.7            N/A            N/A           43.3            N/A           46.0            N/A            N/A            N/A            N/A           47.6           44.6            N/A            N/A            N/A
-Yemeni Arabic                             N/A           65.1           59.3            N/A            N/A           58.1            N/A           60.4            N/A            N/A            N/A            N/A           62.0           59.2            N/A            N/A            N/A
+Algerian Arabic                          45.5           57.1           51.9            N/A           44.5           49.9           39.7           52.1           47.8           50.2           47.7           47.3           53.8           51.5           45.2           52.9           50.2
+Egyptian Arabic                          55.6           70.4           64.4            N/A           54.4           60.7           45.8           62.8           58.5           59.9           57.7           57.1           63.6           61.7           54.6           62.9           60.6
+Iraqi Arabic                             52.3           64.4           57.8            N/A           51.2           57.2           44.7           60.8           55.1           58.3           54.8           53.9           62.0           60.1           51.9           60.1           57.2
+Jordanian Arabic                         55.8           66.6           61.7            N/A           53.4           59.6           46.2           62.6           58.0           59.8           57.6           57.0           63.0           61.3           54.3           62.5           60.4
+Lebanese Arabic                          43.5           67.8           60.8            N/A           41.7           49.9           35.0           53.1           47.5           51.2           48.3           45.7           56.0           50.9           42.1           53.0           50.9
+Libyan Arabic                            52.5           64.4           58.6            N/A           49.8           56.3           42.6           59.0           54.5           56.8           53.7           52.9           60.5           58.4           50.9           60.2           57.1
+Modern Standard Arabic                   63.0           76.8           67.3            N/A           62.0           62.9           57.9           66.8           63.2           64.0           61.8           62.5           67.9           65.1           60.4           65.0           63.1
+Moroccan Arabic                          46.9           68.0           62.1            N/A           45.3           52.6           39.0           57.9           52.8           56.1           52.6           54.1           60.3           55.8           46.6           58.8           55.5
+Omani Arabic                             60.4           68.8           63.9            N/A           58.9           62.3           53.5           65.2           61.0           62.4           60.3           60.5           66.0           64.4           58.7           65.2           62.8
+Palestinian Arabic                       53.8           65.9           60.9            N/A           51.3           58.3           43.1           61.3           56.6           59.4           56.3           54.6           61.8           59.8           51.7           61.5           58.7
+Qatari Arabic                            52.3           66.7           60.4            N/A           50.7           57.1           43.7           59.9           55.2           57.5           54.9           53.7           60.4           59.1           51.8           59.1           56.8
+Saudi Arabic                             56.9           66.0           60.6            N/A           54.6           59.2           47.8           62.3           57.8           59.9           57.6           57.0           63.1           61.6           55.2           62.6           59.8
+Sudanese Arabic                          60.5           70.4           65.0            N/A           58.2           63.0           50.9           67.5           62.3           64.4           61.7           61.5           67.9           65.8           57.9           67.5           64.0
+Syrian Arabic                            52.5           66.2           60.6            N/A           49.8           58.0           42.4           61.5           56.1           59.0           56.3           54.3           62.5           59.6           50.2           61.5           58.7
+Tunisian Arabic                          36.9           55.6           49.9            N/A           34.8           42.5           31.0           45.2           39.2           43.0           39.1           38.5           46.8           43.7           36.2           47.1           43.5
+Yemeni Arabic                            53.9           65.1           59.3            N/A           51.4           58.1           45.0           60.4           55.7           57.7           54.8           55.2           62.0           59.2           51.4           60.8           58.3
 
 
 
@@ -111,10 +111,20 @@ Lower rank is better (1st = best)
 
 1. Jais-2-70B-Chat: 1.0 (based on 16 test set(s))
 2. command-a-translate-08-2025: 2.6 (based on 16 test set(s))
-3. aya-expanse-32b: 2.9 (based on 16 test set(s))
-4. Jais-2-8B-Chat: 4.2 (based on 16 test set(s))
-5. gemma-3-27b-it: 4.6 (based on 16 test set(s))
-6. Nile-Chat-12B: 5.6 (based on 16 test set(s))
+3. aya-expanse-32b: 3.1 (based on 16 test set(s))
+4. gpt-4.1-mini: 4.2 (based on 16 test set(s))
+5. Jais-2-8B-Chat: 5.8 (based on 16 test set(s))
+6. gemma-3-27b-it: 5.9 (based on 16 test set(s))
+7. c4ai-command-r-08-2024: 7.2 (based on 16 test set(s))
+8. gpt-4.1-nano: 7.5 (based on 16 test set(s))
+9. Nile-Chat-12B: 8.2 (based on 16 test set(s))
+10. aya-expanse-8b: 10.1 (based on 16 test set(s))
+11. c4ai-command-r-v01: 11.1 (based on 16 test set(s))
+12. c4ai-command-r7b-arabic-02-2025: 11.7 (based on 16 test set(s))
+13. EuroLLM-9B-Instruct: 12.5 (based on 16 test set(s))
+14. gemma-3-4b-it: 14.2 (based on 16 test set(s))
+15. Mistral-Small-3.2-24B-Instruct-2506: 14.8 (based on 16 test set(s))
+16. Qwen3-4B-Instruct-2507: 16.0 (based on 16 test set(s))
 
 
 ================================================================================
@@ -123,11 +133,21 @@ Lower rank is better (1st = best)
 Lower rank is better (1st = best)
 
 1. Jais-2-70B-Chat: 1.0 (based on 16 test set(s))
-2. command-a-translate-08-2025: 2.4 (based on 16 test set(s))
-3. aya-expanse-32b: 3.4 (based on 16 test set(s))
-4. Jais-2-8B-Chat: 3.5 (based on 16 test set(s))
-5. gemma-3-27b-it: 4.8 (based on 16 test set(s))
-6. Nile-Chat-12B: 6.0 (based on 16 test set(s))
+2. command-a-translate-08-2025: 2.3 (based on 16 test set(s))
+3. gpt-4.1-mini: 3.9 (based on 16 test set(s))
+4. aya-expanse-32b: 3.9 (based on 16 test set(s))
+5. Jais-2-8B-Chat: 4.3 (based on 16 test set(s))
+6. gemma-3-27b-it: 5.8 (based on 16 test set(s))
+7. c4ai-command-r-08-2024: 7.3 (based on 16 test set(s))
+8. gpt-4.1-nano: 7.8 (based on 16 test set(s))
+9. Nile-Chat-12B: 9.1 (based on 16 test set(s))
+10. aya-expanse-8b: 10.0 (based on 16 test set(s))
+11. c4ai-command-r-v01: 11.2 (based on 16 test set(s))
+12. c4ai-command-r7b-arabic-02-2025: 11.7 (based on 16 test set(s))
+13. EuroLLM-9B-Instruct: 12.8 (based on 16 test set(s))
+14. gemma-3-4b-it: 14.2 (based on 16 test set(s))
+15. Mistral-Small-3.2-24B-Instruct-2506: 14.7 (based on 16 test set(s))
+16. Qwen3-4B-Instruct-2507: 16.0 (based on 16 test set(s))
 
 
 ⚠️  No COMET scores found for average ranking calculation

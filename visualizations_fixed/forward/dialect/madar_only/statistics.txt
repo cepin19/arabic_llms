@@ -14,12 +14,6 @@ Dialect BLEU Scores by Test Set
 
 Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..Qwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-madar.dev.glf.0.qa.en                     5.3           17.9           11.0            6.3            5.5            3.7            8.3            4.7           12.4            4.4            5.5            5.1            6.5            6.3           16.0            8.4
-madar.dev.lev.0.lb.en                     3.5           42.2           23.1            6.0            2.7            2.2            6.7            2.6            9.3            2.5            3.3            8.3            9.2            5.0           12.7           11.3
-madar.dev.mgr.0.ma.en                     2.3           30.5           12.9            3.7            1.1            1.6            4.2            2.2            5.8            1.9            3.1            8.2            6.0            2.5           10.0            8.3
-madar.dev.mgr.0.tn.en                     2.7           47.7           24.1            3.8            1.2            2.0            4.5            2.4            4.9            2.1            2.7            6.3            4.9            2.6            9.3            7.5
-madar.dev.msa.0.ms.en                    17.3           29.2           21.5           17.1           15.9           11.4           19.7           17.4           18.5           13.9           18.4           20.1           18.7           15.7           20.2           18.6
-madar.dev.nil.0.eg.en                     4.9           52.1           21.4            8.2            5.3            2.6           11.1            4.2           10.8            3.2            8.5            4.6           11.8            7.1           15.8           13.2
 madar.test.glf.0.iq.en                    5.0           12.3            5.3            5.4            4.4            3.3            6.7            4.4            8.2            3.2            5.4            5.5            9.4            5.3           12.2            9.5
 madar.test.glf.0.om.en                   19.0           10.8            7.0           17.3           13.2            8.9           17.0           17.9           13.9           13.1           19.0           17.8           18.4           15.2           16.6           17.1
 madar.test.glf.0.qa.en                    5.4           17.9           11.4            6.7            5.7            4.2            9.1            5.3           12.6            4.5            6.1            5.6            6.8            6.6           16.5            9.1
@@ -54,12 +48,6 @@ Dialect CHRF Scores by Test Set
 
 Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..Qwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-madar.dev.glf.0.qa.en                    32.9           48.7           39.0           34.7           31.3           28.3           38.2           32.6           39.9           30.5           33.5           34.5           35.7           33.0           46.7           38.1
-madar.dev.lev.0.lb.en                    30.0           65.7           51.6           32.5           23.1           25.3           35.8           28.8           38.7           27.5           29.6           38.7           38.5           30.7           43.9           42.0
-madar.dev.mgr.0.ma.en                    23.2           52.2           33.1           27.0           13.9           19.0           28.6           23.3           31.7           22.3           25.2           36.3           32.7           23.5           40.2           37.2
-madar.dev.mgr.0.tn.en                    24.0           68.4           51.3           26.0           12.7           20.9           28.6           24.0           29.4           22.8           24.2           33.3           29.3           22.6           37.4           34.6
-madar.dev.msa.0.ms.en                    49.6           60.0           53.1           48.7           46.8           40.3           52.3           49.8           51.3           44.4           50.7           53.1           51.2           47.0           53.0           51.3
-madar.dev.nil.0.eg.en                    30.1           71.4           50.9           35.1           29.1           24.2           40.9           29.0           40.1           27.5           35.1           31.3           41.5           33.9           46.4           43.2
 madar.test.glf.0.iq.en                   32.4           41.7           30.7           33.5           31.9           28.4           35.9           32.6           37.4           30.0           33.5           35.4           39.2           29.0           42.8           40.4
 madar.test.glf.0.om.en                   46.9           38.2           28.7           44.5           38.4           32.9           45.5           46.2           40.3           39.9           46.5           47.6           46.2           42.6           44.5           45.2
 madar.test.glf.0.qa.en                   32.9           48.3           39.2           34.5           31.2           28.1           38.6           32.6           40.2           30.3           33.5           34.7           35.7           32.9           46.7           38.4
@@ -94,12 +82,6 @@ Dialect COMET Scores by Test Set
 
 Test Set                      EuroLLM-9B-In..Jais-2-70B-Chat Jais-2-8B-ChatLlama-3.3-70B..Mistral-Small..Qwen3-4B-Inst..aya-expanse-32b aya-expanse-8bc4ai-command-..c4ai-command-..c4ai-command-..command-a-tra.. gemma-3-27b-it  gemma-3-4b-it   gpt-4.1-mini   gpt-4.1-nano
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-madar.dev.glf.0.qa.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
-madar.dev.lev.0.lb.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
-madar.dev.mgr.0.ma.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
-madar.dev.mgr.0.tn.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
-madar.dev.msa.0.ms.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
-madar.dev.nil.0.eg.en                     N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
 madar.test.glf.0.iq.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
 madar.test.glf.0.om.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
 madar.test.glf.0.qa.en                    N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A            N/A
@@ -135,68 +117,68 @@ madar.test.nil.2.eg.en                    N/A            N/A            N/A     
 Models sorted by average BLEU score:
 
 Model: Jais-2-70B-Chat
-  Average BLEU: 21.2
-  Based on 32 test set(s)
+  Average BLEU: 17.7
+  Based on 26 test set(s)
 
 Model: gpt-4.1-mini
-  Average BLEU: 14.3
-  Based on 32 test set(s)
-
-Model: Jais-2-8B-Chat
-  Average BLEU: 13.1
-  Based on 32 test set(s)
+  Average BLEU: 14.4
+  Based on 26 test set(s)
 
 Model: gpt-4.1-nano
+  Average BLEU: 12.0
+  Based on 26 test set(s)
+
+Model: Jais-2-8B-Chat
   Average BLEU: 11.8
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: c4ai-command-r-08-2024
   Average BLEU: 10.1
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: gemma-3-27b-it
-  Average BLEU: 9.9
-  Based on 32 test set(s)
+  Average BLEU: 10.0
+  Based on 26 test set(s)
 
 Model: aya-expanse-32b
-  Average BLEU: 8.7
-  Based on 32 test set(s)
+  Average BLEU: 8.6
+  Based on 26 test set(s)
 
 Model: Llama-3.3-70B-Instruct
   Average BLEU: 7.5
-  Based on 32 test set(s)
-
-Model: command-a-translate-08-2025
-  Average BLEU: 7.4
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: c4ai-command-r7b-arabic-02-2025
+  Average BLEU: 7.2
+  Based on 26 test set(s)
+
+Model: command-a-translate-08-2025
   Average BLEU: 7.1
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: gemma-3-4b-it
   Average BLEU: 6.4
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: EuroLLM-9B-Instruct
   Average BLEU: 6.2
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: aya-expanse-8b
   Average BLEU: 5.7
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: Mistral-Small-3.2-24B-Instruct-2506
-  Average BLEU: 5.4
-  Based on 32 test set(s)
+  Average BLEU: 5.5
+  Based on 26 test set(s)
 
 Model: c4ai-command-r-v01
   Average BLEU: 4.7
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: Qwen3-4B-Instruct-2507
-  Average BLEU: 3.9
-  Based on 32 test set(s)
+  Average BLEU: 3.8
+  Based on 26 test set(s)
 
 ================================================================================
 📊 Average CHRF Scores for Dialect Translations
@@ -205,105 +187,105 @@ Model: Qwen3-4B-Instruct-2507
 Models sorted by average CHRF score:
 
 Model: Jais-2-70B-Chat
-  Average CHRF: 48.6
-  Based on 32 test set(s)
+  Average CHRF: 45.7
+  Based on 26 test set(s)
 
 Model: gpt-4.1-mini
-  Average CHRF: 44.4
-  Based on 32 test set(s)
+  Average CHRF: 44.3
+  Based on 26 test set(s)
 
 Model: gpt-4.1-nano
-  Average CHRF: 41.6
-  Based on 32 test set(s)
-
-Model: Jais-2-8B-Chat
-  Average CHRF: 39.9
-  Based on 32 test set(s)
+  Average CHRF: 41.8
+  Based on 26 test set(s)
 
 Model: gemma-3-27b-it
   Average CHRF: 38.5
-  Based on 32 test set(s)
+  Based on 26 test set(s)
+
+Model: Jais-2-8B-Chat
+  Average CHRF: 38.4
+  Based on 26 test set(s)
 
 Model: c4ai-command-r-08-2024
-  Average CHRF: 38.0
-  Based on 32 test set(s)
+  Average CHRF: 37.8
+  Based on 26 test set(s)
 
 Model: aya-expanse-32b
-  Average CHRF: 36.9
-  Based on 32 test set(s)
+  Average CHRF: 36.8
+  Based on 26 test set(s)
 
 Model: command-a-translate-08-2025
-  Average CHRF: 35.6
-  Based on 32 test set(s)
+  Average CHRF: 35.1
+  Based on 26 test set(s)
 
 Model: Llama-3.3-70B-Instruct
-  Average CHRF: 34.3
-  Based on 32 test set(s)
+  Average CHRF: 34.4
+  Based on 26 test set(s)
 
 Model: c4ai-command-r7b-arabic-02-2025
   Average CHRF: 33.5
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: EuroLLM-9B-Instruct
-  Average CHRF: 32.1
-  Based on 32 test set(s)
+  Average CHRF: 32.2
+  Based on 26 test set(s)
 
 Model: aya-expanse-8b
-  Average CHRF: 31.9
-  Based on 32 test set(s)
+  Average CHRF: 32.0
+  Based on 26 test set(s)
 
 Model: gemma-3-4b-it
   Average CHRF: 31.8
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 Model: c4ai-command-r-v01
-  Average CHRF: 29.7
-  Based on 32 test set(s)
+  Average CHRF: 29.8
+  Based on 26 test set(s)
 
 Model: Mistral-Small-3.2-24B-Instruct-2506
-  Average CHRF: 28.1
-  Based on 32 test set(s)
+  Average CHRF: 28.6
+  Based on 26 test set(s)
 
 Model: Qwen3-4B-Instruct-2507
   Average CHRF: 26.5
-  Based on 32 test set(s)
+  Based on 26 test set(s)
 
 ⚠️  No Dialect COMET scores found
 
 ================================================================================
 📊 Ranking Statistics for Dialect BLEU Score
 ================================================================================
-Total test sets with Dialect BLEU scores: 32
+Total test sets with Dialect BLEU scores: 26
 
 Model: EuroLLM-9B-Instruct
-  Total appearances: 32/32
+  Total appearances: 26/26
   2nd: 1 time
   7th: 1 time
   9th: 4 times
-  10th: 4 times
-  11th: 8 times
-  12th: 6 times
+  10th: 3 times
+  11th: 6 times
+  12th: 3 times
   13th: 8 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 1/32 (3.1%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 1/26 (3.8%)
 
 Model: Jais-2-70B-Chat
-  Total appearances: 32/32
-  1st: 19 times
+  Total appearances: 26/26
+  1st: 13 times
   2nd: 8 times
   3rd: 2 times
   4th: 1 time
   10th: 1 time
   14th: 1 time
-  Win rate: 19/32 (59.4%)
-  Top-3 rate: 29/32 (90.6%)
+  Win rate: 13/26 (50.0%)
+  Top-3 rate: 23/26 (88.5%)
 
 Model: Jais-2-8B-Chat
-  Total appearances: 32/32
+  Total appearances: 26/26
   1st: 1 time
-  2nd: 12 times
+  2nd: 7 times
   3rd: 1 time
-  4th: 5 times
+  4th: 4 times
   5th: 4 times
   7th: 1 time
   8th: 1 time
@@ -313,196 +295,194 @@ Model: Jais-2-8B-Chat
   14th: 1 time
   15th: 1 time
   16th: 1 time
-  Win rate: 1/32 (3.1%)
-  Top-3 rate: 14/32 (43.8%)
+  Win rate: 1/26 (3.8%)
+  Top-3 rate: 9/26 (34.6%)
 
 Model: Llama-3.3-70B-Instruct
-  Total appearances: 32/32
+  Total appearances: 26/26
   6th: 3 times
   7th: 4 times
   8th: 6 times
-  9th: 12 times
+  9th: 7 times
   10th: 1 time
   11th: 2 times
-  12th: 3 times
+  12th: 2 times
   13th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: Mistral-Small-3.2-24B-Instruct-2506
-  Total appearances: 32/32
+  Total appearances: 26/26
   8th: 1 time
-  11th: 11 times
+  11th: 9 times
   12th: 6 times
-  13th: 4 times
+  13th: 2 times
   14th: 3 times
-  16th: 7 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  16th: 5 times
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: Qwen3-4B-Instruct-2507
-  Total appearances: 32/32
+  Total appearances: 26/26
   14th: 1 time
-  15th: 10 times
-  16th: 21 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  15th: 8 times
+  16th: 17 times
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: aya-expanse-32b
-  Total appearances: 32/32
+  Total appearances: 26/26
   4th: 2 times
-  5th: 3 times
-  6th: 8 times
+  5th: 2 times
+  6th: 6 times
   7th: 5 times
-  8th: 9 times
+  8th: 6 times
   9th: 2 times
   10th: 2 times
   11th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: aya-expanse-8b
-  Total appearances: 32/32
+  Total appearances: 26/26
   4th: 1 time
   9th: 1 time
-  10th: 3 times
+  10th: 2 times
   12th: 4 times
-  13th: 8 times
-  14th: 14 times
+  13th: 6 times
+  14th: 11 times
   15th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: c4ai-command-r-08-2024
-  Total appearances: 32/32
-  3rd: 5 times
+  Total appearances: 26/26
+  3rd: 4 times
   4th: 2 times
-  5th: 9 times
-  6th: 9 times
-  7th: 5 times
-  8th: 1 time
+  5th: 8 times
+  6th: 8 times
+  7th: 3 times
   11th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 5/32 (15.6%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 4/26 (15.4%)
 
 Model: c4ai-command-r-v01
-  Total appearances: 32/32
+  Total appearances: 26/26
   12th: 1 time
   13th: 2 times
-  14th: 7 times
-  15th: 20 times
+  14th: 5 times
+  15th: 16 times
   16th: 2 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: c4ai-command-r7b-arabic-02-2025
-  Total appearances: 32/32
+  Total appearances: 26/26
   1st: 1 time
   6th: 3 times
   7th: 3 times
-  8th: 7 times
-  9th: 3 times
-  10th: 9 times
-  11th: 3 times
-  12th: 3 times
-  Win rate: 1/32 (3.1%)
-  Top-3 rate: 1/32 (3.1%)
+  8th: 6 times
+  9th: 2 times
+  10th: 7 times
+  11th: 2 times
+  12th: 2 times
+  Win rate: 1/26 (3.8%)
+  Top-3 rate: 1/26 (3.8%)
 
 Model: command-a-translate-08-2025
-  Total appearances: 32/32
+  Total appearances: 26/26
   2nd: 1 time
-  4th: 2 times
-  5th: 7 times
-  7th: 2 times
+  4th: 1 time
+  5th: 5 times
+  7th: 1 time
   8th: 3 times
   9th: 3 times
   10th: 2 times
   11th: 1 time
   12th: 4 times
-  13th: 5 times
+  13th: 3 times
   14th: 1 time
   16th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 1/32 (3.1%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 1/26 (3.8%)
 
 Model: gemma-3-27b-it
-  Total appearances: 32/32
+  Total appearances: 26/26
   3rd: 2 times
   4th: 5 times
-  5th: 7 times
-  6th: 8 times
-  7th: 7 times
+  5th: 6 times
+  6th: 5 times
+  7th: 5 times
   8th: 2 times
   9th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 2/32 (6.2%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 2/26 (7.7%)
 
 Model: gemma-3-4b-it
-  Total appearances: 32/32
+  Total appearances: 26/26
   7th: 1 time
-  8th: 2 times
+  8th: 1 time
   9th: 4 times
-  10th: 9 times
-  11th: 3 times
-  12th: 5 times
+  10th: 7 times
+  11th: 2 times
+  12th: 4 times
   13th: 4 times
-  14th: 4 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  14th: 3 times
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: gpt-4.1-mini
-  Total appearances: 32/32
+  Total appearances: 26/26
   1st: 11 times
-  2nd: 7 times
-  3rd: 13 times
+  2nd: 6 times
+  3rd: 8 times
   9th: 1 time
-  Win rate: 11/32 (34.4%)
-  Top-3 rate: 31/32 (96.9%)
+  Win rate: 11/26 (42.3%)
+  Top-3 rate: 25/26 (96.2%)
 
 Model: gpt-4.1-nano
-  Total appearances: 32/32
+  Total appearances: 26/26
   2nd: 3 times
   3rd: 9 times
-  4th: 14 times
-  5th: 2 times
+  4th: 10 times
+  5th: 1 time
   6th: 1 time
-  7th: 3 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 12/32 (37.5%)
+  7th: 2 times
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 12/26 (46.2%)
 
 ================================================================================
 📊 Ranking Statistics for Dialect CHRF Score
 ================================================================================
-Total test sets with Dialect CHRF scores: 32
+Total test sets with Dialect CHRF scores: 26
 
 Model: EuroLLM-9B-Instruct
-  Total appearances: 32/32
+  Total appearances: 26/26
   2nd: 1 time
   9th: 2 times
   10th: 4 times
-  11th: 10 times
-  12th: 14 times
-  13th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 1/32 (3.1%)
+  11th: 8 times
+  12th: 11 times
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 1/26 (3.8%)
 
 Model: Jais-2-70B-Chat
-  Total appearances: 32/32
-  1st: 17 times
+  Total appearances: 26/26
+  1st: 11 times
   2nd: 8 times
   3rd: 3 times
   4th: 2 times
   11th: 1 time
   14th: 1 time
-  Win rate: 17/32 (53.1%)
-  Top-3 rate: 28/32 (87.5%)
+  Win rate: 11/26 (42.3%)
+  Top-3 rate: 22/26 (84.6%)
 
 Model: Jais-2-8B-Chat
-  Total appearances: 32/32
-  2nd: 9 times
-  3rd: 3 times
-  4th: 4 times
-  5th: 3 times
+  Total appearances: 26/26
+  2nd: 6 times
+  3rd: 2 times
+  4th: 3 times
+  5th: 2 times
   6th: 3 times
   9th: 1 time
   10th: 1 time
@@ -512,155 +492,153 @@ Model: Jais-2-8B-Chat
   14th: 1 time
   15th: 1 time
   16th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 12/32 (37.5%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 8/26 (30.8%)
 
 Model: Llama-3.3-70B-Instruct
-  Total appearances: 32/32
+  Total appearances: 26/26
   7th: 4 times
-  8th: 9 times
-  9th: 12 times
+  8th: 8 times
+  9th: 8 times
   10th: 1 time
   11th: 1 time
-  12th: 5 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  12th: 4 times
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: Mistral-Small-3.2-24B-Instruct-2506
-  Total appearances: 32/32
+  Total appearances: 26/26
   12th: 3 times
-  13th: 8 times
-  14th: 12 times
-  16th: 9 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  13th: 7 times
+  14th: 10 times
+  16th: 6 times
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: Qwen3-4B-Instruct-2507
-  Total appearances: 32/32
+  Total appearances: 26/26
   14th: 1 time
-  15th: 11 times
-  16th: 20 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  15th: 8 times
+  16th: 17 times
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: aya-expanse-32b
-  Total appearances: 32/32
+  Total appearances: 26/26
   3rd: 1 time
   4th: 2 times
-  5th: 3 times
-  6th: 10 times
+  5th: 1 time
+  6th: 9 times
   7th: 4 times
-  8th: 10 times
+  8th: 7 times
   9th: 2 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 1/32 (3.1%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 1/26 (3.8%)
 
 Model: aya-expanse-8b
-  Total appearances: 32/32
+  Total appearances: 26/26
   5th: 1 time
   8th: 1 time
   9th: 1 time
-  10th: 5 times
-  11th: 6 times
-  12th: 3 times
-  13th: 10 times
-  14th: 4 times
+  10th: 4 times
+  11th: 5 times
+  12th: 2 times
+  13th: 8 times
+  14th: 3 times
   15th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: c4ai-command-r-08-2024
-  Total appearances: 32/32
-  3rd: 2 times
+  Total appearances: 26/26
+  3rd: 1 time
   4th: 2 times
   5th: 7 times
-  6th: 7 times
-  7th: 13 times
+  6th: 5 times
+  7th: 10 times
   11th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 2/32 (6.2%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 1/26 (3.8%)
 
 Model: c4ai-command-r-v01
-  Total appearances: 32/32
+  Total appearances: 26/26
   12th: 3 times
-  13th: 4 times
-  14th: 8 times
-  15th: 17 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  13th: 3 times
+  14th: 6 times
+  15th: 14 times
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: c4ai-command-r7b-arabic-02-2025
-  Total appearances: 32/32
+  Total appearances: 26/26
   3rd: 1 time
   7th: 1 time
-  8th: 5 times
-  9th: 8 times
-  10th: 14 times
+  8th: 4 times
+  9th: 7 times
+  10th: 11 times
   11th: 2 times
-  12th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 1/32 (3.1%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 1/26 (3.8%)
 
 Model: command-a-translate-08-2025
-  Total appearances: 32/32
+  Total appearances: 26/26
   1st: 1 time
-  2nd: 2 times
+  2nd: 1 time
   3rd: 1 time
-  4th: 2 times
-  5th: 7 times
+  4th: 1 time
+  5th: 5 times
   6th: 2 times
   7th: 4 times
   8th: 5 times
-  9th: 3 times
-  11th: 4 times
+  9th: 2 times
+  11th: 3 times
   16th: 1 time
-  Win rate: 1/32 (3.1%)
-  Top-3 rate: 4/32 (12.5%)
+  Win rate: 1/26 (3.8%)
+  Top-3 rate: 3/26 (11.5%)
 
 Model: gemma-3-27b-it
-  Total appearances: 32/32
+  Total appearances: 26/26
   3rd: 1 time
   4th: 8 times
-  5th: 11 times
-  6th: 6 times
-  7th: 4 times
-  8th: 2 times
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 1/32 (3.1%)
+  5th: 10 times
+  6th: 5 times
+  7th: 1 time
+  8th: 1 time
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 1/26 (3.8%)
 
 Model: gemma-3-4b-it
-  Total appearances: 32/32
+  Total appearances: 26/26
   7th: 1 time
   9th: 2 times
-  10th: 7 times
-  11th: 6 times
+  10th: 5 times
+  11th: 4 times
   12th: 2 times
-  13th: 6 times
-  14th: 5 times
+  13th: 5 times
+  14th: 4 times
   15th: 2 times
   16th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 0/32 (0.0%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 0/26 (0.0%)
 
 Model: gpt-4.1-mini
-  Total appearances: 32/32
+  Total appearances: 26/26
   1st: 14 times
-  2nd: 7 times
-  3rd: 9 times
-  4th: 1 time
+  2nd: 5 times
+  3rd: 6 times
   9th: 1 time
-  Win rate: 14/32 (43.8%)
-  Top-3 rate: 30/32 (93.8%)
+  Win rate: 14/26 (53.8%)
+  Top-3 rate: 25/26 (96.2%)
 
 Model: gpt-4.1-nano
-  Total appearances: 32/32
+  Total appearances: 26/26
   2nd: 5 times
-  3rd: 11 times
-  4th: 11 times
-  6th: 4 times
+  3rd: 10 times
+  4th: 8 times
+  6th: 2 times
   7th: 1 time
-  Win rate: 0/32 (0.0%)
-  Top-3 rate: 16/32 (50.0%)
+  Win rate: 0/26 (0.0%)
+  Top-3 rate: 15/26 (57.7%)
 
 ================================================================================
 📊 Ranking Statistics for Dialect COMET Score
@@ -673,22 +651,22 @@ Total test sets with Dialect COMET scores: 0
 ================================================================================
 Lower rank is better (1st = best)
 
-1. Jais-2-70B-Chat: 2.2 (based on 32 test set(s))
-2. gpt-4.1-mini: 2.3 (based on 32 test set(s))
-3. gpt-4.1-nano: 3.9 (based on 32 test set(s))
-4. Jais-2-8B-Chat: 5.3 (based on 32 test set(s))
-5. c4ai-command-r-08-2024: 5.5 (based on 32 test set(s))
-6. gemma-3-27b-it: 5.7 (based on 32 test set(s))
-7. aya-expanse-32b: 7.1 (based on 32 test set(s))
-8. c4ai-command-r7b-arabic-02-2025: 8.8 (based on 32 test set(s))
-9. Llama-3.3-70B-Instruct: 8.8 (based on 32 test set(s))
-10. command-a-translate-08-2025: 8.9 (based on 32 test set(s))
-11. EuroLLM-9B-Instruct: 10.9 (based on 32 test set(s))
-12. gemma-3-4b-it: 10.9 (based on 32 test set(s))
-13. aya-expanse-8b: 12.7 (based on 32 test set(s))
-14. Mistral-Small-3.2-24B-Instruct-2506: 12.7 (based on 32 test set(s))
-15. c4ai-command-r-v01: 14.6 (based on 32 test set(s))
-16. Qwen3-4B-Instruct-2507: 15.6 (based on 32 test set(s))
+1. gpt-4.1-mini: 2.2 (based on 26 test set(s))
+2. Jais-2-70B-Chat: 2.4 (based on 26 test set(s))
+3. gpt-4.1-nano: 3.8 (based on 26 test set(s))
+4. c4ai-command-r-08-2024: 5.4 (based on 26 test set(s))
+5. gemma-3-27b-it: 5.6 (based on 26 test set(s))
+6. Jais-2-8B-Chat: 6.0 (based on 26 test set(s))
+7. aya-expanse-32b: 7.2 (based on 26 test set(s))
+8. c4ai-command-r7b-arabic-02-2025: 8.5 (based on 26 test set(s))
+9. Llama-3.3-70B-Instruct: 8.7 (based on 26 test set(s))
+10. command-a-translate-08-2025: 9.1 (based on 26 test set(s))
+11. EuroLLM-9B-Instruct: 10.8 (based on 26 test set(s))
+12. gemma-3-4b-it: 11.0 (based on 26 test set(s))
+13. Mistral-Small-3.2-24B-Instruct-2506: 12.6 (based on 26 test set(s))
+14. aya-expanse-8b: 12.6 (based on 26 test set(s))
+15. c4ai-command-r-v01: 14.6 (based on 26 test set(s))
+16. Qwen3-4B-Instruct-2507: 15.6 (based on 26 test set(s))
 
 
 ================================================================================
@@ -696,22 +674,22 @@ Lower rank is better (1st = best)
 ================================================================================
 Lower rank is better (1st = best)
 
-1. gpt-4.1-mini: 2.1 (based on 32 test set(s))
-2. Jais-2-70B-Chat: 2.3 (based on 32 test set(s))
-3. gpt-4.1-nano: 3.7 (based on 32 test set(s))
-4. gemma-3-27b-it: 5.3 (based on 32 test set(s))
-5. c4ai-command-r-08-2024: 6.0 (based on 32 test set(s))
-6. Jais-2-8B-Chat: 6.3 (based on 32 test set(s))
-7. aya-expanse-32b: 6.6 (based on 32 test set(s))
-8. command-a-translate-08-2025: 6.8 (based on 32 test set(s))
-9. Llama-3.3-70B-Instruct: 9.0 (based on 32 test set(s))
-10. c4ai-command-r7b-arabic-02-2025: 9.2 (based on 32 test set(s))
-11. EuroLLM-9B-Instruct: 11.0 (based on 32 test set(s))
-12. aya-expanse-8b: 11.7 (based on 32 test set(s))
-13. gemma-3-4b-it: 11.8 (based on 32 test set(s))
-14. Mistral-Small-3.2-24B-Instruct-2506: 14.1 (based on 32 test set(s))
-15. c4ai-command-r-v01: 14.2 (based on 32 test set(s))
-16. Qwen3-4B-Instruct-2507: 15.6 (based on 32 test set(s))
+1. gpt-4.1-mini: 2.0 (based on 26 test set(s))
+2. Jais-2-70B-Chat: 2.7 (based on 26 test set(s))
+3. gpt-4.1-nano: 3.5 (based on 26 test set(s))
+4. gemma-3-27b-it: 5.0 (based on 26 test set(s))
+5. c4ai-command-r-08-2024: 6.0 (based on 26 test set(s))
+6. aya-expanse-32b: 6.6 (based on 26 test set(s))
+7. command-a-translate-08-2025: 7.0 (based on 26 test set(s))
+8. Jais-2-8B-Chat: 7.1 (based on 26 test set(s))
+9. Llama-3.3-70B-Instruct: 9.0 (based on 26 test set(s))
+10. c4ai-command-r7b-arabic-02-2025: 9.1 (based on 26 test set(s))
+11. EuroLLM-9B-Instruct: 10.8 (based on 26 test set(s))
+12. aya-expanse-8b: 11.6 (based on 26 test set(s))
+13. gemma-3-4b-it: 11.9 (based on 26 test set(s))
+14. Mistral-Small-3.2-24B-Instruct-2506: 14.0 (based on 26 test set(s))
+15. c4ai-command-r-v01: 14.2 (based on 26 test set(s))
+16. Qwen3-4B-Instruct-2507: 15.6 (based on 26 test set(s))
 
 
 ⚠️  No Dialect COMET scores found for average ranking calculation

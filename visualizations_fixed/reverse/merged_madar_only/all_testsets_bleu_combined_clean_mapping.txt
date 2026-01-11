@@ -3,10 +3,20 @@ Model Index Mapping for BLEU Scores
 
 Index | Model Name
 --------------------------------------------------------------------------------
-    0 | Jais-2-70B-Chat
-    1 | Jais-2-8B-Chat
-    2 | Nile-Chat-12B
-    3 | aya-expanse-32b
-    4 | command-a-translate-08-2025
-    5 | gemma-3-27b-it
+    0 | EuroLLM-9B-Instruct
+    1 | Jais-2-70B-Chat
+    2 | Jais-2-8B-Chat
+    3 | Mistral-Small-3.2-24B-Instruct-2506
+    4 | Nile-Chat-12B
+    5 | Qwen3-4B-Instruct-2507
+    6 | aya-expanse-32b
+    7 | aya-expanse-8b
+    8 | c4ai-command-r-08-2024
+    9 | c4ai-command-r-v01
+   10 | c4ai-command-r7b-arabic-02-2025
+   11 | command-a-translate-08-2025
+   12 | gemma-3-27b-it
+   13 | gemma-3-4b-it
+   14 | gpt-4.1-mini
+   15 | gpt-4.1-nano
 ================================================================================

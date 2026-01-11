@@ -14,8 +14,8 @@ Average Scores (per-file averages):
 
 Average Scores - MADAR Only (per-file averages):
 --------------------------------------------------------------------------------
-  BLEU: 38.9611
-  CHRF: 58.1944
+  BLEU: 39.5664
+  CHRF: 58.6937
 
 ================================================================================
 Overall Scores (all test sets concatenated):
@@ -29,11 +29,11 @@ Total sentences: 130226
 ================================================================================
 Overall Scores - MADAR Only (all test sets concatenated):
 ================================================================================
-Total test sets: 32
-Total sentences: 112000
+Total test sets: 26
+Total sentences: 79000
 
-  BLEU: 37.7279
-  CHRF: 57.1806
+  BLEU: 38.3354
+  CHRF: 57.6723
 
 ================================================================================
 Per-file Results:

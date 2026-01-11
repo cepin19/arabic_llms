@@ -5,6 +5,7 @@
   "files_with_metrics": 42,
   "merged_dialects": 0,
   "has_overall_scores": true,
+  "has_overall_scores_madar_only": true,
   "results": [
     {
       "roundtrip": {
@@ -476,10 +477,23 @@
         "BLEU": 39.8971,
         "CHRF": 57.6513
       }
+    },
+    {
+      "type": "overall_madar_only",
+      "num_test_sets": 26,
+      "num_sentences": 79000,
+      "roundtrip": {
+        "BLEU": 40.6326,
+        "CHRF": 57.4483
+      }
     }
   ],
   "averages": {
     "BLEU": 40.9103,
     "CHRF": 58.2969
+  },
+  "averages_madar_only": {
+    "BLEU": 40.8266,
+    "CHRF": 57.5944
   }
 }
